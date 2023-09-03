@@ -110,7 +110,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-dark btn-block">Register</button>
+                            <button type="submit" class="btn btn-dark btn-block">REGISTER</button>
                         </div>
                         <!-- /.col -->
                     </div>

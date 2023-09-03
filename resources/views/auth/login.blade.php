@@ -34,7 +34,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form c method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group mb-3">
                         <input type="email" name="email"
@@ -75,7 +75,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-dark btn-block">Login</button>
+                            <button type="submit" class="btn btn-dark btn-block">LOG IN</button>
                         </div>
                         <!-- /.col -->
                     </div>
