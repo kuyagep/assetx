@@ -34,7 +34,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form method="POST" action="{{ route('login') }}">
+                <form c method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group mb-3">
                         <input type="email" name="email"
@@ -42,10 +42,11 @@
                             is-invalid
                         @enderror"
                             value="{{ old('email') }}" placeholder="Enter Registered Email" required>
+
                         @error('email')
-                            <small class="text-danger">
+                            <div class="invalid-feedback">
                                 {{ $message }}
-                            </small>
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">

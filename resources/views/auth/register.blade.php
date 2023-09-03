@@ -43,9 +43,9 @@
                         @enderror"
                             value="{{ old('first_name') }}" placeholder="First name" required>
                         @error('first_name')
-                            <small class="text-danger">
+                            <div class="invalid-feedback">
                                 {{ $message }}
-                            </small>
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
@@ -55,9 +55,9 @@
                         @enderror"
                             value="{{ old('last_name') }}" placeholder="Last name" required>
                         @error('last_name')
-                            <small class="text-danger">
+                            <div class="invalid-feedback">
                                 {{ $message }}
-                            </small>
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
@@ -67,9 +67,9 @@
                         @enderror"
                             value="{{ old('email') }}" placeholder="Email" required>
                         @error('email')
-                            <small class="text-danger">
+                            <div class="invalid-feedback">
                                 {{ $message }}
-                            </small>
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
@@ -79,9 +79,9 @@
                         @enderror"
                             value="{{ old('password') }}" placeholder="Password" required>
                         @error('password')
-                            <small class="text-danger">
+                            <div class="invalid-feedback">
                                 {{ $message }}
-                            </small>
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
@@ -91,9 +91,9 @@
                         @enderror"
                             value="{{ old('password_confirmation') }}" placeholder="Confirm password" required>
                         @error('password_confirmation')
-                            <small class="text-danger">
+                            <div class="invalid-feedback">
                                 {{ $message }}
-                            </small>
+                            </div>
                         @enderror
                     </div>
                     <div class="row mb-3">
