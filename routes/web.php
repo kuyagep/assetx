@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,13 +35,14 @@ Route::middleware('auth')->group(function () {
 });
 
 ######################## ADMIN ########################
-Route::middleware(['auth','role:admin'])->group(function(){
-    Route::get('/admin/dashboard',[AccountController::class,'AdminDashboard'])->name('admin.dashboard');
-    Route::get('/admin/profile',[AccountController::class,'AdminProfile'])->name('admin.profile');
-    Route::post('/admin/profile/update',[AccountController::class,'AdminProfileUpdate'])->name('admin.profile.update');
-    Route::post('/admin/update/password',[AccountController::class,'AdminUpdatePassword'])->name('admin.update.password');
-    Route::get('/admin/change/password',[AccountController::class,'AdminChangePassword'])->name('admin.change.password');
+Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admin'])->group(function(){
+    Route::get('/dashboard',[AccountController::class,'AdminDashboard'])->name('dashboard');
+    Route::get('/profile',[AccountController::class,'AdminProfile'])->name('profile');
+    Route::post('/profile/update',[AccountController::class,'AdminProfileUpdate'])->name('profile.update');
+    Route::post('/update/password',[AccountController::class,'AdminUpdatePassword'])->name('update.password');
+    Route::get('/change/password',[AccountController::class,'AdminChangePassword'])->name('change.password');
 
+    Route::resource('/users', UserController::class);
 });
 
 ######################## CLIENT ########################
@@ -50,5 +52,14 @@ Route::middleware(['auth','role:client'])->group(function(){
     Route::post('/client/profile/update',[AccountController::class,'ClientProfileUpdate'])->name('client.profile.update');
     Route::post('/client/update/password',[AccountController::class,'ClientUpdatePassword'])->name('client.update.password');
     Route::get('/client/change/password',[AccountController::class,'ClientChangePassword'])->name('client.change.password');
+
+});
+######################## SUPER ADMIN ########################
+Route::middleware(['auth','role:super_admin'])->group(function(){
+    Route::get('/s/dashboard',[AccountController::class,'SuperAdminDashboard'])->name('s.dashboard');
+    Route::get('/s/profile',[AccountController::class,'SuperAdminProfile'])->name('s.profile');
+    Route::post('/s/profile/update',[AccountController::class,'SuperAdminProfileUpdate'])->name('s.profile.update');
+    Route::post('/s/update/password',[AccountController::class,'SuperAdminUpdatePassword'])->name('s.update.password');
+    Route::get('/s/change/password',[AccountController::class,'SuperAdminChangePassword'])->name('s.change.password');
 
 });

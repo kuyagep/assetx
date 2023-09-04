@@ -16,10 +16,26 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        
-         $users = User::select('avatar', 'first_name','last_name', 'email_verified_at','status' ,'id', 'role' )->get();
-
-        return view('pages.users.index', compact('users'));
+        $users = [];
+        if($request->ajax()){
+            $users = User::all();
+            return DataTables::of($users)
+                ->editColumn('image', function ($request) {
+                    return '<img src="' .url('assets/dist/img/user/' . $request->image). '" alt="User Image" width="50">';
+            })
+            ->editColumn('created_at', function ($request) {
+                    return $request->created_at->format('d-m-Y H:i'); // format date time
+            })
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $btn = '<a href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-olive btn-sm mr-1" id="editProduct">Edit</a>';
+                $btn .= '<a href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteProduct">Delete</a>';
+                return $btn;
+            })
+            ->rawColumns(['image','action'])
+            ->make(true);
+        }
+       return view('pages.users.index', compact('users'));
     }
 
     /**
@@ -27,7 +43,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.users.create');
+        //
     }
 
     /**
@@ -35,38 +51,39 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
+
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' =>  'required|email|unique:users,email|max:255',
+            'name' => 'required|string',
+            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/|between:0.01,999999.99',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
-        User::updateOrCreate([
-            'id' => Str::uuid(),
-            'first_name' => $request->first_name,
-            'last_name' =>  $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make('password'),
-            'email_verified_at' => null,
-            'role' => 'client',
-            'status' => 'active',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
         
+        $data = new Product;
+        $data->name = $request->name; 
+        $data->price = $request->price; 
 
-         $notification = array(
-                'message' => 'User created Successfully!',
-                'alert-type' => 'success'
-        );
-        return redirect()->route('super_admin.user.index')->with($notification);
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            //new filename
+            $filename = $file->hashName();
+            //upload file to the directory            
+            $file->move(public_path('assets/dist/img/product'), $filename);
+            $data->image =$filename; 
+        } 
+
+        // save the data
+        $data->save();
+        // youtube link: https://www.youtube.com/watch?v=47er3YeFbZo
+       
+        return response()->json(['message' => 'Product saved successfully!']);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
         //
     }
@@ -74,47 +91,33 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        $users = User::findOrFail($id);
-        return view('pages.users.edit', compact('users'));
+        $id = ['id' => $request->id];
+        $product = Product::where($id)->first();
+
+        return response()->json($product);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, Product $product)
     {
-       $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'max:255'],
-        ]);
-
-        User::findOrFail($request->id)->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-        ]);
-        
-
-        $notification = array(
-                'message' => 'User Updated Successfully!',
-                'alert-type' => 'success'
-        );
-       
-        return redirect()->route('super_admin.user.index')->with($notification);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $user = User::findOrFail($id);
-        // Perform additional checks (authorization) if needed before deletion
-        $user->delete();
-        // Otherwise, redirect back with a success flash message
-        return redirect()->route('super_admin.user.index')->with('success', 'User deleted successfully.');
+        if($request->ajax()){
+             $product = Product::where('id',$request->id)->delete();
+             return response()->json(['success'=>'Post deleted successfully']);
+        }
+       
+
+        return response()->json(['success' => 'Product deleted successfully!']);
     }
 }

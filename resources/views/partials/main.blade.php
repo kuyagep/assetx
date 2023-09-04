@@ -70,7 +70,7 @@
     <!-- jQuery Mapael -->
     <script src="{{ asset('assets/plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
     <script src="{{ asset('assets/plugins/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('assets/lugins/jquery-mapael/jquery.mapael.min.js') }}p"></script>
+    <script src="{{ asset('assets/plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
 
     <!-- DataTables  & Plugins -->
@@ -87,6 +87,7 @@
     <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+    <script src="{{ asset('assets/dist/js/custom/toastr.min.js') }}"></script>
     {{-- dataTable --}}
     <script>
         $(function() {
