@@ -95,9 +95,18 @@
 
                 <!-- Right navbar links -->
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                    <a href="{{ route('login') }}" type="button" class="btn bg-olive  btn-sm "><i
-                            class="fa fa-bell"></i>
-                        LOG IN</a>
+                    @auth()
+                        <form action="{{ route('logout') }}" method="post">@csrf
+                            <button type="submit" class="btn bg-danger  btn-sm "><i class="fa fa-bell"
+                                    onclick="event.preventDefault();
+                                        this.closest('form').submit();"></i>
+                                LOG OUT</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" type="button" class="btn bg-olive  btn-sm "><i
+                                class="fa fa-bell"></i>
+                            LOG IN</a>
+                    @endauth
                 </ul>
 
             </div>
