@@ -16,7 +16,8 @@
                     alt="Account Avatar">
             </div>
             <div class="info">
-                <a href="#" class="d-block text-white">John Doe</a>
+                <a href="#"
+                    class="d-block text-white">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
             </div>
         </div>
 
@@ -40,7 +41,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ url('/home') }}" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
+                    <a href="{{ url('/dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-bar"></i>
                         <p>
                             Dashboard

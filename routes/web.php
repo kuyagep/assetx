@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,4 +33,5 @@ Route::middleware('auth')->group(function () {
 
 // new route
 
-require __DIR__.'/auth.php';
+Route::get('admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::get('client/dashboard', [ClientController::class, 'clientDashboard'])->name('client.dashboard');
