@@ -18,6 +18,8 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/adminlte.min.css">
 </head>
@@ -31,7 +33,7 @@
                 <a href="#" class="navbar-brand">
                     <img src="{{ asset('brand_logo/android-chrome-192x192.png') }}" alt="Logo"
                         class="brand-image img-circle elevation-0" style="opacity: .8">
-                    <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
+                    <span class="brand-text font-weight-light h5">{{ config('app.name', 'Laravel') }}</span>
                 </a>
 
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
@@ -91,32 +93,34 @@
                     </ul>
 
 
+
                 </div>
 
-                <!-- Right navbar links -->
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     @auth()
-                        <form action="{{ route('logout') }}" method="post">@csrf
-                            <button type="submit" class="btn bg-danger  btn-sm "><i class="fa fa-bell"
-                                    onclick="event.preventDefault();
-                                        this.closest('form').submit();"></i>
+                        <form action="{{ route('logout') }}" method="post"> @csrf
+                            <button type="submit" class="btn bg-danger  btn-sm "
+                                onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i>
                                 LOG OUT</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" type="button" class="btn bg-olive  btn-sm "><i
-                                class="fa fa-bell"></i>
+                        <a href="{{ route('login') }}" type="button" class="btn btn-sm btn-outline-light">
+                            <i class="fa-solid fa-right-to-bracket mr-2"></i>
                             LOG IN</a>
                     @endauth
                 </ul>
 
             </div>
+
         </nav>
         <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper ">
             <!-- Content Header (Page header) -->
-            <div class="row mb-2">
+            <div class="row mb-3">
 
             </div>
             <!-- /.content-header -->
@@ -125,36 +129,74 @@
             <div class="content ">
                 <div class="container ">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-
-                                    <p class="card-text">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's
-                                        content.
-                                    </p>
-
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
+                        <!-- /.col -->
+                        <div class="col-md-12 mb-3">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                                    </li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100"
+                                            src="https://placehold.it/900x500/39CCCC/ffffff&text=I+Love+Bootstrap"
+                                            alt="First slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100"
+                                            src="https://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap"
+                                            alt="Second slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100"
+                                            src="https://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap"
+                                            alt="Third slide">
+                                    </div>
                                 </div>
+
                             </div>
 
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
 
-                                    <p class="card-text">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's
-                                        content.
-                                    </p>
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div><!-- /.card -->
+                            <!-- /.card -->
                         </div>
+                        <!-- /.col -->
+
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-bullhorn"></i>
+                                        Annoucements
+                                    </h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="callout callout-danger">
+                                        <h5>I am a danger callout!</h5>
+
+                                        <p>There is a problem that we need to fix. A wonderful serenity has taken
+                                            possession
+                                            of my entire
+                                            soul,
+                                            like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
                         <!-- /.col-md-6 -->
                         <div class="col-lg-6">
                             <div class="card">
