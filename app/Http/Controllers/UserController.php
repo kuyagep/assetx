@@ -20,6 +20,7 @@ class UserController extends Controller
         if($request->ajax()){
             $users = User::orderBy('created_at', 'asc')->get();
             return DataTables::of($users)
+              
             ->editColumn('avatar', function ($request) {
                   //  return '<img src="' .asset('assets/dist/img/avatar/' . $request->avatar). '" alt="User Image" width="50">';
             })
@@ -60,7 +61,7 @@ class UserController extends Controller
             $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
-                'email' =>  'required|email|max:255',
+                'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:'.User::class],
             ]);
         }
                

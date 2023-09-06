@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed accent-danger ">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed accent-danger dark-mode">
     @include('sweetalert::alert')
 
     <div class="wrapper">

@@ -38,7 +38,7 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="dataTableajax" class="table table-bordered">
+                                    <table id="dataTableajax" class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -47,7 +47,7 @@
                                                 <th>Last Name</th>
                                                 <th>Email</th>
                                                 <th>Role</th>
-                                                <th>Status</th>
+                                                <th style="width: 8%" class="text-center">Status</th>
                                                 <th>Create At</th>
                                                 <th width="300px">Action</th>
                                             </tr>
@@ -188,7 +188,8 @@
                     },
                     {
                         data: 'status',
-                        name: 'status'
+                        name: 'status',
+                        class: 'text-center'
                     }, {
                         data: 'created_at',
                         name: 'created_at'
