@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $users = [];
         if($request->ajax()){
-            $users = User::all();
+            $users = User::orderBy('created_at', 'asc')->get();
             return DataTables::of($users)
             ->editColumn('avatar', function ($request) {
                   //  return '<img src="' .asset('assets/dist/img/avatar/' . $request->avatar). '" alt="User Image" width="50">';
@@ -108,18 +108,18 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
 
         if ($request->ajax()) {
-            
+              $id = ['id' => $request->id];
             $request->validate([
                 'first_name' => ['required', 'string', 'max:255'],
                 'last_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'max:255'],
             ]);
 
-            User::findOrFail($request->id)->update([
+            User::findOrFail($id)->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,

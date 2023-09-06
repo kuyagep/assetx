@@ -72,7 +72,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="javascript:void(0)" method="post" name="ModalForm" id="ModalForm"
+                            <form action="javascript:void(0)" method="post" name="ModalForm" id="addModalForm"
                                 class="form-horizontal" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
@@ -214,18 +214,96 @@
                 $('#ModalForm').trigger("reset");
             });
 
-            // display image
-            $('#image').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
+            // Store Function
+            $('#addModalForm').submit(function(e) {
+                e.preventDefault();
+
+                $('#btn-save').html('Sending...');
+
+                // Serialize the form data using FormData
+                let formData = new FormData(this);
+
+                if (!$('#id').val()) {
+                    // Send the form data via AJAX using jQuery store function
+                    $.ajax({
+                        // Replace with your route URL
+                        url: "{{ route('admin.users.store') }}",
+                        type: 'POST',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: (response) => {
+                            // Handle the response from the server (if needed)
+                            $('#ModalDialog').modal('hide');
+                            var oTable = $('#dataTableajax').dataTable();
+                            oTable.fnDraw(false);
+
+                            $('#btn-save').html('Submit');
+                            $('#btn-save').attr('disabled', false);
+                            // Display the message on the page
+                            toastr.success(response.message, 'Success');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: response.message,
+                            });
+                        },
+                        error: (response) => {
+                            // Handle the error (if needed)
+                            //console.log(response);
+                            $('#error').html("<div class='alert alert-danger'>" + response[
+                                    'responseJSON']['message'] +
+                                "</div>");
+                            $('#btn-save').html('Save User');
+                        }
+                    });
+
+                } else {
+                    let id = $('#id').val();
+                    console.log(id);
+                    var route = "{{ route('admin.users.update', ':id') }}";
+                    route = route.replace(':id', id);
+                    $.ajax({
+                        // Replace with your route URL
+                        url: route,
+                        type: 'PATCH',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: (response) => {
+                            // Handle the response from the server (if needed)
+                            $('#ModalDialog').modal('hide');
+                            var oTable = $('#dataTableajax').dataTable();
+                            oTable.fnDraw(false);
+
+                            $('#btn-save').html('Save Changes');
+                            $('#btn-save').attr('disabled', false);
+                            // Display the message on the page
+                            toastr.success(response.message, 'Success');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: response.message,
+                            });
+                        },
+                        error: (response) => {
+                            // Handle the error (if needed)
+                            //console.log(response);
+                            $('#error').html("<div class='alert alert-danger'>" + response[
+                                    'responseJSON']['message'] +
+                                "</div>");
+                            $('#btn-save').html('Update User');
+                        }
+                    });
                 }
-                reader.readAsDataURL(e.target.files['0']);
+
             });
 
             // Edit Function
             $('body').on('click', '#editButton', function() {
-                $('#btn-save').html("Update User");
+                $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
                 var route = "{{ route('admin.users.edit', ':id') }}";
                 route = route.replace(':id', id);
@@ -237,63 +315,18 @@
                         id: id
                     },
                     dataType: 'json',
-                    success: function(res) {
+                    success: function(response) {
                         // console.log(res);
                         $('#ModalTitle').html("Edit User");
                         $('#ModalDialog').modal("show");
-                        $('#id').val(res.id);
-                        $('#first_name').val(res.first_name);
-                        $('#last_name').val(res.last_name);
-                        $('#email').val(res.email);
+                        $('#id').val(response.id);
+                        $('#first_name').val(response.first_name);
+                        $('#last_name').val(response.last_name);
+                        $('#email').val(response.email);
                         $('#error').html('');
                     },
-                    error: function(res) {
-                        console.log(res);
-                    }
-                });
-            });
-
-            // Store Function
-            $('#ModalForm').submit(function(event) {
-                event.preventDefault();
-
-                $('#btn-save').html('Sending...');
-
-                // Serialize the form data using FormData
-                const formData = new FormData(this);
-
-                // Send the form data via AJAX using jQuery
-                $.ajax({
-                    // Replace with your route URL
-                    url: "{{ route('admin.users.store') }}",
-                    type: 'POST',
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: (response) => {
-                        // Handle the response from the server (if needed)
-                        $('#ModalDialog').modal('hide');
-                        var oTable = $('#dataTableajax').dataTable();
-                        oTable.fnDraw(false);
-
-                        $('#btn-save').html('Submit');
-                        $('#btn-save').attr('disabled', false);
-                        // Display the message on the page
-                        toastr.success(response.message, 'Success');
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: response.message,
-                        });
-                    },
-                    error: (response) => {
-                        // Handle the error (if needed)
+                    error: function(response) {
                         console.log(response);
-                        $('#error').html("<div class='alert alert-danger'>" + response[
-                                'responseJSON']['message'] +
-                            "</div>");
-                        $('#btn-save').html('Save User');
                     }
                 });
             });
@@ -343,6 +376,15 @@
                     }
                 });
 
+            });
+
+            // display image
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
             });
         });
     </script>
