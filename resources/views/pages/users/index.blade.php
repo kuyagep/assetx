@@ -29,7 +29,7 @@
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-users "></i><b> List of User</b></h3>
                                 <div class="card-tools">
-                                    <a href="javascript:void(0)" id="addNewUserBtn" class="btn btn-secondary btn-sm">
+                                    <a href="javascript:void(0)" id="addNewUserBtn" class="btn btn-primary btn-sm">
                                         <i class="fa fa-plus mr-1"></i>&nbsp;Add New User
                                     </a>
                                 </div>
@@ -72,7 +72,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="javascript:void(0)" method="post" name="ModalForm" id="addModalForm"
+                            <form action="javascript:void(0)" method="post" name="ModalForm" id="ModalForm"
                                 class="form-horizontal" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
@@ -115,8 +115,9 @@
                     <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
-                <!-- End Modal -->
 
+                <!-- End Modal -->
+                <!-- /.modal -->
             </div>
             <!--/. container-fluid -->
         </section>
@@ -215,7 +216,7 @@
             });
 
             // Store Function
-            $('#addModalForm').submit(function(e) {
+            $('#ModalForm').submit(function(e) {
                 e.preventDefault();
 
                 $('#btn-save').html('Sending...');
@@ -223,86 +224,76 @@
                 // Serialize the form data using FormData
                 let formData = new FormData(this);
 
-                if (!$('#id').val()) {
-                    // Send the form data via AJAX using jQuery store function
-                    $.ajax({
-                        // Replace with your route URL
-                        url: "{{ route('admin.users.store') }}",
-                        type: 'POST',
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: (response) => {
-                            // Handle the response from the server (if needed)
-                            $('#ModalDialog').modal('hide');
-                            var oTable = $('#dataTableajax').dataTable();
-                            oTable.fnDraw(false);
+                // Send the form data via AJAX using jQuery store function
+                $.ajax({
+                    // Replace with your route URL
+                    url: "{{ route('admin.users.store') }}",
+                    type: 'POST',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (response) => {
+                        // Handle the response from the server (if needed)
+                        $('#ModalDialog').modal('hide');
+                        var oTable = $('#dataTableajax').dataTable();
+                        oTable.fnDraw(false);
 
-                            $('#btn-save').html('Submit');
-                            $('#btn-save').attr('disabled', false);
-                            // Display the message on the page
-                            toastr.success(response.message, 'Success');
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success!',
-                                text: response.message,
-                            });
-                        },
-                        error: (response) => {
-                            // Handle the error (if needed)
-                            //console.log(response);
-                            $('#error').html("<div class='alert alert-danger'>" + response[
-                                    'responseJSON']['message'] +
-                                "</div>");
-                            $('#btn-save').html('Save User');
-                        }
-                    });
+                        $('#btn-save').html('Submit');
+                        $('#btn-save').attr('disabled', false);
+                        // Display the message on the page
+                        toastr.success(response.message, 'Success');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: response.message,
+                        });
+                    },
+                    error: (response) => {
+                        // Handle the error (if needed)
+                        //console.log(response);
+                        $('#error').html("<div class='alert alert-danger'>" + response[
+                                'responseJSON']['message'] +
+                            "</div>");
+                        $('#btn-save').html('Save User');
+                    }
+                });
 
-                } else {
-                    let id = $('#id').val();
-                    console.log(id);
-                    var route = "{{ route('admin.users.update', ':id') }}";
-                    route = route.replace(':id', id);
-                    $.ajax({
-                        // Replace with your route URL
-                        url: route,
-                        type: 'PATCH',
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: (response) => {
-                            // Handle the response from the server (if needed)
-                            $('#ModalDialog').modal('hide');
-                            var oTable = $('#dataTableajax').dataTable();
-                            oTable.fnDraw(false);
-
-                            $('#btn-save').html('Save Changes');
-                            $('#btn-save').attr('disabled', false);
-                            // Display the message on the page
-                            toastr.success(response.message, 'Success');
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success!',
-                                text: response.message,
-                            });
-                        },
-                        error: (response) => {
-                            // Handle the error (if needed)
-                            //console.log(response);
-                            $('#error').html("<div class='alert alert-danger'>" + response[
-                                    'responseJSON']['message'] +
-                                "</div>");
-                            $('#btn-save').html('Update User');
-                        }
-                    });
-                }
 
             });
 
+            // View Function
+            $('body').on('click', '#viewButton', function() {
+                $('#btn-save').attr('disabled', true);
+                var id = $(this).data('id');
+                var route = "{{ route('admin.users.show', ':id') }}";
+                route = route.replace(':id', id);
+
+                $.ajax({
+                    type: "GET",
+                    url: route,
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        // console.log(res);
+                        $('#ModalTitle').html("View User");
+                        $('#ModalDialog').modal("show");
+                        $('#id').val(response.id);
+                        $('#first_name').val(response.first_name);
+                        $('#last_name').val(response.last_name);
+                        $('#email').val(response.email);
+                        $('#error').html('');
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
             // Edit Function
             $('body').on('click', '#editButton', function() {
+                $('#btn-save').attr('disabled', false);
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
                 var route = "{{ route('admin.users.edit', ':id') }}";

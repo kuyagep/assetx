@@ -28,9 +28,9 @@ class UserController extends Controller
             })
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a title="View" data-toggle="tooltip" data-placement="top" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-primary btn-sm mr-1" id="viewButton">
+                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
                          View</a>';
-                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-olive btn-sm mr-1" id="editButton">
+                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
                         Edit</a>';
                 $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
                         Delete</a>';
@@ -68,12 +68,12 @@ class UserController extends Controller
          User::updateOrCreate(
             [    
                 'id' => $request->id,
-                'email' => $request->email,
             ],
             [
                 'first_name' => ucwords(trim($request->first_name)),
                 'last_name' => ucwords(trim($request->last_name)),
                 'password' => Hash::make('password'),
+                'email' => trim($request->email),
                 'email_verified_at' => null,
                 'role' => 'client',
                 'status' => 'active',
@@ -89,9 +89,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Request $request)
     {
-        //
+        $id = ['id' => $request->id];
+        $user = User::where($id)->first();
+
+        return response()->json($user);
     }
 
     /**
@@ -111,22 +114,6 @@ class UserController extends Controller
     public function update(Request $request)
     {
 
-        if ($request->ajax()) {
-              $id = ['id' => $request->id];
-            $request->validate([
-                'first_name' => ['required', 'string', 'max:255'],
-                'last_name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'max:255'],
-            ]);
-
-            User::findOrFail($id)->update([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-            ]);
-        }
-
-        return response()->json(['message' => 'User updated successfully!']);
         
     }
 
