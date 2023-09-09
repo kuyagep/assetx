@@ -115,7 +115,8 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+                    <button href="#" class="btn btn-default btn-flat float-right" id="logout">Sign
+                        out</button>
                 </li>
             </ul>
         </li>

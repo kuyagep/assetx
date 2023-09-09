@@ -20,9 +20,34 @@ class UserController extends Controller
         if($request->ajax()){
             $users = User::orderBy('created_at', 'asc')->get();
             return DataTables::of($users)
-              
-            ->editColumn('avatar', function ($request) {
-                  //  return '<img src="' .asset('assets/dist/img/avatar/' . $request->avatar). '" alt="User Image" width="50">';
+                ->editColumn('full_name', function ($request) {
+                    $result = $request->first_name . " " . $request->last_name;
+                    return $result;
+                })
+                ->editColumn('avatar', function ($request) {
+
+                    if (empty($request->avatar)) {
+                        $temp = asset("assets/dist/img/avatar.png");
+                    } else {
+                        $temp = asset("assets/dist/img/avatar/" . $request->avatar);
+                    }
+
+                    $result = '<ul class="list-inline">
+                            <li class="list-inline-item">
+                                <img alt="Avatar" class="table-avatar" src="' . $temp . '" style="width: 2.5rem; border-radius: 50%;">
+                            </li>
+                        </ul>';
+                    return $result;
+                    //  return '<img src="' .asset('assets/dist/img/avatar/' . $request->avatar). '" alt="User Image" width="50">';
+                })
+                ->editColumn('status', function ($request) {
+
+                    if($request->status === "active"){
+                        $result = '<span class="badge badge-success">Active</span>';
+                    }else{
+                         $result = '<span class="badge badge-danger">Inactive</span>';
+                    }
+                    return $result;
             })
             ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i'); // format date time
@@ -37,7 +62,7 @@ class UserController extends Controller
                         Delete</a>';
                 return $btn;
             })
-            ->rawColumns(['avatar','action'])
+            ->rawColumns(['avatar','action','full_name','status'])
             ->make(true);
         }
        return view('pages.users.index', compact('users'));
@@ -58,10 +83,11 @@ class UserController extends Controller
     {
 
         if ($request->ajax()) {
+
             $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
-                'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:'.User::class],
+                'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
             ]);
         }
                

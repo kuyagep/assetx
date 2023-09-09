@@ -1,134 +1,129 @@
+{{-- Extend main layout --}}
 @extends('partials.main')
+{{-- Page Title --}}
 @section('page-title', 'Manage Users')
+{{-- Content Header --}}
+@section('content-header', 'Manage Users')
+{{-- Main content --}}
 @section('main-content')
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Users</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Users</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-users "></i><b> List of User</b></h3>
-                                <div class="card-tools">
-                                    <a href="javascript:void(0)" id="addNewUserBtn" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-plus mr-1"></i>&nbsp;Add New User
-                                    </a>
-                                </div>
-                                <!-- /.card-tools -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fas fa-users "></i><b> List of User</b></h3>
+                            <div class="card-tools">
+                                <a href="javascript:void(0)" id="addNewUserBtn" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add New User
+                                </a>
                             </div>
+                            <!-- /.card-tools -->
+                        </div>
 
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="dataTableajax" class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Avatar</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
-                                                <th style="width: 8%" class="text-center">Status</th>
-                                                <th>Create At</th>
-                                                <th width="300px">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="dataTableajax" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Avatar</th>
+                                            <th>Full Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th style="width: 8%" class="text-center">Status</th>
+                                            <th>Create At</th>
+                                            <th width="300px">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Modal -->
-                <div class="modal fade" id="ModalDialog">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="ModalTitle"></h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form action="javascript:void(0)" method="post" name="ModalForm" id="ModalForm"
-                                class="form-horizontal" enctype="multipart/form-data">
-                                @csrf
-                                <div class="modal-body">
-                                    {{-- Error Display here --}}
-                                    <div id="error"></div>
-                                    {{-- Reference Id --}}
-                                    <input type="hidden" name="id" id="id">
-                                    {{-- Data --}}
-                                    <div class="form-group row">
-                                        <label for="first_name" class="col-sm-2 col-form-label">First Name <span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="text" id="first_name" name="first_name"
-                                                class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="last_name" class="col-sm-2 col-form-label">Last Name <span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="last_name" name="last_name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="email" class="col-sm-2 col-form-label">Email <span
-                                                class="text-danger">*</span></label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="email" name="email">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer justify-end">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" id="btn-save">Save changes</button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-
-                <!-- End Modal -->
-                <!-- /.modal -->
             </div>
-            <!--/. container-fluid -->
-        </section>
-        <!-- /.content -->
-    </div>
 
+            <!-- Modal -->
+            <div class="modal fade" id="ModalDialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="ModalTitle"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="javascript:void(0)" method="post" name="ModalForm" id="ModalForm"
+                            class="form-horizontal" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                {{-- Error Display here --}}
+                                <div id="error"></div>
+                                {{-- Reference Id --}}
+                                <input type="hidden" name="id" id="id">
+                                {{-- sample --}}
+                                <div class="row">
+                                    <div class="col-8">
+
+                                        <div class="form-group">
+                                            <label for="emails">First Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="first_name" name="first_name"
+                                                placeholder="Ex. Juan">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emails">Last Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                                placeholder="Ex. Dela Cruz">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emails">Email address <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="Ex. example@">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <img id="showImage" alt="Avatar" class="table-avatar"
+                                            src="{{ asset('assets/dist/img/avatar.png') }}" style="width: 100%; ">
+                                        <div class="form-group mt-2">
+                                            <label for="avatar">Avatar</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="avatar"
+                                                        id="avatar">
+                                                    <label class="custom-file-label" for="avatar">Choose</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer justify-end">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="btn-save">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+            <!-- End Modal -->
+            <!-- /.modal -->
+        </div>
+        <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
 @endsection
 
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script type="text/javascript">
         $(document).ready(function($) {
             // token header
@@ -172,11 +167,8 @@
                         data: 'avatar',
                         name: 'avatar'
                     }, {
-                        data: 'first_name',
-                        name: 'first_name'
-                    }, {
-                        data: 'last_name',
-                        name: 'last_name'
+                        data: 'full_name',
+                        name: 'full_name'
                     },
                     {
                         data: 'email',
@@ -371,7 +363,7 @@
             });
 
             // display image
-            $('#image').change(function(e) {
+            $('#avatar').change(function(e) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $('#showImage').attr('src', e.target.result);

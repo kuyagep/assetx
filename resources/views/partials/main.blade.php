@@ -23,13 +23,13 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+        href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed accent-danger dark-mode">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed accent-danger ">
     @include('sweetalert::alert')
 
     <div class="wrapper">
@@ -46,11 +46,14 @@
 
         <!-- Main Sidebar Container -->
         @include('partials.sidebar')
-
-        <!-- Content Wrapper. Contains page content -->
-        @yield('main-content')
-        <!-- /.content-wrapper -->
-
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            @include('partials.content-header')
+            <!-- /.content-header -->
+            <!-- Content Wrapper. Contains page content -->
+            @yield('main-content')
+            <!-- /.content-wrapper -->
+        </div>
         <!-- Main Footer -->
         @include('partials.footer')
     </div>
@@ -74,20 +77,21 @@
     <script src="{{ asset('assets/plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
 
     <!-- DataTables  & Plugins -->
-    <script src="{{ asset('assets') }}/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/jszip/jszip.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="{{ asset('assets') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
     <script src="{{ asset('assets/dist/js/custom/toastr.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- dataTable --}}
     <script>
         $(function() {
@@ -98,14 +102,75 @@
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+
+        });
+    </script>
+
+    {{-- realtime --}}
+    <script>
+        function clock() {
+            let realTime = new Date();
+            let year = realTime.getFullYear();
+            let month = realTime.getMonth() + 1;
+            let date = realTime.getDate();
+            let hrs = realTime.getHours();
+            let mins = realTime.getMinutes();
+            let secs = realTime.getSeconds();
+            let period = "AM";
+
+            if (hrs == 0) hrs = 12;
+            if (hrs > 12) {
+                hrs = hrs - 12;
+                period = "PM";
+            }
+
+            hrs = hrs < 10 ? `0${hrs}` : hrs;
+            mins = mins < 10 ? `0${mins}` : mins;
+            secs = secs < 10 ? `0${secs}` : secs;
+
+            let time = `${date}/${month}/${year} ${hrs}:${mins}:${secs} ${period}`;
+            setInterval(clock, 1000);
+            document.getElementById("clock").innerText = time;
+        }
+
+        clock();
+    </script>
+
+    <script>
+        $(function() {
+            $('body').on('click', '#logout', function() {
+
+                // var id = $(this).data('id');
+                var route = "{{ route('logout') }}";
+                // route = route.replace(':id', id);
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "POST",
+                            url: route,
+                            success: function(response) {
+
+                                window.location.replace("");
+
+                            },
+                            error: function(response) {
+                                console.log('Error : ', response);
+                            }
+                        });
+
+                    }
+                });
+
             });
         });
     </script>
