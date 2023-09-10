@@ -116,6 +116,7 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
+
                 </div>
                 <!-- /.col -->
                 <div class="col-md-6">
@@ -146,6 +147,12 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
+                    <blockquote class="quote-danger">
+                        <h5 id="note">Note!</h5>
+                        <p>These implementations are not supported by ColorlibHQ. However, they do provide a good example of
+                            how to integrate AdminLTE into different frameworks. For the latest release of AdminLTE, please
+                            visit our <a href="#">repository</a> or <a href="#">website</a>.</p>
+                    </blockquote>
                 </div>
                 <!-- /.col -->
             </div>

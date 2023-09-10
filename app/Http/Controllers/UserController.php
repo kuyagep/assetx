@@ -88,6 +88,7 @@ class UserController extends Controller
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+                'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
         }
                
@@ -104,8 +105,8 @@ class UserController extends Controller
                 'email_verified_at' => null,
                 'role' => 'client',
                 'status' => 'active',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         );
         // youtube link: https://www.youtube.com/watch?v=47er3YeFbZo

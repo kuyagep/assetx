@@ -34,7 +34,7 @@
                                             <th>Role</th>
                                             <th style="width: 8%" class="text-center">Status</th>
                                             <th>Create At</th>
-                                            <th width="300px">Action</th>
+                                            <th width="250px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -134,23 +134,6 @@
                 }
             });
 
-            //toastr message
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": true,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": true,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
 
             // Display data from index controller
             var table = $("#dataTableajax").DataTable({
@@ -236,7 +219,6 @@
                         $('#btn-save').html('Submit');
                         $('#btn-save').attr('disabled', false);
                         // Display the message on the page
-                        toastr.success(response.message, 'Success');
                         Swal.fire({
                             icon: 'success',
                             title: 'Success!',

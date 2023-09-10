@@ -58,7 +58,31 @@
         @include('partials.footer')
     </div>
     <!-- ./wrapper -->
+    <div class="modal fade" id="logoutModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Logout</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('logout') }}" method="post">@csrf
 
+                    <div class="modal-body">
+                        <p>Are you sure you want to log-out?</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-dark">Logout</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
@@ -90,8 +114,9 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
-    <script src="{{ asset('assets/dist/js/custom/toastr.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('assets/custom/js/realtime.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/js/custom/toastr.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/dist/js/custom/sweetalert2@11.js') }}"></script>
     {{-- dataTable --}}
     <script>
         $(function() {
@@ -107,34 +132,7 @@
     </script>
 
     {{-- realtime --}}
-    <script>
-        function clock() {
-            let realTime = new Date();
-            let year = realTime.getFullYear();
-            let month = realTime.getMonth() + 1;
-            let date = realTime.getDate();
-            let hrs = realTime.getHours();
-            let mins = realTime.getMinutes();
-            let secs = realTime.getSeconds();
-            let period = "AM";
 
-            if (hrs == 0) hrs = 12;
-            if (hrs > 12) {
-                hrs = hrs - 12;
-                period = "PM";
-            }
-
-            hrs = hrs < 10 ? `0${hrs}` : hrs;
-            mins = mins < 10 ? `0${mins}` : mins;
-            secs = secs < 10 ? `0${secs}` : secs;
-
-            let time = `${date}/${month}/${year} ${hrs}:${mins}:${secs} ${period}`;
-            setInterval(clock, 1000);
-            document.getElementById("clock").innerText = time;
-        }
-
-        clock();
-    </script>
 
     <script>
         $(function() {
