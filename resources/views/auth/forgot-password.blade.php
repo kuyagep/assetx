@@ -46,7 +46,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <input type="text" name="email"
-                            class="form-control form-control-border border-width-2 @error('email') is-invalid @enderror"
+                            class="form-control @error('email') is-invalid @enderror"
                             id="email" placeholder="Enter registered email address" value="{{ old('email') }}">
                         @error('email')
                             <span class="error invalid-feedback"> {{ $message }}</span>

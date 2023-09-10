@@ -82,12 +82,13 @@
                                         <div class="form-group">
                                             <label for="emails">Email address <span class="text-danger">*</span></label>
                                             <input type="email" class="form-control" id="email" name="email"
-                                                placeholder="Ex. example@">
+                                                placeholder="Ex. example@email.com">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <img id="showImage" alt="Avatar" class="table-avatar"
-                                            src="{{ asset('assets/dist/img/avatar.png') }}" style="width: 100%; ">
+                                            src="{{ asset('assets/dist/img/avatar.png') }}"
+                                            style="width: 150px;max-width: 150px;height: 150px;object-fit: cover; ">
                                         <div class="form-group mt-2">
                                             <label for="avatar">Avatar</label>
                                             <div class="input-group">
