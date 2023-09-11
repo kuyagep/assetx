@@ -66,7 +66,7 @@ class UserController extends Controller
             ->rawColumns(['avatar','action','full_name','status'])
             ->make(true);
         }
-       return view('pages.users.indexx');
+       return view('pages.users.index');
     }
 
     /**
@@ -88,11 +88,17 @@ class UserController extends Controller
             $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
-                'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:'.User::class],
+                'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'role' => 'required|string|max:255',
             ]);
 
-                         
+            
+            if (User::where('email', $request->email )->exists()) {
+                return response()->json(['icon'=>'error','title'=>'Ooop!', 'message' => 'Email has been already taken!']);
+                exit();
+            }
+
             $data = new User;
             $data->first_name = $request->first_name;
             $data->last_name = $request->last_name;
@@ -101,7 +107,7 @@ class UserController extends Controller
             $data->role = 'client';
             $data->status ='active';
 
-            if ($request->file('avatar')) {
+            if ($request->hasFile('avatar')) {
                 $file = $request->file('avatar');           
                 // @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
 
@@ -116,11 +122,7 @@ class UserController extends Controller
             $data->save();
 
         }
-
         return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User saved successfully!']);
-               
-
-        
     }
 
     /**
@@ -185,6 +187,9 @@ class UserController extends Controller
                     $data['avatar'] = $filename;
                 }
                 $data->save();
+            }else{
+               
+                 return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'User not Found!']);
             }
 
             

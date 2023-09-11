@@ -15,10 +15,9 @@
                         <div class="card-header">
                             <h3 class="card-title"><i class="fas fa-users "></i><b> List of User</b></h3>
                             <div class="card-tools">
-                                <a href="javascript:void(0)" id="addNewUserBtn" class="btn btn-primary ">
+                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
                                     <i class="fa fa-plus mr-1"></i>&nbsp;Add New User
                                 </a>
-
                             </div>
                             <!-- /.card-tools -->
                         </div>
@@ -49,23 +48,23 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="ModalDialog">
+            <div class="modal fade" id="modal">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="ModalTitle"></h4>
+                            <h4 class="modal-title" id="modal-title"></h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="javascript:void(0)" method="post" name="ModalForm" id="ModalForm"
-                            class="form-horizontal" enctype="multipart/form-data">
+                        <form action="javascript:void(0)" name="modal-form" id="modal-form" class="form-horizontal"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 {{-- Error Display here --}}
                                 <div id="error"></div>
                                 {{-- Reference Id --}}
-                                <input type="text" name="id" id="id">
+                                <input type="hidden" name="id" id="id">
                                 {{-- sample --}}
                                 <div class="row">
                                     <div class="col-8">
@@ -81,20 +80,28 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="emails">First Name <span class="text-danger">*</span></label>
+                                            <label for="first_name">First Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="first_name" name="first_name"
                                                 placeholder="Ex. Juan">
 
                                         </div>
                                         <div class="form-group">
-                                            <label for="emails">Last Name <span class="text-danger">*</span></label>
+                                            <label for="last_name">Last Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="last_name" name="last_name"
                                                 placeholder="Ex. Dela Cruz">
                                         </div>
                                         <div class="form-group">
-                                            <label for="emails">Email address <span class="text-danger">*</span></label>
+                                            <label for="email">Email address <span class="text-danger">*</span></label>
                                             <input type="email" class="form-control" id="email" name="email"
                                                 placeholder="Ex. example@email.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Role <span class="text-danger">*</span></label>
+                                            <select class="custom-select" name="role" id="role">
+                                                <option selected>Select...</option>
+                                                <option value="client">Client</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -107,8 +114,8 @@
 
                             </div>
                             <div class="modal-footer justify-end">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-dark" id="btn-save">Save changes</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-dark btn-save" id="btn-save">Save</button>
                             </div>
                         </form>
                     </div>
@@ -185,24 +192,25 @@
             });
 
             // Add Button Function
-            $('#addNewUserBtn').click(function() {
+            $('#add-button').click(function() {
                 $('#error').html('');
-                $('#ModalDialog').modal("show");
-                $('#ModalTitle').html("Add User");
-                $('#btn-save').html("Save User");
+                $('#modal').modal("show");
+                $('#modal-title').html("Add Data");
+                $('#btn-save').html("Save");
+                $('#btn-save').show();
                 $('#id').val('');
-                $('#ModalForm').trigger("reset");
+                $('#modal-form').trigger("reset");
             });
 
 
             // Store Function
-            $('#ModalForm').submit(function(e) {
+            $('#modal-form').submit(function(e) {
                 e.preventDefault();
 
                 $('#btn-save').html('Sending...');
 
                 // Serialize the form data using FormData
-                let formData = new FormData(this);
+                let formData = new FormData($('#modal-form')[0]);
 
                 // Send the form data via AJAX using jQuery store function
                 $.ajax({
@@ -215,81 +223,30 @@
                     processData: false,
                     success: (response) => {
                         // Handle the response from the server (if needed)
-                        $('#ModalDialog').modal('hide');
-                        var oTable = $('#dataTableajax').dataTable();
-                        oTable.fnDraw(false);
+                        $('#btn-save').html('Submitted');
+                        $('#modal').modal('hide');
+                        table.draw();
+                        $('#modal-form').trigger("reset");
 
-                        $('#ModalForm').trigger("reset");
-                        $('#btn-save').html('Submit');
-                        $('#btn-save').attr('disabled', false);
                         // Display the message on the page
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
+                            icon: response.icon,
+                            title: response.title,
                             text: response.message,
+                            time: 2000
                         });
                     },
                     error: (response) => {
                         // Handle the error (if needed)
-                        //console.log(response);
                         $('#error').html("<div class='alert alert-danger'>" + response[
                                 'responseJSON']['message'] +
                             "</div>");
-                        $('#btn-save').html('Save User');
+                        $('#btn-save').html('Save');
                     }
                 });
 
-
             });
 
-            // Edit Modal Function update
-            $('#editModalForm').submit(function(e) {
-                e.preventDefault();
-
-                var id = $('#id').val();
-                var route = "{{ route('admin.users.edit', ':id') }}";
-                route = route.replace(':id', id);
-                $('#btn-save').html('Sending...');
-
-                // Serialize the form data using FormData
-                let editformData = new FormData(this);
-
-                // Send the form data via AJAX using jQuery store function
-                $.ajax({
-                    // Replace with your route URL
-                    url: route,
-                    type: 'POST',
-                    data: editformData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: (response) => {
-                        // Handle the response from the server (if needed)
-                        $('#ModalDialog').modal('hide');
-                        var oTable = $('#dataTableajax').dataTable();
-                        oTable.fnDraw(false);
-
-                        $('#btn-save').html('Submit');
-                        $('#btn-save').attr('disabled', false);
-                        // Display the message on the page
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: response.message,
-                        });
-                    },
-                    error: (response) => {
-                        // Handle the error (if needed)
-                        //console.log(response);
-                        $('#error').html("<div class='alert alert-danger'>" + response[
-                                'responseJSON']['message'] +
-                            "</div>");
-                        $('#btn-save').html('Save User');
-                    }
-                });
-
-
-            });
 
 
             // View Function
@@ -308,9 +265,9 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                        // console.log(res);
-                        $('#ModalTitle').html("View User");
-                        $('#ModalDialog').modal("show");
+
+                        $('#modal-title').html("View Data");
+                        $('#modal').modal("show");
                         $('#id').val(response.id);
                         $('#first_name').val(response.first_name);
                         $('#last_name').val(response.last_name);
@@ -322,10 +279,11 @@
                     }
                 });
             });
+
             // Edit Function
             $('body').on('click', '#editButton', function() {
-                $('#btn-save').attr('disabled', false);
-                $('#ModalForm').attr("id", "editModalForm");
+
+                // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
                 var route = "{{ route('admin.users.edit', ':id') }}";
@@ -340,8 +298,8 @@
                     dataType: 'json',
                     success: function(response) {
                         // console.log(res);
-                        $('#ModalTitle').html("Edit User");
-                        $('#ModalDialog').modal("show");
+                        $('#modal-title').html("Edit Data");
+                        $('#modal').modal("show");
                         $('#id').val(response.id);
                         $('#first_name').val(response.first_name);
                         $('#last_name').val(response.last_name);
@@ -385,9 +343,10 @@
                                 oTable.fnDraw(false);
                                 //Sweet Alert
                                 Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success!',
+                                    icon: response.icon,
+                                    title: response.title,
                                     text: response.message,
+                                    time: 2000
                                 });
 
                             },
