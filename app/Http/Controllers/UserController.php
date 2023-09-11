@@ -35,7 +35,7 @@ class UserController extends Controller
 
                     $result = '<ul class="list-inline">
                             <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="' . $temp . '" style="width: 2.5rem; border-radius: 50%;">
+                                <img alt="Avatar" class="table-avatar" src="' . $temp . '" style="width: 2.5rem; height: 2.5rem; border-radius: 50%; object-fit: cover;">
                             </li>
                         </ul>';
                     return $result;
@@ -82,47 +82,70 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         if ($request->ajax()) {
-
             $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'role' => 'required|string|max:255',
+                'status' => 'required|string|max:255',
             ]);
+            // checked if new data or exists
+            if (empty($request->id)) {
+                $request->validate([
+                    'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:'.User::class],
+                ]);
+                $data = new User;
+                $data->first_name = $request->first_name;
+                $data->last_name = $request->last_name;
+                $data->email = $request->email;
+                $data->password = Hash::make('password');
+                $data->role = $request->role;;
+                $data->status = $request->status;
 
+                if ($request->hasFile('avatar')) {
+                    $file = $request->file('avatar');           
+                    // @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/img/avatar'), $filename);
+                    $data['avatar'] = $filename;
+                }
+
+                $data->save();
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User saved successfully!']);
+            }else{
+                $data = User::find($request->id);
+
+                $data->first_name = $request->first_name;
+                $data->last_name = $request->last_name;
+                $data->email = $request->email;
+                $data->role = $request->role;;
+                $data->status = $request->status;
+
+                if ($request->hasFile('avatar')) {
+                    $file = $request->file('avatar');           
+                    @unlink(public_path('assets/dist/img/avatar/'. $data->avatar));
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/img/avatar'), $filename);
+                    $data['avatar'] = $filename;
+                }
+
+                $data->save();
+                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User updated successfully!']);
+            }
             
-            if (User::where('email', $request->email )->exists()) {
-                return response()->json(['icon'=>'error','title'=>'Ooop!', 'message' => 'Email has been already taken!']);
-                exit();
-            }
-
-            $data = new User;
-            $data->first_name = $request->first_name;
-            $data->last_name = $request->last_name;
-            $data->email = $request->email;
-            $data->password = Hash::make('password');
-            $data->role = 'client';
-            $data->status ='active';
-
-            if ($request->hasFile('avatar')) {
-                $file = $request->file('avatar');           
-                // @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
-
-                //new filename
-                $filename = $file->hashName();
-
-                // dd($filename);
-                $file->move(public_path('assets/dist/img/avatar'), $filename);
-                $data['avatar'] = $filename;
-            }
-
-            $data->save();
 
         }
-        return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User saved successfully!']);
+
     }
 
     /**

@@ -98,9 +98,17 @@
                                         <div class="form-group">
                                             <label for="role">Role <span class="text-danger">*</span></label>
                                             <select class="custom-select" name="role" id="role">
-                                                <option selected>Select...</option>
-                                                <option value="client">Client</option>
+                                                <option>Select...</option>
+                                                <option value="client" selected>Client</option>
                                                 <option value="admin">Admin</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="status">Status <span class="text-danger">*</span></label>
+                                            <select class="custom-select" name="status" id="status">
+                                                <option>Select...</option>
+                                                <option value="active" selected>Activate</option>
+                                                <option value="inactive">Deactivate</option>
                                             </select>
                                         </div>
                                     </div>
