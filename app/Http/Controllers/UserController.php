@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\DataTables;
@@ -65,7 +66,7 @@ class UserController extends Controller
             ->rawColumns(['avatar','action','full_name','status'])
             ->make(true);
         }
-       return view('pages.users.index', compact('users'));
+       return view('pages.users.indexx');
     }
 
     /**
@@ -87,31 +88,39 @@ class UserController extends Controller
             $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
-                'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+                'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:'.User::class],
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
+
+                         
+            $data = new User;
+            $data->first_name = $request->first_name;
+            $data->last_name = $request->last_name;
+            $data->email = $request->email;
+            $data->password = Hash::make('password');
+            $data->role = 'client';
+            $data->status ='active';
+
+            if ($request->file('avatar')) {
+                $file = $request->file('avatar');           
+                // @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
+
+                //new filename
+                $filename = $file->hashName();
+
+                // dd($filename);
+                $file->move(public_path('assets/dist/img/avatar'), $filename);
+                $data['avatar'] = $filename;
+            }
+
+            $data->save();
+
         }
+
+        return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User saved successfully!']);
                
+
         
-         User::updateOrCreate(
-            [    
-                'id' => $request->id,
-            ],
-            [
-                'first_name' => ucwords(trim($request->first_name)),
-                'last_name' => ucwords(trim($request->last_name)),
-                'password' => Hash::make('password'),
-                'email' => trim($request->email),
-                'email_verified_at' => null,
-                'role' => 'client',
-                'status' => 'active',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        );
-        // youtube link: https://www.youtube.com/watch?v=47er3YeFbZo
-       
-        return response()->json(['message' => 'User saved successfully!']);
     }
 
     /**
@@ -139,9 +148,50 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
 
+       if ($request->ajax()) {
+
+            $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+                       
+            $data = User::find($id);
+
+            if($data){
+                $data->first_name = $request->first_name;
+                $data->last_name = $request->last_name;
+                $data->email = $request->email;
+
+                if ($request->hasFile('avatar')) {
+                     // @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
+                    $path = 'assets/dist/img/avatar/' . $data->avatar;
+                    if(File::exists($path)){
+                        File::delete($path);
+                    }
+
+                    $file = $request->file('avatar');           
+                   
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/img/avatar'), $filename);
+                    $data['avatar'] = $filename;
+                }
+                $data->save();
+            }
+
+            
+
+        }
+
+        return response()->json(['message' => 'User saved successfully!']);
         
     }
 

@@ -222,11 +222,13 @@
                         $('#ModalForm').trigger("reset");
                         $('#btn-save').html('Submit');
                         $('#btn-save').attr('disabled', false);
+
                         // Display the message on the page
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
+                            icon: response.icon,
+                            title: response.title,
                             text: response.message,
+                            timer: 2000
                         });
                     },
                     error: (response) => {
