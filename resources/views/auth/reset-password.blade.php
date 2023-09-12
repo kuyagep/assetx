@@ -41,7 +41,7 @@
                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                     <div class="form-group mb-3">
-                        <input type="email" name="email"
+                        <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                             class="form-control form-control-border border-width-2 @error('email')
                             is-invalid
                         @enderror"

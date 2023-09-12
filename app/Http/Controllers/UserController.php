@@ -106,7 +106,6 @@ class UserController extends Controller
 
                 if ($request->hasFile('avatar')) {
                     $file = $request->file('avatar');           
-                    // @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
 
                     //new filename
                     $filename = $file->hashName();
@@ -140,10 +139,9 @@ class UserController extends Controller
                 }
 
                 $data->save();
-                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User updated successfully!']);
             }
             
-
         }
 
     }
@@ -230,7 +228,7 @@ class UserController extends Controller
     {
         if($request->ajax()){
              $user = User::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User saved successfully!']);
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User de successfully!']);
         }
        
 

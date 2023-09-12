@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition login-page accent-danger">
+<body class="hold-transition login-page accent-dark dark-mode">
     <div class="login-box">
         <div class="login-logo">
             <a href="javascript:void(0)"><b>{{ config('app.name', 'AssetX') }}</b></a>
@@ -41,7 +41,8 @@
                             class="form-control  @error('email')
                             is-invalid
                         @enderror"
-                            value="{{ old('email') }}" placeholder="Enter Registered Email" required>
+                            value="{{ old('email') }}" placeholder="Enter Registered Email"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
 
                         @error('email')
                             <div class="invalid-feedback">
@@ -66,7 +67,7 @@
                         <div class="col-5">
                             @if (Route::has('password.request'))
                                 <div class="mt-1">
-                                    <a class="text-dark" href="{{ route('password.request') }}">Forgot
+                                    <a href="{{ route('password.request') }}">Forgot
                                         Password?</a>
                                 </div>
                             @endif

@@ -74,9 +74,9 @@
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="avatar"
                                                         id="avatar">
-                                                    <label class="custom-file-label" for="avatar">Choose</label>
+                                                    <label class="custom-file-label" for="avatar">Choose
+                                                        file</label>
                                                 </div>
-
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -241,7 +241,7 @@
                             icon: response.icon,
                             title: response.title,
                             text: response.message,
-                            time: 2000
+                            timer: 2000
                         });
                     },
                     error: (response) => {
@@ -254,8 +254,6 @@
                 });
 
             });
-
-
 
             // View Function
             $('body').on('click', '#viewButton', function() {
@@ -280,6 +278,8 @@
                         $('#first_name').val(response.first_name);
                         $('#last_name').val(response.last_name);
                         $('#email').val(response.email);
+                        $('#role').val(response.role);
+                        $('#status').val(response.status);
                         $('#error').html('');
                     },
                     error: function(response) {
@@ -290,7 +290,7 @@
 
             // Edit Function
             $('body').on('click', '#editButton', function() {
-
+                $('#btn-save').attr('disabled', false);
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
@@ -312,6 +312,8 @@
                         $('#first_name').val(response.first_name);
                         $('#last_name').val(response.last_name);
                         $('#email').val(response.email);
+                        $('#role').val(response.role);
+                        $('#status').val(response.status);
                         $('#error').html('');
                     },
                     error: function(response) {
@@ -327,9 +329,10 @@
                 var route = "{{ route('admin.users.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
+
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    text: "You want delete this account?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -354,7 +357,7 @@
                                     icon: response.icon,
                                     title: response.title,
                                     text: response.message,
-                                    time: 2000
+                                    timer: 2000
                                 });
 
                             },

@@ -38,7 +38,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <input type="text" name="first_name"
-                            class="form-control form-control-border border-width-2 @error('first_name')
+                            class="form-control @error('first_name')
                             is-invalid
                         @enderror"
                             value="{{ old('first_name') }}" placeholder="First name" required>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="text" name="last_name"
-                            class="form-control form-control-border border-width-2 @error('last_name')
+                            class="form-control @error('last_name')
                             is-invalid
                         @enderror"
                             value="{{ old('last_name') }}" placeholder="Last name" required>
@@ -61,8 +61,8 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="email" name="email"
-                            class="form-control form-control-border border-width-2 @error('email')
+                        <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                            class="form-control @error('email')
                             is-invalid
                         @enderror"
                             value="{{ old('email') }}" placeholder="Email" required>
@@ -73,11 +73,15 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="text" name="password"
-                            class="form-control form-control-border border-width-2 @error('password')
+                        <input type="password" name="password"
+                            class="form-control @error('password')
                             is-invalid
                         @enderror"
-                            value="{{ old('password') }}" placeholder="Password" required>
+                            value="{{ old('password') }}" placeholder="Password"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                            required>
+
                         @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -85,8 +89,8 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="text" name="password_confirmation"
-                            class="form-control form-control-border border-width-2 @error('password_confirmation')
+                        <input type="password" name="password_confirmation"
+                            class="form-control @error('password_confirmation')
                             is-invalid
                         @enderror"
                             value="{{ old('password_confirmation') }}" placeholder="Confirm password" required>
