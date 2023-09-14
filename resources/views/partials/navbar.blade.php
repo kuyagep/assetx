@@ -84,13 +84,13 @@
                 <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
                     class="user-image img-circle elevation-2" alt="User Image"
                     style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
-                {{-- <span class="d-none d-md-inline">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span> --}}
+                <span class="d-none d-md-inline">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
-                <li class="user-header bg-danger">
+                <li class="user-header bg-default">
                     <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
-                        class="img-circle elevation-2" alt="User Image">
+                        class="img-circle elevation-1" alt="User Image">
 
                     <p>
                         {{ Auth::user()->first_name . '  ' . Auth::user()->last_name }}
@@ -98,7 +98,7 @@
                     </p>
                 </li>
                 <!-- Menu Body -->
-                <li class="user-body">
+                {{-- <li class="user-body">
                     <div class="row">
                         <div class="col-4 text-center">
                             <a href="#">Followers</a>
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <!-- /.row -->
-                </li>
+                </li> --}}
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <a href="#" class="btn btn-default btn-flat">Profile</a>

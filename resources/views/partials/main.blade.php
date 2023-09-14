@@ -14,8 +14,8 @@
     <link rel="manifest" href="{{ asset('brand_logo/site.webmanifest') }}">
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    {{-- <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- overlayScrollbars -->
@@ -29,16 +29,16 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed accent-danger ">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-danger ">
     @include('sweetalert::alert')
 
     <div class="wrapper">
 
         <!-- Preloader -->
-        {{-- <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo"
-                height="60" width="60">
-        </div> --}}
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__wobble" src="{{ asset('brand_logo/android-chrome-192x192.png') }}"
+                alt="Brand Logo Preloader" height="60" width="60">
+        </div>
 
         <!-- Navbar -->
         @include('partials.navbar')
@@ -132,47 +132,6 @@
         });
     </script>
 
-    {{-- realtime --}}
-
-
-    <script>
-        $(function() {
-            $('body').on('click', '#logout', function() {
-
-                // var id = $(this).data('id');
-                var route = "{{ route('logout') }}";
-                // route = route.replace(':id', id);
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: "POST",
-                            url: route,
-                            success: function(response) {
-
-                                window.location.replace("");
-
-                            },
-                            error: function(response) {
-                                console.log('Error : ', response);
-                            }
-                        });
-
-                    }
-                });
-
-            });
-        });
-    </script>
     <script>
         $(function() {
             bsCustomFileInput.init();

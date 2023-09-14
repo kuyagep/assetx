@@ -14,26 +14,26 @@
     <link rel="manifest" href="{{ asset('brand_logo/site.webmanifest') }}">
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    {{-- <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> --}}
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
 
 <body class="hold-transition layout-top-nav layout-navbar-fixed layout-fixed">
     <div class="wrapper  ">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-dark navbar-dark ">
+        <nav class="main-header navbar navbar-expand-md navbar-dark ">
             <div class="container ">
                 <a href="#" class="navbar-brand">
                     <img src="{{ asset('brand_logo/android-chrome-192x192.png') }}" alt="Logo"
                         class="brand-image img-circle elevation-0" style="opacity: .8">
-                    <span class="brand-text font-weight-light h5">{{ config('app.name', 'Laravel') }}</span>
+                    <span class="brand-text font-weight-light h5">{{ config('app.name') }}</span>
                 </a>
 
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
@@ -99,16 +99,16 @@
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                     @auth()
                         <form action="{{ route('logout') }}" method="post"> @csrf
-                            <button type="submit" class="btn bg-danger  btn-sm "
+                            <a type="submit" class="btn bg-danger  btn-sm"
                                 onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                                <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i>
-                                LOG OUT</button>
+                                {{-- <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i> --}}
+                                LOG OUT</a>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" type="button" class="btn btn-sm btn-outline-light">
-                            <i class="fa-solid fa-right-to-bracket mr-2"></i>
-                            LOG IN</a>
+                        <li class="nav-item"><a href="{{ route('login') }}" class="nav-link btn-link">
+                                {{-- <i class="fa-solid fa-right-to-bracket mr-2"></i> --}}
+                                Log In</a></li>
                     @endauth
                 </ul>
 
@@ -120,23 +120,21 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper ">
             <!-- Content Header (Page header) -->
-            <div class="row mb-3">
-
-            </div>
+            <div class="row mb-3"></div>
             <!-- /.content-header -->
 
             <!-- Main content -->
             <div class="content ">
                 <div class="container ">
-                    <div class="row">
+                    {{-- <div class="row">
                         <!-- /.col -->
                         <div class="col-md-12 mb-3">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <div id="carousel-hero" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                                    <li data-target="#carousel-hero" data-slide-to="0" class="active">
                                     </li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                    <li data-target="#carousel-hero" data-slide-to="1"></li>
+                                    <li data-target="#carousel-hero" data-slide-to="2"></li>
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -163,7 +161,7 @@
                         </div>
                         <!-- /.col -->
 
-                    </div>
+                    </div> --}}
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-md-6">
@@ -248,11 +246,11 @@
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    <script src="{{ asset('assets') }}/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('assets') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('assets') }}/dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
 </body>
 
 </html>

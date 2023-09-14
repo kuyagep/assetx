@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -51,7 +52,7 @@ class UserController extends Controller
                     return $result;
             })
             ->editColumn('created_at', function ($request) {
-                    return $request->created_at->format('d-m-Y H:i'); // format date time
+                    return $request->created_at->format('d-m-Y H:i:s'); // format date time
             })
             ->addIndexColumn()
             ->addColumn('action', function($row){
@@ -66,7 +67,15 @@ class UserController extends Controller
             ->rawColumns(['avatar','action','full_name','status'])
             ->make(true);
         }
-       return view('pages.users.index');
+
+    if(Auth::user()->role == "super_admin"){
+        return view('super_admin.users.index');
+    }elseif(Auth::user()->role == "admin"){
+        return view('admin.users.index');
+    }else{
+        return view('pages.users.index');
+    }
+       
     }
 
     /**

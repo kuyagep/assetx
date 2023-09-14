@@ -1,27 +1,35 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('partials.auth.main')
+@section('auth-title', 'Confirm Password')
+@section('auth-content')
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="javascript:void(0)"><b>{{ config('app.name') }}</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">This is a secure area of the application. Please confirm your password before
+                    continuing.</p>
+                <form method="POST" action="{{ route('password.confirm') }}">
+                    @csrf
+                    <div class="form-group mb-3">
+                        <input type="text" name="password"
+                            class="form-control form-control-lg @error('password') is-invalid @enderror" id="password">
+                        @error('password')
+                            <span class="error invalid-feedback"> {{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-dark btn-block">CONFIRM</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.login-card-body -->
+        </div>
     </div>
-
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    <!-- /.login-box -->
+@endsection

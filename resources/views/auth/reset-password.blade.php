@@ -1,30 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'AssetX') }}</title>
-
-    {{-- icons --}}
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('brand_logo/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('brand_logo/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('brand_logo/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('brand_logo/site.webmanifest') }}">
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
-</head>
-
-<body class="hold-transition login-page accent-danger">
+@extends('partials.auth.main')
+@section('auth-title', 'Reset Password')
+@section('auth-content')
     <div class="login-box">
         <div class="login-logo">
             <a href="javascript:void(0)"><b>{{ config('app.name', 'AssetX') }}</b></a>
@@ -42,7 +18,7 @@
 
                     <div class="form-group mb-3">
                         <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                            class="form-control form-control-border border-width-2 @error('email')
+                            class="form-control form-control-lg @error('email')
                             is-invalid
                         @enderror"
                             value="{{ old('email', $request->email) }}" placeholder="Enter Registered Email" required>
@@ -55,7 +31,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="password" name="password"
-                            class="form-control form-control-border border-width-2 @error('password')
+                            class="form-control form-control-lg @error('password')
                             is-invalid
                         @enderror"
                             placeholder="New Password" required>
@@ -91,13 +67,4 @@
         </div>
     </div>
     <!-- /.login-box -->
-
-    <!-- jQuery -->
-    <script src="{{ asset('assets') }}/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('assets') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('assets') }}/dist/js/adminlte.min.js"></script>
-</body>
-
-</html>
+@endsection

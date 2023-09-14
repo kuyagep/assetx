@@ -15,19 +15,19 @@ class AccountController extends Controller
     
     // ================Super Admin================
     // SuperAdmin Account Management
-    public function SuperAdminDashboard()
+    public function super_adminDashboard()
     {
         return view('super_admin.index');
     }
 
     // Display Profile
-    public function SuperAdminProfile(Request $request)
+    public function super_adminProfile(Request $request)
     {
         $account = User::find(Auth::user()->id);
         return view('super_admin.super_admin_profile', compact('account'));
     }
 
-    public function SuperAdminProfileUpdate(Request $request)
+    public function super_adminProfileUpdate(Request $request)
     {        
         // Validation rules for the form fields
        $request->validate([
@@ -73,14 +73,14 @@ class AccountController extends Controller
         return redirect()->back()->with($notification);
     }
     // Change password
-    public function SuperAdminChangePassword()
+    public function super_adminChangePassword()
     {
         $account = User::find(Auth::user()->id);
         return view('super_admin.super_admin_change_password', compact('account'));
     }
 
     // Update Password
-    public function SuperAdminUpdatePassword( Request $request)
+    public function super_adminUpdatePassword( Request $request)
     {
         //validation
         $request->validate([
@@ -216,22 +216,22 @@ class AccountController extends Controller
 
 
 
-    // ================Client================
+    // ================client================
     
-    // Client Account Management
-    public function ClientDashboard()
+    // client Account Management
+    public function clientDashboard()
     {
          return view('client.index');
     }
 
     // Display Profile
-    public function ClientProfile(Request $request)
+    public function clientProfile(Request $request)
     {
         $account = User::find(Auth::user()->id);
         return view('client.client_profile', compact('account'));
     }
 
-    public function ClientProfileUpdate(Request $request)
+    public function clientProfileUpdate(Request $request)
     {        
         // Validation rules for the form fields
        $request->validate([
@@ -272,14 +272,14 @@ class AccountController extends Controller
         return redirect()->back()->with($notification);
     }
     // Change password
-    public function ClientChangePassword()
+    public function clientChangePassword()
     {
         $account = User::find(Auth::user()->id);
         return view('client.client_change_password', compact('account'));
     }
 
     // Update Password
-    public function ClientUpdatePassword( Request $request)
+    public function clientUpdatePassword( Request $request)
     {
         //validation
         $request->validate([

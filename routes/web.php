@@ -45,21 +45,22 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admi
     Route::resource('/users', UserController::class);
 });
 
-######################## CLIENT ########################
+######################## client ########################
 Route::middleware(['auth','role:client'])->group(function(){
-    Route::get('/client/dashboard',[AccountController::class,'ClientDashboard'])->name('client.dashboard');
-    Route::get('/client/profile',[AccountController::class,'ClientProfile'])->name('client.profile');
-    Route::post('/client/profile/update',[AccountController::class,'ClientProfileUpdate'])->name('client.profile.update');
-    Route::post('/client/update/password',[AccountController::class,'ClientUpdatePassword'])->name('client.update.password');
-    Route::get('/client/change/password',[AccountController::class,'ClientChangePassword'])->name('client.change.password');
+    Route::get('/client/dashboard',[AccountController::class,'clientDashboard'])->name('client.dashboard');
+    Route::get('/client/profile',[AccountController::class,'clientProfile'])->name('client.profile');
+    Route::post('/client/profile/update',[AccountController::class,'clientProfileUpdate'])->name('client.profile.update');
+    Route::post('/client/update/password',[AccountController::class,'clientUpdatePassword'])->name('client.update.password');
+    Route::get('/client/change/password',[AccountController::class,'clientChangePassword'])->name('client.change.password');
 
 });
 ######################## SUPER ADMIN ########################
-Route::middleware(['auth','role:super_admin'])->group(function(){
-    Route::get('/s/dashboard',[AccountController::class,'SuperAdminDashboard'])->name('s.dashboard');
-    Route::get('/s/profile',[AccountController::class,'SuperAdminProfile'])->name('s.profile');
-    Route::post('/s/profile/update',[AccountController::class,'SuperAdminProfileUpdate'])->name('s.profile.update');
-    Route::post('/s/update/password',[AccountController::class,'SuperAdminUpdatePassword'])->name('s.update.password');
-    Route::get('/s/change/password',[AccountController::class,'SuperAdminChangePassword'])->name('s.change.password');
+Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:super_admin'])->group(function(){
+    Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
+    Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
+    Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
+    Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
+    Route::get('/change/password',[AccountController::class,'super_adminChangePassword'])->name('change.password');
 
+    Route::resource('/users', UserController::class);
 });
