@@ -1,7 +1,9 @@
 @extends('partials.auth.main')
 @section('auth-title', 'Login')
 @section('auth-content')
+    @include('sweetalert::alert')
     <div class="login-box">
+
         <div class="login-logo">
             <a href="javascript:void(0)"><b>{{ config('app.name') }}</b></a>
         </div>
