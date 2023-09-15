@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('page-title') {{ config('app.name', 'AssetX') }}</title>
+    <title>{{ config('app.name', 'AssetX') }}</title>
 
     {{-- icons --}}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('brand_logo/apple-touch-icon.png') }}">
@@ -126,120 +126,56 @@
             <!-- Main content -->
             <div class="content ">
                 <div class="container ">
-                    {{-- <div class="row">
-                        <!-- /.col -->
-                        <div class="col-md-12 mb-3">
-                            <div id="carousel-hero" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carousel-hero" data-slide-to="0" class="active">
-                                    </li>
-                                    <li data-target="#carousel-hero" data-slide-to="1"></li>
-                                    <li data-target="#carousel-hero" data-slide-to="2"></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100"
-                                            src="https://placehold.it/900x500/39CCCC/ffffff&text=I+Love+Bootstrap"
-                                            alt="First slide">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100"
-                                            src="https://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap"
-                                            alt="Second slide">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100"
-                                            src="https://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap"
-                                            alt="Third slide">
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <!-- /.card -->
-                        </div>
-                        <!-- /.col -->
-
-                    </div> --}}
-                    <!-- /.row -->
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="card card-default">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <i class="fas fa-bullhorn"></i>
-                                        Annoucements
-                                    </h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <div class="callout callout-danger">
-                                        <h5>I am a danger callout!</h5>
-
-                                        <p>There is a problem that we need to fix. A wonderful serenity has taken
-                                            possession
-                                            of my entire
-                                            soul,
-                                            like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                    </div>
-
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                        <!-- /.col -->
-                        <!-- /.col-md-6 -->
-                        <div class="col-lg-6">
+                        <div class="col-8">
                             <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title m-0">Featured</h5>
-                                </div>
                                 <div class="card-body">
-                                    <h6 class="card-title">Special title treatment</h6>
-
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional
-                                        content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="card-title m-0">Featured</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="card-title">Special title treatment</h6>
-
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional
-                                        content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    description
                                 </div>
                             </div>
                         </div>
-                        <!-- /.col-md-6 -->
+                        <div class="col-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="{{ route('login') }}" method="post">
+                                        @csrf
+                                        <h5 class="text-center mb-3">Login</h5>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-lg"
+                                                placeholder="Email address">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-lg"
+                                                placeholder="Password">
+                                        </div>
+                                        <button class="btn btn-lg btn-success btn-block">
+                                            Login
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <!-- /.row -->
-                </div><!-- /.container-fluid -->
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
             </div>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
 
-        <!-- Main Footer -->
-        @include('partials.footer')
+    <!-- Main Footer -->
+    @include('partials.footer')
     </div>
     <!-- ./wrapper -->
 
