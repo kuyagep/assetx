@@ -124,7 +124,7 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="content ">
+            {{-- <div class="content ">
                 <div class="container ">
                     <div class="row">
                         <div class="col-8">
@@ -160,7 +160,7 @@
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
-            </div>
+            </div> --}}
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
