@@ -196,6 +196,9 @@
                                         <!-- /.col -->
                                     </div>
                                 </form>
+                                <div class="mt-3 mb-1 text-center text-secondary">
+                                    <a class="text-muted text-secondary" href="{{ url('/register') }}">Register</a>
+                                </div>
                             </div>
                             <!-- /.login-card-body -->
                         </div>

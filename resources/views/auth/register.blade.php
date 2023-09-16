@@ -93,7 +93,7 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                <a href="{{ route('login') }}" class="text-center text-secondary">I already have a account</a>
+                <a href="{{ route('login') }}" class="text-center text-secondary">I already have an account</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
