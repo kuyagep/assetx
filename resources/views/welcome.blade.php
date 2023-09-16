@@ -14,22 +14,18 @@
     <link rel="manifest" href="{{ asset('brand_logo/site.webmanifest') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
-    <!-- Google Font: Source Sans Pro -->
-
-    <!-- Font Awesome Icons -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
     <style>
         body {
-            width: 100%;
+            width: auto;
             height: 100vh;
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("{{ asset('brand_logo/hero.png') }}") !important;
             background-size: cover;
-            /* background-repeat: no-repeat; */
-            /* background-position: center; */
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         .login-box {
@@ -43,8 +39,8 @@
 </head>
 
 <body id="app" class="hold-transition layout-top-nav layout-navbar-fixed layout-fixed  accent-dark">
+    @include('sweetalert::alert')
     <div class="wrapper">
-        @include('sweetalert::alert')
         <div id="particles-js"></div>
         <!-- Content Wrapper. Contains page content -->
         <!-- Navbar -->
@@ -71,7 +67,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">About</a>
                         </li>
-
+                        {{-- 
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" class="nav-link dropdown-toggle">Features</a>
@@ -110,10 +106,26 @@
                                 </li>
                                 <!-- End Level two -->
                             </ul>
-                        </li>
+                        </li> --}}
                         @auth()
-                            <li class="nav-item">
-                                <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" class="nav-link dropdown-toggle">My Account</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="#" class="dropdown-item">Dashboard </a></li>
+                                    <li><a href="#" class="dropdown-item">Profile</a></li>
+
+                                    <li class="dropdown-divider"></li>
+                                    <form method="post" action="{{ route('logout') }}"> @csrf
+                                        <li><a href="#"
+                                                onclick="event.preventDefault();
+                                                this.closest('form').submit();"
+                                                class="dropdown-item">Logout</a></li>
+                                    </form>
+                                    <!-- Level two dropdown-->
+
+                                    <!-- End Level two -->
+                                </ul>
                             </li>
                         @endauth
 
@@ -208,20 +220,14 @@
         </div>
         <!-- /.row -->
     </div>
-    </div>
-
-
-    {{-- @include('partials.footer') --}}
-
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+
     <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- stats.js lib -->
-    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {

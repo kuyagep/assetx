@@ -67,7 +67,13 @@
                                 <input type="hidden" name="id" id="id">
                                 {{-- sample --}}
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-md-4 col-sm-12">
+                                        <img id="showImage" alt="Avatar" class="table-avatar"
+                                            src="{{ asset('assets/dist/img/avatar.png') }}"
+                                            style="width: 150px;max-width: 150px;height: 150px;object-fit: cover; ">
+
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
                                         <div class="form-group mt-2">
                                             <label for="avatar">Avatar</label>
                                             <div class="input-group">
@@ -107,17 +113,12 @@
                                             <label for="status">Status <span class="text-danger">*</span></label>
                                             <select class="custom-select" name="status" id="status">
                                                 <option>Select...</option>
-                                                <option value="active" selected>Activate</option>
-                                                <option value="inactive">Deactivate</option>
+                                                <option value="active">Activate</option>
+                                                <option value="inactive " selected>Deactivate</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-4">
-                                        <img id="showImage" alt="Avatar" class="table-avatar"
-                                            src="{{ asset('assets/dist/img/avatar.png') }}"
-                                            style="width: 150px;max-width: 150px;height: 150px;object-fit: cover; ">
 
-                                    </div>
                                 </div>
 
                             </div>

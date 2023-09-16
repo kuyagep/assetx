@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-dark">
+<nav class="main-header navbar navbar-expand navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -82,7 +82,7 @@
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
-                    class="user-image img-circle elevation-2" alt="User Image"
+                    class="user-image img-circle elevation-1" alt="User Image"
                     style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
                 <span class="d-none d-md-inline">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
             </a>
