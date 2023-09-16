@@ -2,6 +2,7 @@
 @section('auth-title', 'Login')
 @section('auth-content')
     @include('sweetalert::alert')
+
     <div class="login-box">
 
         <div class="login-logo">

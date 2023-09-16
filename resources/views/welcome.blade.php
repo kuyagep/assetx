@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('brand_logo/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('brand_logo/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('brand_logo/site.webmanifest') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
     <!-- Google Font: Source Sans Pro -->
     {{-- <link rel="stylesheet"
@@ -22,164 +23,194 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
+    <style>
+        .content-wrapper {
+            width: 100%;
+            height: 95vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .login-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+    </style>
 </head>
 
-<body class="hold-transition layout-top-nav layout-navbar-fixed layout-fixed">
-    <div class="wrapper  ">
+<body id="app" class="hold-transition layout-top-nav layout-navbar-fixed layout-fixed  accent-dark">
+    <div class="wrapper">
+        @include('sweetalert::alert')
 
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-dark ">
-            <div class="container ">
-                <a href="#" class="navbar-brand">
-                    <img src="{{ asset('brand_logo/android-chrome-192x192.png') }}" alt="Logo"
-                        class="brand-image img-circle elevation-0" style="opacity: .8">
-                    <span class="brand-text font-weight-light h5">{{ config('app.name') }}</span>
-                </a>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand-md navbar-dark ">
+                <div class="container ">
+                    <a href="#" class="navbar-brand">
+                        <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
+                            style="opacity: .8; height: 60px">
+                        {{-- <span class="brand-text font-weight-light h5">{{ config('app.name') }}</span> --}}
+                    </a>
 
-                <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
+                        data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-                    <!-- Left navbar links -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Contact</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" class="nav-link dropdown-toggle">Updates</a>
-                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">Some action </a></li>
-                                <li><a href="#" class="dropdown-item">Some other action</a></li>
+                    <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                        <!-- Left navbar links -->
+                        <ul class="navbar-nav justify-content-center">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">About</a>
+                            </li>
 
-                                <li class="dropdown-divider"></li>
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" class="nav-link dropdown-toggle">Features</a>
+                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="#" class="dropdown-item">Dashboard </a></li>
+                                    <li><a href="#" class="dropdown-item">Profile</a></li>
 
-                                <!-- Level two dropdown-->
-                                <li class="dropdown-submenu dropdown-hover">
-                                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false"
-                                        class="dropdown-item dropdown-toggle">Hover for action</a>
-                                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                                        <li>
-                                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                                        </li>
+                                    <li class="dropdown-divider"></li>
 
-                                        <!-- Level three dropdown-->
-                                        <li class="dropdown-submenu">
-                                            <a id="dropdownSubMenu3" href="#" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                class="dropdown-item dropdown-toggle">level 2</a>
-                                            <ul aria-labelledby="dropdownSubMenu3"
-                                                class="dropdown-menu border-0 shadow">
-                                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                            </ul>
-                                        </li>
-                                        <!-- End Level three -->
+                                    <!-- Level two dropdown-->
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false"
+                                            class="dropdown-item dropdown-toggle">Password</a>
+                                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                            <li>
+                                                <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
+                                            </li>
 
-                                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                                    </ul>
+                                            <!-- Level three dropdown-->
+                                            <li class="dropdown-submenu">
+                                                <a id="dropdownSubMenu3" href="#" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                    class="dropdown-item dropdown-toggle">level 2</a>
+                                                <ul aria-labelledby="dropdownSubMenu3"
+                                                    class="dropdown-menu border-0 shadow">
+                                                    <li><a href="#" class="dropdown-item">3rd level</a></li>
+                                                    <li><a href="#" class="dropdown-item">3rd level</a></li>
+                                                </ul>
+                                            </li>
+                                            <!-- End Level three -->
+
+                                            <li><a href="#" class="dropdown-item">level 2</a></li>
+                                            <li><a href="#" class="dropdown-item">level 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- End Level two -->
+                                </ul>
+                            </li>
+                            @auth()
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
                                 </li>
-                                <!-- End Level two -->
-                            </ul>
-                        </li>
+                            @endauth
+
+                        </ul>
+
+
+
+                    </div>
+
+                    <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+
                     </ul>
-
-
 
                 </div>
 
-                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                    @auth()
-                        <form action="{{ route('logout') }}" method="post"> @csrf
-                            <a type="submit" class="btn bg-danger  btn-sm"
-                                onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                                {{-- <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i> --}}
-                                LOG OUT</a>
-                        </form>
-                    @else
-                        <li class="nav-item"><a href="{{ route('login') }}" class="nav-link btn-link">
-                                {{-- <i class="fa-solid fa-right-to-bracket mr-2"></i> --}}
-                                Log In</a></li>
-                    @endauth
-                </ul>
-
-            </div>
-
-        </nav>
-        <!-- /.navbar -->
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper ">
+            </nav>
+            <!-- /.navbar -->
             <!-- Content Header (Page header) -->
             <div class="row mb-3"></div>
             <!-- /.content-header -->
 
             <!-- Main content -->
-            {{-- <div class="content ">
+            <div class="content mt-5 ">
                 <div class="container ">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    description
-                                </div>
-                            </div>
+                    <div class="login-box">
+                        <div class="login-logo">
+                            <p class="text-white"><b>{{ config('app.name') }}</b></p>
                         </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="{{ route('login') }}" method="post">
-                                        @csrf
-                                        <h5 class="text-center mb-3">Login</h5>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-lg"
-                                                placeholder="Email address">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-lg"
-                                                placeholder="Password">
-                                        </div>
-                                        <button class="btn btn-lg btn-success btn-block">
-                                            Login
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- /.login-logo -->
+                        <div class="card">
+                            <div class="card-body login-card-body">
+                                <h3 class="login-box-msg">Sign in</h3>
 
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="form-group mb-3">
+                                        <input type="email" name="email"
+                                            class="form-control form-control-lg  @error('email')
+                            is-invalid
+                        @enderror"
+                                            value="{{ old('email') }}" placeholder="Enter Registered Email"
+                                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="password" name="password" class="form-control form-control-lg"
+                                            placeholder="Enter Password" required>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-7">
+                                            <div class="icheck-secondary">
+                                                <input type="checkbox" id="remember" name="remember">
+                                                <label for="remember">
+                                                    Remember Me
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-5">
+                                            @if (Route::has('password.request'))
+                                                <div class="mt-1">
+                                                    <a href="{{ route('password.request') }}">Forgot
+                                                        Password?</a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-lg btn-dark btn-block">LOG
+                                                IN</button>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.login-card-body -->
+                        </div>
                     </div>
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
-            </div> --}}
+            </div>
             <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
-    @include('partials.footer')
-    </div>
-    <!-- ./wrapper -->
-
-    <!-- REQUIRED SCRIPTS -->
+    {{-- @include('partials.footer') --}}
 
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
@@ -187,6 +218,33 @@
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+    <script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1561436720/particles.js"></script>
+    <script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1561436735/app.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            var count_particles, stats, update;
+            stats = new Stats;
+            stats.setMode(0);
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.left = '0px';
+            stats.domElement.style.top = '0px';
+            document.body.appendChild(stats.domElement);
+            count_particles = document.querySelector('.js-count-particles');
+            update = function() {
+                stats.begin();
+                stats.end();
+                if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+                    count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+                }
+                requestAnimationFrame(update);
+            };
+            requestAnimationFrame(update);
+
+
+        });
+    </script>
 </body>
 
 </html>
