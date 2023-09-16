@@ -34,7 +34,7 @@
                                             <th>Role</th>
                                             <th style="width: 8%" class="text-center">Status</th>
                                             <th>Create At</th>
-                                            <th width="250px">Action</th>
+                                            <th width="300px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

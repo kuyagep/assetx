@@ -19,10 +19,15 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
     <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+        }
+
         body {
             width: auto;
             height: 100vh;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("{{ asset('brand_logo/hero.png') }}") !important;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("{{ asset('brand_logo/hero-background.png') }}");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -149,7 +154,7 @@
 
         <!-- Main content -->
         <div class="content mt-5 ">
-            <div class="container ">
+            <div class="container login-box">
                 <div class="login-box">
                     <div class="login-logo">
                         <p class="text-white"><b>{{ config('app.name') }}</b></p>
