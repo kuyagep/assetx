@@ -15,10 +15,9 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
     <!-- Google Font: Source Sans Pro -->
-    {{-- <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
+
     <!-- Font Awesome Icons -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}"> --}}
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- Theme style -->
@@ -67,14 +66,14 @@
                     <div class="collapse navbar-collapse order-3" id="navbarCollapse">
                         <!-- Left navbar links -->
                         <ul class="navbar-nav justify-content-center">
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="#" class="nav-link active">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">About</a>
-                            </li>
+                            </li> --}}
 
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" class="nav-link dropdown-toggle">Features</a>
                                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -112,7 +111,7 @@
                                     </li>
                                     <!-- End Level two -->
                                 </ul>
-                            </li>
+                            </li> --}}
                             @auth()
                                 <li class="nav-item">
                                     <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>

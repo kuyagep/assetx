@@ -143,7 +143,7 @@
                             <p>Users</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-circle text-warning"></i>
                             <p>
@@ -194,7 +194,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
 
                 </ul>
             </nav>
@@ -240,8 +240,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.users.index') }}"
-                            class="nav-link {{ Request::is('admin/users') ? 'active' : '' }}">
+                        <a href="{{ route('client.users.index') }}"
+                            class="nav-link {{ Request::is('client/users') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
                             <p>Users</p>
                         </a>

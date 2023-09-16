@@ -10,9 +10,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <blockquote class="quote-success">
+                    <blockquote class="quote-danger">
                         <h5 id="note"><i class="fas fa-bullhorn"></i> Welcome! {{ Auth::user()->first_name }}</h5>
-                        <p>This is your main dashboard you can freely navigate.</p>
+                        <p>This is your main dashboard you can freely navigate. Contact support team if you need help.</p>
                     </blockquote>
                 </div>
             </div>
