@@ -212,7 +212,7 @@
 
 
             <!-- SidebarSearch Form -->
-            <div class="form-inline">
+            <div class="form-inline mt-3">
                 <div class="input-group" data-widget="sidebar-search">
                     <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                         aria-label="Search">
@@ -240,10 +240,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('client.users.index') }}"
+                        <a href="{{ route('client.dashboard') }}"
                             class="nav-link {{ Request::is('client/users') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
-                            <p>Users</p>
+                            <p>Manage Account</p>
                         </a>
                     </li>
 
