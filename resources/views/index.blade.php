@@ -90,7 +90,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" class="nav-link dropdown-toggle">My Account</a>
                                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                    <li><a href="#" class="dropdown-item">Dashboard </a></li>
+                                    @if (Auth::user()->role === 'client')
+                                        <li><a href="{{ url('/client/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        </li>
+                                    @elseif(Auth::user()->role === 'admin')
+                                        <li><a href="{{ url('/admin/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        </li>
+                                    @else
+                                        <li><a href="{{ url('/s/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        </li>
+                                    @endif
                                     <li><a href="#" class="dropdown-item">Profile</a></li>
 
                                     <li class="dropdown-divider"></li>

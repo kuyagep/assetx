@@ -51,7 +51,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admi
 });
 
 ######################## client ########################
-Route::middleware(['auth','role:client'])->group(function(){
+Route::middleware(['auth','verified','role:client'])->group(function(){
     Route::get('/client/dashboard',[AccountController::class,'clientDashboard'])->name('client.dashboard');
     Route::get('/client/profile',[AccountController::class,'clientProfile'])->name('client.profile');
     Route::post('/client/profile/update',[AccountController::class,'clientProfileUpdate'])->name('client.profile.update');
