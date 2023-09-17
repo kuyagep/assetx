@@ -100,8 +100,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <li class="dropdown-submenu dropdown-hover">
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf
-                                            <a href="{{ route('logout') }}" role="button" aria-expanded="false"
-                                                class="dropdown-item">Logout</a>
+                                            <a href="javascript:void(0)"
+                                                onclick="event.preventDefault();
+                                                this.closest('form').submit();"
+                                                role="button" aria-expanded="false" class="dropdown-item">Logout</a>
                                         </form>
 
 
@@ -158,7 +160,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <i class="fa-brands fa-youtube"></i>
                         </a>
                     </li>
-                    <a href="{{ route('login') }}" class="nav-item btn btn-primary px-3">Login</a>
+                    @auth
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <a href="{{ route('login') }}"
+                                onclick="event.preventDefault();
+                                                this.closest('form').submit();"
+                                class="nav-item btn btn-danger px-3">Logout</a>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="nav-item btn btn-primary px-3">Login</a>
+                    @endauth
+
                 </ul>
             </div>
         </nav>
