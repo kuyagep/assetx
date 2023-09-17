@@ -3,7 +3,7 @@
 @section('auth-content')
     <div class="register-box">
         <div class="register-logo">
-            <a href="javascript:void(0)"><b>{{ config('app.name') }}</b></a>
+            <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
         </div>
 
         <div class="card">

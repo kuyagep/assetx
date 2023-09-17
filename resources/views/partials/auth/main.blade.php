@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
 
-<body class="hold-transition accent-dark login-page">
+<body class="hold-transition accent-dark login-page bg-dark">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__wobble" src="{{ asset('brand_logo/android-chrome-192x192.png') }}"
