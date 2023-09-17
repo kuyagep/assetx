@@ -21,11 +21,10 @@
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cog"></i></span>
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-laptop"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">INFORMATION COMMUNICATION AND TECHNOLOGY
-                                EQUIPMENT
+                            <span class="info-box-text">ICT EQUIPMENT
                             </span>
                             <span class="info-box-number">
                                 10
@@ -39,10 +38,9 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                        <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">OTHER MACHINERY AND EQUIPMENT</span>
+                        <div class="info-box-content">OFFICE EQUIPMENTS</span>
                             <span class="info-box-number">41,410</span>
                         </div>
                         <!-- /.info-box-content -->
@@ -56,10 +54,10 @@
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">IT EQUIPMENT AND SOFTWARE</span>
+                            <span class="info-box-text">SOFTWARES</span>
                             <span class="info-box-number">760</span>
                         </div>
                         <!-- /.info-box-content -->

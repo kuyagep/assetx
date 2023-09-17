@@ -20,13 +20,13 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('/home', function () {
-    return view('home');
+Route::get('/index', function () {
+    return view('index');
 });
 
 Route::get('/dashboard', function () {

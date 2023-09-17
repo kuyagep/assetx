@@ -229,23 +229,64 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                    with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{ url('client/dashboard') }}"
+                        <a href="{{ url('/client/dashboard') }}"
                             class="nav-link {{ Request::is('client/dashboard') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-chart-bar"></i>
+                            <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Dashboard
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('client.dashboard') }}"
-                            class="nav-link {{ Request::is('client/users') ? 'active' : '' }}">
-                            <i class="fas fa-users nav-icon "></i>
-                            <p>Manage Account</p>
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-layer-group"></i>
+                            <p>
+                                Accountability
+                            </p>
                         </a>
                     </li>
+                    <li
+                        class="nav-item {{ Request::is('client/change/password', 'client/profile') ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ Request::is('client/change/password', 'client/profile') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-user-circle "></i>
+                            <p>
+                                My Account
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{ url('client/profile') }}"
+                                    class="nav-link {{ Request::is('client/profile') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Update Account</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('client/change/password') }}"
+                                    class="nav-link {{ Request::is('client/change/password') ? 'active' : '' }}">
+                                    <i class="fas fa-user-lock nav-icon"></i>
+                                    <p>Change Password</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-header">SYSTEM</li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-cloud-download-alt text-danger"></i>
+                            <p>
+                                Backup/Restore
+                            </p>
+                        </a>
+                    </li>
+
+
 
                 </ul>
             </nav>

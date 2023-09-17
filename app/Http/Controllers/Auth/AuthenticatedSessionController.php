@@ -31,11 +31,11 @@ class AuthenticatedSessionController extends Controller
 
         $url = '';
         if ($request->user()->role === 'super_admin') {
-           $url = 's/dashboard';
+           $url = '/s/dashboard';
         } elseif ($request->user()->role === 'admin') {
-           $url = 'admin/dashboard';
+           $url = '/admin/dashboard';
         } elseif ($request->user()->role === 'client') {
-            $url = 'client/dashboard';
+            $url = '/client/dashboard';
         }else{
             $url = '/welcome';
         }

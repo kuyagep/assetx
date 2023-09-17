@@ -21,16 +21,15 @@
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
                     <div class="form-group mb-3 mt-3">
-                        <input type="text" name="email"
-                            class="form-control form-control-lg @error('email') is-invalid @enderror" id="email"
-                            placeholder="Enter registered email address" value="{{ old('email') }}">
+                        <input type="text" name="email" class="form-control  @error('email') is-invalid @enderror"
+                            id="email" placeholder="Enter registered email address" value="{{ old('email') }}">
                         @error('email')
                             <span class="error invalid-feedback"> {{ $message }}</span>
                         @enderror
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-lg btn-dark btn-block">EMAIL PASSWORD RESET LINK</button>
+                            <button type="submit" class="btn  btn-dark btn-block">EMAIL PASSWORD RESET LINK</button>
                         </div>
                         <!-- /.col -->
                     </div>

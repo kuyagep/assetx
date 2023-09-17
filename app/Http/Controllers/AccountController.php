@@ -302,7 +302,7 @@ class AccountController extends Controller
         User::whereId(Auth::user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
-        Alert::success('Failed', 'Password updated successfully!');
+        Alert::success('Success', 'Password updated successfully!');
         $notification = array(
                 'message' => 'Password updated successfully!',
                 'alert-type' => 'success'

@@ -14,7 +14,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <input type="text" name="first_name"
-                            class="form-control form-control-lg @error('first_name')
+                            class="form-control @error('first_name')
                             is-invalid
                         @enderror"
                             value="{{ old('first_name') }}" placeholder="First name" required>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="text" name="last_name"
-                            class="form-control form-control-lg @error('last_name')
+                            class="form-control @error('last_name')
                             is-invalid
                         @enderror"
                             value="{{ old('last_name') }}" placeholder="Last name" required>
@@ -38,8 +38,8 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                            class="form-control form-control-lg @error('email') is-invalid @enderror"
-                            value="{{ old('email') }}" placeholder="Email" required>
+                            class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                            placeholder="Email" required>
                         @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="password" name="password"
-                            class="form-control form-control-lg @error('password')
+                            class="form-control @error('password')
                             is-invalid
                         @enderror"
                             value="{{ old('password') }}" placeholder="Password"
@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="password" name="password_confirmation"
-                            class="form-control form-control-lg @error('password_confirmation')
+                            class="form-control @error('password_confirmation')
                             is-invalid
                         @enderror"
                             value="{{ old('password_confirmation') }}" placeholder="Confirm password" required>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-lg btn-dark btn-block">REGISTER</button>
+                            <button type="submit" class="btn  btn-dark btn-block">REGISTER</button>
                         </div>
                         <!-- /.col -->
                     </div>

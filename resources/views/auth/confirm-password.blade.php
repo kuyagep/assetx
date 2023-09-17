@@ -13,8 +13,8 @@
                 <form method="POST" action="{{ route('password.confirm') }}">
                     @csrf
                     <div class="form-group mb-3">
-                        <input type="text" name="password"
-                            class="form-control form-control-lg @error('password') is-invalid @enderror" id="password">
+                        <input type="text" name="password" class="form-control  @error('password') is-invalid @enderror"
+                            id="password">
                         @error('password')
                             <span class="error invalid-feedback"> {{ $message }}</span>
                         @enderror

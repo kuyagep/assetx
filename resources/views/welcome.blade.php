@@ -18,8 +18,10 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/custom/css/particles.css') }}">
     <style>
-        * {
+        /* * {
             margin: 0%;
             padding: 0%;
         }
@@ -31,29 +33,29 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-        }
-
+        } */
+        /*
         .login-box {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
 
-        }
+        } */
     </style>
 </head>
 
 <body id="app" class="hold-transition layout-top-nav layout-navbar-fixed layout-fixed  accent-dark">
     @include('sweetalert::alert')
     <div class="wrapper">
-        <div id="particles-js"></div>
+
         <!-- Content Wrapper. Contains page content -->
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md navbar-dark ">
             <div class="container ">
                 <a href="#" class="navbar-brand">
                     <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
-                        style="opacity: .8; height: 60px">
+                        style="opacity: .8; hieght: 60px;">
                     {{-- <span class="brand-text font-weight-light h5">{{ config('app.name') }}</span> --}}
                 </a>
 
@@ -153,8 +155,10 @@
         <!-- /.content-header -->
 
         <!-- Main content -->
-        <div class="content mt-5 ">
-            <div class="container login-box">
+        <div class="content ">
+
+            <div class="container">
+                <div id="particles-js"></div>
                 <div class="login-box">
                     <div class="login-logo">
                         <p class="text-white"><b>{{ config('app.name') }}</b></p>
@@ -219,11 +223,14 @@
                         <!-- /.login-card-body -->
                     </div>
                 </div>
+
                 <!-- /.card -->
             </div>
+
             <!-- /.col -->
         </div>
         <!-- /.row -->
+
     </div>
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
@@ -233,135 +240,7 @@
     <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
 
     <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ffffff"
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 5
-                    },
-                    "image": {
-                        "src": "img/github.svg",
-                        "width": 100,
-                        "height": 100
-                    }
-                },
-                "opacity": {
-                    "value": 0.3447335930860874,
-                    "random": false,
-                    "anim": {
-                        "enable": false,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                        "speed": 40,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": false,
-                    "distance": 150,
-                    "color": "#ffffff",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 6,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": false,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 400,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 200,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-        var count_particles, stats, update;
-        stats = new Stats;
-        stats.setMode(0);
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-        document.body.appendChild(stats.domElement);
-        count_particles = document.querySelector('.js-count-particles');
-        update = function() {
-            stats.begin();
-            stats.end();
-            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-            }
-            requestAnimationFrame(update);
-        };
-        requestAnimationFrame(update);;
-    </script>
+    <script src="{{ asset('assets/custom/js/particles.js') }}"></script>
 </body>
 
 </html>

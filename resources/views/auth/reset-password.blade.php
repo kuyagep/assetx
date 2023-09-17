@@ -3,7 +3,7 @@
 @section('auth-content')
     <div class="login-box">
         <div class="login-logo">
-            <a href="javascript:void(0)"><b>{{ config('app.name', 'AssetX') }}</b></a>
+            <a href="javascript:void(0)"><b>{{ config('app.name') }}</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -18,7 +18,7 @@
 
                     <div class="form-group mb-3">
                         <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                            class="form-control form-control-lg @error('email')
+                            class="form-control  @error('email')
                             is-invalid
                         @enderror"
                             value="{{ old('email', $request->email) }}" placeholder="Enter Registered Email" required>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="password" name="password"
-                            class="form-control form-control-lg @error('password')
+                            class="form-control  @error('password')
                             is-invalid
                         @enderror"
                             placeholder="New Password" required>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="password" name="password_confirmation"
-                            class="form-control form-control-border border-width-2 @error('password_confirmation')
+                            class="form-control h-2 @error('password_confirmation')
                             is-invalid
                         @enderror"
                             placeholder="Confirm Password" required>

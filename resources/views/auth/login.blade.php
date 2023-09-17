@@ -17,7 +17,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <input type="email" name="email"
-                            class="form-control form-control-lg  @error('email')
+                            class="form-control   @error('email')
                             is-invalid
                         @enderror"
                             value="{{ old('email') }}" placeholder="Enter Registered Email"
@@ -30,8 +30,7 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password" class="form-control form-control-lg"
-                            placeholder="Enter Password" required>
+                        <input type="password" name="password" class="form-control " placeholder="Enter Password" required>
                     </div>
                     <div class="row mb-3">
                         <div class="col-7">
@@ -55,7 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-lg btn-dark btn-block">LOG IN</button>
+                            <button type="submit" class="btn btn-dark btn-block">LOG IN</button>
                         </div>
                         <!-- /.col -->
                     </div>
