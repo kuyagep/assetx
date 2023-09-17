@@ -206,8 +206,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             alt="hero banner">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="https://www.deped.gov.ph/wp-content/uploads/2023/01/BER-banner-1536x569.jpg"
-                                            class="d-block w-100" alt="...">
+                                        <img src="{{ asset('brand_logo/hero-3.png') }}" class="d-block w-100"
+                                            alt="...">
                                     </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button"

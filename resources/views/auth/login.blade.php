@@ -12,7 +12,11 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <h3 class="login-box-msg">Sign in</h3>
-
+                @if ($errors->has('status'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('status') }}</strong>
+                    </span>
+                @endif
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group mb-3">
@@ -59,6 +63,10 @@
                         <!-- /.col -->
                     </div>
                 </form>
+                <p class="mt-3 text-center ">
+                    <a href="{{ route('register') }}" class="text-secondary">Register</a>
+                </p>
+
             </div>
             <!-- /.login-card-body -->
         </div>

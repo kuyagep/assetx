@@ -28,6 +28,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        
+
+         if ($request->user()->status !== 'active') {
+            Auth::logout(); // Log out the user
+            return redirect('/login')->withErrors(['status' => 'Your account is not activated.']); // Redirect with an error message
+        }
+
 
         $url = '';
         if ($request->user()->role === 'super_admin') {
