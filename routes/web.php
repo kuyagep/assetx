@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -22,16 +23,13 @@ require __DIR__.'/auth.php';
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-Route::get('/index', function () {
-    return view('index');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/index', [HomeController::class, 'index'])->name('index');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/features', [HomeController::class, 'features'])->name('features');
+Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
+Route::get('/terms-condition', [HomeController::class, 'terms_condition'])->name('terms-condition');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -51,14 +49,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admi
 });
 
 ######################## client ########################
-Route::middleware(['auth','verified','role:client'])->group(function(){
-    Route::get('/client/dashboard',[AccountController::class,'clientDashboard'])->name('client.dashboard');
-    Route::get('/client/profile',[AccountController::class,'clientProfile'])->name('client.profile');
-    Route::post('/client/profile/update',[AccountController::class,'clientProfileUpdate'])->name('client.profile.update');
-    Route::post('/client/update/password',[AccountController::class,'clientUpdatePassword'])->name('client.update.password');
-    Route::get('/client/change/password',[AccountController::class,'clientChangePassword'])->name('client.change.password');
+Route::prefix('client')->name('client.')->middleware(['auth','verified','role:client'])->group(function(){
+    Route::get('/dashboard',[AccountController::class,'clientDashboard'])->name('dashboard');
+    Route::get('/profile',[AccountController::class,'clientProfile'])->name('profile');
+    Route::post('/profile/update',[AccountController::class,'clientProfileUpdate'])->name('profile.update');
+    Route::post('/update/password',[AccountController::class,'clientUpdatePassword'])->name('update.password');
+    Route::get('/change/password',[AccountController::class,'clientChangePassword'])->name('change.password');
 
 });
+
 ######################## SUPER ADMIN ########################
 Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:super_admin'])->group(function(){
     Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
@@ -72,7 +71,7 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
 
 
 
-######################
+###################### Example of Multi Step Form ##########################
 Route::get('products', [ProductController::class,'index'])->name('products.index');
 Route::get('products/create-step-one', [ProductController::class,'createStepOne'])->name('products.create.step.one');
 Route::post('products/create-step-one', [ProductController::class,'postCreateStepOne'])->name('products.create.step.one.post');

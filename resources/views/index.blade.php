@@ -264,7 +264,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                Developed with ❤️ by Geperson C. Mamalias
+                {{-- Developed with ❤️ by Geperson C. Mamalias --}}
+                <a href="#">Privacy</a> | <a href="#">Terms & Condition</a>
             </div>
             <!-- Default to the left -->
             <strong>Copyright &copy; {{ date('Y') }} <a
