@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
 
          if ($request->user()->status !== 'active') {
             Auth::logout(); // Log out the user
-            return redirect('/login')->withErrors(['status' => 'Your account is not activated.']); // Redirect with an error message
+            return redirect('/login')->with(['status' => 'Your account is not activated.']); // Redirect with an error message
         }
 
 

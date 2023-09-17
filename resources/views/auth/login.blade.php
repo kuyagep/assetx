@@ -12,10 +12,11 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <h3 class="login-box-msg">Sign in</h3>
-                @if ($errors->has('status'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('status') }}</strong>
-                    </span>
+                @if (Session::has('status'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ Session::get('status') }}
+                    </div>
                 @endif
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
