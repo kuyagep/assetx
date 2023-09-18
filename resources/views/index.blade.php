@@ -147,18 +147,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <i class="fa-brands fa-facebook"></i>
                         </a>
                     </li>
-                    <!-- Notifications Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">
                             <i class="fa-brands fa-tiktok"></i>
@@ -178,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 class="nav-item btn btn-danger px-3">Logout</a>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="nav-item btn btn-dark px-3">Login/Register</a>
+                        <a href="{{ route('login') }}" class="nav-item btn btn-primary px-3">Login/Register</a>
                     @endauth
 
                 </ul>

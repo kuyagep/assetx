@@ -1,7 +1,7 @@
 @extends('partials.auth.main')
 @section('auth-title', 'Login')
 @section('auth-content')
-    @include('sweetalert::alert')
+    {{-- @include('sweetalert::alert') --}}
 
     <div class="login-box">
 
@@ -13,29 +13,29 @@
             <div class="card-body login-card-body">
                 <h3 class="login-box-msg">Sign in</h3>
                 @if (Session::has('status'))
-                    <div class="alert alert-success alert-dismissible">
+                    <div class="alert alert-warning alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{ Session::get('status') }}
+                        <i class="bi bi-exclamation-triangle"></i> {{ Session::get('status') }}
                     </div>
                 @endif
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group mb-3">
-                        <input type="email" name="email"
-                            class="form-control   @error('email')
+                        <input type="text" name="login"
+                            class="form-control   @error('login')
                             is-invalid
                         @enderror"
-                            value="{{ old('email') }}" placeholder="Enter Registered Email"
+                            value="{{ old('login') }}" placeholder="Registered Email/Phone"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
 
-                        @error('email')
+                        @error('login')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password" class="form-control " placeholder="Enter Password" required>
+                        <input type="password" name="password" class="form-control " placeholder="Password" required>
                     </div>
                     <div class="row mb-3">
                         <div class="col-7">
