@@ -27,7 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="wrapper ">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-dark navbar-dark accent-secondary">
+        <nav class="main-header navbar navbar-expand-md navbar-dark accent-danger">
             <div class="container">
                 <a href="#" class="navbar-brand">
                     <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <!-- SEARCH FORM -->
 
-                    <form class="form-inline ml-0 ml-md-3">
+                    <form class="form-inline ml-0 ml-md-3 d-none">
                         <div class="input-group input-group-sm">
                             <input class="form-control form-control-navbar" type="search" placeholder="Search"
                                 aria-label="Search">
@@ -178,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 class="nav-item btn btn-danger px-3">Logout</a>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="nav-item btn btn-primary px-3">Login/Register</a>
+                        <a href="{{ route('login') }}" class="nav-item btn btn-dark px-3">Login/Register</a>
                     @endauth
 
                 </ul>
