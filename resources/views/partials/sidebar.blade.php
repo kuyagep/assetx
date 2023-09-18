@@ -143,6 +143,52 @@
                             <p>Users</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-layer-group"></i>
+                            <p>
+                                Accountability
+                            </p>
+                        </a>
+                    </li>
+                    <li
+                        class="nav-item {{ Request::is('admin/change/password', 'admin/profile') ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ Request::is('admin/change/password', 'admin/profile') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-user-circle "></i>
+                            <p>
+                                My Account
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{ url('admin/profile') }}"
+                                    class="nav-link {{ Request::is('admin/profile') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Update Account</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/change/password') }}"
+                                    class="nav-link {{ Request::is('admin/change/password') ? 'active' : '' }}">
+                                    <i class="fas fa-user-lock nav-icon"></i>
+                                    <p>Change Password</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-header">SYSTEM</li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-cloud-download-alt text-danger"></i>
+                            <p>
+                                Backup/Restore
+                            </p>
+                        </a>
+                    </li>
                     {{-- <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-circle text-warning"></i>

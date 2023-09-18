@@ -21,7 +21,7 @@
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cog"></i></span>
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">INFORMATION COMMUNICATION AND TECHNOLOGY
@@ -39,7 +39,7 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                        <span class="info-box-icon bg-olive elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">OTHER MACHINERY AND EQUIPMENT</span>
@@ -56,7 +56,7 @@
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">IT EQUIPMENT AND SOFTWARE</span>
@@ -69,7 +69,7 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
+                        <span class="info-box-icon bg-pink elevation-1"><i class="fas fa-copy"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">FURNITURE AND FIXTURE</span>
