@@ -206,9 +206,9 @@
 @section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
-        const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+        const xValues = ["SULOP", "MALALAG", "PADADA", "HAGONOY 1", "HAGONOY 2"];
         const yValues = [55, 49, 44, 24, 15];
-        const barColors = ["red", "green", "blue", "orange", "brown"];
+        const barColors = ["red", "red", "red", "red", "red"];
 
         new Chart("myChart", {
             type: "bar",
