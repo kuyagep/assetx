@@ -8,9 +8,9 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row mt-sm-4">
+            <div class="row">
 
-                <div class="col-md-12 col-sm-12 ">
+                <div class="col-lg-6 col-md-6 col-sm-12 ">
                     <div class="card">
                         <form method="post" class="needs-validation" action="{{ route('admin.update.password') }}"
                             novalidate="">
