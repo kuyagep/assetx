@@ -13,9 +13,9 @@
             <div class="card-body login-card-body">
                 <h3 class="login-box-msg">Sign in</h3>
                 @if (Session::has('status'))
-                    <div class="alert alert-warning alert-dismissible">
+                    <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <i class="bi bi-exclamation-triangle"></i> {{ Session::get('status') }}
+                        {{ Session::get('status') }}
                     </div>
                 @endif
                 <form method="POST" action="{{ route('login') }}">

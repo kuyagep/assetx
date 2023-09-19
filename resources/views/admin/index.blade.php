@@ -69,7 +69,7 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-pink elevation-1"><i class="fas fa-copy"></i></span>
+                        <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-copy"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">FURNITURE AND FIXTURE</span>
@@ -186,10 +186,48 @@
                 <!-- /.col -->
             </div>
 
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+
+                </div>
+            </div>
+
         </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
 @endsection
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+        const yValues = [55, 49, 44, 24, 15];
+        const barColors = ["red", "green", "blue", "orange", "brown"];
 
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: "World Wine Production 2018"
+                }
+            }
+        });
+    </script>
 @endsection

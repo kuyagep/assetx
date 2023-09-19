@@ -130,9 +130,67 @@
                     <li class="nav-item">
                         <a href="{{ url('admin/dashboard') }}"
                             class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-chart-bar "></i>
+                            <i class="nav-icon fas fa-home"></i>
                             <p>
                                 Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+
+                            <i class="nav-icon fa-solid fa-magnifying-glass"></i>
+                            <p>
+                                Asset Search
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fa-regular fa-square-plus"></i>
+                            <p>
+                                Asset Registration
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-clock"></i>
+                            <p>
+                                Manage Maintenance
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Manage Division
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Manage Office
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>
+                                Manage District
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-graduation-cap"></i>
+                            <p>
+                                Manage Schools
                             </p>
                         </a>
                     </li>
@@ -140,7 +198,7 @@
                         <a href="{{ route('admin.users.index') }}"
                             class="nav-link {{ Request::is('admin/users') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
-                            <p>Users</p>
+                            <p>Manage Users</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -151,6 +209,15 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-print"></i>
+                            <p>
+                                Manage Reports
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-header">ACCOUNT</li>
                     <li
                         class="nav-item {{ Request::is('admin/change/password', 'admin/profile') ? 'menu-open' : '' }}">
                         <a href="#"
@@ -162,7 +229,6 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-
                             <li class="nav-item">
                                 <a href="{{ url('admin/profile') }}"
                                     class="nav-link {{ Request::is('admin/profile') ? 'active' : '' }}">
