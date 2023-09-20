@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AssetSearchController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
@@ -49,6 +50,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admi
     Route::get('/change/password',[AccountController::class,'AdminChangePassword'])->name('change.password');
 
     Route::resource('/users', UserController::class);
+    Route::get('/search', [AssetSearchController::class, 'search'])->name('search');
 });
 
 ######################## client ########################

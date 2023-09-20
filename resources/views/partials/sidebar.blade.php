@@ -137,7 +137,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('admin/search') }}"
+                            class="nav-link {{ Request::is('admin/search') ? 'active' : '' }}">
 
                             <i class="nav-icon fa-solid fa-magnifying-glass"></i>
                             <p>

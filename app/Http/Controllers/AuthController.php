@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,11 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         if(!empty($request->get('user'))){
-            return view('dashboard');
+
+            $user = DB::table('tblusers')->get();
+           
+           
+            return view('dashboard', compact('user'));
         }
         
         return redirect()->back();

@@ -9,7 +9,11 @@
 </head>
 
 <body>
-    <h1>Dashboard</h1>
+
+
+    @foreach ($user as $usr)
+        $usr->roleID();
+    @endforeach
 </body>
 
 </html>

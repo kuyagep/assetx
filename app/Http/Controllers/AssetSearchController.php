@@ -9,9 +9,9 @@ class AssetSearchController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function search ()
     {
-        //
+        return view('admin.asset_search.search');
     }
 
     /**
