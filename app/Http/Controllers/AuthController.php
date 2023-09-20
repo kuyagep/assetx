@@ -27,7 +27,7 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        if(!empty($request->get('username'))){
+        if(!empty($request->get('user'))){
             return view('dashboard');
         }
 
