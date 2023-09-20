@@ -1,233 +1,126 @@
-@extends('partials.main')
-{{-- page title --}}
-@section('page-title', 'Home')
-{{-- Content Header --}}
-@section('content-header', 'Dashboard')
-{{-- content --}}
-@section('main-content')
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <blockquote class="quote-danger">
-                        <h5 id="note"><i class="fas fa-bullhorn"></i> Welcome! {{ Auth::user()->first_name }}</h5>
-                        <p>This is your main dashboard you can freely navigate. Contact support team if you need help.</p>
-                    </blockquote>
-                </div>
-            </div>
-            <!-- Info boxes -->
-            <div class="row">
+/* @keyframes gradient {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+} */
+Marlon
+Marlon Sabroso Diocson
+<!DOCTYPE html>
+<html lang="en">
 
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+<head>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">INFORMATION COMMUNICATION AND TECHNOLOGY
-                                EQUIPMENT
-                            </span>
-                            <span class="info-box-number">
-                                10
-                                <small>%</small>
-                            </span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-olive elevation-1"><i class="fas fa-thumbs-up"></i></span>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">OTHER MACHINERY AND EQUIPMENT</span>
-                            <span class="info-box-number">41,410</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
+    <title>Project TIS - Teachers Information System</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico">
 
-                <!-- fix for small devices only -->
-                <div class="clearfix hidden-md-up"></div>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-shopping-cart"></i></span>
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="assets/css/bootstrap5.min.css">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">IT EQUIPMENT AND SOFTWARE</span>
-                            <span class="info-box-number">760</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-copy"></i></span>
+    <style>
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+        }
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">FURNITURE AND FIXTURE</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">LAND INVENTORY</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
+        .content {
+            /* background-color:rgba(255,255,255,.8); */
+            background-image: url('assets/img/HEROES COVER PAGE.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: .25em;
+            box-shadow: 0 0 .25em rgba(0, 0, 0, .25);
+            box-sizing: border-box;
+            left: 50%;
+            right: -30%;
+            padding: 47vmin;
+            position: fixed;
+            text-align: center;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">MEDICAL AND DENTAL EQUIPMENT</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">BUILDING INVENTORY</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">TVL SPECIALIZATION TOOLS AND EQUIPMENT</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">TRANSPORTATION AND EQUIPMENT</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">DISTRICTS</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">SECONDARY SCHOOLS</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-copy"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">ELEMENTARY SCHOOLS</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-
-                </div>
-            </div>
-
-        </div><!--/. container-fluid -->
-    </section>
-    <!-- /.content -->
-@endsection
-@section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script>
-        const xValues = ["SULOP", "MALALAG", "PADADA", "HAGONOY 1", "HAGONOY 2"];
-        const yValues = [55, 49, 44, 24, 15];
-        const barColors = ["red", "red", "red", "red", "red"];
-
-        new Chart("myChart", {
-            type: "bar",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: "World Wine Production 2018"
-                }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
             }
-        });
-    </script>
-@endsection
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+
+        /* @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        } */
+    </style>
+
+
+</head>
+
+<body class="">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+
+
+        <?php include 'message.php'; ?>
+
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+        <div class="content">
+
+        </div>
+
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
