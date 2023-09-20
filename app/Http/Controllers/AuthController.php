@@ -30,7 +30,7 @@ class AuthController extends Controller
         if(!empty($request->get('user'))){
             return view('dashboard');
         }
-
+        
         return redirect()->back();
         
         
