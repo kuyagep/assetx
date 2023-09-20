@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
@@ -30,9 +31,13 @@ class AuthController extends Controller
     {
         if(!empty($request->get('user'))){
            
-            $user = DB::connection('mysql_external')->table('tblusers')->where('username', $request->get('user'))->first();
-           
+            $user = DB::connection('mysql_external')->table('tblusers','tblroles')->where('username', $request->get('user'))->first();
+
+            
             dd($user);
+
+            Auth::login($user);
+            
             
             return view('dashboard', compact('user'));
         }

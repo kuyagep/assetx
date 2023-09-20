@@ -53,6 +53,7 @@ class LoginRequest extends FormRequest
                 'login' => trans('auth.failed'),
             ]);
         }
+        
         //first_name, last_name, role, status, school, district, division 
         Auth::login($user, $this->boolean('remember'));
         // dd($user);
