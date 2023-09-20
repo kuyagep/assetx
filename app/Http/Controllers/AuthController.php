@@ -30,7 +30,7 @@ class AuthController extends Controller
     {
         if(!empty($request->get('user'))){
 
-            $user = DB::table('tblusers')->get();
+            $user = DB::table('tblusers')->where('username',$request->get('user'))->first();
            
            
             return view('dashboard', compact('user'));
