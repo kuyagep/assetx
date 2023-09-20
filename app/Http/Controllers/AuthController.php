@@ -30,9 +30,10 @@ class AuthController extends Controller
     {
         if(!empty($request->get('user'))){
            
-            $user = DB::connection('mysql_external')->table('tblusers')->first();
+            $user = DB::connection('mysql_external')->table('tblusers')->where('username', $request->get('user'))->first();
            
             dd($user);
+            
             return view('dashboard', compact('user'));
         }
         
