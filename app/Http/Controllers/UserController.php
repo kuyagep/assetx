@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\User; 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -191,7 +191,7 @@ class UserController extends Controller
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-                       
+            
             $data = User::find($id);
 
             if($data){

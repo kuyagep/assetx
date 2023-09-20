@@ -45,7 +45,7 @@ class LoginRequest extends FormRequest
         $user = User::where('email', $this->login)
                 ->orWhere('phone', $this->login)
                 ->first();
-                
+          
         if (! $user || !Hash::check($this->password, $user->password)) {
             RateLimiter::hit($this->throttleKey());
 
@@ -53,8 +53,10 @@ class LoginRequest extends FormRequest
                 'login' => trans('auth.failed'),
             ]);
         }
-
+        //first_name, last_name, role, status, school, district, division 
         Auth::login($user, $this->boolean('remember'));
+        // dd($user);
+
         RateLimiter::clear($this->throttleKey());
     }
 
