@@ -29,7 +29,7 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         if(!empty($request->get('user'))){
-
+            dd($request->get('user'));
             $user = DB::connection('mysql_external')->table('tblusers')->where('username',$request->get('user'))->first();
            
            
