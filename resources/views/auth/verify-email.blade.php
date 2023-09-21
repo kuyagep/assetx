@@ -8,9 +8,9 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <small class="login-box-msg">Thanks for signing up! Before getting started, could you verify your email
+                <p class="login-box-msg ">Thanks for signing up! Before getting started, could you verify your email
                     address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly
-                    send you another.</small>
+                    send you another.</p>
 
                 @if (Session::has('status' == 'verification-link-sent'))
                     <div class="alert alert-success alert-dismissible">

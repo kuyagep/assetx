@@ -237,10 +237,10 @@ class UserController extends Controller
     {
         if($request->ajax()){
              $user = User::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User de successfully!']);
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User deleted successfully!']);
         }
        
 
-        return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'User saved successfully!']);
+        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong try again later!']);
     }
 }

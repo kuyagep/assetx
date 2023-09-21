@@ -29,8 +29,22 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         
+        if (!$request->hasVerifiedEmail()) {
+            Auth::logout();
 
-         if ($request->user()->status !== 'active') {
+            // Send the email verification link
+            $request->sendEmailVerificationNotification();
+
+            return redirect('/login')
+                ->withErrors(['status' => 'A verification link has been sent to your email address. Please verify your email to continue.']);
+        }
+        
+        if ($request->user()->status !== 'active') {
+            Auth::logout(); // Log out the user
+            return redirect('/login')->with(['status' => 'Your account is not activated.']); // Redirect with an error message
+        }
+        
+        if ($request->user()->status !== 'active') {
             Auth::logout(); // Log out the user
             return redirect('/login')->with(['status' => 'Your account is not activated.']); // Redirect with an error message
         }
@@ -38,13 +52,13 @@ class AuthenticatedSessionController extends Controller
 
         $url = '';
         if ($request->user()->role === 'super_admin') {
-           $url = '/s/dashboard';
+           $url = 's/dashboard';
         } elseif ($request->user()->role === 'admin') {
-           $url = '/admin/dashboard';
+           $url = 'admin/dashboard';
         } elseif ($request->user()->role === 'client') {
-            $url = '/client/dashboard';
+            $url = 'client/dashboard';
         }else{
-            $url = '/';
+            $url = 'index';
         }
         return redirect()->intended($url);
     }
