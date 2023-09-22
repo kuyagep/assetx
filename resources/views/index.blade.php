@@ -46,15 +46,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item">
                             <a href="#" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">About</a>
-                        </li>
+
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" class="nav-link dropdown-toggle">About</a>
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">Some action </a></li>
-                                <li><a href="#" class="dropdown-item">Some other action</a></li>
+                                <li><a href="#" class="dropdown-item">Overview </a></li>
+                                <li><a href="#" class="dropdown-item">Features</a></li>
 
                                 <li class="dropdown-divider"></li>
 
@@ -62,13 +60,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="dropdown-submenu dropdown-hover">
                                     <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false"
-                                        class="dropdown-item dropdown-toggle">Hover for action</a>
+                                        class="dropdown-item dropdown-toggle">Privacy Notice</a>
                                     <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                                         <li>
-                                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
+                                            <a tabindex="-1" href="#" class="dropdown-item">Terms & Condition</a>
                                         </li>
+                                        <li><a href="#" class="dropdown-item">Disclaimer</a></li>
+                                        <li><a href="#" class="dropdown-item">Privacy Policy</a></li>
 
-                                        <!-- Level three dropdown-->
+                                        {{-- <!-- Level three dropdown-->
                                         <li class="dropdown-submenu">
                                             <a id="dropdownSubMenu3" href="#" role="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <!-- End Level three -->
 
                                         <li><a href="#" class="dropdown-item">level 2</a></li>
-                                        <li><a href="#" class="dropdown-item">level 2</a></li>
+                                        <li><a href="#" class="dropdown-item">level 2</a></li> --}}
                                     </ul>
                                 </li>
                                 <!-- End Level two -->
