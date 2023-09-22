@@ -23,9 +23,9 @@
                             <div class="author-box-details mt-3">
                                 <div class="author-box-name">
                                     <b><a href="#">
-                                            {{ $account->first_name . ' ' . $account->last_name }}</a></b>
+                                            {{ ucwords(Auth::user()->first_name) . ' ' . ucwords(Auth::user()->last_name) }}</a></b>
                                 </div>
-                                <div class="author-box-job"> {{ ucfirst($account->role) }}</div>
+                                <div class="author-box-job"> {{ Auth::user()->email }}</div>
 
                                 <div class="mb-2 mt-3">
                                     <div class="text-md font-weight-bold">Email: {{ $account->email }}</div>

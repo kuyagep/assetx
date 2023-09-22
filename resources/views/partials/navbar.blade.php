@@ -38,9 +38,9 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-comments"></i>
-                <span class="badge badge-danger navbar-badge">3</span>
+                {{-- <span class="badge badge-danger navbar-badge">3</span> --}}
             </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            {{-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
@@ -59,15 +59,15 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-            </div>
+            </div> --}}
         </li>
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
+                {{-- <span class="badge badge-warning navbar-badge">15</span> --}}
             </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            {{-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">15 Notifications</span>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
@@ -76,25 +76,26 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div>
+            </div> --}}
         </li>
         <!-- User Menu -->
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
+                <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
                     class="user-image img-circle elevation-1" alt="User Image"
                     style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
-                <span class="d-none d-md-inline">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
+                <span
+                    class="d-none d-md-inline">{{ ucwords(Auth::user()->first_name) . ' ' . ucwords(Auth::user()->last_name) }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-default">
-                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
+                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
                         class="img-circle elevation-1" alt="User Image">
 
                     <p>
-                        {{ Auth::user()->first_name . '  ' . Auth::user()->last_name }}
-                        <small>{{ ucwords(Auth::user()->role) }}</small>
+                        {{ ucwords(Auth::user()->first_name) . ' ' . ucwords(Auth::user()->last_name) }}
+                        <small>{{ Auth::user()->email }}</small>
                     </p>
                 </li>
                 <!-- Menu Body -->

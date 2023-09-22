@@ -47,10 +47,42 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Manage Division
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Manage Office
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>
+                                Manage District
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-graduation-cap"></i>
+                            <p>
+                                Manage Schools
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('super_admin.users.index') }}"
                             class="nav-link {{ Request::is('s/users') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
-                            <p>Users</p>
+                            <p>User Management</p>
                         </a>
                     </li>
                     <li class="nav-item {{ Request::is('s/change/password', 'admin/profile') ? 'menu-open' : '' }}">
@@ -163,38 +195,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-building"></i>
-                            <p>
-                                Manage Division
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-briefcase"></i>
-                            <p>
-                                Manage Office
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-home"></i>
-                            <p>
-                                Manage District
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-graduation-cap"></i>
-                            <p>
-                                Manage Schools
-                            </p>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}"
                             class="nav-link {{ Request::is('admin/users') ? 'active' : '' }}">
@@ -353,10 +354,29 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-layer-group"></i>
+                        <a href="{{ url('/client/accountability') }}"
+                            class="nav-link {{ Request::is('client/accountability') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-barcode"></i>
                             <p>
                                 Accountability
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/client/transferred-items') }}"
+                            class="nav-link {{ Request::is('client/transferred-items') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-inbox"></i>
+                            <p>
+                                Transferred Asset
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/client/returned-items') }}"
+                            class="nav-link {{ Request::is('client/returned-items') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-inbox"></i>
+                            <p>
+                                Returned Asset
                             </p>
                         </a>
                     </li>
@@ -391,10 +411,11 @@
                     </li>
                     <li class="nav-header">SYSTEM</li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-cloud-download-alt text-danger"></i>
+                        <a href="{{ url('/client/backup') }}"
+                            class="nav-link {{ Request::is('client/backup') ? 'active' : '' }} ">
+                            <i class="nav-icon fas fa-database text-info"></i>
                             <p>
-                                Backup/Restore
+                                Backup
                             </p>
                         </a>
                     </li>

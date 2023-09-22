@@ -33,7 +33,9 @@ class AuthController extends Controller
            
             $user = DB::connection('mysql_external')->table('tblusers','tblroles')->where('username', $request->get('user'))->first();
 
-            
+            if ($user === null) {
+                return redirect()->back();
+            }
             dd($user);
 
             Auth::login($user);
@@ -42,7 +44,7 @@ class AuthController extends Controller
             return view('dashboard', compact('user'));
         }
         
-        return redirect()->back();
+        
         
         
 

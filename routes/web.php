@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountabilityController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AssetSearchController;
 use App\Http\Controllers\AuthController;
@@ -61,6 +62,13 @@ Route::prefix('client')->name('client.')->middleware(['auth','verified','role:cl
     Route::post('/update/password',[AccountController::class,'clientUpdatePassword'])->name('update.password');
     Route::get('/change/password',[AccountController::class,'clientChangePassword'])->name('change.password');
 
+    Route::get('/accountability',  [AccountabilityController::class, 'index'])->name('accountability');
+    Route::get('/returned-items',  [AccountabilityController::class, 'returned_items'])->name('returned-items');
+    Route::get('/transferred-items',  [AccountabilityController::class, 'transferred_items'])->name('transferred-items');
+    
+    Route::get('/backup', function () {
+        return view('client.back-up');
+    });
 });
 
 ######################## SUPER ADMIN ########################

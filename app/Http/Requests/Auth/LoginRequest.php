@@ -53,6 +53,14 @@ class LoginRequest extends FormRequest
                 'login' => trans('auth.failed'),
             ]);
         }
+
+        if (!$user->hasVerifiedEmail()) {
+            Auth::logout();
+
+            // Send the email verification link
+            $user->sendEmailVerificationNotification();
+
+        }
         
         //first_name, last_name, role, status, school, district, division 
         Auth::login($user, $this->boolean('remember'));

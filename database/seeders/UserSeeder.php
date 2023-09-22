@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => Carbon::now(),
                 'role' => 'client',
                 'status' => 'active',
-                 'created_at' => Carbon::now(),
+                'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
         ]); //call this class to the DatabaseSeeder & run  'php artisan db:seed --class=UserSeeder'

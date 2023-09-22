@@ -29,15 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         
-        if (!$request->hasVerifiedEmail()) {
-            Auth::logout();
-
-            // Send the email verification link
-            $request->sendEmailVerificationNotification();
-
-            return redirect('/login')
-                ->withErrors(['status' => 'A verification link has been sent to your email address. Please verify your email to continue.']);
-        }
+        
         
         if ($request->user()->status !== 'active') {
             Auth::logout(); // Log out the user
