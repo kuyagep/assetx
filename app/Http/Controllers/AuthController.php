@@ -34,13 +34,12 @@ class AuthController extends Controller
             $user = DB::connection('mysql_external')->table('tblusers','tblroles')->where('username', $request->get('user'))->first();
 
             if ($user === null) {
-                return redirect()->back();
+                return redirect()->url('http://202.137.126.58/');
             }
             dd($user);
 
             Auth::login($user);
-            
-            
+                        
             return view('dashboard', compact('user'));
         }
         
