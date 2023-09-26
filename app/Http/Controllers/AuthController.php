@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
@@ -34,7 +35,7 @@ class AuthController extends Controller
             $user = DB::connection('mysql_external')->table('tblusers','tblroles')->where('username', $request->get('user'))->first();
 
             if ($user === null) {
-                return redirect()->url('http://202.137.126.58/');
+                return Redirect::to('http://202.137.126.58/');
             }
             dd($user);
 
