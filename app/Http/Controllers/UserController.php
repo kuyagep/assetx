@@ -20,7 +20,9 @@ class UserController extends Controller
     {
         $users = [];
         if($request->ajax()){
-            $users = User::orderBy('created_at', 'asc')->get();
+            // $users = User::orderBy('created_at', 'asc')->get();
+            $users = User::where('role','client')
+                            ->orWhere('role','admin')->latest();
             return DataTables::of($users)
                 ->editColumn('full_name', function ($request) {
                     $result = $request->first_name . " " . $request->last_name;
