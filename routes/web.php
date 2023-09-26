@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Controllers\SuperAdmin\DistrictController;
+use App\Http\Controllers\SuperAdmin\DivisionController;
 use App\Http\Controllers\AccountabilityController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AssetSearchController;
@@ -80,6 +83,14 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
     Route::get('/change/password',[AccountController::class,'super_adminChangePassword'])->name('change.password');
 
     Route::resource('/users', UserController::class);
+
+    #division
+    Route::resource('/division', DivisionController::class);
+
+    #district
+     Route::get('/district', [DistrictController::class,'index'])->name('district');
+     Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
+     
 });
 
 

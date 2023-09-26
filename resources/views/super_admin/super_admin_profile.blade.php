@@ -8,7 +8,6 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-
             <div class="row mt-sm-4">
                 <div class="col-12 col-md-12 col-lg-5">
                     <div class="card author-box card-primary">
@@ -95,7 +94,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-7 col-12">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" name="email"
+                                        <input type="email" class="form-control " name="email"
                                             value=" {{ old('email', $account->email) }}" required="">
                                         @error('email')
                                             <small class="text-danger">
@@ -105,8 +104,8 @@
                                     </div>
                                     <div class="form-group col-md-5 col-12">
                                         <label>Phone</label>
-                                        <input type="tel" class="form-control" name="phone"
-                                            value="{{ old('phone', $account->phone) }}">
+                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+                                            name="phone" value="{{ old('phone', $account->phone) }}">
                                         @error('phone')
                                             <small class="text-danger">
                                                 {{ $message }}
@@ -117,19 +116,37 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Address</label>
-                                        <input type="tel" class="form-control" name="address"
-                                            value="{{ old('address', $account->address) }}">
+                                        <input type="tel" class="form-control @error('address') is-invalid @enderror "
+                                            name="address" value="{{ old('address', $account->address) }}">
+                                        @error('address')
+                                            <small class="text-danger">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
                                     </div>
-                                    @error('address')
-                                        <small class="text-danger">
-                                            {{ $message }}
-                                        </small>
-                                    @enderror
+
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-12">
+                                    {{-- <div class="form-group col-12">
                                         <label for="image" class="form-label">Upload Avatar</label>
                                         <input class="form-control" type="file" name="avatar" id="image">
+                                        @error('avatar')
+                                            <small class="text-danger">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div> --}}
+
+                                    <div class="form-group col-12">
+                                        <label for="avatar">Upload Avatar</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="avatar"
+                                                    id="avatar">
+                                                <label class="custom-file-label" for="avatar">Choose
+                                                    file</label>
+                                            </div>
+                                        </div>
                                         @error('avatar')
                                             <small class="text-danger">
                                                 {{ $message }}
@@ -152,5 +169,14 @@
     <!-- /.content -->
 @endsection
 @section('script')
-
+    <script>
+        // display image
+        $('#avatar').change(function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    </script>
 @endsection

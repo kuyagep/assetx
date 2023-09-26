@@ -85,9 +85,9 @@
                             <p>User Management</p>
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('s/change/password', 'admin/profile') ? 'menu-open' : '' }}">
+                    <li class="nav-item {{ Request::is('s/change/password', 's/profile') ? 'menu-open' : '' }}">
                         <a href="#"
-                            class="nav-link {{ Request::is('s/change/password', 'admin/profile') ? 'active' : '' }}">
+                            class="nav-link {{ Request::is('s/change/password', 's/profile') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cogs"></i>
                             <p>
                                 Account Settings
