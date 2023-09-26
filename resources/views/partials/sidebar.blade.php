@@ -8,7 +8,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
+                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
                         class="img-circle elevation-0" style="width: 32px;max-width: 32px;height: 32px;object-fit: cover;"
                         alt="Account Avatar">
                 </div>
@@ -47,18 +47,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('s/division') }}"
+                            class="nav-link {{ Request::is('s/division') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-building"></i>
                             <p>
                                 Manage Division
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-briefcase"></i>
-                            <p>
-                                Manage Office
                             </p>
                         </a>
                     </li>
@@ -75,6 +68,14 @@
                             <i class="nav-icon fas fa-graduation-cap"></i>
                             <p>
                                 Manage Schools
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Manage Office
                             </p>
                         </a>
                     </li>
@@ -130,7 +131,7 @@
             <!-- Sidebar user panel (optional) -->
             {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
+                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
                         class="img-circle elevation-0"
                         style="width: 32px;max-width: 32px;height: 32px;object-fit: cover;" alt="Account Avatar">
                 </div>

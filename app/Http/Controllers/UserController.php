@@ -31,7 +31,7 @@ class UserController extends Controller
                 ->editColumn('avatar', function ($request) {
 
                     if (empty($request->avatar)) {
-                        $temp = asset("assets/dist/img/avatar.png");
+                        $temp = asset("assets/dist/img/avatar/default.jpg");
                     } else {
                         $temp = asset("assets/dist/img/avatar/" . $request->avatar);
                     }
