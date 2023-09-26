@@ -15,19 +15,23 @@ class HomeController extends Controller
     }
     public function about()
     {
-        return view('about');
+        return view('pages.about');
     }
     public function features()
     {
-        return view('features');
+        return view('pages.features');
     }
     public function privacy()
     {
-        return view('privacy');
+        return view('pages.privacy');
     }
-    public function terms_condition()
+    public function disclaimer()
     {
-        return view('terms-condition');
+        return view('pages.disclaimer');
+    }
+    public function termsService()
+    {
+        return view('pages.terms-of-service');
     }
 
 }
