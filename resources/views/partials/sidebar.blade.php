@@ -158,7 +158,8 @@
                 <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent nav-collapse-hide-child"
                     data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                    with font-awesome or any other icon font library -->
+
                     <li class="nav-item">
                         <a href="{{ url('admin/dashboard') }}"
                             class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">

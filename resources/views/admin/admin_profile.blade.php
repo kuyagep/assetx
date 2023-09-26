@@ -94,7 +94,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-7 col-12">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" name="email"
+                                        <input type="email" class="form-control " name="email"
                                             value=" {{ old('email', $account->email) }}" required="">
                                         @error('email')
                                             <small class="text-danger">
@@ -104,8 +104,8 @@
                                     </div>
                                     <div class="form-group col-md-5 col-12">
                                         <label>Phone</label>
-                                        <input type="tel" class="form-control" name="phone"
-                                            value="{{ old('phone', $account->phone) }}">
+                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+                                            name="phone" value="{{ old('phone', $account->phone) }}">
                                         @error('phone')
                                             <small class="text-danger">
                                                 {{ $message }}
@@ -116,14 +116,15 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Address</label>
-                                        <input type="tel" class="form-control" name="address"
-                                            value="{{ old('address', $account->address) }}">
+                                        <input type="tel" class="form-control @error('address') is-invalid @enderror "
+                                            name="address" value="{{ old('address', $account->address) }}">
+                                        @error('address')
+                                            <small class="text-danger">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
                                     </div>
-                                    @error('address')
-                                        <small class="text-danger">
-                                            {{ $message }}
-                                        </small>
-                                    @enderror
+
                                 </div>
                                 <div class="row">
                                     {{-- <div class="form-group col-12">
