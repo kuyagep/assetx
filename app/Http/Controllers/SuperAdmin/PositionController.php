@@ -21,15 +21,7 @@ class PositionController extends Controller
             // $data = User::orderBy('created_at', 'asc')->get();
             $data = Position::all();
             return DataTables::of($data)
-                ->editColumn('status', function ($request) {
-
-                    if($request->status === "active"){
-                        $result = '<span class="badge badge-success">Active</span>';
-                    }else{
-                         $result = '<span class="badge badge-danger">Inactive</span>';
-                    }
-                    return $result;
-            })
+                
             ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s'); // format date time
             })
@@ -43,7 +35,7 @@ class PositionController extends Controller
                         Delete</a>';
                 return $btn;
             })
-            ->rawColumns(['action','status'])
+            ->rawColumns(['action'])
             ->make(true);
         }
 
@@ -68,7 +60,6 @@ class PositionController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'status' => 'required|string|max:255',
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
@@ -76,18 +67,7 @@ class PositionController extends Controller
                 $data = new Position;
                 $data->name = $request->name;
                 $data->slug = Str::slug($request->name);
-                $data->status = $request->status;
 
-                if ($request->hasFile('logo')) {
-                    $file = $request->file('logo');           
-
-                    //new filename
-                    $filename = $file->hashName();
-
-                    // dd($filename);
-                    $file->move(public_path('assets/dist/img/logo/'), $filename);
-                    $data['logo'] = $filename;
-                }
 
                 $data->save();
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position saved successfully!']);
@@ -96,19 +76,7 @@ class PositionController extends Controller
 
                 $data->name = $request->name;
                 $data->slug = Str::slug($request->name);
-                $data->status = $request->status;
 
-                if ($request->hasFile('logo')) {
-                    $file = $request->file('logo');           
-                    @unlink(public_path('assets/dist/img/logo/'. $data->logo));
-
-                    //new filename
-                    $filename = $file->hashName();
-
-                    // dd($filename);
-                    $file->move(public_path('assets/dist/img/logo/'), $filename);
-                    $data['logo'] = $filename;
-                }
 
                 $data->save();
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position updated successfully!']);

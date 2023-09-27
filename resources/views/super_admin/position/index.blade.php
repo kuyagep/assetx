@@ -30,7 +30,6 @@
                                             <th>#</th>
                                             <th>Position Name</th>
                                             <th>Slug</th>
-                                            <th style="width: 8%" class="text-center">Status</th>
                                             <th>Create At</th>
                                             <th width="250px">Action</th>
                                         </tr>
@@ -65,19 +64,11 @@
                                 <input type="hidden" name="id" id="id">
                                 {{-- sample --}}
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             <label for="name">Position Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                 placeholder="Ex. Supply Officer">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="status">Status <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="status" id="status">
-                                                <option>Select...</option>
-                                                <option value="active" selected>Activate</option>
-                                                <option value="inactive">Deactivate</option>
-                                            </select>
                                         </div>
                                     </div>
 
@@ -133,11 +124,6 @@
                     {
                         data: 'slug',
                         name: 'slug'
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                        class: 'text-center'
                     }, {
                         data: 'created_at',
                         name: 'created_at'
@@ -246,7 +232,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.division.edit', ':id') }}";
+                var route = "{{ route('super_admin.positions.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -262,7 +248,6 @@
                         $('#modal').modal("show");
                         $('#id').val(response.id);
                         $('#name').val(response.name);
-                        $('#status').val(response.status);
                         $('#error').html('');
 
                     },
@@ -276,7 +261,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.division.destroy', ':id') }}";
+                var route = "{{ route('super_admin.positions.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
