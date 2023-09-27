@@ -56,7 +56,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('s/districts') }}"
+                            class="nav-link {{ Request::is('s/districts') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-home"></i>
                             <p>
                                 Manage District

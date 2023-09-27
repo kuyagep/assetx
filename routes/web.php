@@ -7,7 +7,6 @@ use App\Http\Controllers\AccountabilityController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AssetSearchController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -87,10 +86,11 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
 
     #division
     Route::resource('/division', DivisionController::class);
-
+    
     #district
-     Route::get('/district', [DistrictController::class,'index'])->name('district');
-     Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
+    Route::resource('/districts', DistrictController::class);
+    //  Route::get('/district', [DistrictController::class,'index'])->name('district');
+    //  Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
      
 });
 
