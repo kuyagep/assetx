@@ -23,9 +23,14 @@ class District extends Model
         'status'
      ];
 
-     public function division()
+    public function division()
     {
         return $this->belongsTo(Division::class, 'division_id', 'id');
+    }
+
+    public function schools()
+    {
+        return $this->hasMany(School::class, 'district_id', 'id');
     }
      
 }

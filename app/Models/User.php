@@ -55,4 +55,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'position_id', 'id');
+    }
+
+    // public function position()
+    // {
+    //     return $this->belongsTo(Position::class);
+    // }
 }

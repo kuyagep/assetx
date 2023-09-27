@@ -65,7 +65,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('s/schools') }}"
+                            class="nav-link {{ Request::is('s/schools') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-graduation-cap"></i>
                             <p>
                                 Manage Schools
@@ -73,10 +74,20 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('s/offices') }}"
+                            class="nav-link {{ Request::is('s/offices') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-briefcase"></i>
                             <p>
                                 Manage Office
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('s/positions') }}"
+                            class="nav-link {{ Request::is('s/positions') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Manage Position
                             </p>
                         </a>
                     </li>

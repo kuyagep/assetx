@@ -27,4 +27,8 @@ class Division extends Model
     {
         return $this->hasMany(District::class, 'division_id', 'id');
     }
+     public function offices()
+    {
+        return $this->hasMany(Office::class, 'division_id', 'id');
+    }
 }

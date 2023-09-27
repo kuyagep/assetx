@@ -1,9 +1,9 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Users')
+@section('page-title', 'Manage Office')
 {{-- Content Header --}}
-@section('content-header', 'Manage Users')
+@section('content-header', 'Manage Office')
 {{-- Main content --}}
 @section('main-content')
     <!-- Main content -->
@@ -13,10 +13,10 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><i class="fas fa-users "></i><b> List of User</b></h3>
+                            <h3 class="card-title"> List of Office</h3>
                             <div class="card-tools">
                                 <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add New User
+                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add Office
                                 </a>
                             </div>
                             <!-- /.card-tools -->
@@ -28,10 +28,9 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Avatar</th>
-                                            <th>Full Name</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
+                                            <th>Office</th>
+                                            <th>Division</th>
+                                            <th>Slug</th>
                                             <th style="width: 8%" class="text-center">Status</th>
                                             <th>Create At</th>
                                             <th width="250px">Action</th>
@@ -67,41 +66,21 @@
                                 <input type="hidden" name="id" id="id">
                                 {{-- sample --}}
                                 <div class="row">
-                                    <div class="col-8">
-                                        <div class="form-group mt-2">
-                                            <label for="avatar">Avatar</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="avatar"
-                                                        id="avatar">
-                                                    <label class="custom-file-label" for="avatar">Choose
-                                                        file</label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-12">
                                         <div class="form-group">
-                                            <label for="first_name">First Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="first_name" name="first_name"
-                                                placeholder="Ex. Juan">
-
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="last_name">Last Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                                placeholder="Ex. Dela Cruz">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email address <span class="text-danger">*</span></label>
-                                            <input type="email" class="form-control" id="email" name="email"
-                                                placeholder="Ex. example@email.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="role">Role <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="role" id="role">
-                                                <option>Select...</option>
-                                                <option value="client" selected>Client</option>
-                                                <option value="admin">Admin</option>
+                                            <label for="name">Select Division <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="division_name" name="division_name">
+                                                <option>Choose...</option>
+                                                @foreach ($divisions as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Office Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                placeholder="Ex. Supply">
                                         </div>
                                         <div class="form-group">
                                             <label for="status">Status <span class="text-danger">*</span></label>
@@ -112,18 +91,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-4">
-                                        <img id="showImage" alt="Avatar" class="table-avatar"
-                                            src="{{ asset('assets/dist/img/avatar/default.jpg') }}"
-                                            style="width: 150px;max-width: 150px;height: 150px;object-fit: cover; ">
 
-                                    </div>
                                 </div>
 
                             </div>
                             <div class="modal-footer justify-end">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-dark btn-save" id="btn-save">Save</button>
+                                <button type="button" class="btn btn-danger  px-5" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-dark btn-save px-5" id="btn-save">Save</button>
                             </div>
                         </form>
                     </div>
@@ -151,7 +125,6 @@
                 }
             });
 
-
             // Display data from index controller
             var table = $("#dataTableajax").DataTable({
                 responsive: true,
@@ -159,25 +132,21 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/users') }}",
+                ajax: "{{ url('s/offices') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         class: 'text-center'
                     }, {
-                        data: 'avatar',
-                        name: 'avatar'
+                        data: 'name',
+                        name: 'name'
                     }, {
-                        data: 'full_name',
-                        name: 'full_name'
+                        data: 'division',
+                        name: 'division'
                     },
                     {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'role',
-                        name: 'role'
+                        data: 'slug',
+                        name: 'slug'
                     },
                     {
                         data: 'status',
@@ -201,6 +170,7 @@
 
             // Add Button Function
             $('#add-button').click(function() {
+                $('#btn-save').attr('disabled', false);
                 $('#error').html('');
                 $('#modal').modal("show");
                 $('#modal-title').html("Add Data");
@@ -209,7 +179,6 @@
                 $('#id').val('');
                 $('#modal-form').trigger("reset");
             });
-
 
             // Store Function
             $('#modal-form').submit(function(e) {
@@ -224,7 +193,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.users.store') }}",
+                    url: "{{ route('super_admin.offices.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -252,7 +221,6 @@
                         $('#btn-save').html('Save');
                     }
                 });
-
             });
 
             // View Function
@@ -260,7 +228,7 @@
                 $('#btn-save').attr('disabled', true);
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.users.show', ':id') }}";
+                var route = "{{ route('super_admin.offices.show', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -275,12 +243,11 @@
                         $('#modal-title').html("View Data");
                         $('#modal').modal("show");
                         $('#id').val(response.id);
-                        $('#first_name').val(response.first_name);
-                        $('#last_name').val(response.last_name);
-                        $('#email').val(response.email);
-                        $('#role').val(response.role);
+
+                        $('#name').val(response.name);
                         $('#status').val(response.status);
                         $('#error').html('');
+
                     },
                     error: function(response) {
                         console.log(response);
@@ -294,7 +261,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.users.edit', ':id') }}";
+                var route = "{{ route('super_admin.districts.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -305,16 +272,35 @@
                     },
                     dataType: 'json',
                     success: function(response) {
+                        var division = response.division;
+                        var office = response.office;
+                        // console.log(division);
+                        // console.log(district);
+                        var htmlDivision = "<option value=''>Select Division</option>";
+                        $('#id').val(office['id']);
+                        $('#division_id').val(response.division_id);
+                        $('#name').val(office['name']);
+                        $('#status').val(office['status']);
+
+                        for (let i = 0; i < division.length; i++) {
+                            if (office['division_id'] === division[i]['id']) {
+                                htmlDivision += `<option value="` + division[i]['id'] +
+                                    `" selected>` + division[i]['name'] +
+                                    `</option>`;
+                            } else {
+                                htmlDivision += `<option value="` + division[i]['id'] +
+                                    `">` + division[i]['name'] +
+                                    `</option>`;
+                            }
+                        }
+                        $('#division_name').html(htmlDivision);
+
                         // console.log(res);
                         $('#modal-title').html("Edit Data");
                         $('#modal').modal("show");
-                        $('#id').val(response.id);
-                        $('#first_name').val(response.first_name);
-                        $('#last_name').val(response.last_name);
-                        $('#email').val(response.email);
-                        $('#role').val(response.role);
-                        $('#status').val(response.status);
+
                         $('#error').html('');
+
                     },
                     error: function(response) {
                         console.log(response);
@@ -326,13 +312,13 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.users.destroy', ':id') }}";
+                var route = "{{ route('super_admin.districts.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You want delete this account?",
+                    text: "You want delete this data?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -371,14 +357,6 @@
 
             });
 
-            // display image
-            $('#avatar').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0']);
-            });
         });
     </script>
 @endsection

@@ -10,7 +10,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuperAdmin\OfficeController;
+use App\Http\Controllers\SuperAdmin\PositionController;
+use App\Http\Controllers\SuperAdmin\SchoolController;
 use App\Http\Controllers\UserController;
+use App\Models\Office;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,9 +90,14 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
 
     #division
     Route::resource('/division', DivisionController::class);
-    
     #district
     Route::resource('/districts', DistrictController::class);
+    #schools
+    Route::resource('/schools', SchoolController::class);
+    #offices
+    Route::resource('/offices', OfficeController::class);
+    #positions
+    Route::resource('/positions', PositionController::class);
     //  Route::get('/district', [DistrictController::class,'index'])->name('district');
     //  Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
      
