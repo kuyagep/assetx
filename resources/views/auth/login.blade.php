@@ -65,7 +65,7 @@
                     </div>
                 </form>
                 <p class="mt-3 text-center ">
-                    <a href="{{ route('register') }}" class="text-secondary">Register</a>
+                    {{-- <a href="{{ route('register') }}" class="text-secondary">Register</a> --}}
                 </p>
 
             </div>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('position_id')->nullable();
+            $table->unsignedBigInteger('position_id')->default('1');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->timestamps();
             
             // Define the foreign key constraint
-            $table->foreign('position_id')->references('id')->on('positions');
+            $table->foreign('position_id')->references('id')->on('positions')->onDelete('RESTRICT');
            
         });
     }

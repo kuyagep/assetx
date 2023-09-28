@@ -85,9 +85,52 @@
                     <li class="nav-item">
                         <a href="{{ url('s/positions') }}"
                             class="nav-link {{ Request::is('s/positions') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-briefcase"></i>
+                            <i class="nav-icon fas fa-user-tie"></i>
                             <p>
                                 Manage Position
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('s/classifications') }}"
+                            class="nav-link {{ Request::is('s/classifications') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-stream"></i>
+                            <p>
+                                Asset Classification
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('s/asset-status') }}"
+                            class="nav-link {{ Request::is('s/asset-status') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-toggle-on"></i>
+                            <p>
+                                Asset Status
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-qrcode"></i>
+                            <p>
+                                Assets
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('s/issuance-type') }}"
+                            class="nav-link {{ Request::is('s/issuance-type') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Issuance Type
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>
+                                All Issuances
                             </p>
                         </a>
                     </li>

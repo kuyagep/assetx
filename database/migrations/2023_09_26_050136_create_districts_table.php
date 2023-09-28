@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
 
-            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade');
+            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('RESTRICT');
 
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\SuperAdmin\AssetStatusController;
 use App\Http\Controllers\SuperAdmin\DistrictController;
 use App\Http\Controllers\SuperAdmin\DivisionController;
 use App\Http\Controllers\AccountabilityController;
@@ -10,9 +11,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuperAdmin\ClassificationController;
+use App\Http\Controllers\SuperAdmin\IssuanceTypeController;
 use App\Http\Controllers\SuperAdmin\OfficeController;
 use App\Http\Controllers\SuperAdmin\PositionController;
 use App\Http\Controllers\SuperAdmin\SchoolController;
+use App\Http\Controllers\SuperAdmin\UsersController;
 use App\Http\Controllers\UserController;
 use App\Models\Office;
 use Illuminate\Support\Facades\Route;
@@ -86,7 +90,7 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
     Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
     Route::get('/change/password',[AccountController::class,'super_adminChangePassword'])->name('change.password');
 
-    Route::resource('/users', UserController::class);
+    Route::resource('/users', UsersController::class);
 
     #division
     Route::resource('/division', DivisionController::class);
@@ -98,6 +102,12 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
     Route::resource('/offices', OfficeController::class);
     #positions
     Route::resource('/positions', PositionController::class);
+    #asset classifications
+    Route::resource('/classifications', ClassificationController::class);
+    #asset status
+    Route::resource('/asset-status', AssetStatusController::class);
+    #asset issuance type
+    Route::resource('/issuance-type', IssuanceTypeController::class);
     //  Route::get('/district', [DistrictController::class,'index'])->name('district');
     //  Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
      

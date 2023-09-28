@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
 
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('RESTRICT');
             $table->timestamps();
         });
     }
