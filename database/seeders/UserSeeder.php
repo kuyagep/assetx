@@ -55,6 +55,19 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila'),
             ]
+            ,
+            [ //Demo Account
+                'id' => Str::uuid(),
+                'first_name' => 'Demo',
+                'last_name' => 'Account',
+                'email' => 'demo@gmail.com',
+                'password' => Hash::make('demo'),
+                'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
+                'role' => 'client',
+                'status' => 'active',
+                'created_at' => Carbon::now()->timezone('Asia/Manila'),
+                'updated_at' => Carbon::now()->timezone('Asia/Manila'),
+            ]
         ]); //call this class to the DatabaseSeeder & run  'php artisan db:seed --class=UserSeeder'
     }
 }

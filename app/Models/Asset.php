@@ -4,31 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Asset extends Model
 {
     use HasFactory;
-        public $incrementing = false;
-    protected $keyType = 'string';
 
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
+    protected $table = 'assets';
+
+    protected $guarded = [];
+
+    public function classifications()
     {
-        static::creating(function ($model) {
-            $model->{$model->getKeyName()} = Str::uuid();
-        });
+        return $this->belongsTo(Classification::class, 'classification_id', 'id');
     }
-
-   
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-     protected $guarded = [];
+    public function asset_status()
+    {
+        return $this->belongsTo(AssetStatus::class, 'asset_status_id', 'id');
+    }
+    public function issuance_type()
+    {
+        return $this->belongsTo(IssuanceType::class, 'issuance_type_id', 'id');
+    }
 }

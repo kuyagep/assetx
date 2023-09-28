@@ -42,7 +42,7 @@
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Home</a>
+                            <a href="{{ url('/index') }}" class="nav-link">Home</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -169,7 +169,7 @@
                                 class="nav-item btn btn-danger px-3">Logout</a>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="nav-item btn btn-primary px-3">Login/Register</a>
+                        <a href="{{ route('login') }}" class="nav-item btn btn-default px-3 ">Get Started</a>
                     @endauth
 
                 </ul>

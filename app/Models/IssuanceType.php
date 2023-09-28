@@ -15,4 +15,6 @@ class IssuanceType extends Model
         'name',
         'slug',
      ];
+
+     
 }
