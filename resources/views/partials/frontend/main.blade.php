@@ -169,7 +169,7 @@
                                 class="nav-item btn btn-danger px-3">Logout</a>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="nav-item btn btn-default px-3 ">Get Started</a>
+                        <a href="{{ route('login') }}" class="nav-item btn btn-default px-3 ">Demo</a>
                     @endauth
 
                 </ul>

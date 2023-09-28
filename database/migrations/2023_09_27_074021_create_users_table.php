@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->unsignedBigInteger('position_id')->default('1');
+             $table->unsignedBigInteger('school_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
@@ -30,6 +31,7 @@ return new class extends Migration
             
             // Define the foreign key constraint
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('RESTRICT');
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('RESTRICT');
            
         });
     }

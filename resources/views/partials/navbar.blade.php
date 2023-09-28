@@ -115,7 +115,14 @@
                 </li> --}}
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    @if (Auth::user()->role === 'client')
+                        <a href="/client/profile" class="btn btn-default btn-flat">Profile</a>
+                    @elseif(Auth::user()->role === 'admin')
+                        <a href="/admin/profile" class="btn btn-default btn-flat">Profile</a>
+                    @else
+                        <a href="/s/profile" class="btn btn-default btn-flat">Profile</a>
+                    @endif
+
 
                     <a href="#" class="btn btn-default btn-flat float-right" data-toggle="modal"
                         data-target="#logoutModal">Sign out</a>

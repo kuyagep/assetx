@@ -11,7 +11,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuperAdmin\AssetController;
 use App\Http\Controllers\SuperAdmin\ClassificationController;
+use App\Http\Controllers\SuperAdmin\IssuanceController;
 use App\Http\Controllers\SuperAdmin\IssuanceTypeController;
 use App\Http\Controllers\SuperAdmin\OfficeController;
 use App\Http\Controllers\SuperAdmin\PositionController;
@@ -108,6 +110,10 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
     Route::resource('/asset-status', AssetStatusController::class);
     #asset issuance type
     Route::resource('/issuance-type', IssuanceTypeController::class);
+    #assets
+    Route::resource('/assets', AssetController::class);
+    #issuances
+    Route::resource('/issuances', IssuanceController::class);
     //  Route::get('/district', [DistrictController::class,'index'])->name('district');
     //  Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
      

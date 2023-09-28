@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"> Division Asset Management System <small>Version 0.2.9</small></h1>
+                        <h1 class="m-0"> Division Asset MS <small>Version 0.2.9</small></h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -36,7 +36,8 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{ asset('brand_logo/hero-1.png') }}" class="d-block w-100" alt="hero banner">
+                                    <img src="{{ asset('brand_logo/DAMS-Dashboard.jpg') }}" class="d-block w-100"
+                                        alt="hero banner">
                                 </div>
                                 <div class="carousel-item">
                                     <img src="{{ asset('brand_logo/hero-2.png') }}" class="d-block w-100" alt="hero banner">

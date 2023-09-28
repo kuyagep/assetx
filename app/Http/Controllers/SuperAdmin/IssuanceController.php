@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
-use App\Models\District;
-use App\Models\School;
+use App\Models\Issuance;
+use App\Models\IssuanceType;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
-class SchoolController extends Controller
+class IssuanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,37 +23,12 @@ class SchoolController extends Controller
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = School::all();
+            $data = Issuance::all();
             return DataTables::of($data)
-                ->editColumn('logo', function ($request) {
-                    if (empty($request->logo)) {
-                        $temp = asset("assets/dist/img/logo/no_image.png");
-                    } else {
-                        $temp = asset("assets/dist/img/logo/" . $request->logo);
-                    }
-
-                    $result = '<ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <img alt="Logo" class="table-avatar" src="' . $temp . '" style="width: 2.5rem; height: 2.5rem; border-radius: 50%; object-fit: cover;">
-                                    </li>
-                                </ul>';
-                    return $result;
-                    //  return '<img src="' .asset('assets/dist/img/avatar/' . $request->avatar). '" alt="User Image" width="50">';
+                ->editColumn('issuance_type', function ($request) {
+                    return $request->issuance_type->name; 
                 })
-                ->editColumn('district', function ($request) {
-                    return $request->district->name; 
-    
-                    
-                })
-                ->editColumn('status', function ($request) {
-
-                    if($request->status === "active"){
-                        $result = '<span class="badge badge-success">Active</span>';
-                    }else{
-                         $result = '<span class="badge badge-danger">Inactive</span>';
-                    }
-                    return $result;
-                })
+               
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
@@ -63,12 +39,12 @@ class SchoolController extends Controller
                             Delete</a>';
                     return $btn;
                 })
-                ->rawColumns(['logo','district','action','status'])
+                ->rawColumns(['issuance_type','action'])
                 ->make(true);
         }
 
-        $districts = District::all();
-        return view('super_admin.school.index', compact('districts'));
+        $issuance_type = IssuanceType::all();
+        return view('super_admin.issuances.index', compact('issuance_type'));
        
     }
 
@@ -87,48 +63,26 @@ class SchoolController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'district_name' => 'required',
-                'school_id' => 'required|numeric',
-                'name' => 'required|string|max:255',
-                'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'code' => 'required|string|max:255',
-                'status' => 'required|string|max:255',
+                'issuance_type' => 'required',
+                'total_value' => 'required|numeric|min:0.01|max:9999.99',
             ]);
 
-
-            $district = District::findOrFail($request->district_name);
+            $total_value = '';
+            $issuance_type = IssuanceType::findOrFail($request->issuance_type);
             // checked if new data or exists
             if (empty($request->id)) {
 
-                $data = new School;
-                $data->district_id = $request->district_name;
-                $data->school_id = $request->school_id;
-                $data->name = $request->name;
-                $data->code = $request->code;
-                $data->slug = Str::slug($request->name);
+                $data = new Issuance;
+                $data->total_value = $total_value;
+                $data->received_form_user_id = Auth::user()->id;
+                $data->received_by_user_id = Auth::user()->id;
                 $data->status = $request->status;
-
-                 if ($request->hasFile('logo')) {
-                    $file = $request->file('logo');           
-
-                    //new filename
-                    $filename = $file->hashName();
-
-                    // dd($filename);
-                    $file->move(public_path('assets/dist/img/logo'), $filename);
-                    $data['logo'] = $filename;
-                }
-
-                $district->schools()->save($data);
-                // $division->districts()->create([
-                //     'name' =>  $request->name,
-                //     'slug' =>  Str::slug($request->name),
-                //     'status' =>  $request->status,
-                // ]);
-
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Schools saved successfully!']);
+                 
+                $issuance_type->issuance()->save($data);
+                
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issued successfully!']);
             }else{
-                $data = School::find($request->id);
+                $data = Issuance::find($request->id);
                 $data->district_id = $request->district_name;
                 $data->school_id = $request->school_id;
                 $data->name = $request->name;
@@ -160,7 +114,7 @@ class SchoolController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = School::where($id)->first();
+        $data = Issuance::where($id)->first();
 
         return response()->json($data);
     }
@@ -170,9 +124,9 @@ class SchoolController extends Controller
      */
     public function edit(Request $request)
     {
-        $school = School::findOrFail($request->id);
-        $district = District::all();   
-        return response()->json(['school'=> $school, 'district'=> $district ]);
+        $school = Issuance::findOrFail($request->id);
+        $issuance_type = IssuanceType::all();   
+        return response()->json(['school'=> $school, 'district'=> $issuance_type ]);
     }
 
     /**
@@ -188,7 +142,7 @@ class SchoolController extends Controller
             ]);
 
             
-            $data = District::find($id);
+            $data = IssuanceType::find($id);
 
             if($data){
 
@@ -212,7 +166,7 @@ class SchoolController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             $school = School::where('id',$request->id)->delete();
+             $school = Issuance::where('id',$request->id)->delete();
              return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School deleted successfully!']);
         }
 

@@ -16,15 +16,16 @@ return new class extends Migration
             $table->string('issuance_code')->unique();
             $table->decimal('total_value', 10, 2);
             $table->boolean('is_approved')->default(false);
-            $table->string('received_form')->nullable();
-            $table->string('received_by')->nullable();
+            $table->uuid('received_form_user_id');
+            $table->uuid('received_by_user_id');
             $table->unsignedBigInteger('issuance_type_id');
             $table->timestamps();
 
             // Define foreign key constraints
-            // $table->foreign('received_form_user_id')->references('id')->on('users');
-            // $table->foreign('received_by_user_id')->references('id')->on('users');
-            $table->foreign('issuance_type_id')->references('id')->on('issuance_types');
+            $table->foreign('received_form_user_id')->references('id')->on('users');
+            $table->foreign('received_by_user_id')->references('id')->on('users');
+            $table->foreign('issuance_type_id')->references('id')->on('issuance_type');
+
         });
     }
 

@@ -6,12 +6,14 @@
     <div class="login-box">
 
         <div class="login-logo">
+            <img src="{{ asset('brand_logo/android-chrome-512x512.png') }}" width="100px" alt="" srcset="">
             <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <h3 class="login-box-msg">Sign in</h3>
+                <h4 class="login-box-msg">Sign in</h4>
+
                 @if (Session::has('status'))
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -22,10 +24,10 @@
                     @csrf
                     <div class="form-group mb-3">
                         <input type="text" name="login"
-                            class="form-control   @error('login')
+                            class="form-control form-control-lg  @error('login')
                             is-invalid
                         @enderror"
-                            value="{{ old('login') }}" placeholder="Registered Email/Phone"
+                            value="{{ old('login', 'demo@gmail.com') }}" placeholder="Registered Email/Phone"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
 
                         @error('login')
@@ -35,7 +37,8 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password" class="form-control " placeholder="Password" required>
+                        <input type="password" name="password" class="form-control form-control-lg " placeholder="Password"
+                            required>
                     </div>
                     <div class="row mb-3">
                         <div class="col-7">
@@ -59,7 +62,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-dark btn-block">LOG IN</button>
+                            <button type="submit" class="btn btn-dark btn-lg btn-block">LOG IN</button>
                         </div>
                         <!-- /.col -->
                     </div>

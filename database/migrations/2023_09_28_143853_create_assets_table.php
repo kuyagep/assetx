@@ -13,24 +13,23 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('classification_id');
-            $table->unsignedBigInteger('asset_status_id');
-            $table->unsignedBigInteger('issuance_id');
             $table->string('article');
             $table->string('description');
             $table->string('reference')->nullable();
-            $table->string('property_no')->unique();
+            $table->string('property_no');
             $table->string('unit_of_measure');
             $table->decimal('unit_value', 10, 2);
-            $table->integer('balance_per_card_qty')->nullable();
-            $table->decimal('balance_per_card_value', 10, 2)->nullable();
+            $table->integer('balance_per_card_qty');
+            $table->decimal('balance_per_card_value', 10, 2);
             $table->integer('onhand_per_count_qty');
             $table->decimal('onhand_per_count_value', 10, 2);
             $table->integer('shortage_overage_qty')->nullable();
             $table->decimal('shortage_overage_value', 10, 2)->nullable();
             $table->date('date_acquire');
             $table->text('remarks')->nullable();
-            
+            $table->unsignedBigInteger('classification_id');
+            $table->unsignedBigInteger('asset_status_id')->default(1);
+            $table->unsignedBigInteger('issuance_id')->nullable();
             $table->timestamps();
 
             // Define foreign key constraints

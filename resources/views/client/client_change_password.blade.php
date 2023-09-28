@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row mt-sm-4">
 
-                <div class="col-md-12 col-sm-12 ">
+                <div class="col-md-6 col-sm-12 ">
                     <div class="card">
                         <form method="post" class="needs-validation" action="{{ route('client.update.password') }}"
                             novalidate="">
@@ -33,20 +33,22 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="row">
+                                <div class="row mt-3">
                                     <label>New Password</label>
                                     <input type="password"
                                         class="form-control @error('new_password')                                             
                                                     is-invalid                                              
                                                  @enderror "
-                                        name="new_password" required="">
+                                        name="new_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                        required="">
                                     @error('new_password')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="row">
+                                <div class="row mt-3">
                                     <label>Confirm Password</label>
                                     <input type="password"
                                         class="form-control @error('new_password_confirmation')                                             

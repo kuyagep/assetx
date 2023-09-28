@@ -28,33 +28,15 @@
                                 <div class="author-box-job"> {{ Auth::user()->email }}</div>
 
                                 <div class="mb-2 mt-3">
-                                    <div class="text-md font-weight-bold">Email: {{ $account->email }}</div>
+                                    <div class="text-md font-weight-bold">Emp. No: </div>
                                 </div>
                                 <div class="mb-2 mt-2">
                                     <div class="text-md font-weight-bold">Phone: {{ $account->phone }}</div>
                                 </div>
                                 <div class="mb-2 mt-2">
-                                    <div class="text-md font-weight-bold">Phone: {{ $account->address }}</div>
+                                    <div class="text-md font-weight-bold">Address: {{ $account->address }}</div>
                                 </div>
-                                <div class="mb-2 mt-3">
-                                    <div class="text-small font-weight-bold">Follow On</div>
-                                </div>
-                                <a href="#" class="btn btn-social-icon mr-1 btn-facebook">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="btn btn-social-icon mr-1 btn-twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="btn btn-social-icon mr-1 btn-github">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" class="btn btn-social-icon mr-1 btn-instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <div class="w-100 d-sm-none"></div>
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="#" class="btn">View Posts <i class="fas fa-chevron-right"></i></a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
