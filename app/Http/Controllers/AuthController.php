@@ -36,12 +36,14 @@ class AuthController extends Controller
 
             if ($user === null) {
                 return Redirect::to('http://202.137.126.58/');
+            } else {
+                return Redirect::to('http://202.137.126.59/assetx');
             }
-            dd($user);
+            // dd($user);
 
-            Auth::login($user);
+            // Auth::login($user);
                         
-            return view('dashboard', compact('user'));
+            // return view('dashboard', compact('user'));
         }
         
         
