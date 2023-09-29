@@ -33,12 +33,12 @@ class PurchaseController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
-                            View</a>';
-                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
-                            Edit</a>';
-                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
-                            Delete</a>';
+                    // $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
+                    //         View</a>';
+                    $btn = '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
+                            Update</a>';
+                    // $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
+                    //         Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action','isApproved'])

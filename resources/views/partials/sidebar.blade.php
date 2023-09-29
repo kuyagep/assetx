@@ -47,6 +47,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ url('s/purchase') }}"
+                            class="nav-link {{ Request::is('s/purchase') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Manage Purchase Request
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ url('s/division') }}"
                             class="nav-link {{ Request::is('s/division') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-building"></i>
@@ -407,6 +416,15 @@
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('client/purchase') }}"
+                            class="nav-link {{ Request::is('client/purchase') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Purchase Request
                             </p>
                         </a>
                     </li>
