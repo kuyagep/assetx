@@ -51,7 +51,7 @@ class AuthController extends Controller
                 }else{
                     $url = 'index';
                 }
-                return redirect()->url($url);
+                return redirect()->to($url);
             }else{
                  return Redirect::to('http://202.137.126.59/assetx');
             }
