@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('accountables', function (Blueprint $table) { 
             $table->id();
+            $table->string('code');
             $table->string('name');
-            $table->string('budget');
-            $table->enum('isApproved',['approved','reject', 'pending'])->default('pending');
+            $table->string('total_cost');
+            $table->enum('asset_status',['working','for repair', 'for condemned'])->default('working');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purchases');
+        Schema::dropIfExists('accountables');
     }
 };

@@ -5,18 +5,21 @@ use App\Http\Controllers\SuperAdmin\AssetStatusController;
 use App\Http\Controllers\SuperAdmin\DistrictController;
 use App\Http\Controllers\SuperAdmin\DivisionController;
 use App\Http\Controllers\AccountabilityController;
+use App\Http\Controllers\AccountableController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AssetSearchController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseController as ControllersPurchaseController;
 use App\Http\Controllers\SuperAdmin\AssetController;
 use App\Http\Controllers\SuperAdmin\ClassificationController;
 use App\Http\Controllers\SuperAdmin\IssuanceController;
 use App\Http\Controllers\SuperAdmin\IssuanceTypeController;
 use App\Http\Controllers\SuperAdmin\OfficeController;
 use App\Http\Controllers\SuperAdmin\PositionController;
+use App\Http\Controllers\SuperAdmin\PurchaseController;
 use App\Http\Controllers\SuperAdmin\SchoolController;
 use App\Http\Controllers\SuperAdmin\UsersController;
 use App\Http\Controllers\UserController;
@@ -75,10 +78,14 @@ Route::prefix('client')->name('client.')->middleware(['auth','verified','role:cl
     Route::post('/update/password',[AccountController::class,'clientUpdatePassword'])->name('update.password');
     Route::get('/change/password',[AccountController::class,'clientChangePassword'])->name('change.password');
 
-    Route::get('/accountability',  [AccountabilityController::class, 'index'])->name('accountability');
-    Route::get('/returned-items',  [AccountabilityController::class, 'returned_items'])->name('returned-items');
-    Route::get('/transferred-items',  [AccountabilityController::class, 'transferred_items'])->name('transferred-items');
+    Route::get('/returned-items',  [AccountableController::class, 'returned_items'])->name('returned-items');
+    Route::get('/transferred-items',  [AccountableController::class, 'transferred_items'])->name('transferred-items');
     
+    #issuances
+    Route::resource('/purchase', ControllersPurchaseController::class);
+    #accountability
+    Route::resource('/accountability', AccountableController::class);
+
     Route::get('/backup', function () {
         return view('client.back-up');
     });
@@ -114,6 +121,11 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
     Route::resource('/assets', AssetController::class);
     #issuances
     Route::resource('/issuances', IssuanceController::class);
+    #issuances
+    Route::resource('/purchase', PurchaseController::class);
+
+    #accountability
+    Route::resource('/accountability', AccountableController::class);
     //  Route::get('/district', [DistrictController::class,'index'])->name('district');
     //  Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
      

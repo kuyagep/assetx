@@ -51,7 +51,16 @@
                             class="nav-link {{ Request::is('s/purchase') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-building"></i>
                             <p>
-                                Manage Purchase Request
+                                Purchase Request
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/s/accountability') }}"
+                            class="nav-link {{ Request::is('s/accountability') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-barcode"></i>
+                            <p>
+                                Accountability
                             </p>
                         </a>
                     </li>
@@ -437,7 +446,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{ url('/client/transferred-items') }}"
                             class="nav-link {{ Request::is('client/transferred-items') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-inbox"></i>
@@ -445,8 +454,8 @@
                                 Transferred Asset
                             </p>
                         </a>
-                    </li>
-                    <li class="nav-item">
+                    </li> --}}
+                    {{-- <li class="nav-item">
                         <a href="{{ url('/client/returned-items') }}"
                             class="nav-link {{ Request::is('client/returned-items') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-inbox"></i>
@@ -454,7 +463,7 @@
                                 Returned Asset
                             </p>
                         </a>
-                    </li>
+                    </li> --}}
                     <li
                         class="nav-item {{ Request::is('client/change/password', 'client/profile') ? 'menu-open' : '' }}">
                         <a href="#"

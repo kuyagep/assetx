@@ -1,9 +1,9 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Purchase Request')
+@section('page-title', 'Manage Accoutability')
 {{-- Content Header --}}
-@section('content-header', 'Manage Purchase Request')
+@section('content-header', 'Manage Accoutability')
 {{-- Main content --}}
 @section('main-content')
     <!-- Main content -->
@@ -13,11 +13,11 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"> List of Purchase Request</h3>
+                            <h3 class="card-title"> List of Accoutability</h3>
                             <div class="card-tools">
-                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add Purchase Request
-                                </a>
+                                {{-- <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
+                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add Accoutability
+                                </a> --}}
                             </div>
                             <!-- /.card-tools -->
                         </div>
@@ -28,9 +28,10 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Title of Activity</th>
-                                            <th>Budget</th>
-                                            <th>Status</th>
+                                            <th>Property No.</th>
+                                            <th>Issued Item</th>
+                                            <th>Total Cost</th>
+                                            <th>Asset Status</th>
                                             <th width="250px">Action</th>
                                         </tr>
                                     </thead>
@@ -66,15 +67,26 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="name">Title of Activity <span
-                                                    class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                placeholder="Ex. Seminar Workshop...">
+                                            <label for="name">Property No. <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="code" name="code"
+                                                disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Proposal Budget <span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" id="budget" name="budget"
+                                            <label for="name">Issued Items <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="name" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Total Cost <span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" id="total_cost" name="total_cost"
                                                 placeholder="Ex. 67,997.00">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="status">Action <span class="text-danger">*</span></label>
+                                            <select class="custom-select" name="asset_status" id="asset_status">
+                                                <option>Select...</option>
+                                                <option value="for repair" selected>for repair</option>
+                                                <option value="for condemned">for condoemned</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -118,22 +130,26 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('client/purchase') }}",
+                ajax: "{{ url('client/accountability') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         class: 'text-center'
                     }, {
+                        data: 'code',
+                        name: 'code'
+                    }, {
                         data: 'name',
                         name: 'name'
                     },
                     {
-                        data: 'budget',
-                        name: 'budget'
+                        data: 'total_cost',
+                        name: 'total_cost'
                     },
+
                     {
-                        data: 'isApproved',
-                        name: 'isApproved',
+                        data: 'asset_status',
+                        name: 'asset_status',
                         class: 'text-center'
                     }, {
                         data: 'action',
@@ -173,7 +189,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('client.purchase.store') }}",
+                    url: "{{ route('client.accountability.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -223,9 +239,10 @@
                         $('#modal-title').html("View Data");
                         $('#modal').modal("show");
                         $('#id').val(response.id);
+                        $('#code').val(response.code);
                         $('#name').val(response.name);
-                        $('#budget').val(response.budget);
-                        $('#isApproved').val(response.isApproved);
+                        $('#total_cost').val(response.total_cost);
+                        $('#asset_status').val(response.asset_status);
                         $('#error').html('');
 
                     },
@@ -241,7 +258,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.edit', ':id') }}";
+                var route = "{{ route('client.accountability.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -256,8 +273,10 @@
                         $('#modal-title').html("Edit Data");
                         $('#modal').modal("show");
                         $('#id').val(response.id);
+                        $('#code').val(response.code);
                         $('#name').val(response.name);
-                        $('#budget').val(response.budget);
+                        $('#total_cost').val(response.total_cost);
+                        $('#asset_status').val(response.asset_status);
                         $('#error').html('');
 
                     },
@@ -271,7 +290,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.destroy', ':id') }}";
+                var route = "{{ route('client.accountability.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 

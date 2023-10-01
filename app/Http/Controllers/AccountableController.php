@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Purchase;
+use App\Models\Accountable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
-class PurchaseController extends Controller
+class AccountableController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,16 +20,16 @@ class PurchaseController extends Controller
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = Purchase::all();
+            $data = Accountable::all();
             return DataTables::of($data)
-                ->editColumn('isApproved', function ($request) {
+                ->editColumn('asset_status', function ($request) {
 
-                    if($request->isApproved === "approved"){
-                        $result = '<span class="badge badge-success">Approved</span>';
-                    }elseif($request->isApproved === "pending"){
-                         $result = '<span class="badge badge-warning">Pending</span>';
+                    if($request->asset_status === "working"){
+                        $result = '<span class="badge badge-success">working</span>';
+                    }elseif($request->asset_status === "for repair"){
+                        $result = '<span class="badge badge-warning">for repair</span>';
                     }else{
-                         $result = '<span class="badge badge-danger">Reject</span>';
+                        $result = '<span class="badge badge-danger">for condemned</span>';
                     }
                     return $result;
                 })
@@ -40,13 +40,22 @@ class PurchaseController extends Controller
                             Update</a>';
                     return $btn;
                 })
-                ->rawColumns(['action','isApproved'])
+                ->rawColumns(['action','asset_status'])
                 ->make(true);
         }
         
-        return view('client.purchase.index');
+        return view('client.accountability.index');
        
     }
+
+    public function transferred_items(){
+        return view('client.transferred-items');
+    }
+
+    public function returned_items(){
+        return view('client.transferred-items');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,31 +73,32 @@ class PurchaseController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'budget' => 'required|numeric|min:0.01|max:9999999999999.99',
+                'total_cost' => 'required|numeric|min:0.01|max:9999999999999.99',
+                'asset_status' => 'required',
             ]);
 
 
             // checked if new data or exists
             if (empty($request->id)) {
 
-                $data = new Purchase();
+                $data = new Accountable();
                 $data->name = $request->name;
-                $data->budget = $request->budget;
+                $data->total_cost = $request->total_cost;
+                $data->asset_status = $request->asset_status;
 
                 $data->save();
 
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase saved successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Accountability saved successfully!']);
             }else{
-                $data = Purchase::find($request->id);
+                $data = Accountable::find($request->id);
                 $data->name = $request->name;
-                $data->budget = $request->budget;
+                $data->total_cost = $request->total_cost;
+                $data->asset_status = $request->asset_status;
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Accountability updated successfully!']);
             }
-            
         }
-
     }
 
     /**
@@ -97,7 +107,7 @@ class PurchaseController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = Purchase::where($id)->first();
+        $data = Accountable::where($id)->first();
 
         return response()->json($data);
     }
@@ -109,8 +119,8 @@ class PurchaseController extends Controller
     {
         
         $id = ['id' => $request->id];
-        $purchase = Purchase::where($id)->first();
-        return response()->json( $purchase);
+        $accountable = Accountable::where($id)->first();
+        return response()->json($accountable);
     }
 
     /**
@@ -129,8 +139,8 @@ class PurchaseController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             $school = Purchase::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase deleted successfully!']);
+             $school = Accountable::where('id',$request->id)->delete();
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Accountability deleted successfully!']);
         }
 
         return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again!']);

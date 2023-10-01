@@ -79,10 +79,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="status">Approval <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="status" id="status">
+                                            <select class="custom-select" name="isApproved" id="isApproved">
                                                 <option>Select...</option>
-                                                <option value="active" selected>Approved</option>
-                                                <option value="inactive">Reject</option>
+                                                <option value="approved" selected>Approved</option>
+                                                <option value="reject">Reject</option>
                                             </select>
                                         </div>
                                     </div>
