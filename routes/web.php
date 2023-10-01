@@ -78,8 +78,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admi
     Route::resource('/asset-status', AdminAssetStatusController::class);
     #purchases
     Route::resource('/purchase', AdminPurchaseController::class);
+    #issue items
+    Route::resource('/purchase', AdminPurchaseController::class);
     
     Route::get('/search', [AssetSearchController::class, 'search'])->name('search');
+
+    Route::get('/issue-items', function () {
+        return view('admin.issue-items');
+    });
     
 });
 

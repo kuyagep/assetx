@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Issuance;
 use App\Models\IssuanceType;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
-class IssuanceController extends Controller
+class AdminIssuanceTypeController extends Controller
 {
     // use Illuminate\Support\Str;
     /**
@@ -18,9 +17,7 @@ class IssuanceController extends Controller
      */
     public function index(Request $request)
     {
-        if(!Auth::check()){
-            return redirect('/index');
-        }
+       
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
@@ -45,7 +42,7 @@ class IssuanceController extends Controller
         }
 
         $issuance_type = IssuanceType::all();
-        return view('super_admin.issuances.index', compact('issuance_type'));
+        return view('admin.issuances.index', compact('issuance_type'));
        
     }
 
@@ -102,7 +99,7 @@ class IssuanceController extends Controller
                 }
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance updated successfully!']);
             }
             
         }
@@ -151,10 +148,10 @@ class IssuanceController extends Controller
                 $data->slug = $request->slug;
 
                 $data->save();
-                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School updated successfully!']);
+                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance updated successfully!']);
             }else{
                
-                 return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'School not Found!']);
+                 return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Issuance not Found!']);
             }
         }
         return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again.']);
@@ -168,7 +165,7 @@ class IssuanceController extends Controller
     {
         if($request->ajax()){
              $school = Issuance::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School deleted successfully!']);
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance deleted successfully!']);
         }
 
         return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again!']);

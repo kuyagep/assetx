@@ -255,7 +255,8 @@
                     </li>
                     <li class="nav-header">ISSUANCE MANAGEMENT</li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ url('admin/issue-items') }}"
+                            class="nav-link {{ Request::is('admin/issue-items') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-barcode"></i>
                             <p>
                                 Issue Items

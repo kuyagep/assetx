@@ -24,7 +24,9 @@
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
                                     <h3 class="text-info">{{ $purchasesCount }}</h3>
-                                    <p class="mb-0">Purchase Request</p>
+                                    <p class="mb-0 " title="view"><a href="{{ url('admin/purchase') }}"
+                                            class="text-dark">Purchase Request</a>
+                                    </p>
                                 </div>
                                 <div class="align-self-center">
                                     <i class="fas fa-book-open text-info fa-3x"></i>
