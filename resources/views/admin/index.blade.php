@@ -94,7 +94,7 @@
                                     <p class="mb-0">Total Users</p>
                                 </div>
                                 <div class="align-self-center">
-                                    <i class="fas fa-map-signs text-danger fa-3x"></i>
+                                    <i class="fas fa-users text-danger fa-3x"></i>
                                 </div>
                             </div>
                             <div class="px-md-1">
