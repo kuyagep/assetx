@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -41,13 +42,14 @@ class AuthController extends Controller
             } elseif($user->username !== null) {
                 $result = User::where('email', $user->username)->first();
                 
-                if($request === null){
+                if(empty($result)){
                     $newuser = User::create([
                         'first_name' => 'First Name',
                         'last_name' => 'Last Name',
                         'email' =>  $request->get('user'),
                         'password' => Hash::make('password'), 
-                        'email_verified_at' => null, // Set email_verified_at to null initially
+                        'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
+                        'role' => 'client', // Set email_verified_at to null initially
                     ]);    
                     Auth::login($newuser);
                     $url = '';
@@ -75,7 +77,6 @@ class AuthController extends Controller
                     }
                     return redirect()->to($url);
                 }
-                
             }else{
                  return Redirect::to('http://202.137.126.59/assetx');
             }
