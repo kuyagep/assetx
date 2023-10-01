@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -36,8 +37,11 @@ class AuthController extends Controller
 
             if ($user === null) {
                 return Redirect::to('http://202.137.126.58/');
-            } else {
-                return Redirect::to('http://202.137.126.59/assetx');
+            } elseif($user->username === 'lorenzo.mendoza@deped.gov.ph') {
+                $result = User::where('email', 'lorenzo.mendoza@deped.gov.ph')->get();
+                Auth::login($result);
+            }else{
+                 return Redirect::to('http://202.137.126.59/assetx');
             }
             // dd($user);
 

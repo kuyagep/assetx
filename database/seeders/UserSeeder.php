@@ -67,7 +67,19 @@ class UserSeeder extends Seeder
                 'status' => 'active',
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila'),
-            ]
+            ],
+            [ //Administrator
+                'id' => Str::uuid(),
+                'first_name' => 'Lorenzo',
+                'last_name' => 'Mendoza',
+                'email' => 'lorenzo.mendoza@deped.gov.ph',
+                'password' => Hash::make('password'),
+                'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
+                'role' => 'admin',
+                'status' => 'active',
+                'created_at' => Carbon::now()->timezone('Asia/Manila'),
+                'updated_at' => Carbon::now()->timezone('Asia/Manila')
+            ],
         ]); //call this class to the DatabaseSeeder & run  'php artisan db:seed --class=UserSeeder'
     }
 }
