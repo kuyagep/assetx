@@ -7,6 +7,10 @@ use App\Http\Controllers\SuperAdmin\DivisionController;
 use App\Http\Controllers\AccountabilityController;
 use App\Http\Controllers\AccountableController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Admin\AdminAssetStatusController;
+use App\Http\Controllers\Admin\AdminPurchaseController;
+use App\Http\Controllers\Admin\ClassificationsController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AssetSearchController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -66,7 +70,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admi
     Route::post('/update/password',[AccountController::class,'AdminUpdatePassword'])->name('update.password');
     Route::get('/change/password',[AccountController::class,'AdminChangePassword'])->name('change.password');
 
-    Route::resource('/users', UserController::class);
+    Route::resource('/users', AdminUserController::class);
+    #asset classifications
+    Route::resource('/classifications', ClassificationsController::class);
+    #asset status
+    Route::resource('/asset-status', AdminAssetStatusController::class);
+    #purchases
+    Route::resource('/purchase', AdminPurchaseController::class);
+    
     Route::get('/search', [AssetSearchController::class, 'search'])->name('search');
 });
 
@@ -85,6 +96,7 @@ Route::prefix('client')->name('client.')->middleware(['auth','verified','role:cl
     Route::resource('/purchase', ControllersPurchaseController::class);
     #accountability
     Route::resource('/accountability', AccountableController::class);
+    
 
     Route::get('/backup', function () {
         return view('client.back-up');

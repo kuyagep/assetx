@@ -243,6 +243,42 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-header">PROCUREMENT MANAGEMENT</li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/purchase') }}"
+                            class="nav-link {{ Request::is('admin/purchase') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Purchase Request
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-header">ISSUANCE MANAGEMENT</li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-barcode"></i>
+                            <p>
+                                Issue Items
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Issuance Type
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>
+                                All Issuances
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-header">ACCOUNTABILITY MANAGEMENT</li>
                     <li class="nav-item">
                         <a href="{{ url('admin/search') }}"
                             class="nav-link {{ Request::is('admin/search') ? 'active' : '' }}">
@@ -254,6 +290,24 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ url('admin/classifications') }}"
+                            class="nav-link {{ Request::is('admin/classifications') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-stream"></i>
+                            <p>
+                                Asset Classification
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/asset-status') }}"
+                            class="nav-link {{ Request::is('admin/asset-status') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-toggle-on"></i>
+                            <p>
+                                Asset Status
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="" class="nav-link ">
                             <i class="nav-icon fa-regular fa-square-plus"></i>
                             <p>
@@ -261,6 +315,7 @@
                             </p>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="" class="nav-link ">
                             <i class="nav-icon fas fa-clock"></i>
