@@ -46,11 +46,11 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
-                                    <h3 class="text-warning">156</h3>
-                                    <p class="mb-0">New Comments</p>
+                                    <h3 class="text-warning">0</h3>
+                                    <p class="mb-0">Issuances</p>
                                 </div>
                                 <div class="align-self-center">
-                                    <i class="far fa-comments text-warning fa-3x"></i>
+                                    <i class="far fa-paste text-warning fa-3x"></i>
                                 </div>
                             </div>
                             <div class="px-md-1">
@@ -69,11 +69,11 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
-                                    <h3 class="text-success">64.89 %</h3>
-                                    <p class="mb-0">Bounce Rate</p>
+                                    <h3 class="text-success">0</h3>
+                                    <p class="mb-0">Total Asset</p>
                                 </div>
                                 <div class="align-self-center">
-                                    <i class="fas fa-mug-hot text-success fa-3x"></i>
+                                    <i class="fas fa-qrcode text-success fa-3x"></i>
                                 </div>
                             </div>
                             <div class="px-md-1">
@@ -90,8 +90,8 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
-                                    <h3 class="text-danger">423</h3>
-                                    <p class="mb-0">Total Visits</p>
+                                    <h3 class="text-danger">{{ $users }}</h3>
+                                    <p class="mb-0">Total Users</p>
                                 </div>
                                 <div class="align-self-center">
                                     <i class="fas fa-map-signs text-danger fa-3x"></i>

@@ -11,38 +11,35 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 class AdminIssuanceTypeController extends Controller
 {
-    // use Illuminate\Support\Str;
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-       
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = Issuance::all();
+            $data = IssuanceType::all();
             return DataTables::of($data)
-                ->editColumn('issuance_type', function ($request) {
-                    return $request->issuance_type->name; 
-                })
-               
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
-                            View</a>';
-                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
-                            Edit</a>';
-                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
-                            Delete</a>';
-                    return $btn;
-                })
-                ->rawColumns(['issuance_type','action'])
-                ->make(true);
+            ->editColumn('created_at', function ($request) {
+                    return $request->created_at->format('d-m-Y H:i:s'); // format date time
+            })
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
+                         View</a>';
+                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
+                        Edit</a>';
+                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
+                        Delete</a>';
+                return $btn;
+            })
+            ->rawColumns(['action','created_at'])
+            ->make(true);
         }
 
-        $issuance_type = IssuanceType::all();
-        return view('admin.issuances.index', compact('issuance_type'));
+    
+        return view('admin.issuanceType.index');
        
     }
 
@@ -61,45 +58,27 @@ class AdminIssuanceTypeController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'issuance_type' => 'required',
-                'total_value' => 'required|numeric|min:0.01|max:9999.99',
+                'name' => 'required|string|max:255',
             ]);
-
-            $total_value = '';
-            $issuance_type = IssuanceType::findOrFail($request->issuance_type);
             // checked if new data or exists
             if (empty($request->id)) {
-
-                $data = new Issuance;
-                $data->total_value = $total_value;
-                $data->received_form_user_id = Auth::user()->id;
-                $data->received_by_user_id = Auth::user()->id;
-                $data->status = $request->status;
-                 
-                $issuance_type->issuance()->save($data);
-                
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issued successfully!']);
-            }else{
-                $data = Issuance::find($request->id);
-                $data->district_id = $request->district_name;
-                $data->school_id = $request->school_id;
+               
+                $data = new IssuanceType;
                 $data->name = $request->name;
-                $data->code = $request->code;
                 $data->slug = Str::slug($request->name);
-                $data->status = $request->status;
 
-                if ($request->hasFile('logo')) {
-                    $file = $request->file('logo');      
-                    //new filename
-                    $filename = $file->hashName();
-
-                    // dd($filename);
-                    $file->move(public_path('assets/dist/img/logo'), $filename);
-                    $data['logo'] = $filename;
-                }
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type saved successfully!']);
+            }else{
+                $data = IssuanceType::find($request->id);
+
+                $data->name = $request->name;
+                $data->slug = Str::slug($request->name);
+
+
+                $data->save();
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type updated successfully!']);
             }
             
         }
@@ -112,7 +91,7 @@ class AdminIssuanceTypeController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = Issuance::where($id)->first();
+        $data = IssuanceType::where($id)->first();
 
         return response()->json($data);
     }
@@ -122,9 +101,10 @@ class AdminIssuanceTypeController extends Controller
      */
     public function edit(Request $request)
     {
-        $school = Issuance::findOrFail($request->id);
-        $issuance_type = IssuanceType::all();   
-        return response()->json(['school'=> $school, 'district'=> $issuance_type ]);
+        $id = ['id' => $request->id];
+        $data = IssuanceType::where($id)->first();
+
+        return response()->json($data);
     }
 
     /**
@@ -133,29 +113,6 @@ class AdminIssuanceTypeController extends Controller
     public function update(Request $request, $id)
     {
 
-       if ($request->ajax()) {
-
-            $request->validate([
-                'name' => 'required|string|max:255',
-            ]);
-
-            
-            $data = IssuanceType::find($id);
-
-            if($data){
-
-                $data->name = $request->name;
-                $data->slug = $request->slug;
-
-                $data->save();
-                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance updated successfully!']);
-            }else{
-               
-                 return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Issuance not Found!']);
-            }
-        }
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again.']);
-        
     }
 
     /**
@@ -164,10 +121,11 @@ class AdminIssuanceTypeController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             $school = Issuance::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance deleted successfully!']);
+             $user = IssuanceType::where('id',$request->id)->delete();
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type deleted successfully!']);
         }
+       
 
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again!']);
+        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong try again later!']);
     }
 }

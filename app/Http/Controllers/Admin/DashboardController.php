@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Purchase;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,6 +14,8 @@ class DashboardController extends Controller
         
         $purchase = Purchase::get();
         $purchasesCount = $purchase->count();
-         return view('admin.index', compact('purchasesCount'));
+        $user = User::get();
+        $users = $user->count();
+         return view('admin.index', compact('purchasesCount', 'users'));
     }
 }

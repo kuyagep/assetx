@@ -8,6 +8,7 @@ use App\Http\Controllers\AccountabilityController;
 use App\Http\Controllers\AccountableController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AdminAssetStatusController;
+use App\Http\Controllers\Admin\AdminIssuanceTypeController;
 use App\Http\Controllers\Admin\AdminPurchaseController;
 use App\Http\Controllers\Admin\ClassificationsController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -80,11 +81,28 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admi
     Route::resource('/purchase', AdminPurchaseController::class);
     #issue items
     Route::resource('/purchase', AdminPurchaseController::class);
+    #asset issuance type
+    Route::resource('/issuance-type', AdminIssuanceTypeController::class);
     
     Route::get('/search', [AssetSearchController::class, 'search'])->name('search');
 
     Route::get('/issue-items', function () {
         return view('admin.issue-items');
+    });
+
+    Route::get('/all-issuances', function () {
+        return view('admin.all-issuances');
+    });
+    
+    Route::get('/asset-registration', function () {
+        return view('admin.asset-registration');
+    });
+
+    Route::get('/reports', function () {
+        return view('admin.reports');
+    });
+    Route::get('/backups', function () {
+        return view('admin.backups');
     });
     
 });

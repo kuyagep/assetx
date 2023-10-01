@@ -264,7 +264,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ url('admin/issuance-type') }}"
+                            class="nav-link {{ Request::is('admin/issuance-type') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Issuance Type
@@ -272,7 +273,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('admin/all-issuances') }}"
+                            class="nav-link {{ Request::is('admin/all-issuances') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-file-alt"></i>
                             <p>
                                 All Issuances
@@ -290,14 +292,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-layer-group"></i>
-                            <p>
-                                Accountability
-                            </p>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="{{ url('admin/classifications') }}"
                             class="nav-link {{ Request::is('admin/classifications') ? 'active' : '' }}">
@@ -317,19 +312,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('admin/asset-registration') }}"
+                            class="nav-link {{ Request::is('admin/asset-registration') ? 'active' : '' }}">
                             <i class="nav-icon fa-regular fa-square-plus"></i>
                             <p>
                                 Asset Registration
-                            </p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-clock"></i>
-                            <p>
-                                Manage Maintenance
                             </p>
                         </a>
                     </li>
@@ -339,12 +326,13 @@
                         <a href="{{ route('admin.users.index') }}"
                             class="nav-link {{ Request::is('admin/users') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
-                            <p>Manage Users</p>
+                            <p>User Management</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('admin/reports') }}"
+                            class="nav-link {{ Request::is('admin/reports') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-print"></i>
                             <p>
                                 Manage Reports
@@ -382,7 +370,8 @@
                     </li>
                     <li class="nav-header">SYSTEM</li>
                     <li class="nav-item">
-                        <a href="" class="nav-link ">
+                        <a href="{{ url('admin/backups') }}"
+                            class="nav-link {{ Request::is('admin/backups') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cloud-download-alt text-danger"></i>
                             <p>
                                 Backup/Restore

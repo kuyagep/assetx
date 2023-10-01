@@ -9,7 +9,7 @@
     <section class="content">
         <div class="container-fluid">
             <h2 class="text-center display-4">Asset Search</h2>
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col-md-8 offset-md-2">
                     <form action="{{ route('admin.search') }}" method="Get">
                         <div class="input-group">
@@ -22,6 +22,14 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="row mt-9">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 ">
+                    <div class="text-center display-4  ">
+                        <h1 class="text-secondary">Coming Soon!</h1>
+                    </div>
                 </div>
             </div>
         </div>
