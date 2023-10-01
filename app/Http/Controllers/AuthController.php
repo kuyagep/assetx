@@ -37,8 +37,22 @@ class AuthController extends Controller
 
             if ($user === null) {
                 return Redirect::to('http://202.137.126.58/');
-            } else{
-                 return Redirect::to('http://202.137.126.59/assetx/login');
+            } elseif($user->username == 'lorenzo.mendoza@deped.gov.ph') {
+                $result = User::where('email', 'lorenzo.mendoza@deped.gov.ph')->first();
+                Auth::login($result);
+                $url = '';
+                if (Auth::user()->role === 'super_admin') {
+                $url = 's/dashboard';
+                } elseif (Auth::user()->role === 'admin') {
+                $url = 'admin/dashboard';
+                } elseif (Auth::user()->role === 'client') {
+                    $url = 'client/dashboard';
+                }else{
+                    $url = 'index';
+                }
+                return redirect()->url($url);
+            }else{
+                 return Redirect::to('http://202.137.126.59/assetx');
             }
             // dd($user);
 
