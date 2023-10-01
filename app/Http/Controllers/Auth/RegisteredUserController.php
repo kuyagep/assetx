@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -42,7 +43,7 @@ class RegisteredUserController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password), 
-            'email_verified_at' => null, // Set email_verified_at to null initially
+            'email_verified_at' => Carbon::now()->timezone('Asia/Manila'), // Set email_verified_at to null initially
         ]);
 
         event(new Registered($user));

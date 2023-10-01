@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
@@ -40,18 +41,41 @@ class AuthController extends Controller
             } elseif($user->username !== null) {
                 $result = User::where('email', $user->username)->first();
                 
-                Auth::login($result);
-                $url = '';
-                if (Auth::user()->role === 'super_admin') {
-                $url = 's/dashboard';
-                } elseif (Auth::user()->role === 'admin') {
-                $url = 'admin/dashboard';
-                } elseif (Auth::user()->role === 'client') {
-                    $url = 'client/dashboard';
+                if($request === null){
+                    $newuser = User::create([
+                        'first_name' => 'First Name',
+                        'last_name' => 'Last Name',
+                        'email' =>  $request->get('user'),
+                        'password' => Hash::make('password'), 
+                        'email_verified_at' => null, // Set email_verified_at to null initially
+                    ]);    
+                    Auth::login($newuser);
+                    $url = '';
+                    if (Auth::user()->role === 'super_admin') {
+                    $url = 's/dashboard';
+                    } elseif (Auth::user()->role === 'admin') {
+                    $url = 'admin/dashboard';
+                    } elseif (Auth::user()->role === 'client') {
+                        $url = 'client/dashboard';
+                    }else{
+                        $url = 'index';
+                    }
+                    return redirect()->to($url);                
                 }else{
-                    $url = 'index';
+                    Auth::login($result);
+                    $url = '';
+                    if (Auth::user()->role === 'super_admin') {
+                    $url = 's/dashboard';
+                    } elseif (Auth::user()->role === 'admin') {
+                    $url = 'admin/dashboard';
+                    } elseif (Auth::user()->role === 'client') {
+                        $url = 'client/dashboard';
+                    }else{
+                        $url = 'index';
+                    }
+                    return redirect()->to($url);
                 }
-                return redirect()->to($url);
+                
             }else{
                  return Redirect::to('http://202.137.126.59/assetx');
             }
