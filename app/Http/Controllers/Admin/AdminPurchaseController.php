@@ -20,6 +20,9 @@ class AdminPurchaseController extends Controller
             // $data = User::orderBy('created_at', 'asc')->get();
             $data = Purchase::all();
             return DataTables::of($data)
+            ->editColumn('created_at', function ($request) {
+                    return $request->created_at->format('M. d, Y'); // format date time
+            })
                 ->editColumn('isApproved', function ($request) {
 
                     if($request->isApproved === "approved"){
@@ -39,7 +42,7 @@ class AdminPurchaseController extends Controller
                             Delete</a>';
                     return $btn;
                 })
-                ->rawColumns(['action','isApproved'])
+                ->rawColumns(['action','isApproved','created_at'])
                 ->make(true);
         }
         

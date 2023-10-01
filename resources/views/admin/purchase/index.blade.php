@@ -31,7 +31,7 @@
                                             <th>Title of Activity</th>
                                             <th>Budget</th>
                                             <th>Status</th>
-                                            <th>Create At</th>
+                                            <th>Requested At</th>
                                             <th width="250px">Action</th>
                                         </tr>
                                     </thead>

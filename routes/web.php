@@ -10,6 +10,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AdminAssetStatusController;
 use App\Http\Controllers\Admin\AdminPurchaseController;
 use App\Http\Controllers\Admin\ClassificationsController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AssetSearchController;
 use App\Http\Controllers\AuthController;
@@ -64,7 +65,7 @@ Route::middleware('auth')->group(function () {
 
 ######################## ADMIN ########################
 Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admin'])->group(function(){
-    Route::get('/dashboard',[AccountController::class,'AdminDashboard'])->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class,'AdminDashboard'])->name('dashboard');
     Route::get('/profile',[AccountController::class,'AdminProfile'])->name('profile');
     Route::post('/profile/update',[AccountController::class,'AdminProfileUpdate'])->name('profile.update');
     Route::post('/update/password',[AccountController::class,'AdminUpdatePassword'])->name('update.password');
@@ -79,6 +80,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admi
     Route::resource('/purchase', AdminPurchaseController::class);
     
     Route::get('/search', [AssetSearchController::class, 'search'])->name('search');
+    
 });
 
 ######################## client ########################

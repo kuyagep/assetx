@@ -290,6 +290,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="nav-icon fas fa-layer-group"></i>
+                            <p>
+                                Accountability
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ url('admin/classifications') }}"
                             class="nav-link {{ Request::is('admin/classifications') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-stream"></i>
@@ -333,14 +341,7 @@
                             <p>Manage Users</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link ">
-                            <i class="nav-icon fas fa-layer-group"></i>
-                            <p>
-                                Accountability
-                            </p>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="" class="nav-link ">
                             <i class="nav-icon fas fa-print"></i>

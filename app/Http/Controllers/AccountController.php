@@ -117,10 +117,7 @@ class AccountController extends Controller
     // ================Admin================
     
     // Admin Account Management
-    public function AdminDashboard()
-    {
-         return view('admin.index');
-    }
+    
 
     // Display Profile
     public function AdminProfile(Request $request)
