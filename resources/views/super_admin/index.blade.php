@@ -16,79 +16,92 @@
                     </blockquote>
                 </div>
             </div>
-            <!-- Info boxes -->
             <div class="row">
-
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">ICT EQUIPMENT
-
-                            </span>
-                            <span class="info-box-number">
-                                10
-                                <small>%</small>
-                            </span>
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h3 class="text-info">278</h3>
+                                    <p class="mb-0">New Reports</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-book-open text-info fa-3x"></i>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-olive elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">OTHER MACHINERY AND EQUIPMENT</span>
-                            <span class="info-box-number">41,410</span>
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h3 class="text-warning">156</h3>
+                                    <p class="mb-0">New Issued</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="far fa-comments text-warning fa-3x"></i>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 35%"
+                                        aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
-
-                <!-- fix for small devices only -->
-                <div class="clearfix hidden-md-up"></div>
-
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">IT EQUIPMENT AND SOFTWARE</span>
-                            <span class="info-box-number">760</span>
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h3 class="text-success">64.89 %</h3>
+                                    <p class="mb-0">Tranfer</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-mug-hot text-success fa-3x"></i>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%"
+                                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-copy"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">FURNITURE AND FIXTURE</span>
-                            <span class="info-box-number">2,000</span>
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h3 class="text-danger">423</h3>
+                                    <p class="mb-0">Condenmed</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-map-signs text-danger fa-3x"></i>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 40%"
+                                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
-
             </div>
-
-
-
-
-        </div><!--/. container-fluid -->
-    </section>
-    <section>
-        <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-3 col-sm-6 col-12 mb-4">
                     <div class="card">
@@ -213,99 +226,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between px-md-1">
-                                <div>
-                                    <h3 class="text-info">278</h3>
-                                    <p class="mb-0">New Reports</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i class="fas fa-book-open text-info fa-3x"></i>
-                                </div>
-                            </div>
-                            <div class="px-md-1">
-                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between px-md-1">
-                                <div>
-                                    <h3 class="text-warning">156</h3>
-                                    <p class="mb-0">New Issued</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i class="far fa-comments text-warning fa-3x"></i>
-                                </div>
-                            </div>
-                            <div class="px-md-1">
-                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 35%"
-                                        aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between px-md-1">
-                                <div>
-                                    <h3 class="text-success">64.89 %</h3>
-                                    <p class="mb-0">Tranfer</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i class="fas fa-mug-hot text-success fa-3x"></i>
-                                </div>
-                            </div>
-                            <div class="px-md-1">
-                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%"
-                                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between px-md-1">
-                                <div>
-                                    <h3 class="text-danger">423</h3>
-                                    <p class="mb-0">Condenmed</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i class="fas fa-map-signs text-danger fa-3x"></i>
-                                </div>
-                            </div>
-                            <div class="px-md-1">
-                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 40%"
-                                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--Section: Minimal statistics cards-->
 
-    <!--Section: Statistics with subtitles-->
-    <section>
-        <div class="container-fluid">
+            <!--Section: Minimal statistics cards-->
             <div class="row">
                 <div class="col-xl-6 col-md-12 mb-4">
                     <div class="card">
@@ -390,10 +312,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <!--Section: Statistics with subtitles-->
 
+        </div><!--/. container-fluid -->
     </section>
-    <!--Section: Statistics with subtitles-->
     <!-- /.content -->
 @endsection
 @section('script')
