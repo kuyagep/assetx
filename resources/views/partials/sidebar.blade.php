@@ -1,5 +1,5 @@
 @if (Auth::user()->role == 'super_admin')
-    <aside class="main-sidebar sidebar-dark-danger elevation-1">
+    <aside class="main-sidebar sidebar-dark-danger bg-purple elevation-1">
         <!-- Brand Logo -->
         @include('partials.brand_logo')
 
@@ -19,7 +19,7 @@
             </div>
 
             <!-- SidebarSearch Form -->
-            <div class="form-inline">
+            {{-- <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
                     <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                         aria-label="Search">
@@ -29,7 +29,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
@@ -37,10 +37,11 @@
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                    <li class="nav-header">DASHBOARD</li>
                     <li class="nav-item">
                         <a href="{{ url('s/dashboard') }}"
                             class="nav-link {{ Request::is('s/dashboard') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-chart-bar"></i>
+                            <i class="nav-icon fa-regular fa-compass"></i>
                             <p>
                                 Dashboard
                             </p>
@@ -159,6 +160,50 @@
                             <p>User Management</p>
                         </a>
                     </li>
+                    <li
+                        class="nav-item {{ Request::is('s/permission', 's/permission-group', 's/roles') ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ Request::is('s/permission', 's/permission-group', 's/roles') ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-users-gear"></i>
+                            <p>
+                                Role & Permission
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{ url('s/roles') }}"
+                                    class="nav-link {{ Request::is('s/roles') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Roles</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('s/role-permission') }}"
+                                    class="nav-link {{ Request::is('s/role-permission') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Role Permission</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('s/permission') }}"
+                                    class="nav-link {{ Request::is('s/permission') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Permissions</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('s/permission-group') }}"
+                                    class="nav-link {{ Request::is('s/permission-group') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Permission Group</p>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
                     <li class="nav-item {{ Request::is('s/change/password', 's/profile') ? 'menu-open' : '' }}">
                         <a href="#"
                             class="nav-link {{ Request::is('s/change/password', 's/profile') ? 'active' : '' }}">
@@ -187,6 +232,7 @@
 
                         </ul>
                     </li>
+
 
                 </ul>
             </nav>

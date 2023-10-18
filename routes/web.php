@@ -24,8 +24,10 @@ use App\Http\Controllers\SuperAdmin\ClassificationController;
 use App\Http\Controllers\SuperAdmin\IssuanceController;
 use App\Http\Controllers\SuperAdmin\IssuanceTypeController;
 use App\Http\Controllers\SuperAdmin\OfficeController;
+use App\Http\Controllers\SuperAdmin\PermissionGroupController;
 use App\Http\Controllers\SuperAdmin\PositionController;
 use App\Http\Controllers\SuperAdmin\PurchaseController;
+use App\Http\Controllers\SuperAdmin\RoleController;
 use App\Http\Controllers\SuperAdmin\SchoolController;
 use App\Http\Controllers\SuperAdmin\UsersController;
 use App\Http\Controllers\UserController;
@@ -164,6 +166,23 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
 
     #accountability
     Route::resource('/accountability', AccountableController::class);
+    #permission group
+    Route::resource('/permission-group', PermissionGroupController::class);
+
+    Route::get('/permission',[RoleController::class,'allPermission'])->name('all.permission');
+    Route::post('/permission',[RoleController::class,'storePermission'])->name('permission.add');
+    Route::get('/permission/{id}/edit',[RoleController::class,'editPermission'])->name('permission.edit');
+    Route::delete('/permission/{id}',[RoleController::class,'destroyPermission'])->name('permission.destroy');
+    Route::get('/permission/import',[RoleController::class,'importPermission'])->name('import.permission');
+    Route::get('/permission/export/',[RoleController::class,'exportPermission'])->name('export.permission');
+    Route::post('/permission/import/',[RoleController::class,'importPermissions'])->name('import.permissions');
+
+    Route::get('/roles',[RoleController::class,'allRoles'])->name('all.roles');
+    Route::post('/roles',[RoleController::class,'storeRoles'])->name('roles.add');
+    Route::get('/roles/{id}/edit',[RoleController::class,'editRoles'])->name('roles.edit');
+    Route::delete('/roles/{id}',[RoleController::class,'destroyRoles'])->name('roles.destroy');
+
+    Route::get('/role-permission',[RoleController::class,'allRolePermission'])->name('add.roles.permission');
     //  Route::get('/district', [DistrictController::class,'index'])->name('district');
     //  Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
      
