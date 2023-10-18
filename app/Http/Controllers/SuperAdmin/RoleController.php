@@ -238,7 +238,7 @@ class RoleController extends Controller
 
         Alert::success('Success', 'Role Permission added successfully!');
 
-        return redirect()->back();
+        return redirect()->route('super_admin.all.roles.permission');
 
     }//end
 
@@ -269,5 +269,39 @@ class RoleController extends Controller
             ->make(true);
         }
         return view('pages.rolesPermission.all_roles_permission');
+    }
+
+    public function editRolesPermission(Request $request){
+        $role = Role::findOrFail($request->id);
+        $permissions = Permission::all();
+
+        $permission_groups = User::getPermissionGroups();
+        return view('pages.rolesPermission.edit_roles_permission', compact('role', 'permissions', 'permission_groups'));
+    }
+    public function updateRolesPermission(Request $request, $id){
+        $role = Role::findOrFail($id);
+        $permissions = $request->permission;
+
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+
+        Alert::success('Success', 'Role updated successfully!');
+
+        return redirect()->route('super_admin.all.roles.permission');
+    }
+
+    public function destroyRolesPermission(Request $request, $id){
+    
+         if($request->ajax()){
+            $role = Role::findOrFail( $id );
+
+            if(!is_null($role)){
+                $role->delete();
+            }
+            return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Role deleted successfully!']);
+        }       
+
+        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong try again later!']);
     }
 }

@@ -207,7 +207,25 @@
                                     <p>Permission Group</p>
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item {{ Request::is('s/admin/all') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-users-gear"></i>
+                            <p>
+                                Manage Admin
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
 
+                            <li class="nav-item">
+                                <a href="{{ url('s/admin/all') }}"
+                                    class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>All Admin</p>
+                                </a>
+                            </li>
 
                         </ul>
                     </li>

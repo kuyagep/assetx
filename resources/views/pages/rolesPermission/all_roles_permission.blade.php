@@ -210,35 +210,35 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.roles.edit', ':id') }}";
+                var route = "{{ route('super_admin.roles.permission.edit', ':id') }}";
                 route = route.replace(':id', id);
+                window.location.href = route;
+                // $.ajax({
+                //     type: "GET",
+                //     url: route,
+                //     data: {
+                //         id: id
+                //     },
+                //     dataType: 'json',
+                //     success: function(response) {
+                //         $('#modal-title').html("Edit Data");
+                //         $('#modal').modal("show");
+                //         $('#id').val(response.id);
+                //         $('#name').val(response.name);
+                //         $('#error').html('');
 
-                $.ajax({
-                    type: "GET",
-                    url: route,
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#modal-title').html("Edit Data");
-                        $('#modal').modal("show");
-                        $('#id').val(response.id);
-                        $('#name').val(response.name);
-                        $('#error').html('');
-
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
+                //     },
+                //     error: function(response) {
+                //         console.log(response);
+                //     }
+                // });
             });
 
             // Delete Function
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.roles.destroy', ':id') }}";
+                var route = "{{ route('super_admin.roles.permission.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
