@@ -103,11 +103,18 @@
                                                 placeholder="Ex. example@email.com">
                                         </div>
                                         <div class="form-group">
+                                            <label for="phone">Phone Number <span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" id="phone" name="phone"
+                                                placeholder="Ex. 09123456789">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="role">Role <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="role" id="role">
-                                                <option>Select...</option>
-                                                <option value="client" selected>Client</option>
-                                                <option value="admin">Admin</option>
+                                            <select class="custom-select" id="roles" name="roles">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}">{{ $role->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -212,7 +219,7 @@
             $('#add-button').click(function() {
                 $('#error').html('');
                 $('#modal').modal("show");
-                $('#modal-title').html("Add Data");
+                $('#modal-title').html("Add Admin User");
                 $('#btn-save').html("Save");
                 $('#btn-save').show();
                 $('#id').val('');
@@ -233,7 +240,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.users.store') }}",
+                    url: "{{ route('super_admin.admin.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -303,7 +310,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.users.edit', ':id') }}";
+                var route = "{{ route('super_admin.admin.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -314,15 +321,30 @@
                     },
                     dataType: 'json',
                     success: function(response) {
+                        var roles = response.roles;
+                        var user = response.user;
                         // console.log(res);
                         $('#modal-title').html("Edit Data");
                         $('#modal').modal("show");
                         $('#id').val(response.id);
-                        $('#first_name').val(response.first_name);
-                        $('#last_name').val(response.last_name);
-                        $('#email').val(response.email);
-                        $('#role').val(response.role);
-                        $('#status').val(response.status);
+                        $('#first_name').val(response.user['first_name']);
+                        $('#last_name').val(response.user['last_name']);
+                        $('#email').val(response.user['email']);
+                        $('#phone').val(response.user['phone']);
+                        var htmlRole = "<option value=''>Select Role...</option>";
+                        for (let i = 0; i < roles.length; i++) {
+                            if ("{{ $user->hasRoles($role->name) }}") {
+                                htmlRole += `<option value="` + roles[i]['id'] +
+                                    `" selected>` + roles[i]['name'] +
+                                    `</option>`;
+                            } else {
+                                htmlRole += `<option value="` + roles[i]['id'] +
+                                    `">` + roles[i]['name'] +
+                                    `</option>`;
+                            }
+                        }
+                        $('#division_name').html(htmlRole);
+                        // $('#status').val(response.user['status']);
                         $('#error').html('');
                     },
                     error: function(response) {

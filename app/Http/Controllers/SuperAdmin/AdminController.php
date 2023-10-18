@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
@@ -34,13 +36,12 @@ class AdminController extends Controller
                 return $result; 
             })
             ->editColumn('role', function ($request) {
-                $result = $request->role;
-                if($result == null){
-                    return "N/A";
-                }else{
-                    $result = $request->role;
+                $result = '';
+                foreach ($request->roles as $role) {
+                    $result .= '<span class="badge badge-primary mr-1">'.$role->name.'</span>';
                 }
-                return $result; 
+                
+                return $result;
             })
             ->editColumn('full_name', function ($request) {
                 $result = $request->first_name . " " . $request->last_name;
@@ -62,6 +63,7 @@ class AdminController extends Controller
                 return $result;
                 //  return '<img src="' .asset('assets/dist/img/avatar/' . $request->avatar). '" alt="User Image" width="50">';
             })
+            
             ->editColumn('status', function ($request) {
 
                 if($request->status === "active"){
@@ -87,6 +89,87 @@ class AdminController extends Controller
         }
 
         $positions = Position::all();
-        return view('pages.admins.all_admin', compact('positions'));
+        $roles = Role::all();
+        return view('pages.admins.all_admin', compact('positions','roles'));
+    }
+    
+     public function storeAdmin(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+                'phone' => ['numeric','digits:11'],
+                'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'roles' => 'required|string|max:255',
+                'status' => 'required|string|max:255',
+            ]);
+            // checked if new data or exists
+            if (empty($request->id)) {
+                $request->validate([
+                    'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:'.User::class],
+                    'phone' => ['numeric','digits:11', 'unique:'.User::class],
+                ]);
+                $user = new User;
+                $user->first_name = $request->first_name;
+                $user->last_name = $request->last_name;
+                $user->email = $request->email;
+                $user->phone = $request->phone;
+                $user->password = Hash::make('password');
+                $user->role = 'admin';
+                $user->status = $request->status;
+
+                if ($request->hasFile('avatar')) {
+                    $file = $request->file('avatar');           
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/img/avatar'), $filename);
+                    $user['avatar'] = $filename;
+                }
+
+                $user->save();
+
+                if($request->roles){
+                    $user->assignRole($request->roles);
+                }
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Admin user saved successfully!']);
+            }else{
+                $user = User::find($request->id);
+
+                $user->first_name = $request->first_name;
+                $user->last_name = $request->last_name;
+                $user->email = $request->email;
+                $user->phone = $request->phone;
+                $user->role = $request->role;;
+                $user->status = $request->status;
+
+                if ($request->hasFile('avatar')) {
+                    $file = $request->file('avatar');           
+                    @unlink(public_path('assets/dist/img/avatar/'. $user->avatar));
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/img/avatar'), $filename);
+                    $user['avatar'] = $filename;
+                }
+
+                $user->save();
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Admin user updated successfully!']);
+            }
+            
+        }
+
+    }
+
+    public function editAdmin(Request $request, $id){
+        $user = User::findOrFail($id);
+        $roles = Role::all();   
+        return response()->json(['user'=> $user, 'roles'=> $roles, ]);
     }
 }

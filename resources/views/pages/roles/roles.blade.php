@@ -81,7 +81,7 @@
                                         <div class="form-group">
                                             <label for="name">Role Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="name" name="name"
-                                                placeholder=" ">
+                                                placeholder=" " autofocus autocomplete="">
                                         </div>
                                     </div>
                                 </div>

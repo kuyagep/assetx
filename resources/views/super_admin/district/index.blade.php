@@ -276,12 +276,12 @@
                         var district = response.district;
                         // console.log(division);
                         // console.log(district);
-                        var htmlDivision = "<option value=''>Select Division</option>";
+
                         $('#id').val(district['id']);
-                        $('#division_id').val(response.division_id);
+                        // $('#division_id').val(response.division_id);
                         $('#name').val(district['name']);
                         $('#status').val(district['status']);
-
+                        var htmlDivision = "<option value=''>Select Division</option>";
                         for (let i = 0; i < division.length; i++) {
                             if (district['division_id'] === division[i]['id']) {
                                 htmlDivision += `<option value="` + division[i]['id'] +

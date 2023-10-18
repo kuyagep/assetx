@@ -192,6 +192,8 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
 
     Route::controller(AdminController::class)->group(function () {
         Route::get('/admin/all', 'allAdmin')->name('all.admin');
+        Route::post('/admin/store', 'storeAdmin')->name('admin.store');
+        Route::get('/admin/{id}/edit', 'editAdmin')->name('admin.edit');
     });
     
     

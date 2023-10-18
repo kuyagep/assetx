@@ -175,7 +175,7 @@ class RoleController extends Controller
     {
          if ($request->ajax()) {
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => 'required|string|max:255|unique:roles',
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
