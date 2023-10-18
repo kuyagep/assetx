@@ -1,9 +1,9 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Permission')
+@section('page-title', 'Roles Permission')
 {{-- Content Header --}}
-@section('content-header', 'Manage Permission')
+@section('content-header', 'All Roles Permission')
 {{-- Main content --}}
 @section('main-content')
     <!-- Main content -->
@@ -14,13 +14,13 @@
                     <div class="row mb-3">
                         <div class="col-12">
                             <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2" title="Add data">
-                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add Permission
+                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add Roles
                             </a>
                             <a href="{{ route('super_admin.import.permission') }}" class="btn btn-success mr-2"
                                 title="Import Excel">
                                 <i class="fa-solid fa-upload"></i>&nbsp;Import
                             </a>
-                            <a href="javascript:void(0)" class="btn btn-danger" id="export-data">
+                            <a href="javascript:void(0)" class="btn btn-danger mr-2" title="Export to Excel">
                                 <i class="fa-solid fa-download"></i>&nbsp;Export
                             </a>
 
@@ -28,7 +28,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"> All Permission</h3>
+                            <h3 class="card-title"> All Roles</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
@@ -43,8 +43,8 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Role Name</th>
                                             <th>Permission</th>
-                                            <th>Group Name</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -80,18 +80,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="name">Permission Name <span class="text-danger">*</span></label>
+                                            <label for="name">Role Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                 placeholder=" ">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="status">Group Name <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="group_name" id="group_name">
-                                                <option>Choose...</option>
-                                                @foreach ($groups as $item)
-                                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -129,30 +120,30 @@
             // Display data from index controller
             var table = $("#dataTableajax").DataTable({
                 responsive: true,
+                lengthChange: false,
+                searching: false,
                 processing: true,
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/permission') }}",
+                ajax: "{{ url('s/roles/permission/all') }}",
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        class: 'text-center'
-                    }, {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'group_name',
-                        name: 'group_name'
-                    }, {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false,
-                        class: 'text-center'
-                    },
-                ],
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    class: 'text-center'
+                }, {
+                    data: 'name',
+                    name: 'name'
+                }, {
+                    data: 'permission',
+                    name: 'permission'
+                }, {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    class: 'text-center'
+                }, ],
                 order: [
                     [0, 'desc']
                 ]
@@ -163,7 +154,7 @@
                 $('#btn-save').attr('disabled', false);
                 $('#error').html('');
                 $('#modal').modal("show");
-                $('#modal-title').html("Add Permission");
+                $('#modal-title').html("Add Role");
                 $('#btn-save').html('Save');
                 $('#btn-save').show();
                 $('#id').val('');
@@ -183,7 +174,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.permission.add') }}",
+                    url: "{{ route('super_admin.roles.add') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -219,7 +210,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.permission.edit', ':id') }}";
+                var route = "{{ route('super_admin.roles.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -230,33 +221,10 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                        var groups = response.groups;
-                        var permission = response.permission;
-                        // console.log(division);
-                        // console.log(district);
-                        var htmlGroups = "<option value=''>Select Division</option>";
-                        $('#id').val(permission['id']);
-                        // $('#division_id').val(response.division_id);
-                        $('#name').val(permission['name']);
-                        $('#status').val(permission['status']);
-
-                        for (let i = 0; i < groups.length; i++) {
-                            if (permission['group_name'] === groups[i]['name']) {
-                                htmlGroups += `<option value="` + groups[i]['name'] +
-                                    `" selected>` + groups[i]['name'] +
-                                    `</option>`;
-                            } else {
-                                htmlGroups += `<option value="` + groups[i]['name'] +
-                                    `">` + groups[i]['name'] +
-                                    `</option>`;
-                            }
-                        }
-                        $('#group_name').html(htmlGroups);
-
-                        // console.log(res);
                         $('#modal-title').html("Edit Data");
                         $('#modal').modal("show");
-
+                        $('#id').val(response.id);
+                        $('#name').val(response.name);
                         $('#error').html('');
 
                     },
@@ -270,13 +238,13 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.permission.destroy', ':id') }}";
+                var route = "{{ route('super_admin.roles.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You want delete this data?",
+                    text: "You want delete this role?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -315,56 +283,6 @@
 
             });
 
-            // display image
-            $('#avatar').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0']);
-            });
-
-
-            $('body').on('click', '#export-data', function() {
-                var route = "{{ route('super_admin.export.permission') }}";
-
-                Swal.fire({
-                    title: 'Do you want to export permission?',
-                    text: "",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#716add',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Export'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Exporting permission
-                        let timerInterval
-                        Swal.fire({
-                            title: 'Export',
-                            html: 'Exporting Permission Data.',
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: () => {
-                                Swal.showLoading()
-                            },
-                            willClose: () => {
-                                clearInterval(timerInterval)
-                            }
-                        }).then((result) => {
-                            /* Read more about handling dismissals below */
-                            if (result.dismiss === Swal.DismissReason.timer) {
-
-                                window.location.href = route;
-                            }
-                        });
-                    }
-                })
-
-
-
-
-            });
         });
     </script>
 @endsection

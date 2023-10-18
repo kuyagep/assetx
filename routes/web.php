@@ -182,7 +182,9 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
     Route::get('/roles/{id}/edit',[RoleController::class,'editRoles'])->name('roles.edit');
     Route::delete('/roles/{id}',[RoleController::class,'destroyRoles'])->name('roles.destroy');
 
-    Route::get('/role-permission',[RoleController::class,'allRolePermission'])->name('add.roles.permission');
+    Route::get('/roles/permission/',[RoleController::class,'addRolePermission'])->name('add.roles.permission');
+    Route::post('/roles/permission/',[RoleController::class,'storeRolesPermission'])->name('roles.permission.store');
+    Route::get('/roles/permission/all',[RoleController::class,'allRolesPermission'])->name('all.roles.permission');
     //  Route::get('/district', [DistrictController::class,'index'])->name('district');
     //  Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
      

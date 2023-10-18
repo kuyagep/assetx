@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Imports\PermissionImport;
 use App\Models\Division;
 use App\Models\PermissionGroup;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
@@ -210,5 +212,62 @@ class RoleController extends Controller
         }       
 
         return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong try again later!']);
+    }
+
+    //* Add Role Permission all Method //
+    public function addRolePermission(){
+
+        $roles = Role::all();
+        $permissions = Permission::all();
+
+        $permission_groups = User::getPermissionGroups();
+        return view('pages.rolesPermission.add_roles_permission', compact('roles', 'permissions', 'permission_groups'));
+    }
+    public function storeRolesPermission(Request $request){
+        $request->validate([
+                'role_name' => 'required',
+        ]);
+        $data = array();
+        $permissions = $request->permission;
+        
+        foreach($permissions as $key => $item){
+            $data['role_id'] = $request->role_name;
+            $data['permission_id'] = $item;
+            DB::table('role_has_permissions')->insert($data);
+        }
+
+        Alert::success('Success', 'Role Permission added successfully!');
+
+        return redirect()->back();
+
+    }//end
+
+    public function allRolesPermission(Request $request)
+    {
+        $data = [];
+        if($request->ajax()){
+            // $data = User::orderBy('created_at', 'asc')->get();
+            $data = Role::all();
+            return DataTables::of($data)
+            ->editColumn('permission', function ($request) {
+                $result = '';
+                foreach ($request->permissions as $key => $prem) {
+                    $result .= '<span class="badge badge-success mr-1">'.$prem->name.'</span>';
+                }
+                
+                return $result;
+            })
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $btn = '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-purple btn-sm mr-1" id="editButton">
+                        <i class="fa-regular fa-pen-to-square"></i> Edit</a>';
+                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
+                        <i class="fa-regular fa-trash-can"></i> Delete</a>';
+                return $btn;
+            })
+            ->rawColumns(['action','permission'])
+            ->make(true);
+        }
+        return view('pages.rolesPermission.all_roles_permission');
     }
 }

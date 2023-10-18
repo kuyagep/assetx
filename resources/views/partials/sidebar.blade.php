@@ -161,9 +161,9 @@
                         </a>
                     </li>
                     <li
-                        class="nav-item {{ Request::is('s/permission', 's/permission-group', 's/roles') ? 'menu-open' : '' }}">
+                        class="nav-item {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all') ? 'menu-open' : '' }}">
                         <a href="#"
-                            class="nav-link {{ Request::is('s/permission', 's/permission-group', 's/roles') ? 'active' : '' }}">
+                            class="nav-link {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-users-gear"></i>
                             <p>
                                 Role & Permission
@@ -180,10 +180,17 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('s/role-permission') }}"
-                                    class="nav-link {{ Request::is('s/role-permission') ? 'active' : '' }}">
+                                <a href="{{ url('s/roles/permission/') }}"
+                                    class="nav-link {{ Request::is('s/roles/permission/') ? 'active' : '' }}">
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>Role Permission</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('s/roles/permission/all') }}"
+                                    class="nav-link {{ Request::is('s/roles/permission/all') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>All Roles Permission</p>
                                 </a>
                             </li>
                             <li class="nav-item">
