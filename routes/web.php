@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
 });
 
 ######################## ADMIN ########################
-Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admin'])->group(function(){
+Route::prefix('admin')->name('admin.')->middleware(['auth','verified','roles:admin'])->group(function(){
     Route::get('/dashboard',[DashboardController::class,'AdminDashboard'])->name('dashboard');
     Route::get('/profile',[AccountController::class,'AdminProfile'])->name('profile');
     Route::post('/profile/update',[AccountController::class,'AdminProfileUpdate'])->name('profile.update');
@@ -133,7 +133,7 @@ Route::prefix('client')->name('client.')->middleware(['auth','verified','role:cl
 });
 
 ######################## SUPER ADMIN ########################
-Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:super_admin'])->group(function(){
+Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'])->group(function(){
     Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
     Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
     Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
@@ -143,7 +143,18 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
     Route::resource('/users', UsersController::class);
 
     #division
-    Route::resource('/division', DivisionController::class);
+    Route::controller(DivisionController::class)->group(function () {
+
+        Route::get('/division', 'index')->middleware(['permission:division.all'])->name('division.index');
+        Route::post('/division', 'store')->name('division.store');
+        Route::get('/division/create', 'create')->name('division.create');
+        Route::get('/division/{division}', 'show')->name('division.show');
+        Route::put('/division/{division}', 'update')->name('division.update');
+        Route::get('/division/{division}/edit', 'edit')->name('division.edit');
+        Route::delete('/division/{division}', 'destroy')->name('division.destroy');
+        
+     });
+   
     #district
     Route::resource('/districts', DistrictController::class);
     #schools

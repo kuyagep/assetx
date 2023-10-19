@@ -16,7 +16,9 @@ class AdminController extends Controller
     public function allAdmin(Request $request){
         $users = [];
         if($request->ajax()){
-            $users = User::where('role', 'admin')->get();
+            $users = User::where('role', 'admin')
+            ->orWhere('role','super_admin')
+            ->get();
             return DataTables::of($users)
             ->editColumn('position', function ($request) {
                 $result = $request->position->name;
@@ -118,7 +120,7 @@ class AdminController extends Controller
                 $user->email = $request->email;
                 $user->phone = $request->phone;
                 $user->password = Hash::make('password');
-                $user->role = 'admin';
+                $user->role = 'super_admin';
                 $user->status = $request->status;
 
                 if ($request->hasFile('avatar')) {

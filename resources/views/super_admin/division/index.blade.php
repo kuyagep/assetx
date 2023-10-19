@@ -15,9 +15,11 @@
                         <div class="card-header">
                             <h3 class="card-title"> List of Division</h3>
                             <div class="card-tools">
-                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add Division
-                                </a>
+                                @if (Auth::user()->can('division.add'))
+                                    <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
+                                        <i class="fa fa-plus mr-1"></i>&nbsp;Add Division
+                                    </a>
+                                @endif
                             </div>
                             <!-- /.card-tools -->
                         </div>

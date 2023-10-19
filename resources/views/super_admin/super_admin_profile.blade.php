@@ -36,25 +36,7 @@
                                 <div class="mb-2 mt-2">
                                     <div class="text-md font-weight-bold">Phone: {{ $account->address }}</div>
                                 </div>
-                                <div class="mb-2 mt-3">
-                                    <div class="text-small font-weight-bold">Follow On</div>
-                                </div>
-                                <a href="#" class="btn btn-social-icon mr-1 btn-facebook">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="btn btn-social-icon mr-1 btn-twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="btn btn-social-icon mr-1 btn-github">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" class="btn btn-social-icon mr-1 btn-instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <div class="w-100 d-sm-none"></div>
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="#" class="btn">View Posts <i class="fas fa-chevron-right"></i></a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -65,11 +47,10 @@
                             novalidate="" enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf
-                            <div class="card-header">
-                                <h4>Update Profile</h4>
-                            </div>
+
                             <div class="card-body">
-                                <div class="row">
+                                <h4>Update Profile</h4>
+                                <div class="row mt-5">
                                     <div class="form-group col-md-6 col-12">
                                         <label>First Name</label>
                                         <input type="text" class="form-control" name="first_name"
@@ -127,15 +108,6 @@
 
                                 </div>
                                 <div class="row">
-                                    {{-- <div class="form-group col-12">
-                                        <label for="image" class="form-label">Upload Avatar</label>
-                                        <input class="form-control" type="file" name="avatar" id="image">
-                                        @error('avatar')
-                                            <small class="text-danger">
-                                                {{ $message }}
-                                            </small>
-                                        @enderror
-                                    </div> --}}
 
                                     <div class="form-group col-12">
                                         <label for="avatar">Upload Avatar</label>
@@ -155,10 +127,11 @@
                                     </div>
 
                                 </div>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-secondary">Update Profile</button>
+                                </div>
                             </div>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary">Update Profile</button>
-                            </div>
+
                         </form>
                     </div>
                 </div>

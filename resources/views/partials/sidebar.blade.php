@@ -1,5 +1,5 @@
 @if (Auth::user()->role == 'super_admin')
-    <aside class="main-sidebar sidebar-dark-danger bg-purple elevation-1">
+    <aside class="main-sidebar sidebar-dark-secondary bg-navy elevation-1">
         <!-- Brand Logo -->
         @include('partials.brand_logo')
 
@@ -65,15 +65,18 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ url('s/division') }}"
-                            class="nav-link {{ Request::is('s/division') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-building"></i>
-                            <p>
-                                Manage Division
-                            </p>
-                        </a>
-                    </li>
+                    @if (Auth::user()->can('division.menu'))
+                        <li class="nav-item">
+                            <a href="{{ url('s/division') }}"
+                                class="nav-link {{ Request::is('s/division') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-building"></i>
+                                <p>
+                                    Manage Division
+                                </p>
+                            </a>
+                        </li>
+                    @endif
+
                     <li class="nav-item">
                         <a href="{{ url('s/districts') }}"
                             class="nav-link {{ Request::is('s/districts') ? 'active' : '' }}">
@@ -158,13 +161,33 @@
                         <a href="{{ route('super_admin.users.index') }}"
                             class="nav-link {{ Request::is('s/users') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
-                            <p>User Management</p>
+                            <p>Manage Users</p>
                         </a>
                     </li>
+                    <li class="nav-item {{ Request::is('s/admin/all') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-users-gear"></i>
+                            <p>
+                                Manage Admin
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{ url('s/admin/all') }}"
+                                    class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>All Admin</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
                     <li
-                        class="nav-item {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all') ? 'menu-open' : '' }}">
+                        class="nav-item {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all', 's/roles/permission') ? 'menu-open' : '' }}">
                         <a href="#"
-                            class="nav-link {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all') ? 'active' : '' }}">
+                            class="nav-link {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all', 's/roles/permission') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-users-gear"></i>
                             <p>
                                 Role & Permission
@@ -181,10 +204,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('s/roles/permission/') }}"
-                                    class="nav-link {{ Request::is('s/roles/permission/') ? 'active' : '' }}">
+                                <a href="{{ url('s/roles/permission') }}"
+                                    class="nav-link {{ Request::is('s/roles/permission') ? 'active' : '' }}">
                                     <i class="fas fa-user-cog nav-icon"></i>
-                                    <p>Role Permission</p>
+                                    <p>Add Role Permission</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -210,26 +233,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item {{ Request::is('s/admin/all') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
-                            <i class="nav-icon fa-solid fa-users-gear"></i>
-                            <p>
-                                Manage Admin
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
 
-                            <li class="nav-item">
-                                <a href="{{ url('s/admin/all') }}"
-                                    class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
-                                    <i class="fas fa-user-cog nav-icon"></i>
-                                    <p>All Admin</p>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
                     <li class="nav-item {{ Request::is('s/change/password', 's/profile') ? 'menu-open' : '' }}">
                         <a href="#"
                             class="nav-link {{ Request::is('s/change/password', 's/profile') ? 'active' : '' }}">

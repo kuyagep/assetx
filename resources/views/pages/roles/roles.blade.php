@@ -16,13 +16,6 @@
                             <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2" title="Add data">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add Roles
                             </a>
-                            <a href="{{ route('super_admin.import.permission') }}" class="btn btn-success mr-2"
-                                title="Import Excel">
-                                <i class="fa-solid fa-upload"></i>&nbsp;Import
-                            </a>
-                            <a href="javascript:void(0)" class="btn btn-danger mr-2" title="Export to Excel">
-                                <i class="fa-solid fa-download"></i>&nbsp;Export
-                            </a>
 
                         </div>
                     </div>

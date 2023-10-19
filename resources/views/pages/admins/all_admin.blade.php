@@ -308,7 +308,6 @@
             $('body').on('click', '#editButton', function() {
                 $('#btn-save').attr('disabled', false);
                 // $('#ModalForm').attr("id", "editModalForm");
-                $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
                 var route = "{{ route('super_admin.admin.edit', ':id') }}";
                 route = route.replace(':id', id);
