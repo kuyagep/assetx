@@ -312,58 +312,21 @@
                 var id = $(this).data('id');
                 var route = "{{ route('super_admin.admin.edit', ':id') }}";
                 route = route.replace(':id', id);
+                window.location.href = route;
 
-                $.ajax({
-                    type: "GET",
-                    url: route,
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        var roles = response.roles;
-                        var user = response.user;
-                        // console.log(res);
-                        $('#modal-title').html("Edit Data");
-                        $('#modal').modal("show");
-                        $('#id').val(response.id);
-                        $('#first_name').val(response.user['first_name']);
-                        $('#last_name').val(response.user['last_name']);
-                        $('#email').val(response.user['email']);
-                        $('#phone').val(response.user['phone']);
-                        var htmlRole = "<option value=''>Select Role...</option>";
-                        for (let i = 0; i < roles.length; i++) {
-                            if ("{{ $user->hasRoles($role->name) }}") {
-                                htmlRole += `<option value="` + roles[i]['id'] +
-                                    `" selected>` + roles[i]['name'] +
-                                    `</option>`;
-                            } else {
-                                htmlRole += `<option value="` + roles[i]['id'] +
-                                    `">` + roles[i]['name'] +
-                                    `</option>`;
-                            }
-                        }
-                        $('#division_name').html(htmlRole);
-                        // $('#status').val(response.user['status']);
-                        $('#error').html('');
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
             });
 
             // Delete Function
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.users.destroy', ':id') }}";
+                var route = "{{ route('super_admin.admin.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You want delete this account?",
+                    text: "You want delete this admin user?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

@@ -7,6 +7,7 @@ use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -144,7 +145,7 @@ class AdminController extends Controller
                 $user->last_name = $request->last_name;
                 $user->email = $request->email;
                 $user->phone = $request->phone;
-                $user->role = $request->role;;
+                $user->role = $request->role;
                 $user->status = $request->status;
 
                 if ($request->hasFile('avatar')) {
@@ -170,6 +171,74 @@ class AdminController extends Controller
     public function editAdmin(Request $request, $id){
         $user = User::findOrFail($id);
         $roles = Role::all();   
-        return response()->json(['user'=> $user, 'roles'=> $roles, ]);
+
+        return view('pages.admins.edit_admin', compact('user','roles'));
+        // return response()->json(['user'=> $user, 'roles'=> $roles, ]);
     }
+    
+     public function updateAdmin(Request $request, $id)
+    {
+        
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+            'phone' => ['numeric','digits:11'],
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'roles' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+        ]);
+            
+        $user = User::findOrFail($id);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->role = 'admin';
+        $user->status = $request->status;
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');           
+            @unlink(public_path('assets/dist/img/avatar/'. $user->avatar));
+
+            //new filename
+            $filename = $file->hashName();
+
+            // dd($filename);
+            $file->move(public_path('assets/dist/img/avatar'), $filename);
+            $user['avatar'] = $filename;
+        }
+
+        $user->save();
+
+        $user->roles()->detach();
+        if($request->roles){
+                    $user->assignRole($request->roles);
+                }
+
+        Alert::success('Success','Admin user updated successfully!');
+
+        return redirect()->route('super_admin.all.admin');
+        // return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Admin user updated successfully!']);
+        
+
+    }
+
+     public function destroyAdmin(Request $request, $id)
+    {
+         if($request->ajax()){
+            $user = User::findOrFail( $id );
+
+            if(!is_null($user)){
+                $user->delete();
+            }
+            return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Admin user deleted successfully!']);
+        }       
+
+        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong try again later!']);
+       
+    }
+    
+
+
 }

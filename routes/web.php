@@ -194,6 +194,8 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','verified','role:su
         Route::get('/admin/all', 'allAdmin')->name('all.admin');
         Route::post('/admin/store', 'storeAdmin')->name('admin.store');
         Route::get('/admin/{id}/edit', 'editAdmin')->name('admin.edit');
+        Route::post('/admin/update/{id}', 'updateAdmin')->name('admin.update');
+        Route::delete('/admin/destroy/{id}', 'destroyAdmin')->name('admin.destroy');
     });
     
     

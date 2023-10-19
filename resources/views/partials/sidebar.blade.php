@@ -153,6 +153,7 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-header">USER MANAGEMENT</li>
                     <li class="nav-item">
                         <a href="{{ route('super_admin.users.index') }}"
                             class="nav-link {{ Request::is('s/users') ? 'active' : '' }}">
