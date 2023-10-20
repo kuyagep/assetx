@@ -54,13 +54,15 @@ class PermissionGroupController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'name' => 'required|string|max:255|unique:permission_groups',
+                'name' => 'required|string|max:255',
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
-               
+               $request->validate([
+                    'name' => 'required|string|max:255|unique:permission_groups',
+                ]);
                 $data = new PermissionGroup;
-                $data->name = $request->name;
+                $data->name = ucfirst($request->name);
 
 
                 $data->save();
@@ -68,7 +70,7 @@ class PermissionGroupController extends Controller
             }else{
                 $data = PermissionGroup::find($request->id);
 
-                $data->name = $request->name;
+                $data->name = ucfirst($request->name);
 
 
                 $data->save();

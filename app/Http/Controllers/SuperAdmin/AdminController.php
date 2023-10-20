@@ -196,7 +196,7 @@ class AdminController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->role = 'admin';
+        $user->role = 'super_admin';
         $user->status = $request->status;
 
         if ($request->hasFile('avatar')) {

@@ -65,17 +65,20 @@ class RoleController extends Controller
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
-               
+               $request->validate([
+                    'name' => 'required|string|max:255|unique:permissions',
+                    'group_name' => 'required|string|max:255|unique:permissions',
+                ]);
                 $data = new Permission;
-                $data->name = $request->name;
-                $data->group_name = $request->group_name;
+                $data->name = ucfirst($request->name);
+                $data->group_name = ucwords($request->group_name);
 
                 $data->save();
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission saved successfully!']);
             }else{
                 $data = Permission::find($request->id);
-                $data->name = $request->name;
-                $data->group_name = $request->group_name;
+                $data->name = ucfirst($request->name);
+                $data->group_name = ucwords($request->group_name);
 
                 $data->save();
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission updated successfully!']);
@@ -175,19 +178,21 @@ class RoleController extends Controller
     {
          if ($request->ajax()) {
             $request->validate([
-                'name' => 'required|string|max:255|unique:roles',
+                'name' => 'required|string|max:255',
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
-               
+               $request->validate([
+                    'name' => 'required|string|max:255|unique:roles',
+                ]);
                 $data = new Role;
-                $data->name = $request->name;
+                $data->name = strtolower($request->name);
 
                 $data->save();
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Role saved successfully!']);
             }else{
                 $data = Role::find($request->id);
-                $data->name = $request->name;
+                $data->name = strtolower($request->name);
 
                 $data->save();
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Role updated successfully!']);

@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
 });
 
 ######################## ADMIN ########################
-Route::prefix('admin')->name('admin.')->middleware(['auth','verified','roles:admin'])->group(function(){
+Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admin'])->group(function(){
     Route::get('/dashboard',[DashboardController::class,'AdminDashboard'])->name('dashboard');
     Route::get('/profile',[AccountController::class,'AdminProfile'])->name('profile');
     Route::post('/profile/update',[AccountController::class,'AdminProfileUpdate'])->name('profile.update');
@@ -133,7 +133,7 @@ Route::prefix('client')->name('client.')->middleware(['auth','verified','role:cl
 });
 
 ######################## SUPER ADMIN ########################
-Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'])->group(function(){
+Route::prefix('s')->name('super_admin.')->middleware(['auth','role:super-admin'])->group(function(){
     Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
     Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
     Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
@@ -144,8 +144,8 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
 
     #division
     Route::controller(DivisionController::class)->group(function () {
-
-        Route::get('/division', 'index')->middleware(['permission:division.all'])->name('division.index');
+        //* ->middleware('permission:division.all')
+        Route::get('/division', 'index')->name('division.index')->middleware('permission:division.all');
         Route::post('/division', 'store')->name('division.store');
         Route::get('/division/create', 'create')->name('division.create');
         Route::get('/division/{division}', 'show')->name('division.show');
@@ -157,8 +157,10 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
    
     #district
     Route::resource('/districts', DistrictController::class);
+
     #schools
     Route::resource('/schools', SchoolController::class);
+    
     #offices
     Route::resource('/offices', OfficeController::class);
     #positions
