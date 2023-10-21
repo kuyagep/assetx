@@ -10,24 +10,23 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="row mb-3">
+                <div class="col-lg-12">
+                    <div class="row mb-3 ">
                         <div class="col-12">
-                            <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
+                            <button id="add-button" class="btn btn-primary mr-2 float-left">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add Admin
-                            </a>
-
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><i class="fas fa-users "></i>&nbsp;All Admin</h3>
-                            <div class="card-tools">
-
-                            </div>
-                            <!-- /.card-tools -->
+                            <h5><i class="fas fa-users "></i>&nbsp;List of All Admin</h5>
                         </div>
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="dataTableajax" class="table table-striped">
@@ -56,7 +55,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modal">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-title"></h4>
@@ -136,8 +135,10 @@
 
                             </div>
                             <div class="modal-footer justify-end">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-dark btn-save" id="btn-save">Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" title="Close"><i
+                                        class="fa-solid fa-xmark"></i> Close</button>
+                                <button type="submit" class="btn btn-dark" id="btn-save" title="Save"><i
+                                        class="fa-regular fa-floppy-disk"></i>Save</button>
                             </div>
                         </form>
                     </div>
@@ -220,7 +221,9 @@
                 $('#error').html('');
                 $('#modal').modal("show");
                 $('#modal-title').html("Add Admin User");
-                $('#btn-save').html("Save");
+                $('#btn-save').html("<i class='fa-regular fa-floppy-disk'></i> Save");
+                // <iclass='fa-regular fa-floppy-disk'></>Save
+
                 $('#btn-save').show();
                 $('#id').val('');
                 $('#modal-form').trigger("reset");

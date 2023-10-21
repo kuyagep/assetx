@@ -33,8 +33,8 @@ class AccountController extends Controller
        $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'phone' => ['numeric','digits:11'],
+            'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:'.User::class],
+            'phone' => ['numeric','digits:11', 'unique:'.User::class],
             'address' => ['string', 'max:255'],
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -73,12 +73,7 @@ class AccountController extends Controller
         return redirect()->back()->with($notification);
     }
     // Change password
-    public function super_adminChangePassword()
-    {
-        $account = User::find(Auth::user()->id);
-        return view('super_admin.super_admin_change_password', compact('account'));
-    }
-
+    
     // Update Password
     public function super_adminUpdatePassword( Request $request)
     {

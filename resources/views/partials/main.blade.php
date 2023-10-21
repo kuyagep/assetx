@@ -58,6 +58,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             @include('partials.content-header')
+
             <!-- /.content-header -->
             <!-- Content Wrapper. Contains page content -->
             @yield('main-content')

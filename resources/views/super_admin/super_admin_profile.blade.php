@@ -51,7 +51,7 @@
                                         <h4 class="mb-0">Edit profile </h4>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <a href="{{ url('s/change/password') }}" class="btn btn-sm btn-primary"><i
+                                        <a href="#change_password" class="btn btn-sm btn-primary"><i
                                                 class="fa-solid fa-key"></i> Change
                                             Password</a>
                                     </div>
@@ -125,7 +125,7 @@
                                                 <label class="form-control-label" for="phone">Phone</label>
                                                 <input type="text" id="phone" name="phone" class="form-control"
                                                     placeholder="Enter mobile no."
-                                                    value="{{ old('address', $account->phone) }}">
+                                                    value="{{ old('phone', $account->phone) }}">
                                                 @error('phone')
                                                     <small class="text-danger">
                                                         {{ $message }}
@@ -176,7 +176,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row ">
+            <div class="row" id="change_password">
                 <div class="col-xl-8 order-xl-1">
                     <div class="card">
                         <form method="post" class="needs-validation"

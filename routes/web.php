@@ -138,7 +138,6 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
     Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
     Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
     Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
-    Route::get('/change/password',[AccountController::class,'super_adminChangePassword'])->name('change.password');
 
     Route::resource('/users', UsersController::class);
 

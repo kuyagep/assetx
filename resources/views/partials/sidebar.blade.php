@@ -57,12 +57,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/s/accountability') }}"
-                            class="nav-link {{ Request::is('s/accountability') ? 'active' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('s/accountability') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-barcode"></i>
-                            <p>
-                                Accountability
-                            </p>
+                            <p> Accountability</p>
                         </a>
                     </li>
                     @if (Auth::user()->can('division.menu'))
@@ -70,9 +67,7 @@
                             <a href="{{ url('s/division') }}"
                                 class="nav-link {{ Request::is('s/division') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-building"></i>
-                                <p>
-                                    Manage Division
-                                </p>
+                                <p> Manage Division </p>
                             </a>
                         </li>
                     @endif
@@ -233,13 +228,20 @@
                             </li>
                         </ul>
                     </li>
-
-                    <li class="nav-item {{ Request::is('s/change/password', 's/profile') ? 'menu-open' : '' }}">
-                        <a href="#"
-                            class="nav-link {{ Request::is('s/change/password', 's/profile') ? 'active' : '' }}">
+                    <li class="nav-item">
+                        <a href="{{ url('s/profile') }}"
+                            class="nav-link {{ Request::is('s/profile') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>
+                                Profile Settings
+                            </p>
+                        </a>
+                    </li>
+                    {{-- <li class="nav-item {{ Request::is('s/profile') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('s/profile') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cogs"></i>
                             <p>
-                                Account Settings
+                                Profile Settings
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -252,16 +254,8 @@
                                     <p>Profile</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ url('s/change/password') }}"
-                                    class="nav-link {{ Request::is('s/change/password') ? 'active' : '' }}">
-                                    <i class="fas fa-user-lock nav-icon"></i>
-                                    <p>Change Password</p>
-                                </a>
-                            </li>
-
                         </ul>
-                    </li>
+                    </li> --}}
 
 
                 </ul>

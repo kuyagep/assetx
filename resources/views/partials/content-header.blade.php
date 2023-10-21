@@ -12,5 +12,6 @@
                  </ol>
              </div><!-- /.col -->
          </div><!-- /.row -->
+         <hr class="my-3">
      </div><!-- /.container-fluid -->
  </div>
