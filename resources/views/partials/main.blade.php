@@ -38,6 +38,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-danger ">
+    <noscript>You must run this system with JavaScript enabled.</noscript>
     @include('sweetalert::alert')
 
     <div class="wrapper">

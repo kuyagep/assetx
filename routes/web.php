@@ -133,7 +133,7 @@ Route::prefix('client')->name('client.')->middleware(['auth','verified','role:cl
 });
 
 ######################## SUPER ADMIN ########################
-Route::prefix('s')->name('super_admin.')->middleware(['auth','role:super-admin'])->group(function(){
+Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'])->group(function(){
     Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
     Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
     Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
