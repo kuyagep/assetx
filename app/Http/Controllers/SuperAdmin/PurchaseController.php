@@ -66,8 +66,12 @@ class PurchaseController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'name' => 'required|string|max:255',
-                'budget' => 'required|numeric|min:0.01|max:999999999999.99',
+                'get_started' => 'required|string|max:255',
+                'alt_mode_procurement' => 'required|string|max:255',
+                'title' => 'required|string|max:255',
+                'src_fund' => 'required|string|max:255',
+                'attachment' => 'required|mimes:xlsx,xls|max:2048',
+                'amount_abc' => 'required|numeric|min:0.01|max:999999999999.99',
                 'isApproved' => 'required',
             ]);
 
@@ -76,10 +80,25 @@ class PurchaseController extends Controller
             if (empty($request->id)) {
 
                 $data = new Purchase();
-                $data->name = $request->name;
-                $data->budget = $request->budget;
+                $data->get_started = $request->get_started;
+                $data->alt_mode_procurement = $request->alt_mode_procurement;
+                $data->title = $request->title;
+                $data->src_fund = $request->src_fund;
+                $data->amount_abc = $request->amount_abc;
                 $data->isApproved = $request->isApproved;
 
+                if ($request->hasFile('attachment')) {
+                    $file = $request->file('attachment');           
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/attachment/purchases'), $filename);
+                    $data['attachment'] = $filename;
+                }
+                $data->user_id = Auth::user()->id;
+                $data->office_id = Auth::user()->office->name;
                 $data->save();
 
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase saved successfully!']);

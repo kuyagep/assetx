@@ -68,6 +68,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(School::class, 'school_id', 'id');
     }
 
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class, 'user_id', 'id');
+    }
+    public function office()
+    {
+        return $this->hasMany(Office::class, 'office_id', 'id');
+    }
+
     public static function getPermissionGroups(){
         $permission_groups = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
 

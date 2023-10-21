@@ -13,10 +13,19 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('budget');
-            $table->enum('isApproved',['approved','reject', 'pending'])->default('pending');
+            $table->string('get_started');
+            $table->string('alt_mode_procurement');
+            $table->unsignedBigInteger('office_id');
+            $table->uuid('user_id');
+            $table->text('title');
+            $table->string('src_fund');
+            $table->double('amount', 8, 2);
+            $table->string('attachment');
+            $table->enum('isApproved',['approved', 'pending', 'cancelled', 'rebid' ])->default('pending');
             $table->timestamps();
+
+            $table->foreign('office_id')->references('id')->on('offices')->onDelete('RESTRICT');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('RESTRICT');
         });
     }
 

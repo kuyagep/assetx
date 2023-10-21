@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Office;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -92,14 +93,16 @@ class AdminController extends Controller
         }
 
         $positions = Position::all();
+        $offices = Office::all();
         $roles = Role::all();
-        return view('pages.admins.all_admin', compact('positions','roles'));
+        return view('pages.admins.all_admin', compact('positions','roles','offices'));
     }
     
      public function storeAdmin(Request $request)
     {
         if ($request->ajax()) {
             $request->validate([
+                'office_name' => 'required',
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
@@ -108,6 +111,8 @@ class AdminController extends Controller
                 'roles' => 'required|string|max:255',
                 'status' => 'required|string|max:255',
             ]);
+            //check office if exists
+            $office = Office::findOrFail($request->office_name);
             // checked if new data or exists
             if (empty($request->id)) {
                 $request->validate([
@@ -133,8 +138,7 @@ class AdminController extends Controller
                     $file->move(public_path('assets/dist/img/avatar'), $filename);
                     $user['avatar'] = $filename;
                 }
-
-                $user->save();
+                $office->user()->associated($user);
 
                 if($request->roles){
                     $user->assignRole($request->roles);

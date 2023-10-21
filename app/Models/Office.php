@@ -20,4 +20,14 @@ class Office extends Model
     {
         return $this->belongsTo(Division::class, 'division_id', 'id');
     }
+
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class, 'office_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->hasMany(User::class, 'user_id', 'id');
+    }
 }

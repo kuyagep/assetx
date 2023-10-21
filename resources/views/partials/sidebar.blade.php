@@ -47,14 +47,26 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ url('s/purchase') }}"
-                            class="nav-link {{ Request::is('s/purchase') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-building"></i>
+
+                    <li class="nav-item {{ Request::is('s/purchase') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('s/purchase') ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-cart-shopping"></i>
                             <p>
-                                Purchase Request
+                                Manage Purchase
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{ url('s/purchase') }}"
+                                    class="nav-link {{ Request::is('s/purchase') ? 'active' : '' }}">
+                                    <i class="nav-icon fa-solid fa-receipt"></i>
+                                    <p>All Purchase Request</p>
+                                </a>
+                            </li>
+
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link {{ Request::is('s/accountability') ? 'active' : '' }}">

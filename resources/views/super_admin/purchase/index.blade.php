@@ -10,16 +10,22 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="row mb-3 ">
+                        <div class="col-12">
+                            <button id="add-button" class="btn btn-primary mr-2 float-left">
+                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add Purchase Request
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
+                    <div class="card card-outline card-danger">
                         <div class="card-header">
                             <h3 class="card-title"> List of Purchase Request</h3>
-                            <div class="card-tools">
-                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add Purchase Request
-                                </a>
-                            </div>
-                            <!-- /.card-tools -->
+
                         </div>
 
                         <div class="card-body">
@@ -29,10 +35,11 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Title of Activity</th>
-                                            <th>Budget</th>
+                                            <th>Source of Fund</th>
+                                            <th>Amount ABC</th>
                                             <th>Status</th>
-                                            <th>Create At</th>
-                                            <th width="250px">Action</th>
+                                            <th>Submitted At</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,22 +74,71 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="name">Title of Activity <span
-                                                    class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="name" name="name"
+                                            <label for="get_started">Get Started <span class="text-danger"
+                                                    title="important">*</span></label>
+                                            <select class="custom-select" name="get_started" id="get_started">
+                                                <option selected disabled>Select...</option>
+                                                <option value="new-bid">New Bid</option>
+                                                <option value="rebid-1">Re-Bid 1</option>
+                                                <option value="rebid-2">Re-Bid 2</option>
+                                                <option value="rebid-3">Re-Bid 3</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alt_mode_procurement">Alternative Mode of Procurement <span
+                                                    class="text-danger" title="important">*</span></label>
+                                            <select class="custom-select" name="alt_mode_procurement"
+                                                id="alt_mode_procurement">
+                                                <option selected disabled>Select...</option>
+                                                <option value="Shopping">Shopping</option>
+                                                <option value="Direct Contracting">Direct Contracting</option>
+                                                <option value="Repeat Order">Repeat Order</option>
+                                                <option value="egotiated Procurement">Negotiated Procurement</option>
+                                                <option value="Limited Source Bidding">Limited Source Bidding</option>
+                                                <option value="Emergency Purchase">Emergency Purchase</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="title">Title of Activity <span class="text-danger"
+                                                    title="important">*</span></label>
+                                            <input type="text" class="form-control" id="title" name="title"
                                                 placeholder="Ex. Seminar Workshop...">
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Proposal Budget <span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" id="budget" name="budget"
-                                                placeholder="Ex. 67,997.00">
+                                            <label for="src_fund">Source of Fund <span class="text-danger"
+                                                    title="important">*</span></label>
+                                            <input type="text" class="form-control" id="src_fund" name="src_fund"
+                                                placeholder="Ex. Division MOOE">
                                         </div>
                                         <div class="form-group">
-                                            <label for="status">Approval <span class="text-danger">*</span></label>
+                                            <label for="amount_abc">Amount (ABC) <span class="text-danger"
+                                                    title="important">*</span></label>
+                                            <input type="number" class="form-control" id="amount_abc" name="amount_abc"
+                                                placeholder="Ex. 67997.00">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="logo">Upload Attachment <span class="text-danger"
+                                                    title="important">*</span></label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="attachment"
+                                                        id="attachment">
+                                                    <label class="custom-file-label" for="logo">Choose
+                                                        file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="status">Approval <span class="text-danger"
+                                                    title="important">*</span></label>
                                             <select class="custom-select" name="isApproved" id="isApproved">
                                                 <option>Select...</option>
                                                 <option value="approved" selected>Approved</option>
-                                                <option value="reject">Reject</option>
+                                                <option value="reject">Pending</option>
+                                                <option value="reject">Cancelled</option>
+                                                <option value="reject">Rebid</option>
                                             </select>
                                         </div>
                                     </div>
@@ -133,12 +189,16 @@
                         name: 'DT_RowIndex',
                         class: 'text-center'
                     }, {
-                        data: 'name',
-                        name: 'name'
+                        data: 'title',
+                        name: 'title'
                     },
                     {
-                        data: 'budget',
-                        name: 'budget'
+                        data: 'src_fund',
+                        name: 'src_fund'
+                    },
+                    {
+                        data: 'amount_abc',
+                        name: 'amount_abc'
                     },
                     {
                         data: 'isApproved',

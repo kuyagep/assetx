@@ -107,6 +107,16 @@
                                                 placeholder="Ex. 09123456789">
                                         </div>
                                         <div class="form-group">
+                                            <label for="role">Office <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="office_name" name="office_name">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($offices as $office)
+                                                    <option value="{{ $office->id }}">{{ $office->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="role">Role <span class="text-danger">*</span></label>
                                             <select class="custom-select" id="roles" name="roles">
                                                 <option selected disabled>Choose...</option>
