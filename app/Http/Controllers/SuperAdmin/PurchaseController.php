@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Office;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,12 @@ class PurchaseController extends Controller
             // $data = User::orderBy('created_at', 'asc')->get();
             $data = Purchase::all();
             return DataTables::of($data)
+            ->editColumn('office', function ($request) {
+                    return $request->office->name; // format date time
+                })
+                ->editColumn('created_at', function ($request) {
+                        return $request->created_at->format('d-m-Y H:i:s'); // format date time
+                })
                 ->editColumn('isApproved', function ($request) {
 
                     if($request->isApproved === "approved"){
@@ -43,7 +50,7 @@ class PurchaseController extends Controller
                             Delete</a>';
                     return $btn;
                 })
-                ->rawColumns(['action','isApproved'])
+                ->rawColumns(['action','isApproved','created_at','office'])
                 ->make(true);
         }
         
@@ -75,7 +82,7 @@ class PurchaseController extends Controller
                 'isApproved' => 'required',
             ]);
 
-
+            $office = Office::findOrFail(Auth::user()->office_id);
             // checked if new data or exists
             if (empty($request->id)) {
 
@@ -84,7 +91,7 @@ class PurchaseController extends Controller
                 $data->alt_mode_procurement = $request->alt_mode_procurement;
                 $data->title = $request->title;
                 $data->src_fund = $request->src_fund;
-                $data->amount_abc = $request->amount_abc;
+                $data->amount = $request->amount_abc;
                 $data->isApproved = $request->isApproved;
 
                 if ($request->hasFile('attachment')) {
@@ -98,7 +105,7 @@ class PurchaseController extends Controller
                     $data['attachment'] = $filename;
                 }
                 $data->user_id = Auth::user()->id;
-                $data->office_id = Auth::user()->office->name;
+                $data->office_id = Auth::user()->office_id;
                 $data->save();
 
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase saved successfully!']);

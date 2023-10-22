@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Office;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class UsersController extends Controller
@@ -77,9 +79,10 @@ class UsersController extends Controller
             ->rawColumns(['position','avatar','action','full_name','status'])
             ->make(true);
         }
-
+        $offices = Office::all();
+        $roles = Role::all();
         $positions = Position::all();
-        return view('super_admin.users.index', compact('positions'));
+        return view('super_admin.users.index', compact('positions','offices','roles'));
     }
 
     /**
@@ -101,7 +104,8 @@ class UsersController extends Controller
                 'last_name' => 'required|string|max:255',
                 'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'role' => 'required|string|max:255',
+                'office_name' => 'required|string|max:255',
+                'roles' => 'required|string|max:255',
                 'status' => 'required|string|max:255',
             ]);
             // checked if new data or exists
@@ -114,7 +118,7 @@ class UsersController extends Controller
                 $data->last_name = $request->last_name;
                 $data->email = $request->email;
                 $data->password = Hash::make('password');
-                $data->role = $request->role;;
+                // $data->role = $request->role;
                 $data->status = $request->status;
 
                 if ($request->hasFile('avatar')) {

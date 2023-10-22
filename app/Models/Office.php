@@ -26,8 +26,8 @@ class Office extends Model
         return $this->hasMany(Purchase::class, 'office_id', 'id');
     }
 
-    public function user()
+     public function user()
     {
-        return $this->hasMany(User::class, 'user_id', 'id');
+        return $this->hasMany(User::class, 'office_id', 'id');
     }
 }

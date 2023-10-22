@@ -144,7 +144,7 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
     #division
     Route::controller(DivisionController::class)->group(function () {
         //* ->middleware('permission:division.all')
-        Route::get('/division', 'index')->name('division.index')->middleware('permission:division.all');
+        Route::get('/division', 'index')->name('division.index');
         Route::post('/division', 'store')->name('division.store');
         Route::get('/division/create', 'create')->name('division.create');
         Route::get('/division/{division}', 'show')->name('division.show');

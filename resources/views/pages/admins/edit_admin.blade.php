@@ -9,7 +9,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12 ">
+                <div class="col-lg-6">
                     {{-- download excel file --}}
                     <button onclick="history.back()" class="btn btn-dark  mb-3 px-3">
                         <i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back
@@ -44,23 +44,37 @@
                                         <div class="form-group">
                                             <label for="first_name">First Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="first_name" name="first_name"
-                                                value="{{ $user->first_name }}" placeholder="Ex. Juan">
+                                                value="{{ old('first_name', $user->first_name) }}" placeholder="Ex. Juan">
 
                                         </div>
                                         <div class="form-group">
                                             <label for="last_name">Last Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="last_name" name="last_name"
-                                                value="{{ $user->last_name }}" placeholder="Ex. Dela Cruz">
+                                                value="{{ old('last_name', $user->last_name) }}"
+                                                placeholder="Ex. Dela Cruz">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email address <span class="text-danger">*</span></label>
                                             <input type="email" class="form-control" id="email" name="email"
-                                                value="{{ $user->email }}" placeholder="Ex. example@email.com">
+                                                value="{{ old('email', $user->email) }}"
+                                                placeholder="Ex. example@email.com">
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">Phone Number <span class="text-danger">*</span></label>
                                             <input type="number" class="form-control" id="phone" name="phone"
-                                                value="{{ $user->phone }}" placeholder="Ex. 09123456789">
+                                                value="{{ old('phone', $user->phone) }}" placeholder="Ex. 09123456789">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Office <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="office_name" name="office_name">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($offices as $office)
+                                                    <option value="{{ $office->id }}"
+                                                        {{ $user->office_id == $office->id ? 'selected' : '' }}>
+                                                        {{ $office->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="role">Role <span class="text-danger">*</span></label>

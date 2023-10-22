@@ -30,6 +30,16 @@ class AdminController extends Controller
                 }
                 return $result; 
             })
+            ->editColumn('office', function ($request) {
+                $result = $request->office->name;
+                
+                if($result == null){
+                    return "N/A";
+                }else{
+                        $result;
+                }
+                return $result; 
+            })
             ->editColumn('phone', function ($request) {
                 $result = $request->phone;
                 if($result == null){
@@ -88,7 +98,7 @@ class AdminController extends Controller
                         <i class="fa-regular fa-trash-can"></i> </a>';
                 return $btn;
             })
-            ->rawColumns(['phone','role','position','avatar','action','full_name','status'])
+            ->rawColumns(['phone','role','position','office','avatar','action','full_name','status'])
             ->make(true);
         }
 
@@ -102,17 +112,20 @@ class AdminController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'office_name' => 'required',
+                
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
                 'phone' => ['numeric','digits:11'],
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'position_name' => 'required',
+                'office_name' => 'required',
                 'roles' => 'required|string|max:255',
                 'status' => 'required|string|max:255',
             ]);
             //check office if exists
             $office = Office::findOrFail($request->office_name);
+            $position = Office::findOrFail($request->position_name);
             // checked if new data or exists
             if (empty($request->id)) {
                 $request->validate([
@@ -138,7 +151,8 @@ class AdminController extends Controller
                     $file->move(public_path('assets/dist/img/avatar'), $filename);
                     $user['avatar'] = $filename;
                 }
-                $office->user()->associated($user);
+                $office->user()->save($user);
+                $position->user()->save($user);
 
                 if($request->roles){
                     $user->assignRole($request->roles);
@@ -177,8 +191,8 @@ class AdminController extends Controller
     public function editAdmin(Request $request, $id){
         $user = User::findOrFail($id);
         $roles = Role::all();   
-
-        return view('pages.admins.edit_admin', compact('user','roles'));
+        $offices = Office::all();
+        return view('pages.admins.edit_admin', compact('user','roles','offices'));
         // return response()->json(['user'=> $user, 'roles'=> $roles, ]);
     }
     
@@ -191,6 +205,7 @@ class AdminController extends Controller
             'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
             'phone' => ['numeric','digits:11'],
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'office_name' => 'required|string|max:255',
             'roles' => 'required|string|max:255',
             'status' => 'required|string|max:255',
         ]);
@@ -200,6 +215,7 @@ class AdminController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->office_id = $request->office_name;
         $user->role = 'super_admin';
         $user->status = $request->status;
 

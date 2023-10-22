@@ -37,6 +37,7 @@
                                             <th>Title of Activity</th>
                                             <th>Source of Fund</th>
                                             <th>Amount ABC</th>
+                                            <th>Office</th>
                                             <th>Status</th>
                                             <th>Submitted At</th>
                                             <th>Action</th>
@@ -54,7 +55,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modal">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-title"></h4>
@@ -72,7 +73,7 @@
                                 <input type="hidden" name="id" id="id">
                                 {{-- sample --}}
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-lg-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="get_started">Get Started <span class="text-danger"
                                                     title="important">*</span></label>
@@ -85,6 +86,8 @@
 
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="alt_mode_procurement">Alternative Mode of Procurement <span
                                                     class="text-danger" title="important">*</span></label>
@@ -100,27 +103,40 @@
 
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             <label for="title">Title of Activity <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <input type="text" class="form-control" id="title" name="title"
-                                                placeholder="Ex. Seminar Workshop...">
+                                            <textarea class="form-control" id="title" name="title" placeholder="Title/Purpose"></textarea>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="src_fund">Source of Fund <span class="text-danger"
                                                     title="important">*</span></label>
                                             <input type="text" class="form-control" id="src_fund" name="src_fund"
                                                 placeholder="Ex. Division MOOE">
                                         </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="amount_abc">Amount (ABC) <span class="text-danger"
                                                     title="important">*</span></label>
                                             <input type="number" class="form-control" id="amount_abc" name="amount_abc"
                                                 placeholder="Ex. 67997.00">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <div class="form-group mt-2">
-                                            <label for="logo">Upload Attachment <span class="text-danger"
-                                                    title="important">*</span></label>
+                                            <label for="logo">Upload Attachment <small>.xlsx, .xls</small><span
+                                                    class="text-danger" title="important">*</span></label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="attachment"
@@ -197,8 +213,12 @@
                         name: 'src_fund'
                     },
                     {
-                        data: 'amount_abc',
-                        name: 'amount_abc'
+                        data: 'amount',
+                        name: 'amount'
+                    },
+                    {
+                        data: 'office',
+                        name: 'office'
                     },
                     {
                         data: 'isApproved',

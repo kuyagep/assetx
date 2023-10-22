@@ -13,8 +13,8 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn btn-primary mr-2 float-left">
-                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add Admin
+                            <button id="add-button" class="btn btn-primary mr-2 float-left" title="Add [Alt+A]">
+                                <i class="fa-regular fa-square-plus" accesskey="a"></i>&nbsp;Add Admin
                             </button>
                         </div>
                     </div>
@@ -36,6 +36,7 @@
                                             <th>Avatar</th>
                                             <th>Full Name</th>
                                             <th>Position</th>
+                                            <th>Office</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Role</th>
@@ -55,7 +56,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modal">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-title"></h4>
@@ -67,6 +68,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
+
                                 {{-- Error Display here --}}
                                 <div id="error"></div>
                                 {{-- Reference Id --}}
@@ -107,6 +109,16 @@
                                                 placeholder="Ex. 09123456789">
                                         </div>
                                         <div class="form-group">
+                                            <label for="role">Position <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="position_name" name="position_name">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($positions as $position)
+                                                    <option value="{{ $position->id }}">{{ $position->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="role">Office <span class="text-danger">*</span></label>
                                             <select class="custom-select" id="office_name" name="office_name">
                                                 <option selected disabled>Choose...</option>
@@ -138,17 +150,16 @@
                                     <div class="col-4">
                                         <img id="showImage" alt="Avatar" class="table-avatar"
                                             src="{{ asset('assets/dist/img/avatar/default.jpg') }}"
-                                            style="width: 150px;max-width: 150px;height: 150px;object-fit: cover; ">
-
+                                            style="width: 100%;max-width: 100%;height: 150px;object-fit: cover; ">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="modal-footer justify-end">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" title="Close"><i
-                                        class="fa-solid fa-xmark"></i> Close</button>
-                                <button type="submit" class="btn btn-dark" id="btn-save" title="Save"><i
-                                        class="fa-regular fa-floppy-disk"></i>Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" title="Close [Alt+C]"
+                                    accesskey="c"><i class="fa-solid fa-xmark"></i> Close</button>
+                                <button type="submit" class="btn btn-dark" id="btn-save" title="Save [Alt+S]"
+                                    accesskey="s">Save</button>
                             </div>
                         </form>
                     </div>
@@ -198,6 +209,9 @@
                     }, {
                         data: 'position',
                         name: 'position'
+                    }, {
+                        data: 'office',
+                        name: 'office'
                     },
                     {
                         data: 'email',
@@ -231,7 +245,7 @@
                 $('#error').html('');
                 $('#modal').modal("show");
                 $('#modal-title').html("Add Admin User");
-                $('#btn-save').html("<i class='fa-regular fa-floppy-disk'></i> Save");
+                $('#btn-save').html("Save");
                 // <iclass='fa-regular fa-floppy-disk'></>Save
 
                 $('#btn-save').show();

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->unsignedBigInteger('position_id')->default('1');
             $table->unsignedBigInteger('school_id')->nullable();
-            $table->unsignedBigInteger('office_id')->nullable();
+            $table->unsignedBigInteger('office_id')->default('1');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();

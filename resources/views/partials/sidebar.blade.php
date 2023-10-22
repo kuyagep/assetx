@@ -74,15 +74,16 @@
                             <p> Accountability</p>
                         </a>
                     </li>
-                    @if (Auth::user()->can('division.menu'))
-                        <li class="nav-item">
-                            <a href="{{ url('s/division') }}"
-                                class="nav-link {{ Request::is('s/division') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-building"></i>
-                                <p> Manage Division </p>
-                            </a>
-                        </li>
-                    @endif
+                    {{-- @if (Auth::user()->can('division.menu'))
+                    @endif --}}
+                    <li class="nav-item">
+                        <a href="{{ url('s/division') }}"
+                            class="nav-link {{ Request::is('s/division') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p> Manage Division </p>
+                        </a>
+                    </li>
+
 
                     <li class="nav-item">
                         <a href="{{ url('s/districts') }}"

@@ -74,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function office()
     {
-        return $this->hasMany(Office::class, 'office_id', 'id');
+        return $this->belongsTo(Office::class, 'office_id', 'id');
     }
 
     public static function getPermissionGroups(){

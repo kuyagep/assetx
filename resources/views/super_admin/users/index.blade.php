@@ -31,6 +31,7 @@
                                             <th>Avatar</th>
                                             <th>Full Name</th>
                                             <th>Position</th>
+                                            <th>Office</th>
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th style="width: 8%" class="text-center">Status</th>
@@ -97,11 +98,25 @@
                                                 placeholder="Ex. example@email.com">
                                         </div>
                                         <div class="form-group">
+                                            <label for="role">Office <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="office_name" name="office_name">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($offices as $office)
+                                                    <option value="{{ $office->id }}"
+                                                        {{ $user->office_id == $office->id ? 'selected' : '' }}>
+                                                        {{ $office->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="role">Role <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="role" id="role">
-                                                <option>Select...</option>
-                                                <option value="client" selected>Client</option>
-                                                <option value="admin">Admin</option>
+                                            <select class="custom-select" id="roles" name="roles">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}">{{ $role->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -174,6 +189,9 @@
                     }, {
                         data: 'position',
                         name: 'position'
+                    }, , {
+                        data: 'office',
+                        name: 'office'
                     },
                     {
                         data: 'email',

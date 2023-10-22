@@ -67,7 +67,7 @@ class RoleController extends Controller
             if (empty($request->id)) {
                $request->validate([
                     'name' => 'required|string|max:255|unique:permissions',
-                    'group_name' => 'required|string|max:255|unique:permissions',
+                    'group_name' => 'required|string|max:255',
                 ]);
                 $data = new Permission;
                 $data->name = ucfirst($request->name);
