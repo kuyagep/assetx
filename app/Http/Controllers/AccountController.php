@@ -33,13 +33,35 @@ class AccountController extends Controller
        $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:'.User::class],
-            'phone' => ['numeric','digits:11', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+            'phone' => ['numeric','digits:11'],
             'address' => ['string', 'max:255'],
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        
+
+
         $data = User::find(Auth::user()->id);
+
+        if($data->email !== $request->email){
+            $email_exist = User::where('email', $request->email)->first();
+
+            if ($email_exist) {
+                Alert::error('Oops!', 'The email has already been taken.');
+                return redirect()->back();              
+            } 
+        }
+
+        if($data->phone !== $request->phone){
+            $phone_exist = User::where('phone', $request->phone)->first();
+
+            if ($phone_exist) {
+                Alert::success('Oops!', 'The phone has already been taken.');
+                return redirect()->back();
+            }
+        }
+        
         $data->first_name = $request->first_name;
         $data->last_name = $request->last_name;
         $data->email = $request->email;
@@ -58,11 +80,12 @@ class AccountController extends Controller
             $data['avatar'] = $filename;
         }
 
-        $data->save();
+        // $data->save();
 
         // alert()->success('Title','Lorem Lorem Lorem');
-
-        Alert::success('Success', 'Profile updated successfully!');
+        if( $data->save()){
+            Alert::success('Success', 'Your Profile updated successfully!');
+        }      
 
 
         $notification = array(

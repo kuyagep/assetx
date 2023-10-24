@@ -9,6 +9,7 @@ use App\Models\Division;
 use App\Models\PermissionGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -23,6 +24,7 @@ class RoleController extends Controller
      */
     public function allPermission(Request $request)
     {
+        
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();

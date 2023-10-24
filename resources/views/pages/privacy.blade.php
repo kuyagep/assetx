@@ -27,8 +27,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Privacy Policy for DepEd Davao del Sur</h1>
-
+                        <h1>Privacy Policy</h1>
+                        <hr>
                         <p>At Project DAVAOSUR, accessible from www.depeddavaodelsur.com, one of our main priorities is the
                             privacy of our visitors. This Privacy Policy document contains types of information that is
                             collected and recorded by Project DAVAOSUR and how we use it.</p>

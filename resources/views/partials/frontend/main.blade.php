@@ -42,7 +42,7 @@
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="{{ url('/index') }}" class="nav-link">Home</a>
+                            <a href="{{ url('/index') }}" class="nav-link active">Home</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -51,6 +51,9 @@
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                                 <li><a href="#" class="dropdown-item">Overview </a></li>
                                 <li><a href="#" class="dropdown-item">Features</a></li>
+                                <li><a href="{{ url('/data-privacy-notice') }}" class="dropdown-item">Data Privacy
+                                        Notice</a>
+                                </li>
 
                                 <li class="dropdown-divider"></li>
 
@@ -64,7 +67,8 @@
                                             <a tabindex="-1" href="{{ url('/terms-of-service') }}"
                                                 class="dropdown-item">Terms & Condition</a>
                                         </li>
-                                        <li><a href="{{ url('/disclaimer') }}" class="dropdown-item">Disclaimer</a></li>
+                                        <li><a href="{{ url('/disclaimer') }}" class="dropdown-item">Disclaimer</a>
+                                        </li>
                                         <li><a href="{{ url('/privacy') }}" class="dropdown-item">Privacy
                                                 Policy</a></li>
 

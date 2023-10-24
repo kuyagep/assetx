@@ -27,10 +27,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Disclaimer for DepEd Davao del Sur</h1>
-
+                        <h1>Disclaimer</h1>
+                        <hr>
                         <p>If you require any more information or have any questions about our site's disclaimer, please
-                            feel free to contact us by email at deped.davaodelsur@deped.gov.ph.</p>
+                            feel free to contact us by email at <a
+                                href="mailto:deped.davaodelsur@deped.gov.ph">deped.davaodelsur@deped.gov.ph</a>.</p>
 
                         <h2>Disclaimers for Project DAVAOSUR</h2>
 

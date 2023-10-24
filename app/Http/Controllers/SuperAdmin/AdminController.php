@@ -18,7 +18,6 @@ class AdminController extends Controller
         $users = [];
         if($request->ajax()){
             $users = User::where('role', 'admin')
-            ->orWhere('role','super_admin')
             ->get();
             return DataTables::of($users)
             ->editColumn('position', function ($request) {
@@ -138,7 +137,7 @@ class AdminController extends Controller
                 $user->email = $request->email;
                 $user->phone = $request->phone;
                 $user->password = Hash::make('password');
-                $user->role = 'super_admin';
+                $user->role = 'admin';
                 $user->status = $request->status;
 
                 if ($request->hasFile('avatar')) {
@@ -211,12 +210,32 @@ class AdminController extends Controller
         ]);
             
         $user = User::findOrFail($id);
+
+        if($user->email !== $request->email){
+            $email_exist = User::where('email', $request->email)->first();
+
+            if ($email_exist) {
+                Alert::error('Oops!', 'The email has already been taken.');
+                return redirect()->back();              
+            } 
+        }
+
+        if($user->phone !== $request->phone){
+            $phone_exist = User::where('phone', $request->phone)->first();
+
+            if ($phone_exist) {
+                Alert::success('Oops!', 'The phone has already been taken.');
+                return redirect()->back();
+            }
+        }
+
+
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->office_id = $request->office_name;
-        $user->role = 'super_admin';
+        $user->role = 'admin';
         $user->status = $request->status;
 
         if ($request->hasFile('avatar')) {

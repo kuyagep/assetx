@@ -278,7 +278,7 @@
         <!-- /.sidebar -->
     </aside>
 @elseif(Auth::user()->role == 'admin')
-    <aside class="main-sidebar sidebar-dark-danger elevation-1">
+    <aside class="main-sidebar sidebar-dark-danger bg-navy elevation-1">
         <!-- Brand Logo -->
         @include('partials.brand_logo')
 
@@ -575,24 +575,7 @@
                             </p>
                         </a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a href="{{ url('/client/transferred-items') }}"
-                            class="nav-link {{ Request::is('client/transferred-items') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-inbox"></i>
-                            <p>
-                                Transferred Asset
-                            </p>
-                        </a>
-                    </li> --}}
-                    {{-- <li class="nav-item">
-                        <a href="{{ url('/client/returned-items') }}"
-                            class="nav-link {{ Request::is('client/returned-items') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-inbox"></i>
-                            <p>
-                                Returned Asset
-                            </p>
-                        </a>
-                    </li> --}}
+
                     <li
                         class="nav-item {{ Request::is('client/change/password', 'client/profile') ? 'menu-open' : '' }}">
                         <a href="#"

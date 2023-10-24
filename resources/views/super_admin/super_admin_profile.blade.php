@@ -11,6 +11,8 @@
             <div class="row mt-sm-4">
                 <div class="col-xl-4 order-xl-2">
                     <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+
                         <div class="card-body">
                             <div class="text-center">
                                 <a href="#">

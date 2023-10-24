@@ -59,6 +59,7 @@ Route::get('/features', [HomeController::class, 'features'])->name('features');
 Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/disclaimer', [HomeController::class, 'disclaimer'])->name('disclaimer');
 Route::get('/terms-of-service', [HomeController::class, 'termsService'])->name('terms-of-service');
+Route::get('/data-privacy-notice', [HomeController::class, 'dataPrivacy'])->name('data-privacy-notice');
 
 
 Route::middleware('auth')->group(function () {

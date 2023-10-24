@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>Terms and Conditions of Use</h1>
-
+                        <hr>
                         <h2>1. Terms</h2>
 
                         <p>By accessing this Website, accessible from www.depeddavaodelsur.com, you are agreeing to be bound

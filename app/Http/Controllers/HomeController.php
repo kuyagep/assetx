@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -10,7 +11,7 @@ class HomeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {     
         return view('index');
     }
     public function about()
@@ -32,6 +33,10 @@ class HomeController extends Controller
     public function termsService()
     {
         return view('pages.terms-of-service');
+    }
+    public function dataPrivacy()
+    {
+        return view('pages.data-privacy-notice');
     }
 
 }

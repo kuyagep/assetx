@@ -17,19 +17,16 @@ class PurchaseController extends Controller
      */
     public function index(Request $request)
     {
-        if(!Auth::check()){
-            return redirect('/index');
-        }
+        
         $data = [];
         if($request->ajax()){
-            // $data = User::orderBy('created_at', 'asc')->get();
             $data = Purchase::all();
             return DataTables::of($data)
             ->editColumn('office', function ($request) {
-                    return $request->office->name; // format date time
+                    return $request->office->name;
                 })
                 ->editColumn('created_at', function ($request) {
-                        return $request->created_at->format('d-m-Y H:i:s'); // format date time
+                        return $request->created_at->format('d-m-Y H:i:s'); 
                 })
                 ->editColumn('isApproved', function ($request) {
 
