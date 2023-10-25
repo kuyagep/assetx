@@ -13,7 +13,7 @@
 
                     <div class="card">
                         <form method="post" class="needs-validation"
-                            action="{{ route('super_admin.roles.permission.store') }}" novalidate=""
+                            action="{{ route('roles.permission.store') }}" novalidate=""
                             enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf

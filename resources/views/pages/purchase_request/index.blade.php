@@ -199,7 +199,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/purchase') }}",
+                ajax: "{{ url('my/purchase') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -265,7 +265,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.purchase.store') }}",
+                    url: "{{ route('purchase.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -300,7 +300,7 @@
                 $('#btn-save').attr('disabled', true);
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.purchase.show', ':id') }}";
+                var route = "{{ route('purchase.show', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -333,7 +333,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.purchase.edit', ':id') }}";
+                var route = "{{ route('purchase.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -364,7 +364,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.purchase.destroy', ':id') }}";
+                var route = "{{ route('purchase.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 

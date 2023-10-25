@@ -132,7 +132,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/districts') }}",
+                ajax: "{{ url('my/districts') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -193,7 +193,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.districts.store') }}",
+                    url: "{{ route('districts.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -228,7 +228,7 @@
                 $('#btn-save').attr('disabled', true);
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.districts.show', ':id') }}";
+                var route = "{{ route('districts.show', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -261,7 +261,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.districts.edit', ':id') }}";
+                var route = "{{ route('districts.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -312,7 +312,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.districts.destroy', ':id') }}";
+                var route = "{{ route('districts.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 

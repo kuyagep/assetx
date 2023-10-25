@@ -36,11 +36,11 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                       with font-awesome or any other icon font library -->
+                                                                                                                                                                               with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     <li class="nav-item">
-                        <a href="{{ url('s/dashboard') }}"
-                            class="nav-link {{ Request::is('s/dashboard') ? 'active' : '' }}">
+                        <a href="{{ url('my/dashboard') }}"
+                            class="nav-link {{ Request::is('my/dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fa-regular fa-compass"></i>
                             <p>
                                 Dashboard
@@ -48,8 +48,8 @@
                         </a>
                     </li>
 
-                    <li class="nav-item {{ Request::is('s/purchase') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ Request::is('s/purchase') ? 'active' : '' }}">
+                    <li class="nav-item {{ Request::is('my/purchase') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('my/purchase') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-cart-shopping"></i>
                             <p>
                                 Manage Purchase
@@ -59,8 +59,8 @@
                         <ul class="nav nav-treeview">
 
                             <li class="nav-item">
-                                <a href="{{ url('s/purchase') }}"
-                                    class="nav-link {{ Request::is('s/purchase') ? 'active' : '' }}">
+                                <a href="{{ url('my/purchase') }}"
+                                    class="nav-link {{ Request::is('my/purchase') ? 'active' : '' }}">
                                     <i class="nav-icon fa-solid fa-receipt"></i>
                                     <p>All Purchase Request</p>
                                 </a>
@@ -69,7 +69,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ Request::is('s/accountability') ? 'active' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('my/accountability') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-barcode"></i>
                             <p> Accountability</p>
                         </a>
@@ -77,7 +77,8 @@
                     {{-- @if (Auth::user()->can('division.menu'))
                     @endif --}}
                     <li class="nav-item">
-                        <a href="{{ url('s/division') }}" class="nav-link {{ Request::is('s/division') ? 'active' : '' }}">
+                        <a href="{{ url('my/division') }}"
+                            class="nav-link {{ Request::is('my/division') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-building"></i>
                             <p> Manage Division </p>
                         </a>
@@ -85,8 +86,8 @@
 
 
                     <li class="nav-item">
-                        <a href="{{ url('s/districts') }}"
-                            class="nav-link {{ Request::is('s/districts') ? 'active' : '' }}">
+                        <a href="{{ url('my/districts') }}"
+                            class="nav-link {{ Request::is('my/districts') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-home"></i>
                             <p>
                                 Manage District
@@ -94,7 +95,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('s/schools') }}" class="nav-link {{ Request::is('s/schools') ? 'active' : '' }}">
+                        <a href="{{ url('my/schools') }}"
+                            class="nav-link {{ Request::is('my/schools') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-graduation-cap"></i>
                             <p>
                                 Manage Schools
@@ -102,7 +104,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('s/offices') }}" class="nav-link {{ Request::is('s/offices') ? 'active' : '' }}">
+                        <a href="{{ url('my/offices') }}"
+                            class="nav-link {{ Request::is('my/offices') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-briefcase"></i>
                             <p>
                                 Manage Office
@@ -110,8 +113,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('s/positions') }}"
-                            class="nav-link {{ Request::is('s/positions') ? 'active' : '' }}">
+                        <a href="{{ url('my/positions') }}"
+                            class="nav-link {{ Request::is('my/positions') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user-tie"></i>
                             <p>
                                 Manage Position
@@ -119,8 +122,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('s/classifications') }}"
-                            class="nav-link {{ Request::is('s/classifications') ? 'active' : '' }}">
+                        <a href="{{ url('my/classifications') }}"
+                            class="nav-link {{ Request::is('my/classifications') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-stream"></i>
                             <p>
                                 Asset Classification
@@ -128,8 +131,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('s/asset-status') }}"
-                            class="nav-link {{ Request::is('s/asset-status') ? 'active' : '' }}">
+                        <a href="{{ url('my/asset-status') }}"
+                            class="nav-link {{ Request::is('my/asset-status') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-toggle-on"></i>
                             <p>
                                 Asset Status
@@ -145,8 +148,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('s/issuance-type') }}"
-                            class="nav-link {{ Request::is('s/issuance-type') ? 'active' : '' }}">
+                        <a href="{{ url('my/issuance-type') }}"
+                            class="nav-link {{ Request::is('my/issuance-type') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Issuance Type
@@ -163,24 +166,23 @@
                     </li>
                     <li class="nav-header">USER MANAGEMENT</li>
                     <li class="nav-item">
-                        <a href="{{ route('super_admin.user.index') }}"
-                            class="nav-link {{ Request::is('s/user') ? 'active' : '' }}">
+                        <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('my/user') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
                             <p>Manage Users</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('s/admin/all') }}"
-                            class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
+                        <a href="{{ url('my/admin/all') }}"
+                            class="nav-link {{ Request::is('my/admin/all') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
                             <p>Manage Admin</p>
                         </a>
                     </li>
 
                     <li
-                        class="nav-item {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all', 's/roles/permission') ? 'menu-open' : '' }}">
+                        class="nav-item {{ Request::is('my/permission', 'my/permission-group', 'my/roles', 'my/roles/permission/all', 'my/roles/permission') ? 'menu-open' : '' }}">
                         <a href="#"
-                            class="nav-link {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all', 's/roles/permission') ? 'active' : '' }}">
+                            class="nav-link {{ Request::is('my/permission', 'my/permission-group', 'my/roles', 'my/roles/permission/all', 'my/roles/permission') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-users-gear"></i>
                             <p>
                                 Role & Permission
@@ -190,36 +192,36 @@
                         <ul class="nav nav-treeview">
 
                             <li class="nav-item">
-                                <a href="{{ url('s/roles') }}"
-                                    class="nav-link {{ Request::is('s/roles') ? 'active' : '' }}">
+                                <a href="{{ url('my/roles') }}"
+                                    class="nav-link {{ Request::is('my/roles') ? 'active' : '' }}">
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>Roles</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('s/roles/permission') }}"
-                                    class="nav-link {{ Request::is('s/roles/permission') ? 'active' : '' }}">
+                                <a href="{{ url('my/roles/permission') }}"
+                                    class="nav-link {{ Request::is('my/roles/permission') ? 'active' : '' }}">
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>Add Role Permission</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('s/roles/permission/all') }}"
-                                    class="nav-link {{ Request::is('s/roles/permission/all') ? 'active' : '' }}">
+                                <a href="{{ url('my/roles/permission/all') }}"
+                                    class="nav-link {{ Request::is('my/roles/permission/all') ? 'active' : '' }}">
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>All Roles Permission</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('s/permission') }}"
-                                    class="nav-link {{ Request::is('s/permission') ? 'active' : '' }}">
+                                <a href="{{ url('my/permission') }}"
+                                    class="nav-link {{ Request::is('my/permission') ? 'active' : '' }}">
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>Permissions</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('s/permission-group') }}"
-                                    class="nav-link {{ Request::is('s/permission-group') ? 'active' : '' }}">
+                                <a href="{{ url('my/permission-group') }}"
+                                    class="nav-link {{ Request::is('my/permission-group') ? 'active' : '' }}">
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>Permission Group</p>
                                 </a>
@@ -227,8 +229,8 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('s/profile') }}"
-                            class="nav-link {{ Request::is('s/profile') ? 'active' : '' }}">
+                        <a href="{{ url('my/profile') }}"
+                            class="nav-link {{ Request::is('my/profile') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-file-alt"></i>
                             <p>
                                 Profile Settings

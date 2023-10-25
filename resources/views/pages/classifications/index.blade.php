@@ -118,7 +118,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/classifications') }}",
+                ajax: "{{ url('my/classifications') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -171,7 +171,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.classifications.store') }}",
+                    url: "{{ route('classifications.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -206,7 +206,7 @@
                 $('#btn-save').attr('disabled', true);
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.classifications.show', ':id') }}";
+                var route = "{{ route('classifications.show', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -238,7 +238,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.classifications.edit', ':id') }}";
+                var route = "{{ route('classifications.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -267,7 +267,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.classifications.destroy', ':id') }}";
+                var route = "{{ route('classifications.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
@@ -312,14 +312,6 @@
 
             });
 
-            // display image
-            $('#avatar').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0']);
-            });
         });
     </script>
 @endsection

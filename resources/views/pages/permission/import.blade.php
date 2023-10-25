@@ -15,7 +15,7 @@
                         <i class="fa-solid fa-download"></i>&nbsp;Export
                     </a>
                     <div class="card">
-                        <form method="post" class="needs-validation" action="{{ route('super_admin.import.permissions') }}"
+                        <form method="post" class="needs-validation" action="{{ route('import.permissions') }}"
                             novalidate="" enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf
@@ -109,7 +109,7 @@
             // });
 
             $('body').on('click', '#export-data', function() {
-                var route = "{{ route('super_admin.export.permission') }}";
+                var route = "{{ route('export.permission') }}";
 
                 Swal.fire({
                     title: 'Do you want to export permission?',

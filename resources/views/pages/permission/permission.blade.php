@@ -16,8 +16,7 @@
                             <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2" title="Add data">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add Permission
                             </a>
-                            <a href="{{ route('super_admin.import.permission') }}" class="btn btn-success mr-2"
-                                title="Import Excel">
+                            <a href="{{ route('import.permission') }}" class="btn btn-success mr-2" title="Import Excel">
                                 <i class="fa-solid fa-upload"></i>&nbsp;Import
                             </a>
                             <a href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
@@ -133,7 +132,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/permission') }}",
+                ajax: "{{ url('my/permission') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -183,7 +182,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.permission.add') }}",
+                    url: "{{ route('permission.add') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -219,7 +218,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.permission.edit', ':id') }}";
+                var route = "{{ route('permission.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -270,7 +269,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.permission.destroy', ':id') }}";
+                var route = "{{ route('permission.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
@@ -326,7 +325,7 @@
 
 
             $('body').on('click', '#export-data', function() {
-                var route = "{{ route('super_admin.export.permission') }}";
+                var route = "{{ route('export.permission') }}";
 
                 Swal.fire({
                     title: 'Do you want to export permission?',
@@ -359,11 +358,7 @@
                             }
                         });
                     }
-                })
-
-
-
-
+                });
             });
         });
     </script>

@@ -13,7 +13,7 @@
 
                     <div class="card">
                         <form method="post" class="needs-validation"
-                            action="{{ route('super_admin.roles.permission.update', $role->id) }}" novalidate=""
+                            action="{{ route('roles.permission.update', $role->id) }}" novalidate=""
                             enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf

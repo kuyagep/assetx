@@ -15,9 +15,8 @@
                         <i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back
                     </button>
                     <div class="card">
-                        <form method="post" class="needs-validation"
-                            action="{{ route('super_admin.user.update', $user->id) }}" novalidate=""
-                            enctype="multipart/form-data">
+                        <form method="post" class="needs-validation" action="{{ route('user.update', $user->id) }}"
+                            novalidate="" enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf
 
@@ -143,7 +142,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.admin.destroy', ':id') }}";
+                var route = "{{ route('admin.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
@@ -178,7 +177,7 @@
 
                                 setTimeout(function() {
                                     window.location.href =
-                                        "{{ route('super_admin.all.admin') }}";
+                                        "{{ route('all.admin') }}";
                                 }, 2000);
 
                             },

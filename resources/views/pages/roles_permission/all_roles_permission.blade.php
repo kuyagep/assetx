@@ -119,7 +119,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/roles/permission/all') }}",
+                ajax: "{{ url('my/roles/permission/all') }}",
                 columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -167,7 +167,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.roles.add') }}",
+                    url: "{{ route('roles.add') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -203,7 +203,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.roles.permission.edit', ':id') }}";
+                var route = "{{ route('roles.permission.edit', ':id') }}";
                 route = route.replace(':id', id);
                 window.location.href = route;
                 // $.ajax({
@@ -231,7 +231,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.roles.permission.destroy', ':id') }}";
+                var route = "{{ route('roles.permission.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 

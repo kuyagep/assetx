@@ -65,86 +65,23 @@ Route::get('/terms-of-service', [HomeController::class, 'termsService'])->name('
 Route::get('/data-privacy-notice', [HomeController::class, 'dataPrivacy'])->name('data-privacy-notice');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
-######################## ADMIN ########################
-Route::prefix('admin')->name('admin.')->middleware(['auth','verified','role:admin'])->group(function(){
-    Route::get('/dashboard',[DashboardController::class,'AdminDashboard'])->name('dashboard');
-    Route::get('/profile',[AccountController::class,'AdminProfile'])->name('profile');
-    Route::post('/profile/update',[AccountController::class,'AdminProfileUpdate'])->name('profile.update');
-    Route::post('/update/password',[AccountController::class,'AdminUpdatePassword'])->name('update.password');
-    Route::get('/change/password',[AccountController::class,'AdminChangePassword'])->name('change.password');
-
-    Route::resource('/users', AdminUserController::class);
-    #asset classifications
-    Route::resource('/classifications', ClassificationsController::class);
-    #asset status
-    Route::resource('/asset-status', AdminAssetStatusController::class);
-    #purchases
-    Route::resource('/purchase', AdminPurchaseController::class);
-    #issue items
-    Route::resource('/purchase', AdminPurchaseController::class);
-    #asset issuance type
-    Route::resource('/issuance-type', AdminIssuanceTypeController::class);
-    
-    Route::get('/search', [AssetSearchController::class, 'search'])->name('search');
-
-    Route::get('/issue-items', function () {
-        return view('admin.issue-items');
-    });
-
-    Route::get('/all-issuances', function () {
-        return view('admin.all-issuances');
-    });
-    
-    Route::get('/asset-registration', function () {
-        return view('admin.asset-registration');
-    });
-
-    Route::get('/reports', function () {
-        return view('admin.reports');
-    });
-    Route::get('/backups', function () {
-        return view('admin.backups');
-    });
-    
-});
-
-######################## client ########################
-Route::prefix('client')->name('client.')->middleware(['auth','verified','role:client'])->group(function(){
-    Route::get('/dashboard',[AccountController::class,'clientDashboard'])->name('dashboard');
-    Route::get('/profile',[AccountController::class,'clientProfile'])->name('profile');
-    Route::post('/profile/update',[AccountController::class,'clientProfileUpdate'])->name('profile.update');
-    Route::post('/update/password',[AccountController::class,'clientUpdatePassword'])->name('update.password');
-    Route::get('/change/password',[AccountController::class,'clientChangePassword'])->name('change.password');
-
-    Route::get('/returned-items',  [AccountableController::class, 'returned_items'])->name('returned-items');
-    Route::get('/transferred-items',  [AccountableController::class, 'transferred_items'])->name('transferred-items');
-    
-    #issuances
-    Route::resource('/purchase', ControllersPurchaseController::class);
-    #accountability
-    Route::resource('/accountability', AccountableController::class);
-    
-
-    Route::get('/backup', function () {
-        return view('client.back-up');
-    });
-});
 
 ######################## SUPER ADMIN ########################
-Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'])->group(function(){
+Route::prefix('my')->middleware(['auth','role:super-admin|admin'])->group(function(){
     Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
     Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
     Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
     Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
 
     #division
-    Route::controller(DivisionController::class)->group(function () {
+    //* prefix('s')->name('super_admin.')->
+    Route::name('super_admin.')->controller(DivisionController::class)->group(function () {
         //* ->middleware('permission:division.all')
         Route::get('/division', 'index')->name('division.index');
         Route::post('/division', 'store')->name('division.store');

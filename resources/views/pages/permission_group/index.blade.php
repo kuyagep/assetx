@@ -111,7 +111,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/permission-group') }}",
+                ajax: "{{ url('my/permission-group') }}",
                 columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -156,7 +156,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.permission-group.store') }}",
+                    url: "{{ route('permission-group.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -192,7 +192,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.permission-group.edit', ':id') }}";
+                var route = "{{ route('permission-group.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -221,7 +221,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.permission-group.destroy', ':id') }}";
+                var route = "{{ route('permission-group.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 

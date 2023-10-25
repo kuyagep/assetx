@@ -195,7 +195,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('s/user') }}",
+                ajax: "{{ url('my/user') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -267,7 +267,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('super_admin.user.store') }}",
+                    url: "{{ route('user.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -306,7 +306,7 @@
                 $('#btn-save').attr('disabled', false);
                 // $('#ModalForm').attr("id", "editModalForm");
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.user.edit', ':id') }}";
+                var route = "{{ route('user.edit', ':id') }}";
                 route = route.replace(':id', id);
                 window.location.href = route;
 
@@ -316,7 +316,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('super_admin.admin.destroy', ':id') }}";
+                var route = "{{ route('admin.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
