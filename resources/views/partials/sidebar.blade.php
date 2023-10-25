@@ -36,7 +36,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     <li class="nav-item">
                         <a href="{{ url('my/dashboard') }}"
@@ -248,16 +248,30 @@
                             </ul>
                         </li>
                     @endcan
-
-                    <li class="nav-item">
-                        <a href="{{ url('my/profile') }}"
-                            class="nav-link {{ Request::is('my/profile') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-file-alt"></i>
-                            <p>
-                                Profile Settings
-                            </p>
-                        </a>
-                    </li>
+                    {{-- SUPER ADMIN --}}
+                    @role('super-admin')
+                        <li class="nav-item">
+                            <a href="{{ url('my/profile') }}"
+                                class="nav-link {{ Request::is('my/profile') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>
+                                    Profile Settings
+                                </p>
+                            </a>
+                        </li>
+                    @endrole
+                    {{-- ADMIN --}}
+                    @role('admin')
+                        <li class="nav-item">
+                            <a href="{{ url('my/account/profile') }}"
+                                class="nav-link {{ Request::is('my/account/profile') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>
+                                    Profile Settings
+                                </p>
+                            </a>
+                        </li>
+                    @endrole
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

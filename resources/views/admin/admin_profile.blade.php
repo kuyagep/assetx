@@ -11,7 +11,6 @@
             <div class="row mt-sm-4">
                 <div class="col-xl-4 order-xl-2">
                     <div class="card">
-
                         <div class="card-body">
                             <div class="text-center">
                                 <a href="#">
@@ -42,7 +41,7 @@
                 </div>
                 <div class="col-xl-8 order-xl-1">
                     <div class="card">
-                        <form method="post" class="needs-validation" action="{{ route('super_admin.profile.update') }}"
+                        <form method="post" class="needs-validation" action="{{ route('admin.profile.update') }}"
                             novalidate="" enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf
@@ -168,7 +167,7 @@
                                     </div>
                                 </div>
                                 <div class="row float-right mt-3">
-                                    <button type="submit" class="btn btn-dark"><i class="fa-regular fa-floppy-disk"></i>
+                                    <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
                                         Update Profile</button>
                                 </div>
                             </div>
@@ -180,9 +179,8 @@
             <div class="row" id="change_password">
                 <div class="col-xl-8 order-xl-1">
                     <div class="card">
-                        <form method="post" class="needs-validation"
-                            action="{{ route('super_admin.update.password') }}" novalidate=""
-                            enctype="multipart/form-data">
+                        <form method="post" class="needs-validation" action="{{ route('admin.update.password') }}"
+                            novalidate="" enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf
                             <div class="card-header">
@@ -233,7 +231,7 @@
                                     </div>
                                 </div>
                                 <div class="row float-right mt-3">
-                                    <button type="submit" class="btn btn-dark"><i class="fa-regular fa-floppy-disk"></i>
+                                    <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
                                         Save Changes</button>
                                 </div>
                             </div>

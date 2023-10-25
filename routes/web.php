@@ -74,11 +74,21 @@ Route::get('/data-privacy-notice', [HomeController::class, 'dataPrivacy'])->name
 
 ######################## SUPER ADMIN ########################
 Route::prefix('my')->middleware(['auth','role:super-admin|admin'])->group(function(){
-    Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
-    Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
-    Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
-    Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
 
+    //* ############# ADMIN #############
+    Route::name('admin.')->controller(AccountController::class)->middleware(['auth','role:admin'])->group(function () {
+        //* ->middleware('permission:division.all')
+        Route::get('/account/dashboard',[AccountController::class,'adminDashboard'])->name('dashboard');
+        Route::get('/account/profile',[AccountController::class,'adminProfile'])->name('profile');
+        Route::post('/account/profile/update',[AccountController::class,'adminProfileUpdate'])->name('profile.update');
+        Route::post('/account/update/password',[AccountController::class,'adminUpdatePassword'])->name('update.password');
+    });
+    Route::controller(AccountController::class)->group(function () {
+        Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
+        Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
+        Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
+        Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
+    });
     #division
     //* prefix('s')->name('super_admin.')->
     Route::name('super_admin.')->controller(DivisionController::class)->group(function () {
