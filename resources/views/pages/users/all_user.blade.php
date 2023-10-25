@@ -10,18 +10,23 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="row mb-3 ">
+                        <div class="col-12">
+                            <button id="add-button" class="btn btn-primary mr-2 float-left" title="Add [Alt+A]">
+                                <i class="fa-regular fa-square-plus" accesskey="a"></i>&nbsp;Add User
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
+
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><i class="fas fa-users "></i><b> List of User</b></h3>
-                            <div class="card-tools">
-                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add New User
-                                </a>
-                            </div>
-                            <!-- /.card-tools -->
+                            <h5><i class="fas fa-users "></i>&nbsp;List of All User</h5>
                         </div>
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="dataTableajax" class="table table-striped">
@@ -30,10 +35,12 @@
                                             <th>#</th>
                                             <th>Avatar</th>
                                             <th>Full Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
                                             <th>Email</th>
+                                            <th>Phone</th>
                                             <th>Role</th>
-                                            <th style="width: 8%" class="text-center">Status</th>
-                                            <th>Create At</th>
+                                            <th class="text-center">Status</th>
                                             <th width="250px">Action</th>
                                         </tr>
                                     </thead>
@@ -49,7 +56,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modal">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-title"></h4>
@@ -61,6 +68,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
+
                                 {{-- Error Display here --}}
                                 <div id="error"></div>
                                 {{-- Reference Id --}}
@@ -96,11 +104,38 @@
                                                 placeholder="Ex. example@email.com">
                                         </div>
                                         <div class="form-group">
+                                            <label for="phone">Phone Number <span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" id="phone" name="phone"
+                                                placeholder="Ex. 09123456789">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Position <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="position_name" name="position_name">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($positions as $position)
+                                                    <option value="{{ $position->id }}">{{ $position->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Office <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="office_name" name="office_name">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($offices as $office)
+                                                    <option value="{{ $office->id }}">{{ $office->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="role">Role <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="role" id="role">
-                                                <option>Select...</option>
-                                                <option value="client" selected>Client</option>
-                                                <option value="admin">Admin</option>
+                                            <select class="custom-select" id="roles" name="roles">
+                                                <option selected disabled>Choose...</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}">{{ $role->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -114,16 +149,17 @@
                                     </div>
                                     <div class="col-4">
                                         <img id="showImage" alt="Avatar" class="table-avatar"
-                                            src="{{ asset('assets/dist/img/avatar.png') }}"
-                                            style="width: 150px;max-width: 150px;height: 150px;object-fit: cover; ">
-
+                                            src="{{ asset('assets/dist/img/avatar/default.jpg') }}"
+                                            style="width: 100%;max-width: 150px;height: 150px;object-fit: cover; ">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="modal-footer justify-end">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-dark btn-save" id="btn-save">Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" title="Close [Alt+C]"
+                                    accesskey="c"><i class="fa-solid fa-xmark"></i> Close</button>
+                                <button type="submit" class="btn btn-dark" id="btn-save" title="Save [Alt+S]"
+                                    accesskey="s">Save</button>
                             </div>
                         </form>
                     </div>
@@ -159,7 +195,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('admin/users') }}",
+                ajax: "{{ url('s/user') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -170,22 +206,27 @@
                     }, {
                         data: 'full_name',
                         name: 'full_name'
+                    }, {
+                        data: 'position',
+                        name: 'position'
+                    }, {
+                        data: 'office',
+                        name: 'office'
                     },
                     {
                         data: 'email',
                         name: 'email'
                     },
                     {
+                        data: 'phone',
+                        name: 'phone'
+                    }, {
                         data: 'role',
                         name: 'role'
-                    },
-                    {
+                    }, {
                         data: 'status',
                         name: 'status',
                         class: 'text-center'
-                    }, {
-                        data: 'created_at',
-                        name: 'created_at'
                     }, {
                         data: 'action',
                         name: 'action',
@@ -203,8 +244,10 @@
             $('#add-button').click(function() {
                 $('#error').html('');
                 $('#modal').modal("show");
-                $('#modal-title').html("Add Data");
+                $('#modal-title').html("Add User");
                 $('#btn-save').html("Save");
+                // <iclass='fa-regular fa-floppy-disk'></>Save
+
                 $('#btn-save').show();
                 $('#id').val('');
                 $('#modal-form').trigger("reset");
@@ -224,7 +267,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('admin.users.store') }}",
+                    url: "{{ route('super_admin.user.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -256,83 +299,30 @@
             });
 
             // View Function
-            $('body').on('click', '#viewButton', function() {
-                $('#btn-save').attr('disabled', true);
 
-                var id = $(this).data('id');
-                var route = "{{ route('admin.users.show', ':id') }}";
-                route = route.replace(':id', id);
-
-                $.ajax({
-                    type: "GET",
-                    url: route,
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-
-                        $('#modal-title').html("View Data");
-                        $('#modal').modal("show");
-                        $('#id').val(response.id);
-                        $('#first_name').val(response.first_name);
-                        $('#last_name').val(response.last_name);
-                        $('#email').val(response.email);
-                        $('#role').val(response.role);
-                        $('#status').val(response.status);
-                        $('#error').html('');
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
-            });
 
             // Edit Function
             $('body').on('click', '#editButton', function() {
                 $('#btn-save').attr('disabled', false);
                 // $('#ModalForm').attr("id", "editModalForm");
-                $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('admin.users.edit', ':id') }}";
+                var route = "{{ route('super_admin.user.edit', ':id') }}";
                 route = route.replace(':id', id);
+                window.location.href = route;
 
-                $.ajax({
-                    type: "GET",
-                    url: route,
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        // console.log(res);
-                        $('#modal-title').html("Edit Data");
-                        $('#modal').modal("show");
-                        $('#id').val(response.id);
-                        $('#first_name').val(response.first_name);
-                        $('#last_name').val(response.last_name);
-                        $('#email').val(response.email);
-                        $('#role').val(response.role);
-                        $('#status').val(response.status);
-                        $('#error').html('');
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
             });
 
             // Delete Function
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('admin.users.destroy', ':id') }}";
+                var route = "{{ route('super_admin.admin.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You want delete this account?",
+                    text: "You want delete this admin user?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

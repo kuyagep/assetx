@@ -166,32 +166,20 @@
                     </li>
                     <li class="nav-header">USER MANAGEMENT</li>
                     <li class="nav-item">
-                        <a href="{{ route('super_admin.users.index') }}"
-                            class="nav-link {{ Request::is('s/users') ? 'active' : '' }}">
+                        <a href="{{ route('super_admin.user.index') }}"
+                            class="nav-link {{ Request::is('s/user') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
                             <p>Manage Users</p>
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('s/admin/all') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
-                            <i class="nav-icon fa-solid fa-users-gear"></i>
-                            <p>
-                                Manage Admin
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
+                    <li class="nav-item">
+                        <a href="{{ url('s/admin/all') }}"
+                            class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
+                            <i class="fas fa-users nav-icon "></i>
+                            <p>Manage Admin</p>
                         </a>
-                        <ul class="nav nav-treeview">
-
-                            <li class="nav-item">
-                                <a href="{{ url('s/admin/all') }}"
-                                    class="nav-link {{ Request::is('s/admin/all') ? 'active' : '' }}">
-                                    <i class="fas fa-user-cog nav-icon"></i>
-                                    <p>All Admin</p>
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
+
                     <li
                         class="nav-item {{ Request::is('s/permission', 's/permission-group', 's/roles', 's/roles/permission/all', 's/roles/permission') ? 'menu-open' : '' }}">
                         <a href="#"

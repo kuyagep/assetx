@@ -140,7 +140,7 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
     Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
     Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
 
-    Route::resource('/users', UsersController::class);
+    // Route::resource('/users', UsersController::class);
 
     #division
     Route::controller(DivisionController::class)->group(function () {
@@ -209,6 +209,14 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
         Route::get('/admin/{id}/edit', 'editAdmin')->name('admin.edit');
         Route::post('/admin/update/{id}', 'updateAdmin')->name('admin.update');
         Route::delete('/admin/destroy/{id}', 'destroyAdmin')->name('admin.destroy');
+    });
+
+    Route::controller(UsersController::class)->group(function () {
+        Route::get('/user', 'index')->name('user.index');
+        Route::post('/user', 'store')->name('user.store');
+        Route::get('/user/{id}/edit', 'edit')->name('user.edit');
+        Route::post('/user/update/{id}', 'update')->name('user.update');
+        Route::delete('/user/destroy/{id}', 'destroy')->name('user.destroy');
     });
     
     

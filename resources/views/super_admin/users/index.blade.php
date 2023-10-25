@@ -102,8 +102,7 @@
                                             <select class="custom-select" id="office_name" name="office_name">
                                                 <option selected disabled>Choose...</option>
                                                 @foreach ($offices as $office)
-                                                    <option value="{{ $office->id }}"
-                                                        {{ $user->office_id == $office->id ? 'selected' : '' }}>
+                                                    <option value="{{ $office->id }}">
                                                         {{ $office->name }}
                                                     </option>
                                                 @endforeach

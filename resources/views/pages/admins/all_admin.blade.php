@@ -299,37 +299,7 @@
             });
 
             // View Function
-            $('body').on('click', '#viewButton', function() {
-                $('#btn-save').attr('disabled', true);
 
-                var id = $(this).data('id');
-                var route = "{{ route('super_admin.users.show', ':id') }}";
-                route = route.replace(':id', id);
-
-                $.ajax({
-                    type: "GET",
-                    url: route,
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-
-                        $('#modal-title').html("View Data");
-                        $('#modal').modal("show");
-                        $('#id').val(response.id);
-                        $('#first_name').val(response.first_name);
-                        $('#last_name').val(response.last_name);
-                        $('#email').val(response.email);
-                        $('#role').val(response.role);
-                        $('#status').val(response.status);
-                        $('#error').html('');
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
-            });
 
             // Edit Function
             $('body').on('click', '#editButton', function() {
