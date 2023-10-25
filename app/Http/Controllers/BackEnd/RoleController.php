@@ -228,7 +228,7 @@ class RoleController extends Controller
         $permissions = Permission::all();
 
         $permission_groups = User::getPermissionGroups();
-        return view('pages.rolesPermission.add_roles_permission', compact('roles', 'permissions', 'permission_groups'));
+        return view('pages.roles_permission.add_roles_permission', compact('roles', 'permissions', 'permission_groups'));
     }
     public function storeRolesPermission(Request $request){
         $request->validate([
@@ -245,7 +245,7 @@ class RoleController extends Controller
 
         Alert::success('Success', 'Role Permission added successfully!');
 
-        return redirect()->route('super_admin.all.roles.permission');
+        return redirect()->route('all.roles.permission');
 
     }//end
 
@@ -275,7 +275,7 @@ class RoleController extends Controller
             ->rawColumns(['action','permission'])
             ->make(true);
         }
-        return view('pages.rolesPermission.all_roles_permission');
+        return view('pages.roles_permission.all_roles_permission');
     }
 
     public function editRolesPermission(Request $request){
@@ -283,7 +283,7 @@ class RoleController extends Controller
         $permissions = Permission::all();
 
         $permission_groups = User::getPermissionGroups();
-        return view('pages.rolesPermission.edit_roles_permission', compact('role', 'permissions', 'permission_groups'));
+        return view('pages.roles_permission.edit_roles_permission', compact('role', 'permissions', 'permission_groups'));
     }
     public function updateRolesPermission(Request $request, $id){
         $role = Role::findOrFail($id);
@@ -295,7 +295,7 @@ class RoleController extends Controller
 
         Alert::success('Success', 'Role updated successfully!');
 
-        return redirect()->route('super_admin.all.roles.permission');
+        return redirect()->route('all.roles.permission');
     }
 
     public function destroyRolesPermission(Request $request, $id){

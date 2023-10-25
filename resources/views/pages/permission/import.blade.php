@@ -78,7 +78,7 @@
             //     $.ajax({
             //         // Replace with your route URL
             //         type: 'POST',
-            //         url: "{{ route('super_admin.permission.add') }}",
+            //         url: "{{ route('permission.add') }}",
             //         data: formData,
             //         cache: false,
             //         contentType: false,
