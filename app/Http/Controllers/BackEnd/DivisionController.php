@@ -67,7 +67,7 @@ class DivisionController extends Controller
         }
 
     
-        return view('super_admin.division.index');
+        return view('pages.divisions.index');
        
     }
 

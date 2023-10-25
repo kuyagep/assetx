@@ -68,7 +68,7 @@ class SchoolController extends Controller
         }
 
         $districts = District::all();
-        return view('super_admin.school.index', compact('districts'));
+        return view('pages.schools.index', compact('districts'));
        
     }
 

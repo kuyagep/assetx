@@ -143,8 +143,6 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
     Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
     Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
 
-    // Route::resource('/users', UsersController::class);
-
     #division
     Route::controller(DivisionController::class)->group(function () {
         //* ->middleware('permission:division.all')
@@ -154,16 +152,13 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
         Route::get('/division/{division}', 'show')->name('division.show');
         Route::put('/division/{division}', 'update')->name('division.update');
         Route::get('/division/{division}/edit', 'edit')->name('division.edit');
-        Route::delete('/division/{division}', 'destroy')->name('division.destroy');
-        
+        Route::delete('/division/{division}', 'destroy')->name('division.destroy');        
      });
    
     #district
     Route::resource('/districts', DistrictController::class);
-
     #schools
     Route::resource('/schools', SchoolController::class);
-    
     #offices
     Route::resource('/offices', OfficeController::class);
     #positions
@@ -221,11 +216,7 @@ Route::prefix('s')->name('super_admin.')->middleware(['auth','roles:super_admin'
         Route::post('/user/update/{id}', 'update')->name('user.update');
         Route::delete('/user/destroy/{id}', 'destroy')->name('user.destroy');
     });
-    
-    
-    //  Route::get('/district', [DistrictController::class,'index'])->name('district');
-    //  Route::get('/district/create', [DistrictController::class,'create'])->name('district.create');
-     
+         
 });
 
 

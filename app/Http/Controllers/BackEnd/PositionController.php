@@ -40,7 +40,7 @@ class PositionController extends Controller
         }
 
     
-        return view('super_admin.position.index');
+        return view('pages.positions.index');
        
     }
 

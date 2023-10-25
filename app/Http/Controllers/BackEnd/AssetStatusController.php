@@ -40,7 +40,7 @@ class AssetStatusController extends Controller
         }
 
     
-        return view('super_admin.assetStatus.index');
+        return view('pages.asset_status.index');
        
     }
 

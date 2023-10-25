@@ -35,7 +35,7 @@ class PermissionGroupController extends Controller
         }
 
     
-        return view('super_admin.permissionGroup.index');
+        return view('pages.permission_group.index');
        
     }
 

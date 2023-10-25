@@ -1,5 +1,5 @@
 @if (Auth::user()->role == 'super_admin')
-    <aside class="main-sidebar sidebar-dark-secondary bg-navy elevation-1">
+    <aside class="main-sidebar sidebar-dark-light bg-navy elevation-1">
         <!-- Brand Logo -->
         @include('partials.brand_logo')
 
@@ -19,7 +19,7 @@
             </div>
 
             <!-- SidebarSearch Form -->
-            {{-- <div class="form-inline">
+            {{-- <div class="form-inline ">
                 <div class="input-group" data-widget="sidebar-search">
                     <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                         aria-label="Search">

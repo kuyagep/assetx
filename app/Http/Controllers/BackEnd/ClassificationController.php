@@ -39,7 +39,7 @@ class ClassificationController extends Controller
         }
 
     
-        return view('super_admin.classification.index');
+        return view('pages.classifications.index');
        
     }
 

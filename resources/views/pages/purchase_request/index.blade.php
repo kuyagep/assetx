@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn bg-navy btn-sm mr-2 float-left">
+                            <button id="add-button" class="btn bg-navy mr-2 float-left">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add Purchase Request
                             </button>
                         </div>
@@ -55,7 +55,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modal">
-                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-title"></h4>

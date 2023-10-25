@@ -53,7 +53,7 @@ class AssetController extends Controller
 
         $classifications = Classification::all();
         $asset_status = AssetStatus::all();
-        return view('super_admin.assets.index', compact('asset_status', 'classifications' ));
+        return view('pages.assets.index', compact('asset_status', 'classifications' ));
        
     }
 

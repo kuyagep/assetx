@@ -54,7 +54,7 @@ class OfficeController extends Controller
         }
 
         $divisions = Division::all();
-        return view('super_admin.office.index', compact('divisions'));
+        return view('pages.offices.index', compact('divisions'));
        
     }
 

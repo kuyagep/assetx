@@ -17,27 +17,27 @@ class HomeController extends Controller
     }
     public function about()
     {
-        return view('pages.about');
+        return view('pages.frontend.about');
     }
     public function features()
     {
-        return view('pages.features');
+        return view('pages.frontend.features');
     }
     public function privacy()
     {
-        return view('pages.privacy');
+        return view('pages.frontend.privacy');
     }
     public function disclaimer()
     {
-        return view('pages.disclaimer');
+        return view('pages.frontend.disclaimer');
     }
     public function termsService()
     {
-        return view('pages.terms-of-service');
+        return view('pages.frontend.terms-of-service');
     }
     public function dataPrivacy()
     {
-        return view('pages.data-privacy-notice');
+        return view('pages.frontend.data-privacy-notice');
     }
 
 }

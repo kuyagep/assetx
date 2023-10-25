@@ -32,18 +32,23 @@ class PurchaseController extends Controller
 
                     if($request->isApproved === "approved"){
                         $result = '<span class="badge badge-success">Approved</span>';
-                    }else{
-                         $result = '<span class="badge badge-danger">Rejected</span>';
+                    }elseif($request->isApproved === "pending"){
+                         $result = '<span class="badge badge-warning">Pending</span>';                    
+                    }elseif($request->isApproved === "cancelled"){
+                         $result = '<span class="badge badge-danger">Cancelled</span>';
+                         $result = '<span class="badge badge-primary">Rebid</span>';
+                    }elseif($request->isApproved === "rebid"){
+                         $result = '<span class="badge badge-primary">Rebid</span>';
                     }
                     return $result;
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-secondary btn-sm mr-1" id="viewButton">
+                    $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="viewButton">
                             <i class="fas fa-history"></i></a>';
                     $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="editButton">
                             <i class="far fa-edit"></i></a>';
-                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
+                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm" id="deleteButton">
                             <i class="far fa-trash-alt"></i></a>';
                     return $btn;
                 })
@@ -51,7 +56,7 @@ class PurchaseController extends Controller
                 ->make(true);
         }
         
-        return view('super_admin.purchase.index');
+        return view('pages.purchase_request.index');
        
     }
 

@@ -55,7 +55,7 @@ class DistrictController extends Controller
         }
 
         $divisions = Division::all();
-        return view('super_admin.district.index', compact('divisions'));
+        return view('pages.districts.index', compact('divisions'));
        
     }
 

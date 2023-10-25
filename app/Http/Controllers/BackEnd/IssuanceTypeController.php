@@ -38,7 +38,7 @@ class IssuanceTypeController extends Controller
         }
 
     
-        return view('super_admin.issuanceType.index');
+        return view('pages.issuance_type.index');
        
     }
 
