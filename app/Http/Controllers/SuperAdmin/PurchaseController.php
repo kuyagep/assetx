@@ -20,7 +20,7 @@ class PurchaseController extends Controller
         
         $data = [];
         if($request->ajax()){
-            $data = Purchase::all();
+            $data = Purchase::where('user_id', Auth::user()->id)->get();
             return DataTables::of($data)
             ->editColumn('office', function ($request) {
                     return $request->office->name;
@@ -39,12 +39,12 @@ class PurchaseController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
-                            View</a>';
-                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
-                            Edit</a>';
+                    $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-secondary btn-sm mr-1" id="viewButton">
+                            <i class="fas fa-history"></i></a>';
+                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="editButton">
+                            <i class="far fa-edit"></i></a>';
                     $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
-                            Delete</a>';
+                            <i class="far fa-trash-alt"></i></a>';
                     return $btn;
                 })
                 ->rawColumns(['action','isApproved','created_at','office'])

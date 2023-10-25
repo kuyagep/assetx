@@ -36,8 +36,21 @@
         href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 </head>
+<style>
+    /* .main-sidebar {
+        background-image: url('https://cdn.wallpapersafari.com/89/94/KycE8k.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    } */
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-danger ">
+    .brand-link,
+    .main-header {
+        background-color: #F94C10 !important;
+    }
+</style>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-navy ">
     <noscript>You must run this system with JavaScript enabled.</noscript>
     @include('sweetalert::alert')
 

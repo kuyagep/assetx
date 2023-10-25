@@ -56,7 +56,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modal">
-                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-title"></h4>
@@ -150,7 +150,7 @@
                                     <div class="col-4">
                                         <img id="showImage" alt="Avatar" class="table-avatar"
                                             src="{{ asset('assets/dist/img/avatar/default.jpg') }}"
-                                            style="width: 100%;max-width: 100%;height: 150px;object-fit: cover; ">
+                                            style="width: 100%;max-width: 150px;height: 150px;object-fit: cover; ">
                                     </div>
                                 </div>
 

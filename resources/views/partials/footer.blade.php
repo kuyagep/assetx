@@ -1,8 +1,11 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; {{ date('Y') }} <a
-            href="javascript:void(0)">{{ config('app.name', 'Laravel') }}</a>.</strong>
-    All rights reserved.
+    <strong> &copy; {{ date('Y') }} <a href="javascript:void(0)"
+            class="text-secondary">{{ config('app.name', 'Laravel') }}</a>.</strong>
+    Developed with ❤️ by <b title="Geperson Mamalias">PROJECT DAVAOSUR TEAM</b>.
     <div class="float-right d-none d-sm-inline-block">
-        <b>Ver.</b> 0.2.1 | <small>Powered by Laravel Versin 10.20.0 | PHP Version 8.2.4</small>
+        <a href="javascript:void(0)" class="text-secondary  mr-4"><b>License</b></a>
+        <a href="javascript:void(0)" class="text-secondary  mr-4"><b>Help</b></a>
+        <a href="javascript:void(0)" class="text-secondary  mr-4"><b>Contact</b></a>
+        <a href="javascript:void(0)" class="text-secondary"><b>Terms &amp; Conditions</b></a>
     </div>
 </footer>

@@ -12,7 +12,7 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <h4 class="login-box-msg">Sign in</h4>
+                <h5 class="login-box-msg">Account Login</h5>
 
                 @if (Session::has('status'))
                     <div class="alert alert-success alert-dismissible">
@@ -62,7 +62,8 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-dark btn-lg btn-block">LOG IN</button>
+                            <button type="submit" class="btn btn-danger btn-lg btn-block">LOG
+                                IN</button>
                         </div>
                         <!-- /.col -->
                     </div>

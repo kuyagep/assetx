@@ -24,8 +24,22 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
+<style>
+    body {
+        background-image: url('https://cdn.wallpapersafari.com/89/94/KycE8k.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
 
-<body class="hold-transition accent-dark login-page bg-dark">
+    /* .login-box,
+    .card-body {
+        backdrop-filter: blur(14px) !important;
+        background-color: rgba(255, 255, 255, 0.2) !important;
+    } */
+</style>
+
+<body class="hold-transition login-page bg-dark  accent-navy">
     <!-- Preloader -->
     {{-- <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__wobble" src="{{ asset('brand_logo/android-chrome-192x192.png') }}"

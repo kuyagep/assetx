@@ -55,7 +55,7 @@ class LoginRequest extends FormRequest
         }
 
         if (!$user->hasVerifiedEmail()) {
-            Auth::logout();
+            // Auth::logout();
 
             // Send the email verification link
             $user->sendEmailVerificationNotification();

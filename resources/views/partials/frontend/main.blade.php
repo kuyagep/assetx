@@ -51,6 +51,7 @@
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                                 <li><a href="#" class="dropdown-item">Overview </a></li>
                                 <li><a href="#" class="dropdown-item">Features</a></li>
+                                <li><a href="#" class="dropdown-item">Downloadable Forms</a></li>
                                 <li><a href="{{ url('/data-privacy-notice') }}" class="dropdown-item">Data Privacy
                                         Notice</a>
                                 </li>

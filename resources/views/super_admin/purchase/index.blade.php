@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn btn-primary mr-2 float-left">
+                            <button id="add-button" class="btn bg-navy btn-sm mr-2 float-left">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add Purchase Request
                             </button>
                         </div>
@@ -22,7 +22,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card card-outline card-danger">
+                    <div class="card card-outline card-navy">
                         <div class="card-header">
                             <h3 class="card-title"> List of Purchase Request</h3>
 
