@@ -46,7 +46,7 @@
 
     .brand-link,
     .main-header {
-        background-color: ##343a40 !important;
+        background-color: #001f3f !important;
     }
 </style>
 

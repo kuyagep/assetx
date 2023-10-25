@@ -1,12 +1,14 @@
 <?php
 
-
-
-use App\Http\Controllers\AccountabilityController;
-use App\Http\Controllers\AccountableController;
+use Illuminate\Support\Facades\Route;
+############################### ACCOUNT 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountableController;
+############################### AUTH 
 use App\Http\Controllers\AuthController;
+############################### LANDING PAGE 
 use App\Http\Controllers\FrontEnd\HomeController;
+############################### DASHBOARD
 use App\Http\Controllers\BackEnd\AdminController;
 use App\Http\Controllers\BackEnd\AssetController;
 use App\Http\Controllers\BackEnd\ClassificationController;
@@ -22,7 +24,7 @@ use App\Http\Controllers\BackEnd\UsersController;
 use App\Http\Controllers\BackEnd\AssetStatusController;
 use App\Http\Controllers\BackEnd\DistrictController;
 use App\Http\Controllers\BackEnd\DivisionController;
-####################################################################
+############################### FOR UPDATE
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssetSearchController;
@@ -33,7 +35,8 @@ use App\Http\Controllers\Admin\AdminPurchaseController;
 use App\Http\Controllers\Admin\ClassificationsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
