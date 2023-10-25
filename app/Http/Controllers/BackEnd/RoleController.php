@@ -72,14 +72,14 @@ class RoleController extends Controller
                     'group_name' => 'required|string|max:255',
                 ]);
                 $data = new Permission;
-                $data->name = ucfirst($request->name);
+                $data->name = strtolower($request->name);
                 $data->group_name = ucwords($request->group_name);
 
                 $data->save();
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission saved successfully!']);
             }else{
                 $data = Permission::find($request->id);
-                $data->name = ucfirst($request->name);
+                $data->name = strtolower($request->name);
                 $data->group_name = ucwords($request->group_name);
 
                 $data->save();
@@ -136,8 +136,8 @@ class RoleController extends Controller
     }
     public function exportPermission()
     {
-        //
-        return Excel::download(new PermissionExport, 'permissions.xlsx');
+        $file = time() .'_permissions.xlsx';
+        return Excel::download(new PermissionExport, $file);
     }
     public function importPermissions(Request $request)
     {
