@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
-use App\Models\Position;
+use App\Models\PermissionGroup;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Str;
 
-class PositionController extends Controller
+class PermissionGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,20 +17,17 @@ class PositionController extends Controller
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = Position::all();
+            $data = PermissionGroup::all();
             return DataTables::of($data)
-                
             ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s'); // format date time
             })
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
-                         View</a>';
-                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
-                        Edit</a>';
+                $btn = '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-purple btn-sm mr-1" id="editButton">
+                        <i class="fa-regular fa-pen-to-square"></i> Edit</a>';
                 $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
-                        Delete</a>';
+                        <i class="fa-regular fa-trash-can"></i> Delete</a>';
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -40,7 +35,7 @@ class PositionController extends Controller
         }
 
     
-        return view('super_admin.position.index');
+        return view('super_admin.permissionGroup.index');
        
     }
 
@@ -63,23 +58,23 @@ class PositionController extends Controller
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
-               
-                $data = new Position;
-                $data->name = $request->name;
-                $data->slug = Str::slug($request->name);
+               $request->validate([
+                    'name' => 'required|string|max:255|unique:permission_groups',
+                ]);
+                $data = new PermissionGroup;
+                $data->name = ucfirst($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position saved successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission Group saved successfully!']);
             }else{
-                $data = Position::find($request->id);
+                $data = PermissionGroup::find($request->id);
 
-                $data->name = $request->name;
-                $data->slug = Str::slug($request->name);
+                $data->name = ucfirst($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission Group updated successfully!']);
             }
             
         }
@@ -92,7 +87,7 @@ class PositionController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = Position::where($id)->first();
+        $data = PermissionGroup::where($id)->first();
 
         return response()->json($data);
     }
@@ -103,7 +98,7 @@ class PositionController extends Controller
     public function edit(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = Position::where($id)->first();
+        $data = PermissionGroup::where($id)->first();
 
         return response()->json($data);
     }
@@ -122,8 +117,8 @@ class PositionController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             $user = Position::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position deleted successfully!']);
+             PermissionGroup::where('id',$request->id)->delete();
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission Group deleted successfully!']);
         }
        
 

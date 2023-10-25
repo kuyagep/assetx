@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
-use App\Models\Classification;
+use App\Models\Asset;
+use App\Models\AssetStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
-class ClassificationController extends Controller
+class AssetStatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,7 @@ class ClassificationController extends Controller
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = Classification::all();
+            $data = AssetStatus::all();
             return DataTables::of($data)
                 
             ->editColumn('created_at', function ($request) {
@@ -39,7 +40,7 @@ class ClassificationController extends Controller
         }
 
     
-        return view('super_admin.classification.index');
+        return view('super_admin.assetStatus.index');
        
     }
 
@@ -59,29 +60,26 @@ class ClassificationController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'uac_code' => 'required|numeric',
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
                
-                $data = new Classification;
+                $data = new AssetStatus;
                 $data->name = $request->name;
-                $data->uac_code = $request->uac_code;
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification saved successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position saved successfully!']);
             }else{
-                $data = Classification::find($request->id);
+                $data = AssetStatus::find($request->id);
 
                 $data->name = $request->name;
-                $data->uac_code = $request->uac_code;
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position updated successfully!']);
             }
             
         }
@@ -94,7 +92,7 @@ class ClassificationController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = Classification::where($id)->first();
+        $data = AssetStatus::where($id)->first();
 
         return response()->json($data);
     }
@@ -105,7 +103,7 @@ class ClassificationController extends Controller
     public function edit(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = Classification::where($id)->first();
+        $data = AssetStatus::where($id)->first();
 
         return response()->json($data);
     }
@@ -124,8 +122,8 @@ class ClassificationController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             $user = Classification::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification deleted successfully!']);
+             $user = AssetStatus::where('id',$request->id)->delete();
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position deleted successfully!']);
         }
        
 

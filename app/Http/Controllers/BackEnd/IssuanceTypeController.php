@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
-use App\Models\Asset;
-use App\Models\AssetStatus;
+use App\Models\IssuanceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
-class AssetStatusController extends Controller
+class IssuanceTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +18,8 @@ class AssetStatusController extends Controller
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = AssetStatus::all();
+            $data = IssuanceType::all();
             return DataTables::of($data)
-                
             ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s'); // format date time
             })
@@ -35,12 +33,12 @@ class AssetStatusController extends Controller
                         Delete</a>';
                 return $btn;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action','created_at'])
             ->make(true);
         }
 
     
-        return view('super_admin.assetStatus.index');
+        return view('super_admin.issuanceType.index');
        
     }
 
@@ -64,22 +62,22 @@ class AssetStatusController extends Controller
             // checked if new data or exists
             if (empty($request->id)) {
                
-                $data = new AssetStatus;
+                $data = new IssuanceType;
                 $data->name = $request->name;
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position saved successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type saved successfully!']);
             }else{
-                $data = AssetStatus::find($request->id);
+                $data = IssuanceType::find($request->id);
 
                 $data->name = $request->name;
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type updated successfully!']);
             }
             
         }
@@ -92,7 +90,7 @@ class AssetStatusController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = AssetStatus::where($id)->first();
+        $data = IssuanceType::where($id)->first();
 
         return response()->json($data);
     }
@@ -103,7 +101,7 @@ class AssetStatusController extends Controller
     public function edit(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = AssetStatus::where($id)->first();
+        $data = IssuanceType::where($id)->first();
 
         return response()->json($data);
     }
@@ -122,8 +120,8 @@ class AssetStatusController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             $user = AssetStatus::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position deleted successfully!']);
+             $user = IssuanceType::where('id',$request->id)->delete();
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type deleted successfully!']);
         }
        
 

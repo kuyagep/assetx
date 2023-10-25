@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
-use App\Models\PermissionGroup;
+use App\Models\Classification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
-class PermissionGroupController extends Controller
+class ClassificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,17 +18,20 @@ class PermissionGroupController extends Controller
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = PermissionGroup::all();
+            $data = Classification::all();
             return DataTables::of($data)
+                
             ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s'); // format date time
             })
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-purple btn-sm mr-1" id="editButton">
-                        <i class="fa-regular fa-pen-to-square"></i> Edit</a>';
+                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
+                         View</a>';
+                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
+                        Edit</a>';
                 $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
-                        <i class="fa-regular fa-trash-can"></i> Delete</a>';
+                        Delete</a>';
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -35,7 +39,7 @@ class PermissionGroupController extends Controller
         }
 
     
-        return view('super_admin.permissionGroup.index');
+        return view('super_admin.classification.index');
        
     }
 
@@ -55,26 +59,29 @@ class PermissionGroupController extends Controller
         if ($request->ajax()) {
             $request->validate([
                 'name' => 'required|string|max:255',
+                'uac_code' => 'required|numeric',
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
-               $request->validate([
-                    'name' => 'required|string|max:255|unique:permission_groups',
-                ]);
-                $data = new PermissionGroup;
-                $data->name = ucfirst($request->name);
+               
+                $data = new Classification;
+                $data->name = $request->name;
+                $data->uac_code = $request->uac_code;
+                $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission Group saved successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification saved successfully!']);
             }else{
-                $data = PermissionGroup::find($request->id);
+                $data = Classification::find($request->id);
 
-                $data->name = ucfirst($request->name);
+                $data->name = $request->name;
+                $data->uac_code = $request->uac_code;
+                $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission Group updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification updated successfully!']);
             }
             
         }
@@ -87,7 +94,7 @@ class PermissionGroupController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = PermissionGroup::where($id)->first();
+        $data = Classification::where($id)->first();
 
         return response()->json($data);
     }
@@ -98,7 +105,7 @@ class PermissionGroupController extends Controller
     public function edit(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = PermissionGroup::where($id)->first();
+        $data = Classification::where($id)->first();
 
         return response()->json($data);
     }
@@ -117,8 +124,8 @@ class PermissionGroupController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             PermissionGroup::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Permission Group deleted successfully!']);
+             $user = Classification::where('id',$request->id)->delete();
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification deleted successfully!']);
         }
        
 

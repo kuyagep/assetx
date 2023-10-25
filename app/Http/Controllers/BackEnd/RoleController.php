@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\BackEnd;
 
 use App\Exports\PermissionExport;
 use App\Http\Controllers\Controller;

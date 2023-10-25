@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
-use App\Models\IssuanceType;
+use App\Models\Position;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
-class IssuanceTypeController extends Controller
+class PositionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +19,9 @@ class IssuanceTypeController extends Controller
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = IssuanceType::all();
+            $data = Position::all();
             return DataTables::of($data)
+                
             ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s'); // format date time
             })
@@ -33,12 +35,12 @@ class IssuanceTypeController extends Controller
                         Delete</a>';
                 return $btn;
             })
-            ->rawColumns(['action','created_at'])
+            ->rawColumns(['action'])
             ->make(true);
         }
 
     
-        return view('super_admin.issuanceType.index');
+        return view('super_admin.position.index');
        
     }
 
@@ -62,22 +64,22 @@ class IssuanceTypeController extends Controller
             // checked if new data or exists
             if (empty($request->id)) {
                
-                $data = new IssuanceType;
+                $data = new Position;
                 $data->name = $request->name;
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type saved successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position saved successfully!']);
             }else{
-                $data = IssuanceType::find($request->id);
+                $data = Position::find($request->id);
 
                 $data->name = $request->name;
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position updated successfully!']);
             }
             
         }
@@ -90,7 +92,7 @@ class IssuanceTypeController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = IssuanceType::where($id)->first();
+        $data = Position::where($id)->first();
 
         return response()->json($data);
     }
@@ -101,7 +103,7 @@ class IssuanceTypeController extends Controller
     public function edit(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = IssuanceType::where($id)->first();
+        $data = Position::where($id)->first();
 
         return response()->json($data);
     }
@@ -120,8 +122,8 @@ class IssuanceTypeController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             $user = IssuanceType::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issuance Type deleted successfully!']);
+             $user = Position::where('id',$request->id)->delete();
+             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position deleted successfully!']);
         }
        
 
