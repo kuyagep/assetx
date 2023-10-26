@@ -63,7 +63,7 @@ class LoginRequest extends FormRequest
         }
         
         //first_name, last_name, role, status, school, district, division 
-        Auth::login($user, $this->boolean('remember'));
+        Auth::login($user, $this->remember);
         // dd($user);
 
         RateLimiter::clear($this->throttleKey());

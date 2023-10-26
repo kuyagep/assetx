@@ -38,6 +38,7 @@
                                             <th>Source of Fund</th>
                                             <th>Amount ABC</th>
                                             <th>Office</th>
+                                            <th>File</th>
                                             <th>Status</th>
                                             <th>Submitted At</th>
                                             <th>Action</th>
@@ -115,26 +116,36 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6 col-sm-12">
+                                    <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
                                             <label for="src_fund">Source of Fund <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <input type="text" class="form-control" id="src_fund" name="src_fund"
+                                            <input list="src_fund_list" class="form-control" id="src_fund" name="src_fund"
                                                 placeholder="Ex. Division MOOE">
+                                            <datalist id="src_fund_list">
+                                                <option value="Division MOOE - CID">
+                                                <option value="Division MOOE - CID">
+                                                <option value="Division MOOE - SGOD">
+                                                <option value="CAPITAL OUTLAY">
+                                                <option value="SCHOOL MOOE">
+                                                <option value="INSET FUNDS">
+                                                <option value="Division MOOE">
+                                                <option value="Division MOOE">
+                                                <option value="HRTD FUNDS - SGOD">
+                                                <option value="HRTD FUNDS">
+                                            </datalist>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-sm-12">
+                                    <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
                                             <label for="amount_abc">Amount (ABC) <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <input type="number" class="form-control" id="amount_abc" name="amount_abc"
-                                                placeholder="Ex. 67997.00">
+                                            <input type="currency" class="form-control" id="amount_abc"
+                                                name="amount_abc" placeholder="Ex. 67997.00">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-2">
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="form-group">
                                             <label for="logo">Upload Attachment <small>.xlsx, .xls</small><span
                                                     class="text-danger" title="important">*</span></label>
                                             <div class="input-group">
@@ -146,25 +157,33 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="status">Approval <span class="text-danger"
-                                                    title="important">*</span></label>
-                                            <select class="custom-select" name="isApproved" id="isApproved">
-                                                <option>Select...</option>
-                                                <option value="approved" selected>Approved</option>
-                                                <option value="reject">Pending</option>
-                                                <option value="reject">Cancelled</option>
-                                                <option value="reject">Rebid</option>
-                                            </select>
+                                    </div>
+                                </div>
+                                @role('super-admin')
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="status">Approval <span class="text-danger"
+                                                        title="important">*</span></label>
+                                                <select class="custom-select" name="isApproved" id="isApproved">
+                                                    <option>Select...</option>
+                                                    <option value="approved" selected>Approved</option>
+                                                    <option value="pending">Pending</option>
+                                                    <option value="cancelled">Cancelled</option>
+                                                    <option value="rebid">Rebid</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+                                @endrole
 
+                                <div class="row float-right my-3  ">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn bg-navy btn-save" id="btn-save">Save</button>
+                                    </div>
                                 </div>
-
-                            </div>
-                            <div class="modal-footer justify-end">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-dark btn-save" id="btn-save">Save</button>
                             </div>
                         </form>
                     </div>
@@ -219,6 +238,9 @@
                     {
                         data: 'office',
                         name: 'office'
+                    }, {
+                        data: 'attachment',
+                        name: 'attachment'
                     },
                     {
                         data: 'isApproved',
@@ -348,9 +370,12 @@
                         $('#modal-title').html("Edit Data");
                         $('#modal').modal("show");
                         $('#id').val(response.id);
-                        $('#name').val(response.name);
-                        $('#budget').val(response.budget);
+                        $('#title').val(response.title);
+                        $('#src_fund').val(response.src_fund);
+                        $('#amount_abc').val(response.amount);
                         $('#isApproved').val(response.isApproved);
+                        $('#alt_mode_procurement').val(response.alt_mode_procurement);
+                        $('#get_started').val(response.get_started);
                         $('#error').html('');
 
                     },
@@ -360,6 +385,75 @@
                 });
             });
 
+            //Download Function
+            $('body').on('click', '#downloadButton', function() {
+
+                var id = $(this).data('id');
+                var route = "{{ route('purchase.download', ':id') }}";
+                route = route.replace(':id', id);
+
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to download this file?",
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Download'
+                }).then((result) => {
+                    window.location.href = route;
+                });
+
+            });
+
+            //approval Function
+            $('body').on('click', '#approvedButton', function() {
+
+                var id = $(this).data('id');
+                var route = "{{ route('super_admin.purchase.approved', ':id') }}";
+                route = route.replace(':id', id);
+
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to approved this purchase request?",
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Approved!'
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "PUT",
+                            url: route,
+                            data: {
+                                id: id
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                // console.log(response);
+                                table.draw();
+                                //Sweet Alert
+                                Swal.fire({
+                                    icon: response.icon,
+                                    title: response.title,
+                                    text: response.message,
+                                    timer: 2000
+                                });
+
+                            },
+                            error: function(response) {
+                                console.log('Error : ', response);
+                            }
+                        });
+
+                    }
+                });
+
+            });
             // Delete Function
             $('body').on('click', '#deleteButton', function() {
 
@@ -370,7 +464,7 @@
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You want delete this purchasere request?",
+                    text: "You want delete this purchaser request?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

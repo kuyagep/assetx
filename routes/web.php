@@ -76,19 +76,21 @@ Route::get('/data-privacy-notice', [HomeController::class, 'dataPrivacy'])->name
 Route::prefix('my')->middleware(['auth','role:super-admin|admin'])->group(function(){
 
     //* ############# ADMIN #############
-    Route::name('admin.')->controller(AccountController::class)->middleware(['auth','role:admin'])->group(function () {
+    Route::controller(AccountController::class)->prefix('account')->as('account.')->middleware(['role:admin'])->group(function () {
         //* ->middleware('permission:division.all')
-        Route::get('/account/dashboard',[AccountController::class,'adminDashboard'])->name('dashboard');
-        Route::get('/account/profile',[AccountController::class,'adminProfile'])->name('profile');
-        Route::post('/account/profile/update',[AccountController::class,'adminProfileUpdate'])->name('profile.update');
-        Route::post('/account/update/password',[AccountController::class,'adminUpdatePassword'])->name('update.password');
+        Route::get('/dashboard',[AccountController::class,'adminDashboard'])->name('dashboard');
+        Route::get('/profile',[AccountController::class,'adminProfile'])->name('profile');
+        Route::post('/profile/update',[AccountController::class,'adminProfileUpdate'])->name('profile.update');
+        Route::post('/update/password',[AccountController::class,'adminUpdatePassword'])->name('update.password');
     });
-    Route::controller(AccountController::class)->group(function () {
+    //* ############# SUPER ADMIN #############
+    Route::controller(AccountController::class)->middleware(['role:super-admin'])->group(function () {
         Route::get('/dashboard',[AccountController::class,'super_adminDashboard'])->name('dashboard');
         Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
         Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
         Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
     });
+    
     #division
     //* prefix('s')->name('super_admin.')->
     Route::name('super_admin.')->controller(DivisionController::class)->group(function () {
@@ -122,6 +124,11 @@ Route::prefix('my')->middleware(['auth','role:super-admin|admin'])->group(functi
     Route::resource('/issuances', IssuanceController::class);
     #issuances
     Route::resource('/purchase', PurchaseController::class);
+    Route::get('/download/attachment/{id}',[PurchaseController::class,'download'])->name('purchase.download');
+    Route::name('super_admin.')->controller(PurchaseController::class)->group(function () {
+        //* ->middleware('permission:division.all')        
+        Route::put('/purchase/{purchase}', 'approved')->name('purchase.approved');     
+     });
 
     #accountability
     Route::resource('/accountability', AccountableController::class);

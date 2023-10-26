@@ -20,6 +20,12 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
+<style>
+    .modal-body {
+        max-height: 50vh;
+        overflow-y: scroll;
+    }
+</style>
 
 <body class="hold-transition layout-top-nav ">
     <div class="wrapper ">
@@ -102,10 +108,10 @@
                                         <li><a href="{{ url('/client/dashboard') }}" class="dropdown-item">Dashboard </a>
                                         </li>
                                     @elseif(Auth::user()->role === 'admin')
-                                        <li><a href="{{ url('/admin/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
                                         </li>
                                     @else
-                                        <li><a href="{{ url('/s/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
                                         </li>
                                     @endif
                                     <li><a href="#" class="dropdown-item">Profile</a></li>
@@ -213,6 +219,38 @@
     <script src="{{ asset('assets/') }}/dist/js/adminlte.min.js"></script>
 
     <script src="{{ asset('assets/custom/js/realtime.js') }}"></script>
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#data-privacy-notice').modal('show');
+            const $modalBody = $('#modal-body');
+            const $scrollButton = $('#scrollButton');
+
+            $modalBody.scroll(function() {
+                // Check if the user has scrolled to a certain point (e.g., 200 pixels)
+                if ($modalBody.scrollTop() >= 200) {
+                    $scrollButton.prop('disabled', false);
+                } else {
+                    $scrollButton.prop('disabled', true);
+                }
+            });
+        });
+    </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            const $modalBody = $('#modal-body');
+            const $scrollButton = $('#scrollButton');
+
+            $modalBody.scroll(function() {
+                // Check if the user has scrolled to a certain point (e.g., 200 pixels)
+                if ($modalBody.scrollTop() >= 200) {
+                    $scrollButton.prop('disabled', false);
+                } else {
+                    $scrollButton.prop('disabled', true);
+                }
+            });
+        });
+    </script> --}}
 </body>
 
 </html>
