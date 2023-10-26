@@ -36,17 +36,31 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
-                    <li class="nav-item">
-                        <a href="{{ url('my/dashboard') }}"
-                            class="nav-link {{ Request::is('my/dashboard') ? 'active' : '' }}">
-                            <i class="nav-icon fa-regular fa-compass"></i>
-                            <p>
-                                Dashboard
-                            </p>
-                        </a>
-                    </li>
+                    @role('super-admin')
+                        <li class="nav-item">
+                            <a href="{{ url('my/dashboard') }}"
+                                class="nav-link {{ Request::is('my/dashboard') ? 'active' : '' }}">
+                                <i class="nav-icon fa-regular fa-compass"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                    @endrole
+                    @role('admin')
+                        <li class="nav-item">
+                            <a href="{{ url('my/account/dashboard') }}"
+                                class="nav-link {{ Request::is('my/account/dashboard') ? 'active' : '' }}">
+                                <i class="nav-icon fa-regular fa-compass"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                    @endrole
+
                     @can('menu purchase_request')
                         <li class="nav-item {{ Request::is('my/purchase') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ Request::is('my/purchase') ? 'active' : '' }}">
@@ -70,66 +84,15 @@
                         </li>
                     @endcan
 
-                    @can('menu division')
-                        <li class="nav-item">
-                            <a href="{{ url('my/division') }}"
-                                class="nav-link {{ Request::is('my/division') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-building"></i>
-                                <p> Manage Division </p>
-                            </a>
-                        </li>
-                    @endcan
 
-                    @can('menu districts')
-                        <li class="nav-item">
-                            <a href="{{ url('my/districts') }}"
-                                class="nav-link {{ Request::is('my/districts') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-home"></i>
-                                <p>
-                                    Manage District
-                                </p>
-                            </a>
-                        </li>
-                    @endcan
 
-                    @can('menu schools')
-                        <li class="nav-item">
-                            <a href="{{ url('my/schools') }}"
-                                class="nav-link {{ Request::is('my/schools') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-graduation-cap"></i>
-                                <p>
-                                    Manage Schools
-                                </p>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('menu offices')
-                        <li class="nav-item">
-                            <a href="{{ url('my/offices') }}"
-                                class="nav-link {{ Request::is('my/offices') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-briefcase"></i>
-                                <p>
-                                    Manage Office
-                                </p>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('menu positions')
-                        <li class="nav-item">
-                            <a href="{{ url('my/positions') }}"
-                                class="nav-link {{ Request::is('my/positions') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user-tie"></i>
-                                <p>
-                                    Manage Position
-                                </p>
-                            </a>
-                        </li>
-                    @endcan
+
+
                     @can('menu classifications')
                         <li class="nav-item">
                             <a href="{{ url('my/classifications') }}"
                                 class="nav-link {{ Request::is('my/classifications') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-stream"></i>
+                                <i class="nav-icon fas fa-shapes"></i>
                                 <p>
                                     Asset Classification
                                 </p>
@@ -140,7 +103,7 @@
                         <li class="nav-item">
                             <a href="{{ url('my/asset-status') }}"
                                 class="nav-link {{ Request::is('my/asset-status') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-toggle-on"></i>
+                                <i class="nav-icon fas fa-hourglass-half"></i>
                                 <p>
                                     Asset Status
                                 </p>
@@ -150,7 +113,7 @@
                     @can('menu assets')
                         <li class="nav-item">
                             <a href="" class="nav-link ">
-                                <i class="nav-icon fas fa-qrcode"></i>
+                                <i class="nav-icon fas fa-dice-d6"></i>
                                 <p>
                                     Assets
                                 </p>
@@ -177,7 +140,78 @@
                             </p>
                         </a>
                     </li>
+                    @can('menu division', 'menu districts', 'menu schools', 'menu offices', 'menu positions')
+                        <li
+                            class="nav-item {{ Request::is('my/division', 'my/districts', 'my/schools', 'my/offices', 'my/positions') ? 'menu-open' : '' }}">
+                            <a href="#"
+                                class="nav-link {{ Request::is('my/division', 'my/districts', 'my/schools', 'my/offices', 'my/positions') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-layer-group"></i>
+                                <p>
+                                    Components
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
 
+                                @can('menu division')
+                                    <li class="nav-item">
+                                        <a href="{{ url('my/division') }}"
+                                            class="nav-link {{ Request::is('my/division') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-building"></i>
+                                            <p> Manage Division </p>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('menu districts')
+                                    <li class="nav-item">
+                                        <a href="{{ url('my/districts') }}"
+                                            class="nav-link {{ Request::is('my/districts') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-home"></i>
+                                            <p>
+                                                Manage District
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('menu schools')
+                                    <li class="nav-item">
+                                        <a href="{{ url('my/schools') }}"
+                                            class="nav-link {{ Request::is('my/schools') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-graduation-cap"></i>
+                                            <p>
+                                                Manage Schools
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('menu offices')
+                                    <li class="nav-item">
+                                        <a href="{{ url('my/offices') }}"
+                                            class="nav-link {{ Request::is('my/offices') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-briefcase"></i>
+                                            <p>
+                                                Manage Office
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('menu positions')
+                                    <li class="nav-item">
+                                        <a href="{{ url('my/positions') }}"
+                                            class="nav-link {{ Request::is('my/positions') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-user-tie"></i>
+                                            <p>
+                                                Manage Position
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                            </ul>
+                        </li>
+                    @endcan
                     <li class="nav-header">USER MANAGEMENT</li>
                     @can('menu users')
                         <li class="nav-item">

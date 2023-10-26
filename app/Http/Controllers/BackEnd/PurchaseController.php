@@ -26,51 +26,54 @@ class PurchaseController extends Controller
             }else{
                 $data = Purchase::where('user_id', Auth::user()->id)->get();
             }
-            
+
             return DataTables::of($data)
                 ->editColumn('office', function ($request) {
                     return $request->office->name;
                 })
-                ->editColumn('attachment', function ($request) {                   
-                   
-                    $result = '<a href="javascript:void(0)" data-id="'.$request->attachment.'" title="Download" class="badge btn-xs badge-primary" id="downloadButton">Download</a>';
-                    return $result;
-                })
+                
                 ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s');
                 })
                 ->editColumn('isApproved', function ($request) {
-                    
-                    if($request->isApproved === "approved"){
+
+                    if ($request->isApproved === "approved") {
                         $result = '<span class="badge badge-success">Approved</span>';
-                    }elseif($request->isApproved === "pending"){
-                         $result = '<span class="badge badge-warning">Pending</span>';                    
-                    }elseif($request->isApproved === "cancelled"){
-                         $result = '<span class="badge badge-danger">Cancelled</span>';
-                    }elseif($request->isApproved === "rebid"){
-                         $result = '<span class="badge badge-primary">Rebid</span>';
+                    } elseif ($request->isApproved === "pending") {
+                        $result = '<span class="badge badge-warning">Pending</span>';
+                    } elseif ($request->isApproved === "cancelled") {
+                        $result = '<span class="badge badge-danger">Cancelled</span>';
+                    } elseif ($request->isApproved === "rebid") {
+                        $result = '<span class="badge badge-primary">Rebid</span>';
                     }
                     return $result;
                 })
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    
-                    $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="viewButton">
-                            <i class="fas fa-history"></i></a>';
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<div class="btn-group">';
+                    $btn .= '<button title="View" type="button" data-id="'.$row->id.'" class="btn btn-sm bg-navy" id="viewButton"><i class="fas fa-history"></i></button>';
                     if (auth()->user()->hasRole('admin')) {
-                         $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="editButton">
-                            <i class="far fa-edit"></i></a>';
+                        $btn .= '<button title="Edit" type="button" data-id="'.$row->id.'" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
+                    }
+                    if (auth()->user()->hasRole('super-admin')) {
+                        $btn .= '<button type="button" data-id="'.$row->id.'" class="btn bg-olive btn-sm " id="approvedButton"><i class="fas fa-check"></i></button>';
+                        $btn .= '<button type="button" data-id="'.$row->id.'" class="btn bg-danger btn-sm " id="deleteButton"><i class="far fa-trash-alt"></i></button>';
                     }
                    
-                    if (auth()->user()->hasRole('super-admin')) {
-                        $btn .= '<a title="Approved" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-olive btn-sm mr-1" id="approvedButton">
-                                  <i class="fas fa-check"></i></a>';
-                         $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm" id="deleteButton">
-                                  <i class="far fa-trash-alt"></i></a>';
-                    }                    
+                    $btn .= '<div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm  dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                            </button>
+                                <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" data-id="' . $row->attachment . '" title="Download" href="javascript:void(0)" id="downloadButton">Download</a>
+                                    <a class="dropdown-item" href="#">Dropdown link</a>
+                                </div>
+                            </div>
+                        </div>';
+                                      
                     return $btn;
                 })
-                ->rawColumns(['action','attachment','isApproved','created_at','office'])
+                ->rawColumns(['action','isApproved','created_at','office'])
                 ->make(true);
         }
         
@@ -103,8 +106,8 @@ class PurchaseController extends Controller
 
             $office = Office::findOrFail(Auth::user()->office_id);
             // checked if new data or exists
-                if (empty($request->id)) {
-                    $request->validate([                
+            if (empty($request->id)) {
+                $request->validate([                
                     'attachment' => 'required',
                 ]);
                 $data = new Purchase();
@@ -120,12 +123,9 @@ class PurchaseController extends Controller
                 if ($request->hasFile('attachment')) {
                     $attachment = $request->file('attachment');    
                            
-                    //new filename
-                    // $filename = str()->uuid() .'.'. $attachment->extension();
-                    // $attachment = $filename->file('attachment')->store('public');
+                    // Upload the new file 
                     $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() .'.'. $attachment->extension());
-                    // dd($filename);
-                    // $file->move(public_path('assets/dist/attachment/purchases'), $filename);
+                  
                     $data['attachment'] = $attachment;
                 }
                 $data->user_id = Auth::user()->id;
@@ -144,15 +144,17 @@ class PurchaseController extends Controller
                     $data->isApproved = $request->isApproved;
                 }                
 
-                if ($request->hasFile('attachment')) {
-                    $file = $request->file('attachment');           
-
-                    //new filename
-                    $filename = $file->hashName();
-
-                    // dd($filename);
-                    $file->move(public_path('assets/dist/attachment/purchases'), $filename);
-                    $data['attachment'] = $filename;
+               if ($request->hasFile('attachment')) {
+                    $attachment = $request->file('attachment');    
+                           
+                    // Upload the new file and update the record
+                    $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() .'.'. $attachment->extension());
+                    // Delete the old file if it exists
+                    if ($data->attachment) {
+                        Storage::delete($data->attachment);
+                    }
+                    // $file->move(public_path('assets/dist/attachment/purchases'), $filename);
+                    $data['attachment'] = $attachment;
                 }
                 $data->user_id = Auth::user()->id;
                 $data->office_id = Auth::user()->office_id;

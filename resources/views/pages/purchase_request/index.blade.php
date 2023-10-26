@@ -38,7 +38,6 @@
                                             <th>Source of Fund</th>
                                             <th>Amount ABC</th>
                                             <th>Office</th>
-                                            <th>File</th>
                                             <th>Status</th>
                                             <th>Submitted At</th>
                                             <th>Action</th>
@@ -238,9 +237,6 @@
                     {
                         data: 'office',
                         name: 'office'
-                    }, {
-                        data: 'attachment',
-                        name: 'attachment'
                     },
                     {
                         data: 'isApproved',
@@ -402,7 +398,10 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Download'
                 }).then((result) => {
-                    window.location.href = route;
+                    if (result.isConfirmed) {
+                        window.location.href = route;
+                    }
+
                 });
 
             });
@@ -464,7 +463,7 @@
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You want delete this purchaser request?",
+                    text: "You want delete this purchase request permanently?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

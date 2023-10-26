@@ -31,7 +31,7 @@
     <div class="wrapper ">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-dark accent-danger">
+        <nav class="main-header navbar navbar-expand-md navbar-dark accent-navy bg-navy">
             <div class="container">
                 <a href="#" class="navbar-brand">
                     <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
@@ -104,14 +104,14 @@
                                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" class="nav-link dropdown-toggle">My Account</a>
                                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                    @if (Auth::user()->role === 'client')
-                                        <li><a href="{{ url('/client/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                    @if (auth()->user()->hasRole('super-admin'))
+                                        <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
                                         </li>
-                                    @elseif(Auth::user()->role === 'admin')
+                                    @elseif(auth()->user()->hasRole('admin'))
                                         <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
                                         </li>
                                     @else
-                                        <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        <li><a href="{{ url('/client/dashboard') }}" class="dropdown-item">Dashboard </a>
                                         </li>
                                     @endif
                                     <li><a href="#" class="dropdown-item">Profile</a></li>

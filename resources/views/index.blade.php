@@ -148,8 +148,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-right">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Decline</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" id="scrollButton">I
+                                <button type="button" class="btn btn-flat bg-navy" data-dismiss="modal" id="scrollButton">I
                                     Agree</button>
                             </div>
                         </div>

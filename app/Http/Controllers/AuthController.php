@@ -54,9 +54,9 @@ class AuthController extends Controller
                     Auth::login($newuser);
                     $url = '';
                     if (Auth::user()->role === 'super_admin') {
-                    $url = 's/dashboard';
+                    $url = 'my/dashboard';
                     } elseif (Auth::user()->role === 'admin') {
-                    $url = 'admin/dashboard';
+                    $url = 'my/account/dashboard';
                     } elseif (Auth::user()->role === 'client') {
                         $url = 'client/dashboard';
                     }else{
