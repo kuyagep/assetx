@@ -6,8 +6,12 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) d-flex -->
-            <div class="user-panel mt-3 pb-3 mb-3 text-center">
-
+            <div class="user-panel my-2 text-center ">
+                <div class="image d-none">
+                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
+                        class="user-image img-circle elevation-1" alt="User Image"
+                        style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
+                </div>
                 <div class="info">
                     <h4 class="time" id="time"> </h4>
                     <div class="current-date" id="current-date"> </div>
@@ -33,7 +37,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">
