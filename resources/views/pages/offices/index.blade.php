@@ -261,7 +261,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('districts.edit', ':id') }}";
+                var route = "{{ route('offices.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({

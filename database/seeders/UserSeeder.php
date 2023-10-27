@@ -30,10 +30,8 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
         ]);
         $user->assignRole(1);
-
-        DB::table('users')->insert([            
-            [ //Administrator
-                'id' => Str::uuid(),
+       $user1 =  User::create([
+               'id' => Str::uuid(),
                 'first_name' => 'Administrator',
                 'last_name' => 'Account',
                 'email' => 'admin@gmail.com',
@@ -43,7 +41,10 @@ class UserSeeder extends Seeder
                 'status' => 'active',
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
-            ],
+        ]);
+        $user1->assignRole(2);
+
+        DB::table('users')->insert([  
             [ //Custodian Administrator
                 'id' => Str::uuid(),
                 'first_name' => 'Client',

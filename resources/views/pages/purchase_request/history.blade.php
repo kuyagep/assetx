@@ -25,9 +25,7 @@
                     <div class="card card-outline card-navy">
                         <div class="card-header">
                             <h3 class="card-title"> All Purchase Request</h3>
-
                         </div>
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="dataTableajax" class="table table-striped">
@@ -484,8 +482,9 @@
                             },
                             dataType: 'json',
                             success: function(response) {
-                                // console.log(response);
-                                table.draw();
+                                console.log(response);
+                                var oTable = $('#dataTableajax').dataTable();
+                                oTable.fnDraw(false);
                                 //Sweet Alert
                                 Swal.fire({
                                     icon: response.icon,

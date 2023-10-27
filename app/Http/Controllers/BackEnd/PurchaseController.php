@@ -239,7 +239,20 @@ class PurchaseController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-            Purchase::where('id',$request->id)->delete();
+            $data = Purchase::where('id', $request->id)->first();
+
+            $storagePath = storage_path($data->attachment);
+            // $filePath = $data->attachment;
+
+            // // Check if the file exists and delete it
+            // if ($storagePath && Storage::disk('local')->exists($storagePath)) {
+            //     Storage::disk('local')->delete($storagePath);
+            // }
+            if ($data->attachment) {
+                Storage::delete($data->attachment);
+            }
+            
+            $data->delete();
             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request deleted successfully!']);
         }
 

@@ -22,7 +22,7 @@ class Purchase extends Model
     public static function generateUniquePurchaseCode()
     {
         // You can customize the format of the purchase code as needed
-        $prefix = 'PROP';
+        $prefix = 'PR';
         $currentYear = date('Y');
         $currentMonth = date('m');
         $sequenceNumber = static::generateSequenceNumber();
@@ -37,13 +37,15 @@ class Purchase extends Model
         // and incrementing it.
         // For example, you can use DB queries to get the last used number.
         $lastPurchase = static::orderBy('id', 'desc')->first();
-        $lastNumber = $lastPurchase ? substr($lastPurchase->purchase_code, -5) : 0;
+        $lastNumber = $lastPurchase ? substr($lastPurchase->purchase_number, -3) : 0;
 
         // Increment the last number and pad it with leading zeros
-        $newNumber = str_pad(++$lastNumber, 5, '0', STR_PAD_LEFT);
+        $newNumber = str_pad(++$lastNumber, 3, '0', STR_PAD_LEFT);
 
         return $newNumber;
     }
+
+    
 
      protected $guarded = [];
 

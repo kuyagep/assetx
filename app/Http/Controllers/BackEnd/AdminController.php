@@ -260,7 +260,7 @@ class AdminController extends Controller
 
         Alert::success('Success','Admin user updated successfully!');
 
-        return redirect()->route('super_admin.all.admin');
+        return redirect()->route('all.admin');
         // return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Admin user updated successfully!']);
         
 

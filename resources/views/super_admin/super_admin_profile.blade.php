@@ -41,8 +41,8 @@
                 </div>
                 <div class="col-xl-8 order-xl-1">
                     <div class="card">
-                        <form method="post" class="needs-validation" action="{{ route('super_admin.profile.update') }}"
-                            novalidate="" enctype="multipart/form-data">
+                        <form method="post" class="needs-validation" action="{{ route('profile.update') }}" novalidate=""
+                            enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf
                             <div class="card-header">
@@ -179,9 +179,8 @@
             <div class="row" id="change_password">
                 <div class="col-xl-8 order-xl-1">
                     <div class="card">
-                        <form method="post" class="needs-validation"
-                            action="{{ route('super_admin.update.password') }}" novalidate=""
-                            enctype="multipart/form-data">
+                        <form method="post" class="needs-validation" action="{{ route('update.password') }}"
+                            novalidate="" enctype="multipart/form-data">
                             {{-- @method('patch') --}}
                             @csrf
                             <div class="card-header">
