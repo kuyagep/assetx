@@ -62,7 +62,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-danger btn-lg btn-block">LOG
+                            <button type="submit" class="btn bg-navy btn-lg btn-block">LOG
                                 IN</button>
                         </div>
                         <!-- /.col -->

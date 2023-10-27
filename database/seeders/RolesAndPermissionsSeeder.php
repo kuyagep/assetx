@@ -18,20 +18,22 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         //create Permission Groups
         PermissionGroup::create(['name' => 'Dashboard']);
-        PermissionGroup::create(['name' => 'Purchase']);
+        PermissionGroup::create(['name' => 'Purchase Request']);
         PermissionGroup::create(['name' => 'Accountability']);
-        PermissionGroup::create(['name' => 'Classification']);
+        PermissionGroup::create(['name' => 'Classifications']);
         PermissionGroup::create(['name' => 'Asset Status']);
         PermissionGroup::create(['name' => 'Assets']);
         PermissionGroup::create(['name' => 'Issuance Type']);
-        PermissionGroup::create(['name' => 'All Issuance']);
-        PermissionGroup::create(['name' => 'Division']);
-        PermissionGroup::create(['name' => 'District']);
-        PermissionGroup::create(['name' => 'School']);
-        PermissionGroup::create(['name' => 'Office']);
-        PermissionGroup::create(['name' => 'Position']);
-        PermissionGroup::create(['name' => 'User']);
-        PermissionGroup::create(['name' => 'Admin']);
+        PermissionGroup::create(['name' => 'All Issuances']);
+        PermissionGroup::create(['name' => 'Divisions']);
+        PermissionGroup::create(['name' => 'Districts']);
+        PermissionGroup::create(['name' => 'Schools']);
+        PermissionGroup::create(['name' => 'Offices']);
+        PermissionGroup::create(['name' => 'Positions']);
+        PermissionGroup::create(['name' => 'Permissions']);
+        PermissionGroup::create(['name' => 'Permission Group']);
+        PermissionGroup::create(['name' => 'Users']);
+        PermissionGroup::create(['name' => 'Admins']);
         PermissionGroup::create(['name' => 'Reports']);
          // create permissions
         //* Permission::create(['name' => 'menu']);

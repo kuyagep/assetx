@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +17,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
        //
-        DB::table('users')->insert([
-            [ //Developer
+       $user =  User::create([
                 'id' => Str::uuid(),
                 'first_name' => 'Super Admin',
                 'last_name' => 'Account',
@@ -29,8 +28,10 @@ class UserSeeder extends Seeder
                 'status' => 'active',
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
+        ]);
+        $user->assignRole(1);
 
-            ],
+        DB::table('users')->insert([            
             [ //Administrator
                 'id' => Str::uuid(),
                 'first_name' => 'Administrator',

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->string('purchase_number');
             $table->string('get_started');
             $table->string('alt_mode_procurement');
             $table->unsignedBigInteger('office_id');

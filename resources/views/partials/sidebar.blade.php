@@ -36,7 +36,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">
@@ -213,75 +213,69 @@
                         </li>
                     @endcan
                     <li class="nav-header">USER MANAGEMENT</li>
-                    @can('menu users')
-                        <li class="nav-item">
-                            <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('my/user') ? 'active' : '' }}">
-                                <i class="fas fa-users nav-icon "></i>
-                                <p>Manage Users</p>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('menu admin')
-                        <li class="nav-item">
-                            <a href="{{ url('my/admin/all') }}"
-                                class="nav-link {{ Request::is('my/admin/all') ? 'active' : '' }}">
-                                <i class="fas fa-users nav-icon "></i>
-                                <p>Manage Admin</p>
-                            </a>
-                        </li>
-                    @endcan
+                    <li class="nav-item">
+                        <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('my/user') ? 'active' : '' }}">
+                            <i class="fas fa-users nav-icon "></i>
+                            <p>Manage Users</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('my/admin/all') }}"
+                            class="nav-link {{ Request::is('my/admin/all') ? 'active' : '' }}">
+                            <i class="fas fa-users nav-icon "></i>
+                            <p>Manage Admin</p>
+                        </a>
+                    </li>
 
-                    @can('menu roles_permission')
-                        <li
-                            class="nav-item {{ Request::is('my/permission', 'my/permission-group', 'my/roles', 'my/roles/permission/all', 'my/roles/permission') ? 'menu-open' : '' }}">
-                            <a href="#"
-                                class="nav-link {{ Request::is('my/permission', 'my/permission-group', 'my/roles', 'my/roles/permission/all', 'my/roles/permission') ? 'active' : '' }}">
-                                <i class="nav-icon fa-solid fa-users-gear"></i>
-                                <p>
-                                    Role & Permission
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
+                    <li
+                        class="nav-item {{ Request::is('my/permission', 'my/permission-group', 'my/roles', 'my/roles/permission/all', 'my/roles/permission') ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ Request::is('my/permission', 'my/permission-group', 'my/roles', 'my/roles/permission/all', 'my/roles/permission') ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-users-gear"></i>
+                            <p>
+                                Role & Permission
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
 
-                                <li class="nav-item">
-                                    <a href="{{ url('my/roles') }}"
-                                        class="nav-link {{ Request::is('my/roles') ? 'active' : '' }}">
-                                        <i class="fas fa-user-cog nav-icon"></i>
-                                        <p>Roles</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ url('my/roles/permission') }}"
-                                        class="nav-link {{ Request::is('my/roles/permission') ? 'active' : '' }}">
-                                        <i class="fas fa-user-cog nav-icon"></i>
-                                        <p>Add Role Permission</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ url('my/roles/permission/all') }}"
-                                        class="nav-link {{ Request::is('my/roles/permission/all') ? 'active' : '' }}">
-                                        <i class="fas fa-user-cog nav-icon"></i>
-                                        <p>All Roles Permission</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ url('my/permission') }}"
-                                        class="nav-link {{ Request::is('my/permission') ? 'active' : '' }}">
-                                        <i class="fas fa-user-cog nav-icon"></i>
-                                        <p>Permissions</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ url('my/permission-group') }}"
-                                        class="nav-link {{ Request::is('my/permission-group') ? 'active' : '' }}">
-                                        <i class="fas fa-user-cog nav-icon"></i>
-                                        <p>Permission Group</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    @endcan
+                            <li class="nav-item">
+                                <a href="{{ url('my/roles') }}"
+                                    class="nav-link {{ Request::is('my/roles') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Roles</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('my/roles/permission') }}"
+                                    class="nav-link {{ Request::is('my/roles/permission') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Add Role Permission</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('my/roles/permission/all') }}"
+                                    class="nav-link {{ Request::is('my/roles/permission/all') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>All Roles Permission</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('my/permission') }}"
+                                    class="nav-link {{ Request::is('my/permission') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Permissions</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('my/permission-group') }}"
+                                    class="nav-link {{ Request::is('my/permission-group') ? 'active' : '' }}">
+                                    <i class="fas fa-user-cog nav-icon"></i>
+                                    <p>Permission Group</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     {{-- SUPER ADMIN --}}
                     @role('super-admin')
                         <li class="nav-item">
