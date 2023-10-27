@@ -5,17 +5,14 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
-                        class="img-circle elevation-0" style="width: 32px;max-width: 32px;height: 32px;object-fit: cover;"
-                        alt="Account Avatar">
-                </div>
+            <!-- Sidebar user panel (optional) d-flex -->
+            <div class="user-panel mt-3 pb-3 mb-3 text-center">
+
                 <div class="info">
-                    <a href="#"
-                        class="d-block text-white">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
+                    <h4 class="time" id="time"> </h4>
+                    <div class="current-date" id="current-date"> </div>
                 </div>
+
             </div>
 
             <!-- SidebarSearch Form -->
@@ -36,7 +33,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">

@@ -6,7 +6,7 @@
              </div><!-- /.col -->
              <div class="col-sm-6">
                  <ol class="breadcrumb float-sm-right">
-                     <div class="time" id="time"> </div> &nbsp; &nbsp;
+                     {{-- <div class="time" id="time"> </div> &nbsp; &nbsp; --}}
                      {{-- <li class="breadcrumb-item"><a href="#">Home</a></li>
                      <li class="breadcrumb-item active">Users</li> --}}
                  </ol>

@@ -16,6 +16,9 @@
                             <button id="add-button" class="btn bg-navy mr-2 float-left">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add Purchase Request
                             </button>
+                            <button id="history-button" class="btn bg-navy mr-2 float-left">
+                                <i class="fa-regular fa-square-plus"></i>&nbsp;Document Trail
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -385,6 +388,15 @@
                 });
             });
 
+            //Download Function
+            $('body').on('click', '#history-button', function() {
+
+                var id = $(this).data('id');
+                var route = "{{ route('purchase.history') }}";
+                // route = route.replace(':id', id);
+                window.location.href = route;
+
+            });
             //Download Function
             $('body').on('click', '#downloadButton', function() {
 

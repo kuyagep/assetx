@@ -198,6 +198,11 @@ class PurchaseController extends Controller
         
     }
 
+    public function history(Request $request)
+    {
+        return view('pages.purchase_request.history');
+    }
+
     public function download(Request $request, $id)
     {
         //$filePath = 'private/' . $id;
@@ -241,13 +246,6 @@ class PurchaseController extends Controller
         if($request->ajax()){
             $data = Purchase::where('id', $request->id)->first();
 
-            $storagePath = storage_path($data->attachment);
-            // $filePath = $data->attachment;
-
-            // // Check if the file exists and delete it
-            // if ($storagePath && Storage::disk('local')->exists($storagePath)) {
-            //     Storage::disk('local')->delete($storagePath);
-            // }
             if ($data->attachment) {
                 Storage::delete($data->attachment);
             }

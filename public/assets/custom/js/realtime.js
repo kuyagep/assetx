@@ -48,22 +48,11 @@ function showTime() {
   date = date < 10 ? "0" + date : date;
 
   // display date and time
-  var time =
-    dayNames[day] +
-    ", " +
-    monthNames[month] +
-    " " +
-    date +
-    ", " +
-    year +
-    " " +
-    h +
-    ":" +
-    m +
-    ":" +
-    s +
-    " " +
-    session;
+  var date =
+    dayNames[day] + ", " + monthNames[month] + " " + date + ", " + year;
+  var time = h + ":" + m + ":" + s + " " + session;
+  document.getElementById("current-date").innerText = date;
+  document.getElementById("current-date").textContent = date;
   document.getElementById("time").innerText = time;
   document.getElementById("time").textContent = time;
 
