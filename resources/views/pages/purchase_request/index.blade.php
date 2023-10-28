@@ -392,8 +392,8 @@
             $('body').on('click', '#history-button', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('purchase.history') }}";
-                // route = route.replace(':id', id);
+                var route = "{{ route('purchase.history', ':id') }}";
+                route = route.replace(':id', id);
                 window.location.href = route;
 
             });

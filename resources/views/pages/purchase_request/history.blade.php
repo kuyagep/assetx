@@ -25,36 +25,40 @@
                     <div class="card card-navy">
                         <div class="card-header">
                             <h3 class="card-title">Purchase Request Details </h3> <span
-                                class="float-right"><b>PR-2023-10-001</b></span>
+                                class="float-right"><b>{{ $purchase->purchase_number }}</b></span>
                         </div>
 
                         <div class="card-body">
                             <strong><i class="fa-solid fa-circle-info"></i> Title/Description</strong>
                             <p class="text-muted">
-                                New Bid: This is a sample description/title of the activity/materials
+                                {{ $purchase->get_started . ':' . $purchase->title }}
                             </p>
                             <hr>
                             <strong><i class="fa-solid fa-coins"></i> Fund Source</strong>
-                            <p class="text-muted">Division Mooe</p>
+                            <p class="text-muted">{{ $purchase->src_fund }}</p>
                             <hr>
                             <strong><i class="fa-solid fa-peso-sign"></i> Amount</strong>
-                            <h4 class="text-success"><b>25,005.25</b></h4>
+                            <h4 class="text-success"><b>{{ $purchase->amount }}</b></h4>
                             <hr>
                             <strong><i class="far fa-file-alt mr-1"></i> Remarks</strong>
-                            <p class="text-muted">Submitted by Admin on October 27, 2023 11:00 AM.</p>
+                            <p class="text-muted">Submitted by
+                                {{ $purchase->user->first_name . ' ' . $purchase->user->last_name }} <br> on
+                                {{ $purchase->created_at->format('d-m-Y H:i:s') }}.</p>
+                            <div class="text-center mt-5 mb-3">
+                                <a href="#" class="btn btn-sm btn-primary"><i class="fa-regular fa-file-excel"></i>
+                                    Download File</a>
+                            </div>
                         </div>
 
                     </div>
                 </div>
                 <div class="col-lg-8 grid-margin stretch-card">
                     <div class="timeline">
-
-                        <div>
-                            {{-- <i class="fa-solid fa-circle-check bg-success"></i> --}}
+                        {{-- <div>
                             <i class="fas fa-check bg-green"></i>
                             <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                                <h3 class="timeline-header"><a href="#">Approved</a> sent you an email</h3>
+                                <span class="time"><i class="fas fa-clock"></i> 12:05 </span>
+                                <h3 class="timeline-header"><a href="#">Approved</a></h3>
                                 <div class="timeline-body">
                                     Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
                                     weebly ning heekya handango imeem plugg dopplr jibjab, movity
@@ -62,13 +66,12 @@
                                     quora plaxo ideeli hulu weebly balihoo...
                                 </div>
                                 <div class="timeline-footer">
-                                    <a class="btn btn-primary btn-sm">Read more</a>
+                                    <a class="btn btn-warning btn-sm">Read more</a>
                                     <a class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            {{-- <i class="fa-solid fa-circle-check bg-success"></i> --}}
                             <i class="fas fa-check bg-secondary"></i>
                             <div class="timeline-item">
                                 <span class="time"><i class="fas fa-clock"></i> 12:05</span>
@@ -81,8 +84,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div>
                             <i class="fas fa-exclamation bg-warning"></i>
                             <div class="timeline-item">
@@ -91,8 +92,6 @@
                                     request</h3>
                             </div>
                         </div>
-
-
                         <div>
                             <i class="fas fa-xmark bg-red"></i>
                             <div class="timeline-item">
@@ -104,21 +103,26 @@
                                     We are more like Germany, ambitious and misunderstood!
                                 </div>
                             </div>
-                        </div>
-
-                        <div>
-                            <i class="fas fa-regular fa-file-lines bg-primary"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                <h3 class="timeline-header"><a href="#">Jay White</a> Submitted Document for approval
-                                </h3>
-                                <div class="timeline-body">
-                                    <b>PR-2023-10-001</b> <br>
-                                    New Bid: This is a sample description/title of the activity/materials <br>
-                                    October 28, 2023 11:00 AM
+                        </div> --}}
+                        @foreach ($histories as $history)
+                            <div>
+                                @if ($history->purchase->isApproved == 'pending')
+                                    <i class="fas fa-exclamation bg-warning"></i>
+                                @else
+                                    <i class="fas fa-exclamation bg-warning"></i>
+                                @endif
+                                <div class="timeline-item">
+                                    <span class="time"><i class="fas fa-clock"></i>
+                                        {{ $history->created_at->diffForHumans() }}</span>
+                                    <h3 class="timeline-header"><a
+                                            href="#">{{ $history->user->first_name . ' ' . $history->user->last_name }}</a>
+                                    </h3>
+                                    <div class="timeline-body">
+                                        {{ $history->remarks }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
 
                         <div>
                             <i class="fas fa-clock bg-gray"></i>

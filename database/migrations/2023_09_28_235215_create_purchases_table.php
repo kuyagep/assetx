@@ -20,7 +20,7 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->text('title');
             $table->string('src_fund');
-            $table->double('amount', 8, 2);
+            $table->double('amount', 15, 5);
             $table->string('attachment');
             $table->enum('isApproved',['approved', 'pending', 'cancelled', 'rebid' ])->default('pending');
             $table->timestamps();

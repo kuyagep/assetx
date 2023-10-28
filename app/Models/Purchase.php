@@ -57,5 +57,10 @@ class Purchase extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function history()
+    {
+        return $this->hasMany(PurchaseHistory::class, 'purchase_id', 'id');
+    }
      
 }

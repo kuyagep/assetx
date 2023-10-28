@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BackEnd;
 use App\Http\Controllers\Controller;
 use App\Models\Office;
 use App\Models\Purchase;
+use App\Models\PurchaseHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -52,7 +53,7 @@ class PurchaseController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="btn-group">';
-                    $btn .= '<button title="View" type="button" data-id="'.$row->id.'" class="btn btn-sm bg-navy" id="viewButton"><i class="fas fa-history"></i></button>';
+                    $btn .= '<button title="History" type="button" data-id="'.$row->id.'" class="btn btn-sm bg-navy" id="history-button"><i class="fas fa-history"></i></button>';
                     if (auth()->user()->hasRole('admin')) {
                         $btn .= '<button title="Edit" type="button" data-id="'.$row->id.'" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
                     }
@@ -132,6 +133,14 @@ class PurchaseController extends Controller
                 $data->office_id = Auth::user()->office_id;
                 $data->save();
 
+                // history
+                $purchaseHistory = new PurchaseHistory;
+                $purchaseHistory->purchase_id = $data->id; // Set the purchase_id to link it with the newly created purchase
+                $purchaseHistory->manage_by = Auth::user()->id; // You can set an action or description for the history
+                $purchaseHistory->remarks = 'Submitted document for approval'; // You can set an action or description for the history
+                
+                $purchaseHistory->save();
+
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request saved successfully!']);
             }else{
                 $data = Purchase::find($request->id);
@@ -198,9 +207,12 @@ class PurchaseController extends Controller
         
     }
 
-    public function history(Request $request)
+    public function history(Request $request, $id)
     {
-        return view('pages.purchase_request.history');
+        $purchase = Purchase::findOrFail($id);
+        $histories = PurchaseHistory::where('id', $id)->get();
+        
+        return view('pages.purchase_request.history', compact('purchase','histories'));
     }
 
     public function download(Request $request, $id)
