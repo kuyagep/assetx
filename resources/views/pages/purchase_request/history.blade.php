@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 grid-margin stretch-card">
+                <div class="col-lg-6 grid-margin stretch-card">
                     <div class="card card-navy">
                         <div class="card-header">
                             <h3 class="card-title">Purchase Request Details </h3> <span
@@ -52,7 +52,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-8 grid-margin stretch-card">
+                <div class="col-lg-6 grid-margin stretch-card">
                     <div class="timeline">
                         {{-- <div>
                             <i class="fas fa-check bg-green"></i>
@@ -114,8 +114,8 @@
                                 <div class="timeline-item">
                                     <span class="time"><i class="fas fa-clock"></i>
                                         {{ $history->created_at->diffForHumans() }}</span>
-                                    <h3 class="timeline-header"><a
-                                            href="#">{{ $history->user->first_name . ' ' . $history->user->last_name }}</a>
+                                    <h3 class="timeline-header"><a href="#"
+                                            class="text-primary">{{ $history->user->first_name . ' ' . $history->user->last_name }}</a>
                                     </h3>
                                     <div class="timeline-body">
                                         {{ $history->remarks }}

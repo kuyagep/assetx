@@ -50,7 +50,7 @@
     }
 </style>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-navy ">
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-navy ">
     <noscript>You must run this system with JavaScript enabled.</noscript>
     @include('sweetalert::alert')
 

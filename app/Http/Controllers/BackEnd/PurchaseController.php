@@ -168,6 +168,13 @@ class PurchaseController extends Controller
                 $data->user_id = Auth::user()->id;
                 $data->office_id = Auth::user()->office_id;
                 $data->save();
+
+                $purchaseHistory = new PurchaseHistory;
+                $purchaseHistory->purchase_id = $data->id; // Set the purchase_id to link it with the newly created purchase
+                $purchaseHistory->manage_by = Auth::user()->id; // You can set an action or description for the history
+                $purchaseHistory->remarks = 'Updated the document information'; // You can set an action or description for the history
+                
+                $purchaseHistory->save();
                 
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request updated successfully!']);
             }
@@ -210,7 +217,7 @@ class PurchaseController extends Controller
     public function history(Request $request, $id)
     {
         $purchase = Purchase::findOrFail($id);
-        $histories = PurchaseHistory::where('id', $id)->get();
+        $histories = PurchaseHistory::where('purchase_id', $purchase->id)->orderBy('created_at', 'desc')->get();
         
         return view('pages.purchase_request.history', compact('purchase','histories'));
     }
