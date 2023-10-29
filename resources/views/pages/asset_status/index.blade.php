@@ -284,7 +284,6 @@
                             },
                             dataType: 'json',
                             success: function(response) {
-                                console.log(response);
                                 var oTable = $('#dataTableajax').dataTable();
                                 oTable.fnDraw(false);
                                 //Sweet Alert

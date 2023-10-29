@@ -10,7 +10,7 @@
             <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
         </div>
         <!-- /.login-logo -->
-        <div class="card">
+        <div class="card card-outline card-navy">
             <div class="card-body login-card-body">
                 <h5 class="login-box-msg">Account Login</h5>
 
@@ -27,8 +27,8 @@
                             class="form-control form-control-lg  @error('login')
                             is-invalid
                         @enderror"
-                            value="{{ old('login', 'demo@gmail.com') }}" placeholder="Registered Email/Phone"
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                            placeholder="Registered Email/Phone" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                            value="{{ old('login') }}" required>
 
                         @error('login')
                             <div class="invalid-feedback">

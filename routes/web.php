@@ -89,6 +89,7 @@ Route::prefix('my')->middleware(['auth','role:super-admin|admin'])->group(functi
         Route::get('/profile',[AccountController::class,'super_adminProfile'])->name('profile');
         Route::post('/profile/update',[AccountController::class,'super_adminProfileUpdate'])->name('profile.update');
         Route::post('/update/password',[AccountController::class,'super_adminUpdatePassword'])->name('update.password');
+        Route::post('/security/check-current-password','super_adminCheckPassword')->name('check.password');
     });
     
     #division

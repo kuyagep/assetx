@@ -167,7 +167,7 @@
                                     </div>
                                 </div>
                                 <div class="row float-right mt-3">
-                                    <button type="submit" class="btn btn-dark"><i class="fa-regular fa-floppy-disk"></i>
+                                    <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
                                         Update Profile</button>
                                 </div>
                             </div>
@@ -199,7 +199,9 @@
                                             <label>Current Password</label>
                                             <input type="password"
                                                 class="form-control @error('current_password')  is-invalid   @enderror "
-                                                name="current_password" placeholder="Enter Current Password" required>
+                                                name="current_password" id="current_password"
+                                                placeholder="Enter Current Password" required>
+                                            <small id="verifyCurrentPassword"> </small>
                                             @error('current_password')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -220,7 +222,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        <div class="col-lg-6 col-sm-12"><label>Confirm Password</label>
+                                        <div class="col-lg-6 col-sm-12 "><label>Confirm Password</label>
                                             <input type="password"
                                                 class="form-control @error('new_password_confirmation')                                             
                                                     is-invalid                                              
@@ -231,7 +233,7 @@
                                     </div>
                                 </div>
                                 <div class="row float-right mt-3">
-                                    <button type="submit" class="btn btn-dark"><i class="fa-regular fa-floppy-disk"></i>
+                                    <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
                                         Save Changes</button>
                                 </div>
                             </div>
@@ -248,13 +250,47 @@
 @endsection
 @section('script')
     <script>
-        // display image
-        $('#avatar').change(function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#showImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
+        $(document).ready(function() {
+            //headers
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $("#current_password").keyup(function() {
+                var current_password = $("#current_password").val();
+                var route = "{{ route('check.password') }}";
+                // alert(current_password);
+                $.ajax({
+                    type: "POST",
+                    url: route,
+                    data: {
+                        current_password: current_password
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        // console.log(response.message);
+                        if (response.message == "false") {
+                            $("#verifyCurrentPassword").html("Current Password is incorrect!");
+                        } else if (response.message == "true") {
+                            $("#verifyCurrentPassword").html("Current Password is correct!");
+                        }
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+
+            // display image
+            $('#avatar').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
         });
     </script>
 @endsection

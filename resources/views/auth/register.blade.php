@@ -84,7 +84,6 @@
                             </div>
                         </div>
                         <!-- /.col -->
-
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">

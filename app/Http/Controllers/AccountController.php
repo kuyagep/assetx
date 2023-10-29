@@ -131,6 +131,21 @@ class AccountController extends Controller
 
             return redirect()->back()->with($notification);
     }
+    // Update Password
+    public function super_adminCheckPassword( Request $request)
+    {
+       
+         // Verify the current password
+        if (Hash::check($request->current_password, Auth::user()->password)) {
+             return response()->json(['message' => 'true']);
+        } else {
+            return response()->json(['message' => 'false']);
+        }
+        
+        
+
+        // return response()->json(['message' => 'true']);
+    }
     
     // ================Admin================
     

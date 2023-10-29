@@ -42,6 +42,13 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+        if(isset($this->remember) && !empty($this->remember)){
+            setcookie($this->login, $this->login, time() + 3600);
+            setcookie($this->password, $this->password, time() + 3600);
+        }else{
+            setcookie($this->login, "");
+            setcookie($this->password, "");
+        }
         $user = User::where('email', $this->login)
                 ->orWhere('phone', $this->login)
                 ->first();
@@ -54,17 +61,18 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        
+
         if (!$user->hasVerifiedEmail()) {
-            // Auth::logout();
 
             // Send the email verification link
             $user->sendEmailVerificationNotification();
 
-        }
+        } 
+
+
         
-        //first_name, last_name, role, status, school, district, division 
         Auth::login($user, $this->remember);
-        // dd($user);
 
         RateLimiter::clear($this->throttleKey());
     }
@@ -85,7 +93,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'login' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
