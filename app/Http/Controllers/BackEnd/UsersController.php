@@ -267,6 +267,64 @@ class UsersController extends Controller
 
     }
 
+     public function online(Request $request)
+    {
+        $users = [];
+        if($request->ajax()){
+            // $users = User::orderBy('created_at', 'asc')->get();
+            $users = User::where('role', 'client')
+                ->orWhere('role', 'admin')->get();
+            return DataTables::of($users)
+                ->editColumn('full_name', function ($request) {
+                    $result = $request->first_name . " " . $request->last_name;
+                    return $result;
+                })
+                ->editColumn('avatar', function ($request) {
+
+                    if (empty($request->avatar)) {
+                        $temp = asset("assets/dist/img/avatar/default.jpg");
+                    } else {
+                        $temp = asset("assets/dist/img/avatar/" . $request->avatar);
+                    }
+
+                    $result = '<ul class="list-inline">
+                            <li class="list-inline-item">
+                                <img alt="Avatar" class="table-avatar" src="' . $temp . '" style="width: 2.5rem; height: 2.5rem; border-radius: 50%; object-fit: cover;">
+                            </li>
+                        </ul>';
+                    return $result;
+                    //  return '<img src="' .asset('assets/dist/img/avatar/' . $request->avatar). '" alt="User Image" width="50">';
+                })
+                ->editColumn('status', function ($request) {
+
+                    if($request->isOnline()){
+                        $result = '<span class="badge badge-success">Online</span>';
+                    }else{
+                         $result = '<span class="badge badge-danger">Offline</span>';
+                    }
+                    return $result;
+            })
+            ->editColumn('created_at', function ($request) {
+                    return $request->created_at->format('d-m-Y H:i:s'); // format date time
+            })
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
+                         View</a>';
+                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
+                        Edit</a>';
+                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
+                        Delete</a>';
+                return $btn;
+            })
+            ->rawColumns(['avatar','action','full_name','status'])
+            ->make(true);
+        }
+
+        return view('pages.online_users.online_users');
+    
+       
+    }
      public function destroy(Request $request, $id)
     {
          if($request->ajax()){

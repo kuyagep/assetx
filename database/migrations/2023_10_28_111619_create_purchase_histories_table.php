@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('purchase_id');
             $table->uuid('manage_by');
+            $table->string('action')->nullable();
             $table->string('remarks')->nullable();
 
             $table->foreign('purchase_id')->references('id')->on('purchases')->onDelete('cascade');

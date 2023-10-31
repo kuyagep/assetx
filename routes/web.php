@@ -171,6 +171,8 @@ Route::prefix('my')->middleware(['auth','role:super-admin|admin'])->group(functi
         Route::get('/user/{id}/edit', 'edit')->name('user.edit');
         Route::post('/user/update/{id}', 'update')->name('user.update');
         Route::delete('/user/destroy/{id}', 'destroy')->name('user.destroy');
+
+        Route::get('/online/users', 'online')->name('user.online');
     });
          
 });

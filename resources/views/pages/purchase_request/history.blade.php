@@ -13,8 +13,8 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn bg-navy mr-2 float-left">
-                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add Purchase Request
+                            <button onclick="history.back()" class="btn bg-navy  mb-3 px-3">
+                                <i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back
                             </button>
                         </div>
                     </div>
@@ -106,10 +106,16 @@
                         </div> --}}
                         @foreach ($histories as $history)
                             <div>
-                                @if ($history->purchase->isApproved == 'pending')
+                                @if ($history->action == 'submit')
+                                    <i class="fas fa-folder bg-primary"></i>
+                                @elseif($history->action == 'pending')
                                     <i class="fas fa-exclamation bg-warning"></i>
-                                @else
-                                    <i class="fas fa-exclamation bg-warning"></i>
+                                @elseif($history->action == 'approved')
+                                    <i class="fas fa-check bg-green"></i>
+                                @elseif($history->action == 'cancelled')
+                                    <i class="fas fa-xmark bg-red"></i>
+                                @elseif($history->action == 'rebid')
+                                    <i class="fas fa-undo  bg-purple"></i>
                                 @endif
                                 <div class="timeline-item">
                                     <span class="time"><i class="fas fa-clock"></i>

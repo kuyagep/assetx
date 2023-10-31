@@ -9,6 +9,8 @@ class PurchaseHistory extends Model
 {
     use HasFactory;
     protected $table = 'purchase_histories';
+
+    
     protected $guarded = [];
 
     public function purchase()

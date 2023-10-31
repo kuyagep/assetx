@@ -13,8 +13,8 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn bg-navy mr-2 float-left">
-                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add Purchase Request
+                            <button id="add-button" class="btn bg-navy mr-2 float-left" accesskey="a">
+                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
                             </button>
                         </div>
                     </div>
@@ -179,9 +179,10 @@
 
                                 <div class="row float-right my-3  ">
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn bg-navy btn-save" id="btn-save">Save</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                            accesskey="c">Close</button>
+                                        <button type="submit" class="btn bg-navy btn-save" accesskey="s"
+                                            id="btn-save">Save</button>
                                     </div>
                                 </div>
                             </div>

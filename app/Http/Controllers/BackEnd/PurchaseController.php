@@ -105,7 +105,7 @@ class PurchaseController extends Controller
                 'amount_abc' => 'required|numeric|min:0.01|max:999999999999.99',
             ]);
 
-            $office = Office::findOrFail(Auth::user()->office_id);
+            
             // checked if new data or exists
             if (empty($request->id)) {
                 $request->validate([                
@@ -116,10 +116,7 @@ class PurchaseController extends Controller
                 $data->alt_mode_procurement = $request->alt_mode_procurement;
                 $data->title = $request->title;
                 $data->src_fund = $request->src_fund;
-                $data->amount = $request->amount_abc;
-                if(auth()->user()->hasRole('super-admin')){
-                    $data->isApproved = $request->isApproved;
-                }                
+                $data->amount = $request->amount_abc;                          
 
                 if ($request->hasFile('attachment')) {
                     $attachment = $request->file('attachment');    
@@ -129,6 +126,7 @@ class PurchaseController extends Controller
                   
                     $data['attachment'] = $attachment;
                 }
+                
                 $data->user_id = Auth::user()->id;
                 $data->office_id = Auth::user()->office_id;
                 $data->save();
@@ -137,6 +135,7 @@ class PurchaseController extends Controller
                 $purchaseHistory = new PurchaseHistory;
                 $purchaseHistory->purchase_id = $data->id; // Set the purchase_id to link it with the newly created purchase
                 $purchaseHistory->manage_by = Auth::user()->id; // You can set an action or description for the history
+                $purchaseHistory->action = 'submit'; // You can set an action or description for the history
                 $purchaseHistory->remarks = 'Submitted document for approval'; // You can set an action or description for the history
                 
                 $purchaseHistory->save();
@@ -151,6 +150,8 @@ class PurchaseController extends Controller
                 $data->amount = $request->amount_abc;
                 if(auth()->user()->hasRole('super-admin')){
                     $data->isApproved = $request->isApproved;
+                    
+                    
                 }                
 
                if ($request->hasFile('attachment')) {
@@ -169,12 +170,7 @@ class PurchaseController extends Controller
                 $data->office_id = Auth::user()->office_id;
                 $data->save();
 
-                $purchaseHistory = new PurchaseHistory;
-                $purchaseHistory->purchase_id = $data->id; // Set the purchase_id to link it with the newly created purchase
-                $purchaseHistory->manage_by = Auth::user()->id; // You can set an action or description for the history
-                $purchaseHistory->remarks = 'Updated the document information'; // You can set an action or description for the history
                 
-                $purchaseHistory->save();
                 
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request updated successfully!']);
             }
@@ -251,7 +247,14 @@ class PurchaseController extends Controller
             }                
 
             $data->save();
+
+            $purchaseHistory = new PurchaseHistory;
+            $purchaseHistory->purchase_id = $data->id; // Set the purchase_id to link it with the newly created purchase
+            $purchaseHistory->manage_by = Auth::user()->id; // You can set an action or description for the history
+            $purchaseHistory->action = 'approved'; // You can set an action or description for the history
+            $purchaseHistory->remarks = 'Approved the document'; // You can set an action or description for the history
             
+            $purchaseHistory->save();
             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request approved successfully!']);
         }
 
