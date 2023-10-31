@@ -50,17 +50,15 @@ class Asset extends Model
 
 
 
-
-
     protected $guarded = [];
 
-    public function classifications()
+    public function classification()
     {
-        return $this->belongsTo(Classification::class, 'classification_id', 'id');
+        return $this->belongsTo(AssetClassification::class, 'classification_id', 'id');
     }
-    public function asset_status()
+    public function status()
     {
-        return $this->belongsTo(AssetStatus::class, 'asset_status_id', 'id');
+        return $this->belongsTo(AssetStatus::class, 'status_id', 'id');
     }
     public function issuance_type()
     {

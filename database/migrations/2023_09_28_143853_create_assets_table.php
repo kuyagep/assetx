@@ -27,14 +27,14 @@ return new class extends Migration
             $table->decimal('shortage_overage_value', 10, 2)->nullable();
             $table->date('date_acquire');
             $table->text('remarks')->nullable();
-            $table->unsignedBigInteger('classification_id');
-            $table->unsignedBigInteger('asset_status_id')->default(1);
+            $table->unsignedBigInteger('classification_id'); //classifications
+            $table->unsignedBigInteger('status_id')->default(1); //asset status
             $table->unsignedBigInteger('issuance_id')->nullable();
             $table->timestamps();
 
             // Define foreign key constraints
-            $table->foreign('classification_id')->references('id')->on('classifications');
-            $table->foreign('asset_status_id')->references('id')->on('asset_status');
+            $table->foreign('classification_id')->references('id')->on('asset_classifications');
+            $table->foreign('status_id')->references('id')->on('asset_status');
             $table->foreign('issuance_id')->references('id')->on('issuances');
         });
     }

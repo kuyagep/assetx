@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('issuance_types', function (Blueprint $table) {
+        Schema::create('asset_classifications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('uac_code');
             $table->string('slug')->unique();
             $table->timestamps();
         });
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('issuance_types');
+        Schema::dropIfExists('asset_classifications');
     }
 };

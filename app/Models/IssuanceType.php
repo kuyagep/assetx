@@ -9,7 +9,7 @@ class IssuanceType extends Model
 {
     use HasFactory;
 
-    protected $table = 'issuance_type';
+    protected $table = 'issuance_types';
 
     protected $fillable = [
         'name',
