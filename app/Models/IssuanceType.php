@@ -16,5 +16,10 @@ class IssuanceType extends Model
         'slug',
      ];
 
+     public function issuances()
+    {
+        return $this->hasMany(Issuance::class, 'issuance_type_id');
+    }
+
      
 }

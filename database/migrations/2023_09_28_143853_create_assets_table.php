@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('onhand_per_count_value', 10, 2);
             $table->integer('shortage_overage_qty')->nullable();
             $table->decimal('shortage_overage_value', 10, 2)->nullable();
-            $table->date('date_acquire');
+            $table->date('date_acquired');
             $table->text('remarks')->nullable();
             $table->unsignedBigInteger('classification_id'); //classifications
             $table->unsignedBigInteger('status_id')->default(1); //asset status

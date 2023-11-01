@@ -64,4 +64,18 @@ class Asset extends Model
     {
         return $this->belongsTo(IssuanceType::class, 'issuance_type_id', 'id');
     }
+
+    /**
+     * to retrieve all issuances for a specific asset along with the user information:
+     * $asset = Asset::find($assetId);
+     * $issuances = $asset->issuances;
+
+     */
+
+     /**
+      * o retrieve all issuances for a specific user:
+      *$user = User::find($userId);
+    *$issuances = $user->issuances;
+    *
+      */
 }
