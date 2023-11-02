@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('issuances', function (Blueprint $table) {
             $table->id(); //primary key
-            $table->unsignedBigInteger('asset_id');
             
             $table->string('issuance_code')->unique();
             $table->decimal('total_value', 10, 2);
@@ -26,11 +25,10 @@ return new class extends Migration
             $table->timestamps();
 
             // Define foreign key constraints
-            $table->foreign('asset_id')->references('id')->on('assets');
             $table->foreign('issued_by_user_id')->references('id')->on('users');
             $table->foreign('issued_to_user_id')->references('id')->on('users');
             $table->foreign('issuance_type_id')->references('id')->on('issuance_types');
-//asset_id to link the asset being issued
+//asset_id to link the asset being issued   
             //user_id to associate the user receiving the asset
             //issued_at The date and time when the asset was issued.
             //returned_at The date and time when the asset was returned (nullable if the asset is still issued).

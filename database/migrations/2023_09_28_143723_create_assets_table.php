@@ -29,13 +29,11 @@ return new class extends Migration
             $table->text('remarks')->nullable();
             $table->unsignedBigInteger('classification_id'); //classifications
             $table->unsignedBigInteger('status_id')->default(1); //asset status
-            $table->unsignedBigInteger('issuance_id')->nullable();
             $table->timestamps();
 
             // Define foreign key constraints
             $table->foreign('classification_id')->references('id')->on('asset_classifications');
             $table->foreign('status_id')->references('id')->on('asset_status');
-            $table->foreign('issuance_id')->references('id')->on('issuances');
         });
     }
 

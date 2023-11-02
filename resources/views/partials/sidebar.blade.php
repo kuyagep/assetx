@@ -37,7 +37,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">
@@ -113,7 +113,7 @@
                     @endcan
                     @can('menu assets')
                         <li class="nav-item">
-                            <a href="" class="nav-link ">
+                            <a href="{{ url('my/assets') }}" class="nav-link {{ Request::is('my/assets') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-dice-d6"></i>
                                 <p>
                                     Assets

@@ -15,7 +15,7 @@
                         <div class="card-header">
                             <h3 class="card-title"> List of Assets Inventories</h3>
                             <div class="card-tools">
-                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
+                                <a href="{{ route('assets.create') }}" class="btn btn-primary mr-2">
                                     <i class="fa fa-plus mr-1"></i>&nbsp;Add Assets
                                 </a>
                             </div>

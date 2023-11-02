@@ -22,6 +22,9 @@
                 @endif
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
+
+
+                    {{-- old version --}}
                     <div class="form-group mb-3">
                         <input type="text" name="login"
                             class="form-control form-control-lg  @error('login')

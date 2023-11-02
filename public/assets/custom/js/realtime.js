@@ -18,15 +18,7 @@ function showTime() {
     session = "PM";
   }
   // store day and month name in an array
-  var dayNames = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  var dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   var monthNames = [
     "January",
     "February",

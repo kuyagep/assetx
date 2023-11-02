@@ -50,7 +50,25 @@ class Asset extends Model
 
 
 
-    protected $guarded = [];
+    protected $fillable = [
+        'article',
+        'description',
+        'reference',
+        'property_no',
+        'unit_of_measure',
+        'unit_value',
+        'balance_per_card_qty',
+        'balance_per_card_value',
+        'onhand_per_count_qty',
+        'onhand_per_count_value',
+        'shortage_overage_qty',
+        'shortage_overage_value',
+        'date_acquired',
+        'remarks',
+        'classification_id',
+        'status_id',
+        'issuance_id',
+    ];
 
     public function classification()
     {
@@ -60,10 +78,11 @@ class Asset extends Model
     {
         return $this->belongsTo(AssetStatus::class, 'status_id', 'id');
     }
-    public function issuance_type()
+    public function issuances()
     {
-        return $this->belongsTo(IssuanceType::class, 'issuance_type_id', 'id');
+        return $this->belongsToMany(Issuance::class, 'asset_issuance');
     }
+
 
     /**
      * to retrieve all issuances for a specific asset along with the user information:

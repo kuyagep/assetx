@@ -28,6 +28,12 @@ class Issuance extends Model
         return $this->belongsTo(IssuanceType::class, 'issuance_type_id');
     }
 
+    public function assets()
+    {
+        return $this->belongsToMany(Asset::class, 'asset_issuance');
+    }
+
+
     /*
     to retrieve the issuance type for a specific issuance record:
         $issuance = Issuance::find($issuanceId);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
 use App\Models\IssuanceType;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
@@ -17,7 +18,6 @@ class IssuanceTypeController extends Controller
     {
         $data = [];
         if($request->ajax()){
-            // $data = User::orderBy('created_at', 'asc')->get();
             $data = IssuanceType::all();
             return DataTables::of($data)
             ->editColumn('created_at', function ($request) {
@@ -47,7 +47,7 @@ class IssuanceTypeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
