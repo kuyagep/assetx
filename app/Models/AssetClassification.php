@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AssetClassification extends Model
 {
     use HasFactory;
+
+    protected $table = 'asset_classifications';
     protected $fillable = [
         'name',
         'slug',

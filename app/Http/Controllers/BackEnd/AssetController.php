@@ -4,10 +4,8 @@ namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\AssetClassification;
 use App\Models\AssetStatus;
-use App\Models\Classification;
-use App\Models\District;
-use App\Models\Issuance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +18,7 @@ class AssetController extends Controller
     public function index()
     {
         $assets = Asset::all();
-        $classifications  = Classification::all();
+        $classifications  = AssetClassification::all();
         $asset_status = AssetStatus::all(); 
         return view('pages.assets.index', compact('assets', 'classifications','asset_status'));
     }
@@ -28,7 +26,7 @@ class AssetController extends Controller
     public function create()
     {
         // Create a form to add a new asset
-         $classifications  = Classification::all();
+        $classifications  = AssetClassification::all();
         $asset_status = AssetStatus::all(); 
         return view('pages.assets.create', compact( 'classifications','asset_status'));
        
@@ -43,12 +41,9 @@ class AssetController extends Controller
         'unit_of_measure' => 'required|string|max:255',
         'unit_value' => 'required|numeric',
         'balance_per_card_qty' => 'required|integer',
-        'balance_per_card_value' => 'required|numeric',
-        'onhand_per_count_qty' => 'required|integer',
-        'onhand_per_count_value' => 'required|numeric',
         'date_acquired' => 'required|date',
         'classification_id' => 'required|exists:asset_classifications,id',
-        'status_id' => 'required|exists:asset_status,id',
+        'status_id' => 'required',
     ];
 
     // Custom error messages
@@ -66,9 +61,17 @@ class AssetController extends Controller
             ->withErrors($validator)
             ->withInput();
     }
-
-    
-        Asset::create($request->all());
+    $asset = new Asset;
+    $asset->article = $request->article;
+    $asset->description = $request->description;
+    $asset->unit_of_measure = $request->unit_of_measure;
+    $asset->unit_value = $request->unit_value;
+    $asset->balance_per_card_qty = $request->balance_per_card_qty;
+    $asset->balance_per_card_value = $request->balance_per_card_qty * $request->unit_value;
+    $asset->date_acquired = $request->date_acquired;
+    $asset->classification_id = $request->classification_id;
+    $asset->status_id = $request->status_id;
+        $asset->save();
        return redirect()->route('assets.index')
         ->with('success', 'Asset added successfully');
     }

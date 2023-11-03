@@ -10,7 +10,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
+                <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"> Add a New Asset</h3>

@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
 class ClassificationSeeder extends Seeder
 {
     /**
@@ -14,10 +14,10 @@ class ClassificationSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('classifications')->insert([
+        DB::table('asset_classifications')->insert([
             [ 
-                'name' => 'N/A',
-                'slug' => 'n-a',
+                'name' => 'IT EQUIPMENT',
+                'slug' => Str::slug('IT EQUIPMENT'),
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila'),
             ]

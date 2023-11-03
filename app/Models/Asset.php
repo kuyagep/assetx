@@ -18,7 +18,7 @@ class Asset extends Model
 
         static::creating(function ($property) {
             // Generate a unique property code
-            $property->property_code = static::generateUniquePropertyCode();
+            $property->property_no = static::generateUniquePropertyCode();
         });
     }
 

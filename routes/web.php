@@ -9,9 +9,9 @@ use App\Http\Controllers\AuthController;
 ############################### LANDING PAGE 
 use App\Http\Controllers\FrontEnd\HomeController;
 ############################### DASHBOARD
-use App\Http\Controllers\BackEnd\AdminController;
+use App\Http\Controllers\BackEnd\AssetClassificationController;
+use App\Http\Controllers\BackEnd\AssetStatusController;
 use App\Http\Controllers\BackEnd\AssetController;
-use App\Http\Controllers\BackEnd\ClassificationController;
 use App\Http\Controllers\BackEnd\IssuanceController;
 use App\Http\Controllers\BackEnd\IssuanceTypeController;
 use App\Http\Controllers\BackEnd\OfficeController;
@@ -21,21 +21,12 @@ use App\Http\Controllers\BackEnd\PurchaseController;
 use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\SchoolController;
 use App\Http\Controllers\BackEnd\UsersController;
-use App\Http\Controllers\BackEnd\AssetStatusController;
+use App\Http\Controllers\BackEnd\AdminController;
 use App\Http\Controllers\BackEnd\DistrictController;
 use App\Http\Controllers\BackEnd\DivisionController;
+
 ############################### FOR UPDATE
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AssetSearchController;
-use App\Http\Controllers\PurchaseController as ControllersPurchaseController;
-use App\Http\Controllers\Admin\AdminAssetStatusController;
-use App\Http\Controllers\Admin\AdminIssuanceTypeController;
-use App\Http\Controllers\Admin\AdminPurchaseController;
-use App\Http\Controllers\Admin\ClassificationsController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
-
 
 
 /*
@@ -114,7 +105,7 @@ Route::prefix('my')->middleware(['auth','role:super-admin|admin'])->group(functi
     #positions
     Route::resource('/positions', PositionController::class);
     #asset classifications
-    Route::resource('/classifications', ClassificationController::class);
+    Route::resource('/classifications', AssetClassificationController::class);
     #asset status
     Route::resource('/asset-status', AssetStatusController::class);
     #asset issuance type

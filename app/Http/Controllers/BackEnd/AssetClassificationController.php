@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
-use App\Models\Classification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
-
-class ClassificationController extends Controller
+use App\Models\AssetClassification;
+class AssetClassificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +17,7 @@ class ClassificationController extends Controller
         $data = [];
         if($request->ajax()){
             // $data = User::orderBy('created_at', 'asc')->get();
-            $data = Classification::all();
+            $data = AssetClassification::all();
             return DataTables::of($data)
                 
             ->editColumn('created_at', function ($request) {
@@ -64,7 +63,7 @@ class ClassificationController extends Controller
             // checked if new data or exists
             if (empty($request->id)) {
                
-                $data = new Classification;
+                $data = new AssetClassification;
                 $data->name = $request->name;
                 $data->uac_code = $request->uac_code;
                 $data->slug = Str::slug($request->name);
@@ -73,7 +72,7 @@ class ClassificationController extends Controller
                 $data->save();
                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification saved successfully!']);
             }else{
-                $data = Classification::find($request->id);
+                $data = AssetClassification::find($request->id);
 
                 $data->name = $request->name;
                 $data->uac_code = $request->uac_code;
@@ -94,7 +93,7 @@ class ClassificationController extends Controller
     public function show(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = Classification::where($id)->first();
+        $data = AssetClassification::where($id)->first();
 
         return response()->json($data);
     }
@@ -105,7 +104,7 @@ class ClassificationController extends Controller
     public function edit(Request $request)
     {
         $id = ['id' => $request->id];
-        $data = Classification::where($id)->first();
+        $data = AssetClassification::where($id)->first();
 
         return response()->json($data);
     }
@@ -124,7 +123,7 @@ class ClassificationController extends Controller
     public function destroy(Request $request)
     {
         if($request->ajax()){
-             $user = Classification::where('id',$request->id)->delete();
+             $user = AssetClassification::where('id',$request->id)->delete();
              return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification deleted successfully!']);
         }
        

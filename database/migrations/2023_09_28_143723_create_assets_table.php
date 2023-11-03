@@ -21,8 +21,8 @@ return new class extends Migration
             $table->decimal('unit_value', 10, 2);
             $table->integer('balance_per_card_qty');
             $table->decimal('balance_per_card_value', 10, 2);
-            $table->integer('onhand_per_count_qty');
-            $table->decimal('onhand_per_count_value', 10, 2);
+            $table->integer('onhand_per_count_qty')->nullable();
+            $table->decimal('onhand_per_count_value', 10, 2)->nullable();
             $table->integer('shortage_overage_qty')->nullable();
             $table->decimal('shortage_overage_value', 10, 2)->nullable();
             $table->date('date_acquired');
