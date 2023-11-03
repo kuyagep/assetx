@@ -39,7 +39,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @foreach ($assets as $asset)
+                                            <tr>
+                                                <td>{{ $asset->id }}</td>
+                                                <td>{{ $asset->article }}</td>
+                                                <td>{{ $asset->description }}</td>
+                                                <td>{{ $asset->property_no }}</td>
+                                                <td>{{ $asset->unit_of_measure }}</td>
+                                                <td>{{ $asset->unit_value }}</td>
+                                                <td>{{ $asset->status->name }}</td>
+                                                <td>{{ $asset->remarks }}</td>
+                                                <td>
+                                                    <button class="btn bg-navy">View</button>
+                                                    <button class="btn bg-navy">Edit</button>
+                                                    <button class="btn bg-navy">Delete</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
