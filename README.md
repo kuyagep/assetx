@@ -126,7 +126,7 @@ What optimizations did you make in your code? E.g. refactors, performance improv
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](LICENSE)
 
 
 ## Tech Stack
