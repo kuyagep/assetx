@@ -23,19 +23,32 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="dataTableajax" class="table table-striped">
-                                    <thead>
+                            <div class="table-responsive" id="">
+                                <table id="dataTable" class="table table-bordered table-striped ">
+                                    <thead class="text-center align-items">
                                         <tr>
-                                            <th>#</th>
-                                            <th>Article</th>
-                                            <th>Description</th>
-                                            <th>Property No</th>
-                                            <th>UOM</th>
-                                            <th>Unit Value</th>
-                                            <th>Status</th>
-                                            <th>Remark</th>
-                                            <th width="250px">Action</th>
+                                            <th rowspan="2">#</th>
+                                            <th rowspan="2">Article</th>
+                                            <th rowspan="2">Description</th>
+                                            <th rowspan="2">Refference</th>
+                                            <th rowspan="2">Property No</th>
+                                            <th rowspan="2">UOM</th>
+                                            <th rowspan="2">Unit Value</th>
+                                            <th colspan="2">Balance per Card</th>
+                                            <th colspan="2">Onhand per Card</th>
+                                            <th colspan="2"> Shortage Overage</th>
+                                            <th rowspan="2">Classification</th>
+                                            <th rowspan="2">Status</th>
+                                            <th rowspan="2">Remark</th>
+                                            <th rowspan="2" width="250px">Action</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Qty</th>
+                                            <th>Value</th>
+                                            <th>Qty</th>
+                                            <th>Value</th>
+                                            <th>Qty</th>
+                                            <th>Value</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,15 +57,32 @@
                                                 <td>{{ $asset->id }}</td>
                                                 <td>{{ $asset->article }}</td>
                                                 <td>{{ $asset->description }}</td>
+                                                <td>{{ $asset->reference }}</td>
                                                 <td>{{ $asset->property_no }}</td>
                                                 <td>{{ $asset->unit_of_measure }}</td>
                                                 <td>{{ $asset->unit_value }}</td>
+                                                <td>{{ $asset->balance_per_card_qty }}</td>
+                                                <td>{{ $asset->balance_per_card_value }}</td>
+                                                <td>{{ $asset->onhand_per_count_qty }}</td>
+                                                <td>{{ $asset->onhand_per_count_value }}</td>
+                                                <td>{{ $asset->shortage_overage_qty }}</td>
+                                                <td>{{ $asset->shortage_overage_value }}</td>
+                                                <td>{{ $asset->classification->name }}</td>
                                                 <td>{{ $asset->status->name }}</td>
                                                 <td>{{ $asset->remarks }}</td>
                                                 <td>
-                                                    <button class="btn bg-navy">View</button>
-                                                    <button class="btn bg-navy">Edit</button>
-                                                    <button class="btn bg-navy">Delete</button>
+                                                    <a href="" class="btn bg-navy btn-sm" title="View"><i
+                                                            class="fa-solid fa-circle-info"></i></a>
+                                                    <a href="{{ route('assets.edit', $asset->id) }}"
+                                                        class="btn btn-warning btn-sm"><i
+                                                            class="fa-regular fa-pen-to-square"></i></a>
+                                                    <form method="POST"
+                                                        action="{{ route('assets.destroy', $asset->id) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                class="fa-solid fa-trash-can"></i></button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -243,6 +273,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            // var table = $("#dataTable").DataTable();
 
         });
     </script>

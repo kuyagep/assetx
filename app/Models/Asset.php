@@ -40,7 +40,7 @@ class Asset extends Model
         // and incrementing it.
         // For example, you can use DB queries to get the last used number.
         $lastProperty = static::orderBy('id', 'desc')->first();
-        $lastNumber = $lastProperty ? substr($lastProperty->property_code, -5) : 0;
+        $lastNumber = $lastProperty ? substr($lastProperty->property_no, -5) : 0;
 
         // Increment the last number and pad it with leading zeros
         $newNumber = str_pad(++$lastNumber, 5, '0', STR_PAD_LEFT);

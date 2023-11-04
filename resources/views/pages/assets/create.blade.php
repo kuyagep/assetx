@@ -14,11 +14,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"> Add a New Asset</h3>
-                            <div class="card-tools">
-                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add Assets
-                                </a>
-                            </div>
+
                             <!-- /.card-tools -->
                         </div>
 

@@ -38,6 +38,7 @@ class AssetController extends Controller
     $rules = [
         'article' => 'required|string|max:255',
         'description' => 'required|string',
+        'reference' => 'required|string',
         'unit_of_measure' => 'required|string|max:255',
         'unit_value' => 'required|numeric',
         'balance_per_card_qty' => 'required|integer',
@@ -64,6 +65,7 @@ class AssetController extends Controller
     $asset = new Asset;
     $asset->article = $request->article;
     $asset->description = $request->description;
+    $asset->reference = $request->reference;
     $asset->unit_of_measure = $request->unit_of_measure;
     $asset->unit_value = $request->unit_value;
     $asset->balance_per_card_qty = $request->balance_per_card_qty;
@@ -81,21 +83,31 @@ class AssetController extends Controller
         return view('pages.assets.show', compact('asset'));
     }
 
-    public function edit(Asset $asset)
+    public function edit(Request $request, $id)
     {
-        return view('pages.assets.edit', compact('asset'));
+        $classifications  = AssetClassification::all();
+        $asset_status = AssetStatus::all(); 
+        $asset = Asset::findOrFail($id);
+        return view('pages.assets.edit', compact('asset','classifications','asset_status'));
     }
 
     public function update(Request $request, Asset $asset)
     {
         $asset->update($request->all());
-        return redirect()->route('assets.index');
+        return redirect()->route('assets.index')
+        ->with('success', 'Asset updated successfully');
     }
 
-    public function destroy(Asset $asset)
+    public function destroy($id)
     {
+        $asset = Asset::findOrFail($id);
         $asset->delete();
-        return redirect()->route('assets.index');
+
+        return redirect()->route('assets.index')
+            ->with('success', 'Asset deleted successfully');
     }
+
+    
+
 
 }

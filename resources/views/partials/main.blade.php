@@ -147,7 +147,7 @@
             $("#dataTable").DataTable({
                 "responsive": true,
                 "searching": true,
-                "lengthChange": false,
+                "lengthChange": true,
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
