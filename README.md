@@ -1,66 +1,142 @@
-<p align="center"><a href="https://projectdavaosur.com" target="_blank"><img src="[[https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg](https://i.pinimg.com/originals/ea/52/c0/ea52c054c8c90b3c2dbd19a31f265ec8.png)](https://i.pinimg.com/originals/ea/52/c0/ea52c054c8c90b3c2dbd19a31f265ec8.png)" width="400" alt="Project DAVAOSUR Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Logo](https://i.pinimg.com/originals/ea/52/c0/ea52c054c8c90b3c2dbd19a31f265ec8.png)
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Asset Management System (DAMS) Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Our Digital Asset Management System (DAMS) is a cutting-edge solution designed to efficiently manage, track, and optimize your organization's digital and physical assets. Whether it's creative content, intellectual property, or tangible resources, DAMS streamlines the entire asset lifecycle.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Screenshots
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+![App Screenshot](https://i.pinimg.com/originals/2b/3d/4e/2b3d4e37cb22527d0c35e71f898b48df.png)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Acknowledgements
 
-## Laravel Sponsors
+ - [Laravel Framework](https://laravel.com/)
+ - [Adminlte.io](https://adminlte.io/)
+ - [Project Davaosur](https://adminlte.io/)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## Authors
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- [@kuyagep](https://www.github.com/kuyagep)
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Features
 
-## Code of Conduct
+- Light/dark mode toggle
+- Live previews
+- Fullscreen mode
+- Cross platform
+- Security
+- Authentication
+- Email Verification
+- Asset tag scanning
+- Advance searching
+- Multiple users
+- Multiple login option
+- Backups
+- Analytics
+- Traffics
+- Reports
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Feedback
+
+If you have any feedback, please reach out to us at kuyagepofficial@gmail.com
+
+
+## Documentation
+
+[Documentation](#)
+
+
+## Clone
+
+1. Open your terminal: You can use the command prompt on Windows, Terminal on macOS, or any Linux terminal.
+
+2. Navigate to the directory where you want to clone the repository:
+
+```bash
+  cd /path/to/your/desired/directory
+```
+Replace /path/to/your/desired/directory with the actual path to the directory where you want to clone the repository.
+
+3. Clone the repository using the following command:
+
+```bash
+  git clone https://github.com/kuyagep/assetx.git
+```
+This command will download the repository to your local machine.
+
+4. Enter your GitHub credentials, if prompted.
+Now you should have a local copy of the "assetx" repository on your computer.
+
+## Installation
+
+Once you have cloned the Laravel project from GitHub, you can follow these steps to install its dependencies using Composer:
+
+1. Open your terminal and navigate to the root directory of the cloned Laravel project.
+
+```bash
+  cd assetx
+```
+2. Install Composer dependencies by running the following command:
+
+```bash
+  composer install
+```
+This command will read the composer.json file in your project, download all the required dependencies, and install them.
+
+3. Create a copy of the environment configuration file. Laravel uses an .env file to manage environment-specific configurations. You should create one from the example file provided:
+```bash
+  cp .env.example .env
+```
+
+4. Generate an application key:
+```bash
+ php artisan key:generate
+```
+This will generate a unique application key for your project, which is used for encryption and security.
+5. Configure the .env file. Open the .env file in a text editor and set your database connection details and other environment-specific configurations.
+
+6. Create a database for your Laravel project in your database management system (e.g., MySQL, PostgreSQL).
+
+7. Run migrations to create the necessary database tables:
+```bash
+ php artisan migrate
+```
+8. Seed the database with initial data if your project includes database seeds:
+```bash
+ php artisan db:seed
+```
+9. Finally, you can start the Laravel development server:
+```bash
+ php artisan serve
+```
+
+This will start the development server, and you can access your Laravel application by opening a web browser and navigating to the address displayed in your terminal (usually http://localhost:8000).
+## Optimizations
+
+What optimizations did you make in your code? E.g. refactors, performance improvements, accessibility
+
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Tech Stack
+
+**Client:** Bootstrap, Jquery, Javascript, Ajax, Datatable
+
+**Server:** Laravel Framework, PHP, Apache
+
+
+## Support
+
+For support, email kuyagepofficial@gmail.com or message us on Facebook https://facebook.com/projectdavaosur.
+
