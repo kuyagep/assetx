@@ -163,7 +163,7 @@
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
         })
-    </script>02/BBCH
+    </script>
 
     @yield('script')
 </body>
