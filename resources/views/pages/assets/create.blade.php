@@ -64,8 +64,8 @@
                                 <!-- Date Acquired -->
                                 <div class="form-group">
                                     <label for="date_acquired">Date Acquired:</label>
-                                    <input type="date" name="date_acquired" id="date_acquired" class="form-control"
-                                        required>
+                                    <input type="date" name="date_acquired" id="date_acquired"
+                                        class="form-control datetimepicker-input" required>
                                 </div>
 
                                 <!-- Remarks -->
@@ -77,7 +77,7 @@
                                 <!-- Classification -->
                                 <div class="form-group">
                                     <label for="classification_id">Classification:</label>
-                                    <select name="classification_id" id="classification_id" class="form-control" required>
+                                    <select name="classification_id" id="classification_id" class="custom-select" required>
                                         <option value="" selected disabled>Select</option>
                                         @foreach ($classifications as $classification)
                                             <option value="{{ $classification->id }}">{{ $classification->name }}</option>
@@ -88,7 +88,7 @@
                                 <!-- Status -->
                                 <div class="form-group">
                                     <label for="status_id">Status:</label>
-                                    <select name="status_id" id="status_id" class="form-control" required>
+                                    <select name="status_id" id="status_id" class="custom-select" required>
                                         <option value="" selected disabled>Select</option>
                                         @foreach ($asset_status as $status)
                                             <option value="{{ $status->id }}">{{ $status->name }}</option>
@@ -119,6 +119,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+
 
         });
     </script>

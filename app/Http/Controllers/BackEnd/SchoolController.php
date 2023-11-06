@@ -55,14 +55,14 @@ class SchoolController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-primary btn-sm mr-1" id="viewButton">
-                            View</a>';
-                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn btn-info btn-sm mr-1" id="editButton">
-                            Edit</a>';
-                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
-                            Delete</a>';
-                    return $btn;
-                })
+                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="viewButton">
+                         <i class="fas fa-inbox"></i></a>';
+                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
+                        <i class="fa-regular fa-pen-to-square"></i> </a>';
+                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm px-2" id="deleteButton">
+                        <i class="fa-regular fa-trash-can"></i> </a>';
+                return $btn;
+            })
                 ->rawColumns(['logo','district','action','status'])
                 ->make(true);
         }

@@ -60,7 +60,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-title"></h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" accesskey="c">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -179,8 +179,6 @@
 
                                 <div class="row float-right my-3  ">
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal"
-                                            accesskey="c">Close</button>
                                         <button type="submit" class="btn bg-navy btn-save" accesskey="s"
                                             id="btn-save">Save</button>
                                     </div>

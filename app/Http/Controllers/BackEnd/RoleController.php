@@ -32,10 +32,12 @@ class RoleController extends Controller
             return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-purple btn-sm mr-1" id="editButton">
-                        <i class="fa-regular fa-pen-to-square"></i> Edit</a>';
-                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-danger btn-sm" id="deleteButton">
-                        <i class="fa-regular fa-trash-can"></i> Delete</a>';
+                // $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="viewButton">
+                //          <i class="fas fa-inbox"></i></a>';
+                $btn = '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
+                        <i class="fa-regular fa-pen-to-square"></i> </a>';
+                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm px-2" id="deleteButton">
+                        <i class="fa-regular fa-trash-can"></i> </a>';
                 return $btn;
             })
             ->rawColumns(['action'])

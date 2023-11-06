@@ -67,7 +67,7 @@ class PurchaseController extends Controller
                             </button>
                                 <div class="dropdown-menu" style="">
                                     <a class="dropdown-item" data-id="' . $row->attachment . '" title="Download" href="javascript:void(0)" id="downloadButton">Download</a>
-                                    <a class="dropdown-item" href="#">Dropdown link</a>
+                                     <a class="dropdown-item" href="#">Dropdown link</a>
                                 </div>
                             </div>
                         </div>';
