@@ -30,11 +30,15 @@
 
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    {{-- select2 --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.css') }}"> --}}
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet"
         href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <script src="{{ asset('assets/custom/css/toastr.min.css') }}"></script>
 </head>
 <style>
     /* .main-sidebar {
@@ -138,7 +142,11 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <!-- bs-custom-file-input -->
     <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/select2/js/select2.js') }}"></script> --}}
+
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
     <script src="{{ asset('assets/custom/js/realtime.js') }}"></script>
+    <script src="{{ asset('assets/custom/js/toastr.min.js') }}"></script>
     {{-- <script src="{{ asset('assets/dist/js/custom/toastr.min.js') }}"></script> --}}
     <script src="{{ asset('assets/dist/js/custom/sweetalert2@11.js') }}"></script>
     {{-- dataTable --}}
@@ -154,7 +162,28 @@
 
         });
     </script>
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
 
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('error') }} ");
+                    break;
+            }
+        @endif
+    </script>
     <script>
         $(function() {
             bsCustomFileInput.init();

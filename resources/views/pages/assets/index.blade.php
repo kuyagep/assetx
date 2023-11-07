@@ -76,13 +76,13 @@
                                                     <a href="{{ route('assets.edit', $asset->id) }}"
                                                         class="btn btn-warning btn-sm"><i
                                                             class="fa-regular fa-pen-to-square"></i></a>
-                                                    <form method="POST"
+                                                    {{-- <form method="POST"
                                                         action="{{ route('assets.destroy', $asset->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"><i
                                                                 class="fa-solid fa-trash-can"></i></button>
-                                                    </form>
+                                                    </form> --}}
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
+use App\Models\Asset;
+use App\Models\District;
+use App\Models\Division;
 use App\Models\Issuance;
 use App\Models\IssuanceType;
 use App\Models\User;
@@ -18,35 +21,8 @@ class IssuanceController extends Controller
      */
     public function index(Request $request)
     {
-        if(!Auth::check()){
-            return redirect('/index');
-        }
-        $data = [];
-        if($request->ajax()){
-            // $data = User::orderBy('created_at', 'asc')->get();
-            $data = Issuance::all();
-            return DataTables::of($data)
-                ->editColumn('issuance_type', function ($request) {
-                    return $request->issuance_type->name; 
-                })
-               
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="viewButton">
-                         <i class="fas fa-inbox"></i></a>';
-                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
-                        <i class="fa-regular fa-pen-to-square"></i> </a>';
-                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm px-2" id="deleteButton">
-                        <i class="fa-regular fa-trash-can"></i> </a>';
-                return $btn;
-            })
-                ->rawColumns(['issuance_type','action'])
-                ->make(true);
-        }
-
-        $issuance_type = IssuanceType::all();
-        return view('super_admin.issuances.index', compact('issuance_type'));
-       
+        $issuances = Issuance::all();
+        return view('pages.issuances.index', compact('issuances'));       
     }
 
     /**
@@ -54,7 +30,9 @@ class IssuanceController extends Controller
      */
     public function create()
     {
-        //
+       $users = User::all();
+        $assets = Asset::all();
+        return  view('pages.issuances.create', compact('assets','users'));
     }
 
     /**
