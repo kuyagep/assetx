@@ -22,6 +22,16 @@
                             <form action="{{ route('assets.store') }}" method="POST">
                                 @csrf
 
+                                <!-- Classification -->
+                                <div class="form-group">
+                                    <label for="classification_id">Classification:</label>
+                                    <select name="classification_id" id="classification_id" class="custom-select" required>
+                                        <option value="" selected disabled>Select</option>
+                                        @foreach ($classifications as $classification)
+                                            <option value="{{ $classification->id }}">{{ $classification->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <!-- Article -->
                                 <div class="form-group">
                                     <label for="article">Article:</label>
@@ -74,30 +84,19 @@
                                     <textarea name="remarks" id="remarks" class="form-control"></textarea>
                                 </div>
 
-                                <!-- Classification -->
-                                <div class="form-group">
-                                    <label for="classification_id">Classification:</label>
-                                    <select name="classification_id" id="classification_id" class="custom-select" required>
-                                        <option value="" selected disabled>Select</option>
-                                        @foreach ($classifications as $classification)
-                                            <option value="{{ $classification->id }}">{{ $classification->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                < <!-- Status -->
+                                    <div class="form-group">
+                                        <label for="status_id">Status:</label>
+                                        <select name="status_id" id="status_id" class="custom-select" required>
+                                            <option value="" selected disabled>Select</option>
+                                            @foreach ($asset_status as $status)
+                                                <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                <!-- Status -->
-                                <div class="form-group">
-                                    <label for="status_id">Status:</label>
-                                    <select name="status_id" id="status_id" class="custom-select" required>
-                                        <option value="" selected disabled>Select</option>
-                                        @foreach ($asset_status as $status)
-                                            <option value="{{ $status->id }}">{{ $status->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Submit Button -->
-                                <button type="submit" class="btn btn-primary">Add Asset</button>
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn btn-primary">Add Asset</button>
                             </form>
                         </div>
                     </div>

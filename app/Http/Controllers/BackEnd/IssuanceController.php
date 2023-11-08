@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\AssetClassification;
 use App\Models\District;
 use App\Models\Division;
 use App\Models\Issuance;
@@ -30,9 +31,10 @@ class IssuanceController extends Controller
      */
     public function create()
     {
-       $users = User::all();
+        $users = User::select('id','first_name','last_name')->get();
+        $classifications = AssetClassification::all();
         $assets = Asset::all();
-        return  view('pages.issuances.create', compact('assets','users'));
+        return  view('pages.issuances.create', compact('users','classifications','assets'));
     }
 
     /**
@@ -80,7 +82,7 @@ class IssuanceController extends Controller
                 }
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School updated successfully!']);
+                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issued updated successfully!']);
             }
             
         }
@@ -138,6 +140,12 @@ class IssuanceController extends Controller
         return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again.']);
         
     }
+
+    public function getAssetsByClassification($classificationId)
+{
+    $assets = Asset::where('classification_id', $classificationId)->get();
+    return response()->json($assets);
+}
 
     /**
      * Remove the specified resource from storage.
