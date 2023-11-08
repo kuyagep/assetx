@@ -67,7 +67,13 @@
                                                 <td>{{ $asset->onhand_per_count_value }}</td>
                                                 <td>{{ $asset->shortage_overage_qty }}</td>
                                                 <td>{{ $asset->shortage_overage_value }}</td>
-                                                <td>{{ $asset->classification->name }}</td>
+                                                <td>
+                                                    @if ($asset->classification->name)
+                                                        {{ $asset->classification->name }}
+                                                    @else
+                                                        No Classification
+                                                    @endif
+                                                </td>
                                                 <td>{{ $asset->status->name }}</td>
                                                 <td>{{ $asset->remarks }}</td>
                                                 <td>

@@ -114,6 +114,9 @@ Route::prefix('my')->middleware(['auth','role:super-admin|admin'])->group(functi
     Route::resource('/assets', AssetController::class);
     #issuances
     Route::resource('/issuances', IssuanceController::class);
+    Route::controller(IssuanceController::class)->group(function () {
+        Route::get('/get-assets-by-classification/{classificationId}', 'getAssetsByClassification')->name('get.assets');
+    });
     #issuances
     Route::resource('/purchase', PurchaseController::class);
     Route::get('/download/attachment/{id}',[PurchaseController::class,'download'])->name('purchase.download');
