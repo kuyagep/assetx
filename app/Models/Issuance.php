@@ -11,7 +11,46 @@ class Issuance extends Model
 
     protected $table = 'issuances';
 
+    public static function boot()
+    {
+        parent::boot();
+        // issuance_code
+        static::creating(function ($issuance) {
+            // Generate a unique property code
+            $issuance->issuance_code = static::generateUniquePropertyCode();
+        });
+    }
+
+    public static function generateUniquePropertyCode()
+    {
+        // You can customize the format of the property code as needed
+        $prefix = 'PROP';
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $sequenceNumber = static::generateSequenceNumber();
+
+        return "{$prefix}-{$currentYear}-{$currentMonth}-{$sequenceNumber}";
+    }
+
+    public static function generateSequenceNumber()
+    {
+        // Implement your logic to generate a unique sequence number,
+        // such as retrieving the last used number from the database
+        // and incrementing it.
+        // For example, you can use DB queries to get the last used number.
+        $lastIssuance = static::orderBy('id', 'desc')->first();
+        $lastNumber = $lastIssuance ? substr($lastIssuance->issuance_code, -5) : 0;
+
+        // Increment the last number and pad it with leading zeros
+        $newNumber = str_pad(++$lastNumber, 5, '0', STR_PAD_LEFT);
+
+        return $newNumber;
+    }
+
     protected $guarded = [];
+
+
+
 
     public function issuedBy()
     {

@@ -84,19 +84,19 @@
                                     <textarea name="remarks" id="remarks" class="form-control"></textarea>
                                 </div>
 
-                                < <!-- Status -->
-                                    <div class="form-group">
-                                        <label for="status_id">Status:</label>
-                                        <select name="status_id" id="status_id" class="custom-select" required>
-                                            <option value="" selected disabled>Select</option>
-                                            @foreach ($asset_status as $status)
-                                                <option value="{{ $status->id }}">{{ $status->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <!-- Status -->
+                                <div class="form-group">
+                                    <label for="status_id">Status:</label>
+                                    <select name="status_id" id="status_id" class="custom-select" required>
+                                        <option value="" selected disabled>Select</option>
+                                        @foreach ($asset_status as $status)
+                                            <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                                    <!-- Submit Button -->
-                                    <button type="submit" class="btn btn-primary">Add Asset</button>
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary">Add Asset</button>
                             </form>
                         </div>
                     </div>

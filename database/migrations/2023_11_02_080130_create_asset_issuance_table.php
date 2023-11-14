@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('asset_id');
             $table->unsignedBigInteger('issuance_id');
+            $table->integer('quantity');
             $table->timestamps();
 
             $table->foreign('asset_id')->references('id')->on('assets');

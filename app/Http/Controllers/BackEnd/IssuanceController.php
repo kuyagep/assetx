@@ -9,11 +9,15 @@ use App\Models\District;
 use App\Models\Division;
 use App\Models\Issuance;
 use App\Models\IssuanceType;
+use App\Models\Office;
+use App\Models\School;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+
 class IssuanceController extends Controller
 {
     // use Illuminate\Support\Str;
@@ -23,7 +27,7 @@ class IssuanceController extends Controller
     public function index(Request $request)
     {
         $issuances = Issuance::all();
-        return view('pages.issuances.index', compact('issuances'));       
+        return view('pages.issuances.index', compact('issuances'));
     }
 
     /**
@@ -31,10 +35,11 @@ class IssuanceController extends Controller
      */
     public function create()
     {
-        $users = User::select('id','first_name','last_name')->get();
-        $classifications = AssetClassification::all();
-        $assets = Asset::all();
-        return  view('pages.issuances.create', compact('users','classifications','assets'));
+        // $users = User::select('id', 'first_name', 'last_name')->get();
+        $types = IssuanceType::all();
+        $districts = District::where('division_id', Auth::user()->office->division->id)->get();
+        $schoolOrOffices = Office::where('division_id', Auth::user()->office->division->id)->get();
+        return  view('pages.issuances.create', compact('types', 'districts', 'schoolOrOffices'));
     }
 
     /**
@@ -42,51 +47,22 @@ class IssuanceController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->ajax()) {
-            $request->validate([
-                'issuance_type' => 'required',
-                'total_value' => 'required|numeric|min:0.01|max:9999.99',
-            ]);
+        $request->validate([
 
-            $total_value = '';
-            $issuance_type = IssuanceType::findOrFail($request->issuance_type);
-            // checked if new data or exists
-            if (empty($request->id)) {
+            'issuance_type' => 'required',
+            'issued_to' => 'required',
+        ]);
 
-                $data = new Issuance;
-                $data->total_value = $total_value;
-                $data->received_form_user_id = Auth::user()->id;
-                $data->received_by_user_id = Auth::user()->id;
-                $data->status = $request->status;
-                 
-                $issuance_type->issuance()->save($data);
-                
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issued successfully!']);
-            }else{
-                $data = Issuance::find($request->id);
-                $data->district_id = $request->district_name;
-                $data->school_id = $request->school_id;
-                $data->name = $request->name;
-                $data->code = $request->code;
-                $data->slug = Str::slug($request->name);
-                $data->status = $request->status;
+        $issuance = new Issuance;
 
-                if ($request->hasFile('logo')) {
-                    $file = $request->file('logo');      
-                    //new filename
-                    $filename = $file->hashName();
+        $issuance->issuance_type_id = $request->issuance_type;
+        $issuance->issued_to_user_id = $request->issued_to;
+        $issuance->issued_by_user_id = Auth::user()->id;
+        $issuance->issued_on = Carbon::now()->timezone('Asia/Manila');
+        $issuance->save();
 
-                    // dd($filename);
-                    $file->move(public_path('assets/dist/img/logo'), $filename);
-                    $data['logo'] = $filename;
-                }
-
-                $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Issued updated successfully!']);
-            }
-            
-        }
-
+        return redirect()->route('asset_issuance.create', ['issuanceId' => $issuance->id, 'issuanceCode' => $issuance->issuance_code])
+            ->with('success', 'Issuance created successfully.');
     }
 
     /**
@@ -105,9 +81,12 @@ class IssuanceController extends Controller
      */
     public function edit(Request $request)
     {
-        $school = Issuance::findOrFail($request->id);
-        $issuance_type = IssuanceType::all();   
-        return response()->json(['school'=> $school, 'district'=> $issuance_type ]);
+        $issuance = Issuance::findOrFail($request->id);
+        $types = IssuanceType::all();
+
+        $districts = District::where('division_id', Auth::user()->office->division->id)->get();
+        $schoolOrOffices = Office::where('division_id', Auth::user()->office->division->id)->get();
+        return  view('pages.issuances.edit', compact('types', 'districts', 'schoolOrOffices', 'issuance'));
     }
 
     /**
@@ -116,47 +95,66 @@ class IssuanceController extends Controller
     public function update(Request $request, $id)
     {
 
-       if ($request->ajax()) {
+        if ($request->ajax()) {
 
             $request->validate([
                 'name' => 'required|string|max:255',
             ]);
 
-            
+
             $data = IssuanceType::find($id);
 
-            if($data){
+            if ($data) {
 
                 $data->name = $request->name;
                 $data->slug = $request->slug;
 
                 $data->save();
-                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School updated successfully!']);
-            }else{
-               
-                 return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'School not Found!']);
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'School updated successfully!']);
+            } else {
+
+                return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'School not Found!']);
             }
         }
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again.']);
-        
+        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again.']);
     }
 
     public function getAssetsByClassification($classificationId)
-{
-    $assets = Asset::where('classification_id', $classificationId)->get();
-    return response()->json($assets);
-}
+    {
+        $assets = Asset::where('classification_id', $classificationId)->get();
+        return response()->json($assets);
+    }
+    public function getSchoolOrOffice(Request $request)
+    {
+        if (empty($request->id)) {
+            $schools = Office::where('division_id', Auth::user()->office->division->id)->get();
+            return response()->json($schools);
+        } else {
+            $schools = School::where('district_id', $request->id)->get();
+            return response()->json($schools);
+        }
+    }
+    public function getIssuedTo(Request $request)
+    {
+        if (empty($request->district_id)) {
+            $users = User::where('office_id', $request->id)->get();
+            return response()->json($users);
+        } else {
+            $user = User::where('district_id', $request->id)->where('school_id', $request->id)->get();
+            return response()->json($user);
+        }
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Request $request)
     {
-        if($request->ajax()){
-             $school = Issuance::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School deleted successfully!']);
+        if ($request->ajax()) {
+            $school = Issuance::where('id', $request->id)->delete();
+            return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'School deleted successfully!']);
         }
 
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again!']);
+        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again!']);
     }
 }

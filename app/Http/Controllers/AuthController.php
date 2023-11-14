@@ -33,64 +33,59 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        if(!empty($request->get('user'))){
-           
-            $user = DB::connection('mysql_external')->table('tblusers','tblroles')->where('username', $request->get('user'))->first();
+        if (!empty($request->get('user'))) {
+
+            $user = DB::connection('mysql_external')->table('tblusers', 'tblroles')->where('username', $request->get('user'))->first();
 
             if ($user === null) {
                 return Redirect::to('http://202.137.126.58/');
-            } elseif($user->username !== null) {
+            } elseif ($user->username !== null) {
                 $result = User::where('email', $user->username)->first();
-                
-                if(empty($result)){
+
+                if (empty($result)) {
                     $newuser = User::create([
                         'first_name' => 'First Name',
                         'last_name' => 'Last Name',
                         'email' =>  $request->get('user'),
-                        'password' => Hash::make('password'), 
+                        'password' => Hash::make('password'),
                         'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
                         'role' => 'client', // Set email_verified_at to null initially
-                    ]);    
+                    ]);
                     Auth::login($newuser);
                     $url = '';
                     if (Auth::user()->role === 'super_admin') {
-                    $url = 'my/dashboard';
+                        $url = 'my/dashboard';
                     } elseif (Auth::user()->role === 'admin') {
-                    $url = 'my/account/dashboard';
+                        $url = 'my/account/dashboard';
                     } elseif (Auth::user()->role === 'client') {
                         $url = 'client/dashboard';
-                    }else{
+                    } else {
                         $url = 'index';
                     }
-                    return redirect()->to($url);                
-                }else{
+                    return redirect()->to($url);
+                } else {
                     Auth::login($result);
                     $url = '';
                     if (Auth::user()->role === 'super_admin') {
-                    $url = 's/dashboard';
+                        $url = 's/dashboard';
                     } elseif (Auth::user()->role === 'admin') {
-                    $url = 'admin/dashboard';
+                        $url = 'admin/dashboard';
                     } elseif (Auth::user()->role === 'client') {
                         $url = 'client/dashboard';
-                    }else{
+                    } else {
                         $url = 'index';
                     }
                     return redirect()->to($url);
                 }
-            }else{
-                 return Redirect::to('http://202.137.126.59/assetx');
+            } else {
+                return Redirect::to('http://202.137.126.59/assetx');
             }
             // dd($user);
 
             // Auth::login($user);
-                        
+
             // return view('dashboard', compact('user'));
         }
-        
-        
-        
-        
-
     }
 
     /**

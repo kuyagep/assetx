@@ -1,137 +1,130 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Add Issuance')
+@section('page-title', 'Create Issuance')
 {{-- Content Header --}}
-@section('content-header', 'Add Issuance')
+@section('content-header', 'Create Issuance')
 {{-- Main content --}}
 @section('main-content')
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 grid-margin stretch-card">
+                <div class="col-xl-8 order-xl">
                     <div class="card">
+
                         <div class="card-header">
-                            <h3 class="card-title"> Select Assets</h3>
-
-                            <!-- /.card-tools -->
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h4 class="mb-0">Create Issuance</h4>
+                                </div>
+                            </div>
                         </div>
-
                         <div class="card-body">
-                            <form action="{{ route('issuances.store') }}" method="POST">
+                            <form method="post" class="needs-validation" action="{{ route('issuances.store') }}">
                                 @csrf
-
-                                <!-- Classification -->
-                                <div class="form-group">
-                                    <label for="classification_id">Classification:</label>
-                                    <select name="classification_id" id="classification_id" class="custom-select" required>
-                                        <option value="" selected disabled>Select</option>
-                                        @foreach ($classifications as $classification)
-                                            <option value="{{ $classification->id }}">{{ $classification->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Select Multiple Assets Field -->
-                                <div class="form-group">
-                                    <label for="assets">Select Assets:</label>
-                                    <select name="assets" class="custom-select" id="assets" required>
-                                        <option value="" selected disabled>Select Asset</option>
-
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="qty">Qty:</label>
-                                    <input type="number" name="qty" id="qty" class="form-control">
-                                </div>
-
-                                <!-- Total Value Field (Display-only, will be updated via Ajax) -->
-                                <div class="form-group">
-                                    <label for="total_value">Total Value:</label>
-                                    <span id="total_value_display">0.00</span>
-                                </div>
-
-                                <div class="row  float-right">
-                                    <div class="col-12">
-                                        <!-- Submit Button -->
-                                        <button type="submit" class="btn btn-primary pull-right">Add to Issuance</button>
+                                {{-- new version --}}
+                                <h6 class="heading-small text-muted mb-4">Recipient Information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Division</label>
+                                                <input type="text" id="division" name="division"
+                                                    value="{{ Auth::user()->office->division->name }}" class="form-control"
+                                                    disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="district">District</label>
+                                                <select name="district" id="district" class="custom-select">
+                                                    <option value="" selected>Select District</option>
+                                                    @foreach ($districts as $district)
+                                                        <option value="{{ $district->id }}">
+                                                            {{ $district->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('district')
+                                                    <small class="text-danger">
+                                                        {{ $message }}
+                                                    </small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="school">School/Office</label>
+                                                <select name="schoolOrOffice" id="schoolOrOffice" class="custom-select"
+                                                    required>
+                                                    <option value="" selected>Select School/Office</option>
+                                                    @foreach ($schoolOrOffices as $schoolOrOffice)
+                                                        <option value="{{ $schoolOrOffice->id }}">
+                                                            {{ $schoolOrOffice->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('schoolOrOffice')
+                                                    <small class="text-danger">
+                                                        {{ $message }}
+                                                    </small>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="issued_to">Issued to</label>
+                                                <select name="issued_to" id="issued_to" class="custom-select" required>
+                                                    <option value="" selected>Select Recipient</option>
 
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Asset Issuance</h3>
-
-                            <!-- /.card-tools -->
-                        </div>
-
-                        <div class="card-body">
-                            <form action="{{ route('issuances.store') }}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-6">
-                                        <!-- Issuance Code Field -->
-                                        <div class="form-group">
-                                            <label for="issuance_code">Issuance Code:</label>
-                                            <input type="text" name="issuance_code" class="form-control"
-                                                id="issuance_code" required>
+                                                </select>
+                                                @error('issued_to')
+                                                    <small class="text-danger">
+                                                        {{ $message }}
+                                                    </small>
+                                                @enderror
+                                            </div>
                                         </div>
 
                                     </div>
-                                    <div class="col-6">
-                                        <!-- Issued To User Field -->
-                                        <div class="form-group">
-                                            <label for="issued_to_user_id">Issued To:</label>
-                                            <select name="issued_to_user_id" class="custom-select" id="issued_to_user_id"
-                                                required>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->first_name }}</option>
-                                                @endforeach
-                                            </select>
+                                </div>
+                                <hr class="my-4">
+
+                                <h6 class="heading-small text-muted mb-4">Type of Issuance</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="issuance_type">Type</label>
+                                                <select name="issuance_type" id="issuance_type" class="custom-select"
+                                                    required>
+                                                    <option value="" selected>Select Issuance Type</option>
+                                                    @foreach ($types as $type)
+                                                        <option value="{{ $type->id }}">
+                                                            {{ $type->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('phone')
+                                                    <small class="text-danger">
+                                                        {{ $message }}
+                                                    </small>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Select Multiple Assets Field -->
-                                <div class="row">
-                                    <div class="col-12">
-                                        <table class="table table-bordered">
-                                            <thead class="table-dark">
-                                                <th>No</th>
-                                                <th>Item</th>
-                                                <th>Qty</th>
-                                                <th>Value</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Chair</td>
-                                                    <td>1</td>
-                                                    <td>8978</td>
-                                                </tr>
-                                                <tr>
-                                                    <th colspan="3">Total Value</th>
-                                                    <td>5689</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="row float-right mt-3">
+                                    <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
+                                        Create Issuance</button>
                                 </div>
-                                <div class="row float-right">
-                                    <!-- Submit Button -->
-                                    <button type="submit" class="btn btn-primary mr-5">Issue Item</button>
-                                </div>
-
-
                             </form>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -152,27 +145,68 @@
                 }
             });
 
-            $('#classification_id').on('change', function() {
+            $('#district').on('change', function() {
                 var id = $(this).val();
 
-                var route = "{{ route('get.assets', ':id') }}";
-                route = route.replace(':id', id);
+
+                var route = "{{ route('get.school.office') }}";
+                // route = route.replace(':id', id);
 
 
                 // Make an Ajax request to fetch assets for the selected classification
                 $.ajax({
                     url: route,
                     type: 'GET',
+                    data: {
+
+                        id: id
+                    },
+                    dataType: 'json',
                     success: function(data) {
                         console.log(data);
                         // Update the assets dropdown with the received data
-                        var assetsDropdown = $('#assets');
+                        var assetsDropdown = $('#schoolOrOffice');
                         assetsDropdown.empty();
 
                         $.each(data, function(key, value) {
                             assetsDropdown.append($('<option>', {
                                 value: value.id,
-                                text: value.article
+                                text: value.name
+                            }));
+                        });
+                    }
+                });
+            });
+
+
+            $('#schoolOrOffice').on('change', function() {
+                var id = $(this).val();
+                var district_id = $('#district').val();
+
+                var route = "{{ route('get.issued.to') }}";
+                // route = route.replace(':id', id);
+
+
+                // Make an Ajax request to fetch assets for the selected classification
+                $.ajax({
+                    url: route,
+                    type: 'GET',
+                    data: {
+                        district_id: district_id,
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        // Update the assets dropdown with the received data
+                        var assetsDropdown = $('#issued_to');
+                        assetsDropdown.empty();
+
+                        $.each(data, function(key, value) {
+                            assetsDropdown.append($('<option>', {
+                                value: value.id,
+                                text: value.first_name + " " + value
+                                    .last_name
                             }));
                         });
                     }

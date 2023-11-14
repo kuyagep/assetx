@@ -29,30 +29,37 @@
                                         <tr>
                                             <th>#</th>
                                             <th>ISSUANCE CODE</th>
-                                            <th>TOTAL VALUE</th>
                                             <th>ISSUED BY</th>
                                             <th>ISSUED TO</th>
-                                            <th style="width: 8%" class="text-center">STATUS</th>
+                                            <th class="text-center">STATUS</th>
                                             <th width="250px">ACTION</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($issuances as $issuance)
                                             <tr>
+                                                <td>{{ $issuance->id }}</td>
                                                 <td>{{ $issuance->issuance_code }}</td>
-                                                <td>{{ $issuance->total_value }}</td>
-                                                <td>{{ $issuance->issuedTo->firstname }}</td>
-                                                <td>{{ $issuance->isApproved }}</td>
+                                                <td>{{ $issuance->issuedBy->first_name }}</td>
+                                                <td>{{ $issuance->issuedTo->first_name }}</td>
+                                                <td class="text-center">
+
+                                                    @if ($issuance->isApproved)
+                                                        <span class="badge badge-primary">Approved</span>
+                                                    @else
+                                                        <span class="badge badge-warning">Pending</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a href="{{ route('issuances.show', $issuance->id) }}"
-                                                        class="btn btn-info">Show</a>
+                                                        class="btn btn-info btn-sm">Show</a>
                                                     <a href="{{ route('issuances.edit', $issuance->id) }}"
-                                                        class="btn btn-warning">Edit</a>
+                                                        class="btn btn-warning btn-sm">Edit</a>
                                                     <form action="{{ route('issuances.destroy', $issuance->id) }}"
                                                         method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger"
+                                                        <button type="submit" class="btn btn-danger btn-sm"
                                                             onclick="return confirm('Are you sure?')">Delete</button>
                                                     </form>
                                                 </td>
