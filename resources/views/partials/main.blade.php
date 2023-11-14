@@ -39,6 +39,7 @@
         href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <script src="{{ asset('assets/custom/css/toastr.min.css') }}"></script>
+    @livewireStyles
 </head>
 <style>
     /* .main-sidebar {
@@ -193,7 +194,7 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
-
+    @livewireScripts
     @yield('script')
 </body>
 
