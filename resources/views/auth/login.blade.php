@@ -4,10 +4,9 @@
     {{-- @include('sweetalert::alert') --}}
 
     <div class="login-box">
-
         <div class="login-logo">
-            <img src="{{ asset('brand_logo/android-chrome-512x512.png') }}" width="100px" alt="" srcset="">
-            <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
+            <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
+            {{-- <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p> --}}
         </div>
         <!-- /.login-logo -->
         <div class="card card-outline card-navy">
