@@ -25,12 +25,12 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
 <style>
-    body {
+    /* body {
         background-image: url('https://cdn.wallpapersafari.com/89/94/KycE8k.png');
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
-    }
+    } */
 
     /* .login-box,
     .card-body {

@@ -79,14 +79,26 @@ class IssuanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
+    public function edit(Request $request, $id)
     {
-        $issuance = Issuance::findOrFail($request->id);
+        $issuance = Issuance::findOrFail($id);
         $types = IssuanceType::all();
 
         $districts = District::where('division_id', Auth::user()->office->division->id)->get();
-        $schoolOrOffices = Office::where('division_id', Auth::user()->office->division->id)->get();
-        return  view('pages.issuances.edit', compact('types', 'districts', 'schoolOrOffices', 'issuance'));
+        if (empty($issuance->user->school_id)) {
+            $schoolOrOffices = Office::where('division_id', Auth::user()->office->division->id)->get();
+        } else {
+            $schoolOrOffices =  School::where('district_id', $request->id)->get();
+        }
+
+
+        if (empty($issuance->issuedTo->school_id)) {
+            $users = User::where('office_id', $issuance->issuedTo->office_id)->get();
+        } else {
+            $user = User::where('district_id', $request->id)->where('school_id', $request->id)->get();
+        }
+
+        return  view('pages.issuances.edit', compact('types', 'districts', 'schoolOrOffices', 'issuance', 'users'));
     }
 
     /**
@@ -94,29 +106,20 @@ class IssuanceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'issuance_type' => 'required',
+            'issued_to' => 'required',
+        ]);
 
-        if ($request->ajax()) {
+        $issuance = Issuance::findOrFail($id);
 
-            $request->validate([
-                'name' => 'required|string|max:255',
-            ]);
+        $issuance->issuance_type_id = $request->issuance_type;
+        $issuance->issued_to_user_id = $request->issued_to;
+        $issuance->issued_by_user_id = Auth::user()->id;
+        $issuance->issued_on = Carbon::now()->timezone('Asia/Manila');
+        $issuance->update();
 
-
-            $data = IssuanceType::find($id);
-
-            if ($data) {
-
-                $data->name = $request->name;
-                $data->slug = $request->slug;
-
-                $data->save();
-                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'School updated successfully!']);
-            } else {
-
-                return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'School not Found!']);
-            }
-        }
-        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again.']);
+        return redirect()->route('asset_issuance.create', ['issuanceId' => $issuance->id, 'issuanceCode' => $issuance->issuance_code]);
     }
 
     public function getAssetsByClassification($classificationId)
@@ -137,10 +140,10 @@ class IssuanceController extends Controller
     public function getIssuedTo(Request $request)
     {
         if (empty($request->district_id)) {
-            $users = User::where('office_id', $request->id)->get();
+            $users = User::where('office_id', $request->schoolOrOffice)->get();
             return response()->json($users);
         } else {
-            $user = User::where('district_id', $request->id)->where('school_id', $request->id)->get();
+            $user = User::where('school_id', $request->schoolOrOffice)->get();
             return response()->json($user);
         }
     }

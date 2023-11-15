@@ -19,18 +19,18 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('issuances.store') }}" method="POST">
+                            <form action="{{ route('asset_issuance.store') }}" method="POST">
                                 @csrf
-
+                                <input type="hidden" name="issuanceId" value="{{ $issuance->id }}">
                                 <!-- Classification -->
                                 <div class="form-group">
                                     <label for="classification_id">Classification:</label>
                                     <select name="classification_id" id="classification_id" class="custom-select" required>
                                         <option value="" selected disabled>Select</option>
-                                        {{-- @foreach ($classifications as $classification)
+                                        @foreach ($classifications as $classification)
                                             <option value="{{ $classification->id }}">{{ $classification->name }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -44,14 +44,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="qty">Qty:</label>
-                                    <input type="number" name="qty" id="qty" class="form-control">
-                                </div>
-
-                                <!-- Total Value Field (Display-only, will be updated via Ajax) -->
-                                <div class="form-group">
-                                    <label for="total_value">Total Value:</label>
-                                    <span id="total_value_display">0.00</span>
+                                    <label for="quantity ">Qty:</label>
+                                    <input type="number" name="quantity" id="quantity" placeholder="Enter Quantity"
+                                        class="form-control">
                                 </div>
 
                                 <div class="row  float-right">
@@ -106,12 +101,15 @@
                                                 <th>Value</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Chair</td>
-                                                    <td>1</td>
-                                                    <td>8978</td>
-                                                </tr>
+                                                @foreach ($assetIssuances as $assetItem)
+                                                    <tr>
+                                                        <td>{{ $assetItem->id }}</td>
+                                                        <td>{{ $assetItem->asset->article }}</td>
+                                                        <td>{{ $assetItem->quantity }}</td>
+                                                        <td>{{ $assetItem->quantity * $assetItem->asset->unit_value }}</td>
+                                                    </tr>
+                                                @endforeach
+
                                                 <tr>
                                                     <th colspan="3">Total Value</th>
                                                     <td>5689</td>
@@ -151,14 +149,20 @@
             $('#classification_id').on('change', function() {
                 var id = $(this).val();
 
-                var route = "{{ route('get.assets', ':id') }}";
-                route = route.replace(':id', id);
+
+                var route = "{{ route('get.asset') }}";
+                // route = route.replace(':id', id);
 
 
                 // Make an Ajax request to fetch assets for the selected classification
                 $.ajax({
                     url: route,
                     type: 'GET',
+                    data: {
+
+                        id: id
+                    },
+                    dataType: 'json',
                     success: function(data) {
                         console.log(data);
                         // Update the assets dropdown with the received data

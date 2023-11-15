@@ -1,9 +1,9 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Create Issuance')
+@section('page-title', 'Edit Issuance')
 {{-- Content Header --}}
-@section('content-header', 'Create Issuance')
+@section('content-header', 'Edit Issuance')
 {{-- Main content --}}
 @section('main-content')
     <!-- Main content -->
@@ -16,15 +16,18 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h4 class="mb-0">Create Issuance</h4>
+                                    <h4 class="mb-0">Edit Issuance</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form method="post" class="needs-validation" action="{{ route('issuances.store') }}">
+                            <form method="POST" class="needs-validation"
+                                action="{{ route('issuances.update', $issuance->id) }}">
                                 @csrf
+                                @method('PUT')
                                 {{-- new version --}}
                                 <h6 class="heading-small text-muted mb-4">Recipient Information</h6>
+                                <input type="hidden" name="id" value="{{ $issuance->id }}">
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-4">
@@ -41,7 +44,8 @@
                                                 <select name="district" id="district" class="custom-select">
                                                     <option value="" selected>Select District</option>
                                                     @foreach ($districts as $district)
-                                                        <option value="{{ $district->id }}">
+                                                        <option value="{{ $district->id }}"
+                                                            {{ $district->id === isset($issuance->issuedTo->user->school->district->id) ? 'selected' : '' }}>
                                                             {{ $district->name }}
                                                         </option>
                                                     @endforeach
@@ -60,7 +64,10 @@
                                                     required>
                                                     <option value="" selected>Select School/Office</option>
                                                     @foreach ($schoolOrOffices as $schoolOrOffice)
-                                                        <option value="{{ $schoolOrOffice->id }}">
+                                                        <option value="{{ $schoolOrOffice->id }}"
+                                                            @if (empty($issuance->user->school_id)) {{ $schoolOrOffice->id === $issuance->issuedTo->office_id ? 'selected' : '' }}
+                                                        @else
+                                                         {{ $schoolOrOffice->id === $issuance->issuedTo->school_id ? 'selected' : '' }} @endif>
                                                             {{ $schoolOrOffice->name }}
                                                         </option>
                                                     @endforeach
@@ -80,7 +87,12 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="issued_to">Issued to</label>
                                                 <select name="issued_to" id="issued_to" class="custom-select" required>
-                                                    <option value="" selected>Select Recipient</option>
+                                                    @foreach ($users as $user)
+                                                        <option value="{{ $user->id }}"
+                                                            {{ $user->id === $issuance->issuedTo->id ? 'selected' : '' }}>
+                                                            {{ $user->first_name . ' ' . $user->last_name }}
+                                                        </option>
+                                                    @endforeach
 
                                                 </select>
                                                 @error('issued_to')
@@ -105,7 +117,8 @@
                                                     required>
                                                     <option value="" selected>Select Issuance Type</option>
                                                     @foreach ($types as $type)
-                                                        <option value="{{ $type->id }}">
+                                                        <option value="{{ $type->id }}"
+                                                            {{ $type->id === $issuance->issuance_type_id ? 'selected' : '' }}>
                                                             {{ $type->name }}
                                                         </option>
                                                     @endforeach
@@ -121,7 +134,7 @@
                                 </div>
                                 <div class="row float-right mt-3">
                                     <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
-                                        Create Issuance</button>
+                                        Update Changes</button>
                                 </div>
                             </form>
                         </div>

@@ -9,9 +9,9 @@
             {{-- <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p> --}}
         </div>
         <!-- /.login-logo -->
-        <div class="card card-outline card-navy">
+        <div class="card card-outline card-danger">
             <div class="card-body login-card-body">
-                <h5 class="login-box-msg">Account Login</h5>
+                <h5 class="login-box-msg"><b>Enter your valid credentials</b></h5>
 
                 @if (Session::has('status'))
                     <div class="alert alert-success alert-dismissible">
@@ -26,7 +26,7 @@
                     {{-- old version --}}
                     <div class="form-group mb-3">
                         <input type="text" name="login"
-                            class="form-control form-control-lg  @error('login')
+                            class="form-control   @error('login')
                             is-invalid
                         @enderror"
                             placeholder="Registered Email/Phone" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
@@ -39,8 +39,7 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password" class="form-control form-control-lg " placeholder="Password"
-                            required>
+                        <input type="password" name="password" class="form-control  " placeholder="Password" required>
                     </div>
                     <div class="row mb-3">
                         <div class="col-7">
@@ -64,7 +63,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn bg-navy btn-lg btn-block">LOG
+                            <button type="submit" class="btn bg-danger btn-block">LOG
                                 IN</button>
                         </div>
                         <!-- /.col -->
