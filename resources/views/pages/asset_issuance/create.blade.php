@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('issuances.store') }}" method="POST">
+                            <form action="#" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-6">
@@ -89,43 +89,51 @@
                                                 value="{{ $issuance->issuedTo->first_name }}" disabled>
                                         </div>
                                     </div>
+
                                 </div>
-                                <!-- Select Multiple Assets Field -->
-                                <div class="row">
-                                    <div class="col-12">
-                                        <table class="table table-bordered">
-                                            <thead class="table-dark">
-                                                <th>No</th>
-                                                <th>Item</th>
-                                                <th>Qty</th>
-                                                <th>Value</th>
-                                            </thead>
-                                            <tbody>
-
-                                                @foreach ($assetIssuances as $assetItem)
-                                                    <tr>
-                                                        <td>{{ $assetItem->id }}</td>
-                                                        <td>{{ $assetItem->asset->article }}</td>
-                                                        <td>{{ $assetItem->quantity }}</td>
-                                                        <td>{{ $assetItem->quantity * $assetItem->asset->unit_value }}</td>
-                                                    </tr>
-                                                @endforeach
-
-                                                <tr>
-                                                    <th colspan="3">Total Value</th>
-                                                    <td>{{ $totalValue }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="row mb-3">
+                                    <div class="col-12 float-right">
+                                        <button class="btn btn-primary ">Add Asset Issuance</button>
+                                        <button class="btn btn-danger ">Generate Issuance</button>
+                                        <button class="btn btn-success mr-2">Preview Issuance</button>
                                     </div>
                                 </div>
-                                <div class="row float-right">
-                                    <!-- Submit Button -->
-                                    <button type="submit" class="btn btn-primary mr-5">Issue Item</button>
-                                </div>
-
-
                             </form>
+                            <!-- Select Multiple Assets Field -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-bordered">
+                                        <thead class="table-dark">
+                                            <th>No</th>
+                                            <th>Item</th>
+                                            <th>Qty</th>
+                                            <th>Value</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach ($assetIssuances as $assetItem)
+                                                <tr>
+                                                    <td>{{ $assetItem->id }}</td>
+                                                    <td>{{ $assetItem->asset->article }}</td>
+                                                    <td>{{ $assetItem->quantity }}</td>
+                                                    <td>{{ $assetItem->quantity * $assetItem->asset->unit_value }}</td>
+                                                    <td width="150px">
+                                                        <button class="btn btn-danger btn-sm">Remove</button>
+                                                        <button class="btn btn-warning btn-sm">Edit</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                            <tr>
+                                                <th colspan="3">Total Value</th>
+                                                <td>{{ $totalValue }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
