@@ -21,17 +21,20 @@ class AssetIssuanceController extends Controller
     public function create(Request $request)
     {
 
-        if (empty($request->get('issuanceId')) && empty($request->get('issuanceCode'))) {
-            return redirect()->route('issuances.create')
-                ->with('error', 'Asset Issuance failed.');
+        if (!empty($request->get('issuanceId')) && !empty($request->get('issuanceCode'))) {
+            $classifications = AssetClassification::all();
+            $issuance = Issuance::where('id', $request->get('issuanceId'))->first();
+            $assetIssuances = AssetIssuance::where('issuance_id', $request->get('issuanceId'))->get();
+            $totalValue = 0;
+            foreach ($assetIssuances as $assetIssuance) {
+                $total = $assetIssuance->quantity * $assetIssuance->asset->unit_value;
+                $totalValue = $totalValue + $total;
+            }
+            // You can pass any necessary data to the view here
+            return view('pages.asset_issuance.create', compact('issuance', 'classifications', 'assetIssuances', 'totalValue'));
         }
-
-        $classifications = AssetClassification::all();
-        $issuance = Issuance::findOrFail($request->get('issuanceId'));
-        $assetIssuances = AssetIssuance::findOrFail($request->get('issuanceId'))->get();
-
-        // You can pass any necessary data to the view here
-        return view('pages.asset_issuance.create', compact('issuance', 'classifications', 'assetIssuances'));
+        return redirect()->back()
+            ->with('error', 'Asset Issuance failed.');
     }
 
     public function store(Request $request)

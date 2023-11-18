@@ -9,6 +9,7 @@ class Issuance extends Model
 {
     use HasFactory;
 
+
     protected $table = 'issuances';
 
     public static function boot()

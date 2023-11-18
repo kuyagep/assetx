@@ -101,6 +101,7 @@
                                                 <th>Value</th>
                                             </thead>
                                             <tbody>
+
                                                 @foreach ($assetIssuances as $assetItem)
                                                     <tr>
                                                         <td>{{ $assetItem->id }}</td>
@@ -112,7 +113,7 @@
 
                                                 <tr>
                                                     <th colspan="3">Total Value</th>
-                                                    <td>5689</td>
+                                                    <td>{{ $totalValue }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
