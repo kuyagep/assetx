@@ -40,6 +40,24 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <script src="{{ asset('assets/custom/css/toastr.min.css') }}"></script>
     @livewireStyles
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5CZ6KPHZ');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
 <style>
     /* .main-sidebar {
@@ -57,6 +75,10 @@
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-navy ">
     <noscript>You must run this system with JavaScript enabled.</noscript>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CZ6KPHZ" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     @include('sweetalert::alert')
 
     <div class="wrapper">
