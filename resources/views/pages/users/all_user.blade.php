@@ -111,7 +111,7 @@
                                         <div class="form-group">
                                             <label for="role">Position <span class="text-danger">*</span></label>
                                             <select class="custom-select" id="position_name" name="position_name">
-                                                <option selected disabled>Choose...</option>
+                                                <option value="" selected>Choose...</option>
                                                 @foreach ($positions as $position)
                                                     <option value="{{ $position->id }}">{{ $position->name }}
                                                     </option>
@@ -119,9 +119,25 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="role">Office <span class="text-danger">*</span></label>
+                                            <label for="district_name">District <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="district_name" name="school_name">
+                                                <option value="" selected>Select District...</option>
+                                                @foreach ($districts as $district)
+                                                    <option value="{{ $district->id }}">{{ $district->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="school_name">School <span class="text-danger">*</span></label>
+                                            <select class="custom-select" id="school_name" name="school_name">
+                                                <option value="" selected disabled>Select School...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="office_name">Office <span class="text-danger">*</span></label>
                                             <select class="custom-select" id="office_name" name="office_name">
-                                                <option selected disabled>Choose...</option>
+                                                <option value="" selected>Choose...</option>
                                                 @foreach ($offices as $office)
                                                     <option value="{{ $office->id }}">{{ $office->name }}
                                                     </option>
@@ -131,7 +147,7 @@
                                         <div class="form-group">
                                             <label for="role">Role <span class="text-danger">*</span></label>
                                             <select class="custom-select" id="roles" name="roles">
-                                                <option selected disabled>Choose...</option>
+                                                <option value="" selected>Choose...</option>
                                                 @foreach ($roles as $role)
                                                     <option value="{{ $role->id }}">{{ $role->name }}
                                                     </option>
@@ -141,7 +157,7 @@
                                         <div class="form-group">
                                             <label for="status">Status <span class="text-danger">*</span></label>
                                             <select class="custom-select" name="status" id="status">
-                                                <option>Select...</option>
+                                                <option value="">Select...</option>
                                                 <option value="active" selected>Activate</option>
                                                 <option value="inactive">Deactivate</option>
                                             </select>
@@ -368,6 +384,41 @@
                     $('#showImage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0']);
+            });
+
+
+            ////////////////////////getting schools
+            $('#district_name').on('change', function() {
+                var id = $(this).val();
+
+
+                var route = "{{ route('get.school.office') }}";
+                // route = route.replace(':id', id);
+
+
+                // Make an Ajax request to fetch assets for the selected classification
+                $.ajax({
+                    url: route,
+                    type: 'GET',
+                    data: {
+
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        // Update the assets dropdown with the received data
+                        var assetsDropdown = $('#school_name');
+                        assetsDropdown.empty();
+
+                        $.each(data, function(key, value) {
+                            assetsDropdown.append($('<option>', {
+                                value: value.id,
+                                text: value.name
+                            }));
+                        });
+                    }
+                });
             });
         });
     </script>

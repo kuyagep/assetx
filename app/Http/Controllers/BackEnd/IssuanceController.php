@@ -129,23 +129,22 @@ class IssuanceController extends Controller
     }
     public function getSchoolOrOffice(Request $request)
     {
+        // $district = District::where();
         if (empty($request->id)) {
-            $schools = Office::where('division_id', Auth::user()->office->division->id)->get();
-            return response()->json($schools);
+            $schools = Office::where('office_id', $request->id)->get();
         } else {
             $schools = School::where('district_id', $request->id)->get();
-            return response()->json($schools);
         }
+        return response()->json($schools);
     }
     public function getIssuedTo(Request $request)
     {
         if (empty($request->district_id)) {
-            $users = User::where('office_id', $request->schoolOrOffice)->get();
-            return response()->json($users);
+            $users = User::where('office_id', $request->id)->get();
         } else {
-            $user = User::where('school_id', $request->schoolOrOffice)->get();
-            return response()->json($user);
+            $users = User::where('school_id', $request->id)->get();
         }
+        return response()->json($users);
     }
 
     /**
@@ -154,8 +153,8 @@ class IssuanceController extends Controller
     public function destroy(Request $request)
     {
         if ($request->ajax()) {
-            $school = Issuance::where('id', $request->id)->delete();
-            return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'School deleted successfully!']);
+            $issuance = Issuance::where('id', $request->id)->delete();
+            return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Issuance deleted successfully!']);
         }
 
         return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again!']);

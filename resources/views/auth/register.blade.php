@@ -1,5 +1,5 @@
 @extends('partials.auth.main')
-@section('auth-title', 'Register')
+@section('auth-title', 'Registers')
 @section('auth-content')
     <div class="register-box">
         <div class="register-logo">

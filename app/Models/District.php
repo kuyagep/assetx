@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+
 class District extends Model
 {
     use HasFactory;
-   
+
     // protected $table = 'categories';
 
     /**
@@ -16,12 +17,12 @@ class District extends Model
      *
      * @var array<int, string>
      */
-     protected $fillable = [
+    protected $fillable = [
         'division_id',
         'name',
         'slug',
         'status'
-     ];
+    ];
 
     public function division()
     {
@@ -32,5 +33,4 @@ class District extends Model
     {
         return $this->hasMany(School::class, 'district_id', 'id');
     }
-     
 }

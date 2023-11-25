@@ -8,9 +8,6 @@
             <a href="{{ url('http://202.137.126.58/') }}" class="nav-link">Home</a>
         </li>
     </ul>
-
-
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\AssetClassification;
+
 class AssetClassificationController extends Controller
 {
     /**
@@ -15,31 +16,30 @@ class AssetClassificationController extends Controller
     public function index(Request $request)
     {
         $data = [];
-        if($request->ajax()){
+        if ($request->ajax()) {
             // $data = User::orderBy('created_at', 'asc')->get();
             $data = AssetClassification::all();
             return DataTables::of($data)
-                
-            ->editColumn('created_at', function ($request) {
+
+                ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s'); // format date time
-            })
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="viewButton">
+                })
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a title="View" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm mr-1" id="viewButton">
                          <i class="fas fa-inbox"></i></a>';
-                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
+                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
                         <i class="fa-regular fa-pen-to-square"></i> </a>';
-                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm px-2" id="deleteButton">
+                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm px-2" id="deleteButton">
                         <i class="fa-regular fa-trash-can"></i> </a>';
-                return $btn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
-    
+
         return view('pages.classifications.index');
-       
     }
 
     /**
@@ -62,29 +62,27 @@ class AssetClassificationController extends Controller
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
-               
+
                 $data = new AssetClassification;
-                $data->name = $request->name;
+                $data->name =  Str::upper($request->name);
                 $data->uac_code = $request->uac_code;
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification saved successfully!']);
-            }else{
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Asset classification saved successfully!']);
+            } else {
                 $data = AssetClassification::find($request->id);
 
-                $data->name = $request->name;
+                $data->name =  Str::upper($request->name);
                 $data->uac_code = $request->uac_code;
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification updated successfully!']);
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Asset classification updated successfully!']);
             }
-            
         }
-
     }
 
     /**
@@ -114,7 +112,6 @@ class AssetClassificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-
     }
 
     /**
@@ -122,12 +119,12 @@ class AssetClassificationController extends Controller
      */
     public function destroy(Request $request)
     {
-        if($request->ajax()){
-             $user = AssetClassification::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Asset classification deleted successfully!']);
+        if ($request->ajax()) {
+            $user = AssetClassification::where('id', $request->id)->delete();
+            return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Asset classification deleted successfully!']);
         }
-       
 
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong try again later!']);
+
+        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong try again later!']);
     }
 }

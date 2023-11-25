@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use App\Models\Office;
 use App\Models\Position;
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,7 +109,9 @@ class UsersController extends Controller
         $positions = Position::all();
         $offices = Office::all();
         $roles = Role::all();
-        return view('pages.users.all_user', compact('positions', 'roles', 'offices'));
+        // $schools = School::where('district_id', Auth::user()->office->division_id)->get();
+        $districts = District::where('division_id', Auth::user()->office->division_id)->get();
+        return view('pages.users.all_user', compact('positions', 'roles', 'offices', 'districts'));
     }
 
     public function store(Request $request)
@@ -121,18 +125,18 @@ class UsersController extends Controller
                 'phone' => ['numeric', 'digits:11'],
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'position_name' => 'required',
-                'office_name' => 'required',
                 'roles' => 'required|string|max:255',
                 'status' => 'required|string|max:255',
             ]);
             //check office if exists
-            $office = Office::findOrFail($request->office_name);
-            $position = Office::findOrFail($request->position_name);
+
             // checked if new data or exists
             if (empty($request->id)) {
                 $request->validate([
                     'email' => ['required', 'string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255', 'unique:' . User::class],
                     'phone' => ['numeric', 'digits:11', 'unique:' . User::class],
+                    // 'office_name' => ['nullable'],
+                    // 'school_name' => ['nullable'],
                 ]);
                 $user = new User;
                 $user->first_name = $request->first_name;
@@ -142,6 +146,10 @@ class UsersController extends Controller
                 $user->password = Hash::make('password');
                 $user->role = 'client';
                 $user->status = $request->status;
+                $user->office_id = $request->office_name;
+                $user->school_id = $request->school_name;
+                $user->position_id = $request->position_name;
+
 
                 if ($request->hasFile('avatar')) {
                     $file = $request->file('avatar');
@@ -153,13 +161,13 @@ class UsersController extends Controller
                     $file->move(public_path('assets/dist/img/avatar'), $filename);
                     $user['avatar'] = $filename;
                 }
-                $office->user()->save($user);
-                $position->user()->save($user);
+
+                $user->save();
 
                 if ($request->roles) {
                     $user->assignRole($request->roles);
                 }
-                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Admin user saved successfully!']);
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'User saved successfully!']);
             } else {
                 $user = User::find($request->id);
 
@@ -183,7 +191,7 @@ class UsersController extends Controller
                 }
 
                 $user->save();
-                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Admin user updated successfully!']);
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'User updated successfully!']);
             }
         }
     }

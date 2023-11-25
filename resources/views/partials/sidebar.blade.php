@@ -37,7 +37,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">
@@ -64,7 +64,7 @@
 
                     @can('menu purchase_request')
                         <li class="nav-item {{ Request::is('my/purchase') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ Request::is('my/purchase') ? 'active' : '' }}">
+                            <a href="javascript:void(0)" class="nav-link {{ Request::is('my/purchase') ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-cart-shopping"></i>
                                 <p>
                                     Manage Purchase
@@ -85,9 +85,35 @@
                         </li>
                     @endcan
 
+                    @can('menu assets')
+                        <li class="nav-item {{ Request::is('my/assets') ? 'menu-open' : '' }}">
+                            <a href="javascript:void(0)" class="nav-link {{ Request::is('my/assets') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-dice-d6"></i>
+                                <p>
+                                    Assets
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
 
+                                <li class="nav-item">
+                                    <a href="{{ url('my/assets') }}"
+                                        class="nav-link {{ Request::is('my/assets') ? 'active' : '' }}">
+                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <p>Expendable</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('my/roles/permission') }}"
+                                        class="nav-link {{ Request::is('my/roles/permission') ? 'active' : '' }}">
+                                        <i class="fas fa-user-cog nav-icon"></i>
+                                        <p>Non Expendable</p>
+                                    </a>
+                                </li>
 
-
+                            </ul>
+                        </li>
+                    @endcan
 
                     @can('menu classifications')
                         <li class="nav-item">
@@ -111,16 +137,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('menu assets')
-                        <li class="nav-item">
-                            <a href="{{ url('my/assets') }}" class="nav-link {{ Request::is('my/assets') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-dice-d6"></i>
-                                <p>
-                                    Assets
-                                </p>
-                            </a>
-                        </li>
-                    @endcan
+
                     <li class="nav-item">
                         <a href="{{ url('my/issuances') }}"
                             class="nav-link {{ Request::is('my/issuances') ? 'active' : '' }}">
@@ -146,7 +163,7 @@
                     @can('menu division', 'menu districts', 'menu schools', 'menu offices', 'menu positions')
                         <li
                             class="nav-item {{ Request::is('my/division', 'my/districts', 'my/schools', 'my/offices', 'my/positions') ? 'menu-open' : '' }}">
-                            <a href="#"
+                            <a href="javascript:void(0)"
                                 class="nav-link {{ Request::is('my/division', 'my/districts', 'my/schools', 'my/offices', 'my/positions') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-layer-group"></i>
                                 <p>
@@ -224,7 +241,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('my/user') ? 'active' : '' }}">
+                        <a href="{{ route('user.index') }}"
+                            class="nav-link {{ Request::is('my/user') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
                             <p>Manage Users</p>
                         </a>
@@ -239,7 +257,7 @@
 
                     <li
                         class="nav-item {{ Request::is('my/permission', 'my/permission-group', 'my/roles', 'my/roles/permission/all', 'my/roles/permission') ? 'menu-open' : '' }}">
-                        <a href="#"
+                        <a href="javascript:void(0)"
                             class="nav-link {{ Request::is('my/permission', 'my/permission-group', 'my/roles', 'my/roles/permission/all', 'my/roles/permission') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-users-gear"></i>
                             <p>

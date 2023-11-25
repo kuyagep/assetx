@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+
 class SchoolController extends Controller
 {
     /**
@@ -16,11 +17,11 @@ class SchoolController extends Controller
      */
     public function index(Request $request)
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect('/index');
         }
         $data = [];
-        if($request->ajax()){
+        if ($request->ajax()) {
             // $data = User::orderBy('created_at', 'asc')->get();
             $data = School::all();
             return DataTables::of($data)
@@ -40,36 +41,33 @@ class SchoolController extends Controller
                     //  return '<img src="' .asset('assets/dist/img/avatar/' . $request->avatar). '" alt="User Image" width="50">';
                 })
                 ->editColumn('district', function ($request) {
-                    return $request->district->name; 
-    
-                    
+                    return $request->district->name;
                 })
                 ->editColumn('status', function ($request) {
 
-                    if($request->status === "active"){
+                    if ($request->status === "active") {
                         $result = '<span class="badge badge-success">Active</span>';
-                    }else{
-                         $result = '<span class="badge badge-danger">Inactive</span>';
+                    } else {
+                        $result = '<span class="badge badge-danger">Inactive</span>';
                     }
                     return $result;
                 })
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="viewButton">
+                ->addColumn('action', function ($row) {
+                    $btn = '<a title="View" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm mr-1" id="viewButton">
                          <i class="fas fa-inbox"></i></a>';
-                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
+                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
                         <i class="fa-regular fa-pen-to-square"></i> </a>';
-                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm px-2" id="deleteButton">
+                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm px-2" id="deleteButton">
                         <i class="fa-regular fa-trash-can"></i> </a>';
-                return $btn;
-            })
-                ->rawColumns(['logo','district','action','status'])
+                    return $btn;
+                })
+                ->rawColumns(['logo', 'district', 'action', 'status'])
                 ->make(true);
         }
 
         $districts = District::all();
         return view('pages.schools.index', compact('districts'));
-       
     }
 
     /**
@@ -108,8 +106,8 @@ class SchoolController extends Controller
                 $data->slug = Str::slug($request->name);
                 $data->status = $request->status;
 
-                 if ($request->hasFile('logo')) {
-                    $file = $request->file('logo');           
+                if ($request->hasFile('logo')) {
+                    $file = $request->file('logo');
 
                     //new filename
                     $filename = $file->hashName();
@@ -126,8 +124,8 @@ class SchoolController extends Controller
                 //     'status' =>  $request->status,
                 // ]);
 
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Schools saved successfully!']);
-            }else{
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Schools saved successfully!']);
+            } else {
                 $data = School::find($request->id);
                 $data->district_id = $request->district_name;
                 $data->school_id = $request->school_id;
@@ -137,7 +135,7 @@ class SchoolController extends Controller
                 $data->status = $request->status;
 
                 if ($request->hasFile('logo')) {
-                    $file = $request->file('logo');      
+                    $file = $request->file('logo');
                     //new filename
                     $filename = $file->hashName();
 
@@ -147,11 +145,9 @@ class SchoolController extends Controller
                 }
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School updated successfully!']);
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'School updated successfully!']);
             }
-            
         }
-
     }
 
     /**
@@ -171,8 +167,8 @@ class SchoolController extends Controller
     public function edit(Request $request)
     {
         $school = School::findOrFail($request->id);
-        $district = District::all();   
-        return response()->json(['school'=> $school, 'district'=> $district ]);
+        $district = District::all();
+        return response()->json(['school' => $school, 'district' => $district]);
     }
 
     /**
@@ -181,29 +177,28 @@ class SchoolController extends Controller
     public function update(Request $request, $id)
     {
 
-       if ($request->ajax()) {
+        if ($request->ajax()) {
 
             $request->validate([
                 'name' => 'required|string|max:255',
             ]);
 
-            
+
             $data = District::find($id);
 
-            if($data){
+            if ($data) {
 
                 $data->name = $request->name;
                 $data->slug = $request->slug;
 
                 $data->save();
-                 return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School updated successfully!']);
-            }else{
-               
-                 return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'School not Found!']);
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'School updated successfully!']);
+            } else {
+
+                return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'School not Found!']);
             }
         }
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again.']);
-        
+        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again.']);
     }
 
     /**
@@ -211,11 +206,11 @@ class SchoolController extends Controller
      */
     public function destroy(Request $request)
     {
-        if($request->ajax()){
-             $school = School::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'School deleted successfully!']);
+        if ($request->ajax()) {
+            $school = School::where('id', $request->id)->delete();
+            return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'School deleted successfully!']);
         }
 
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again!']);
+        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again!']);
     }
 }

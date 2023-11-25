@@ -17,31 +17,30 @@ class AssetStatusController extends Controller
     public function index(Request $request)
     {
         $data = [];
-        if($request->ajax()){
+        if ($request->ajax()) {
             // $data = User::orderBy('created_at', 'asc')->get();
             $data = AssetStatus::all();
             return DataTables::of($data)
-                
-            ->editColumn('created_at', function ($request) {
+
+                ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s'); // format date time
-            })
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $btn = '<a title="View" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1" id="viewButton">
+                })
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a title="View" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm mr-1" id="viewButton">
                          <i class="fas fa-inbox"></i></a>';
-                $btn .= '<a title="Edit" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
+                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
                         <i class="fa-regular fa-pen-to-square"></i> </a>';
-                $btn .= '<a title="Delete" href="javascript:void(0);" data-id="'.$row->id.'" class="btn bg-navy btn-sm px-2" id="deleteButton">
+                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm px-2" id="deleteButton">
                         <i class="fa-regular fa-trash-can"></i> </a>';
-                return $btn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
-    
+
         return view('pages.asset_status.index');
-       
     }
 
     /**
@@ -63,27 +62,25 @@ class AssetStatusController extends Controller
             ]);
             // checked if new data or exists
             if (empty($request->id)) {
-               
+
                 $data = new AssetStatus;
-                $data->name = $request->name;
+                $data->name = Str::upper($request->name);
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position saved successfully!']);
-            }else{
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Position saved successfully!']);
+            } else {
                 $data = AssetStatus::find($request->id);
 
-                $data->name = $request->name;
+                $data->name = Str::upper($request->name);
                 $data->slug = Str::slug($request->name);
 
 
                 $data->save();
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position updated successfully!']);
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Position updated successfully!']);
             }
-            
         }
-
     }
 
     /**
@@ -113,7 +110,6 @@ class AssetStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-
     }
 
     /**
@@ -121,12 +117,12 @@ class AssetStatusController extends Controller
      */
     public function destroy(Request $request)
     {
-        if($request->ajax()){
-             $user = AssetStatus::where('id',$request->id)->delete();
-             return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Position deleted successfully!']);
+        if ($request->ajax()) {
+            $user = AssetStatus::where('id', $request->id)->delete();
+            return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Position deleted successfully!']);
         }
-       
 
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong try again later!']);
+
+        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong try again later!']);
     }
 }

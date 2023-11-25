@@ -10,7 +10,7 @@ class School extends Model
     use HasFactory;
 
 
-     protected $fillable = [
+    protected $fillable = [
         'district_id',
         'school_id',
         'name',
@@ -18,15 +18,15 @@ class School extends Model
         'logo',
         'slug',
         'status'
-     ];
+    ];
 
-     public function district()
+    public function district()
     {
-        return $this->belongsTo(District::class, 'district_id', 'id');
+        return $this->belongsTo(District::class);
     }
 
     public function users()
     {
-        return $this->hasMany(User::class, 'school_id', 'id' );
+        return $this->hasMany(User::class, 'school_id', 'id');
     }
 }
