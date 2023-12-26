@@ -48,7 +48,6 @@ class IssuanceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'issuance_type' => 'required',
             'issued_to' => 'required',
         ]);
@@ -131,7 +130,7 @@ class IssuanceController extends Controller
     {
         // $district = District::where();
         if (empty($request->id)) {
-            $schools = Office::where('office_id', $request->id)->get();
+            $schools = Office::get();
         } else {
             $schools = School::where('district_id', $request->id)->get();
         }

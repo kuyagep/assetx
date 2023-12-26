@@ -36,7 +36,7 @@
                                             <th>Avatar</th>
                                             <th>Full Name</th>
                                             <th>Position</th>
-                                            <th>Office</th>
+                                            {{-- <th>Office</th> --}}
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Role</th>
@@ -225,10 +225,11 @@
                     }, {
                         data: 'position',
                         name: 'position'
-                    }, {
-                        data: 'office',
-                        name: 'office'
                     },
+                    // {
+                    //     data: 'office',
+                    //     name: 'office'
+                    // },
                     {
                         data: 'email',
                         name: 'email'

@@ -10,12 +10,12 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-8 order-xl">
+                <div class="col-xl-12 order-xl">
                     <div class="card">
 
                         <div class="card-header">
                             <div class="row align-items-center">
-                                <div class="col-8">
+                                <div class="col-12">
                                     <h4 class="mb-0">Edit Issuance</h4>
                                 </div>
                             </div>

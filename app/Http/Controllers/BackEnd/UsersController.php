@@ -34,16 +34,16 @@ class UsersController extends Controller
                     }
                     return $result;
                 })
-                ->editColumn('office', function ($request) {
-                    $result = $request->office->name;
+                // ->editColumn('office', function ($request) {
+                //     $result = $request->office->name;
 
-                    if ($result == null) {
-                        return "N/A";
-                    } else {
-                        $result;
-                    }
-                    return $result;
-                })
+                //     if ($result == null) {
+                //         return "N/A";
+                //     } else {
+                //         $result;
+                //     }
+                //     return $result;
+                // })
                 ->editColumn('phone', function ($request) {
                     $result = $request->phone;
                     if ($result == null) {

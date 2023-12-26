@@ -10,19 +10,18 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-  
-        return view('products.index',compact('products'));
+        return view('products.index', compact('products'));
     }
-  
- 
+
+
     public function createStepOne(Request $request)
     {
         $product = $request->session()->get('product');
-  
-        return view('products.create-step-one',compact('product'));
+
+        return view('products.create-step-one', compact('product'));
     }
-  
- 
+
+
     public function postCreateStepOne(Request $request)
     {
         $validatedData = $request->validate([
@@ -30,58 +29,58 @@ class ProductController extends Controller
             'amount' => 'required|numeric',
             'description' => 'required',
         ]);
-  
-        if(empty($request->session()->get('product'))){
+
+        if (empty($request->session()->get('product'))) {
             $product = new Product();
             $product->fill($validatedData);
             $request->session()->put('product', $product);
-        }else{
+        } else {
             $product = $request->session()->get('product');
             $product->fill($validatedData);
             $request->session()->put('product', $product);
         }
-  
+
         return redirect()->route('products.create.step.two');
     }
-  
- 
+
+
     public function createStepTwo(Request $request)
     {
         $product = $request->session()->get('product');
-  
-        return view('products.create-step-two',compact('product'));
+
+        return view('products.create-step-two', compact('product'));
     }
-  
- 
+
+
     public function postCreateStepTwo(Request $request)
     {
         $validatedData = $request->validate([
             'stock' => 'required',
             'status' => 'required|numeric',
         ]);
-  
+
         $product = $request->session()->get('product');
         $product->fill($validatedData);
         $request->session()->put('product', $product);
-  
+
         return redirect()->route('products.create.step.three');
     }
-  
+
 
     public function createStepThree(Request $request)
     {
         $product = $request->session()->get('product');
-  
-        return view('products.create-step-three',compact('product'));
+
+        return view('products.create-step-three', compact('product'));
     }
- 
+
     public function postCreateStepThree(Request $request)
     {
         $product = $request->session()->get('product');
         $product->save();
-  
+
         $request->session()->forget('product');
-  
+
         return redirect()->route('products.index');
     }
 }

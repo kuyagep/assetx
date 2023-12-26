@@ -36,7 +36,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($issuances as $issuance)
+                                        @forelse ($issuances as $issuance)
                                             <tr>
                                                 <td>{{ $issuance->id }}</td>
                                                 <td>{{ $issuance->issuance_code }}</td>
@@ -64,7 +64,11 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td colspan="6" class="text-center">Nothing Found!</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

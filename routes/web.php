@@ -150,11 +150,13 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
     Route::get('/permission/import', [RoleController::class, 'importPermission'])->name('import.permission');
     Route::get('/permission/export/', [RoleController::class, 'exportPermission'])->name('export.permission');
     Route::post('/permission/import/', [RoleController::class, 'importPermissions'])->name('import.permissions');
+
     //* roles
     Route::get('/roles', [RoleController::class, 'allRoles'])->name('all.roles');
     Route::post('/roles', [RoleController::class, 'storeRoles'])->name('roles.add');
     Route::get('/roles/{id}/edit', [RoleController::class, 'editRoles'])->name('roles.edit');
     Route::delete('/roles/{id}', [RoleController::class, 'destroyRoles'])->name('roles.destroy');
+
     //* roles in permission
     Route::get('/roles/permission/', [RoleController::class, 'addRolePermission'])->name('add.roles.permission');
     Route::post('/roles/permission/', [RoleController::class, 'storeRolesPermission'])->name('roles.permission.store');
