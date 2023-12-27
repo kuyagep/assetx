@@ -12,7 +12,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class AccountController extends Controller
 {
 
-    
+
     // ================Super Admin================
     // SuperAdmin Account Management
     public function super_adminDashboard()
@@ -28,32 +28,32 @@ class AccountController extends Controller
     }
 
     public function super_adminProfileUpdate(Request $request)
-    {        
+    {
         // Validation rules for the form fields
-       $request->validate([
+        $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
-            'phone' => ['numeric','digits:11'],
+            'email' => ['required', 'string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+            'phone' => ['numeric', 'digits:11'],
             'address' => ['string', 'max:255'],
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        
+
 
 
         $data = User::find(Auth::user()->id);
 
-        if($data->email !== $request->email){
+        if ($data->email !== $request->email) {
             $email_exist = User::where('email', $request->email)->first();
 
             if ($email_exist) {
                 Alert::error('Oops!', 'The email has already been taken.');
-                return redirect()->back();              
-            } 
+                return redirect()->back();
+            }
         }
 
-        if($data->phone !== $request->phone){
+        if ($data->phone !== $request->phone) {
             $phone_exist = User::where('phone', $request->phone)->first();
 
             if ($phone_exist) {
@@ -61,7 +61,7 @@ class AccountController extends Controller
                 return redirect()->back();
             }
         }
-        
+
         $data->first_name = $request->first_name;
         $data->last_name = $request->last_name;
         $data->email = $request->email;
@@ -69,8 +69,8 @@ class AccountController extends Controller
         $data->address = $request->address;
 
         if ($request->file('avatar')) {
-            $file = $request->file('avatar');           
-            @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
+            $file = $request->file('avatar');
+            @unlink(public_path('assets/dist/img/avatar/' . Auth::user()->avatar));
 
             //new filename
             $filename = $file->hashName();
@@ -83,9 +83,9 @@ class AccountController extends Controller
         // $data->save();
 
         // alert()->success('Title','Lorem Lorem Lorem');
-        if( $data->save()){
+        if ($data->save()) {
             Alert::success('Success', 'Your Profile updated successfully!');
-        }      
+        }
 
 
         $notification = array(
@@ -96,19 +96,19 @@ class AccountController extends Controller
         return redirect()->back()->with($notification);
     }
     // Change password
-    
+
     // Update Password
-    public function super_adminUpdatePassword( Request $request)
+    public function super_adminUpdatePassword(Request $request)
     {
         //validation
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required|min:6|confirmed'
         ]);
-        
-         // Verify the current password
+
+        // Verify the current password
         if (!Hash::check($request->current_password, Auth::user()->password)) {
-           $notification = array(
+            $notification = array(
                 'message' => 'Current Password does not matched!',
                 'alert-type' => 'error'
             );
@@ -120,37 +120,37 @@ class AccountController extends Controller
         User::whereId(Auth::user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
-       
-        
+
+
         Alert::success('Success', 'Password updated successfully!');
 
         $notification = array(
-                'message' => 'Password updated successfully!',
-                'alert-type' => 'success'
-            );
+            'message' => 'Password updated successfully!',
+            'alert-type' => 'success'
+        );
 
-            return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification);
     }
     // Update Password
-    public function super_adminCheckPassword( Request $request)
+    public function super_adminCheckPassword(Request $request)
     {
-       
-         // Verify the current password
+
+        // Verify the current password
         if (Hash::check($request->current_password, Auth::user()->password)) {
-             return response()->json(['message' => 'true']);
+            return response()->json(['message' => 'true']);
         } else {
             return response()->json(['message' => 'false']);
         }
-        
-        
+
+
 
         // return response()->json(['message' => 'true']);
     }
-    
+
     // ================Admin================
-    
+
     // Admin Account Management
-    
+
 
     // Display Profile
     public function adminDashboard()
@@ -166,32 +166,32 @@ class AccountController extends Controller
     }
 
     public function adminProfileUpdate(Request $request)
-    {        
+    {
         // Validation rules for the form fields
-       $request->validate([
+        $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
-            'phone' => ['numeric','digits:11'],
+            'email' => ['required', 'string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+            'phone' => ['numeric', 'digits:11'],
             'address' => ['string', 'max:255'],
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        
+
 
 
         $data = User::find(Auth::user()->id);
 
-        if($data->email !== $request->email){
+        if ($data->email !== $request->email) {
             $email_exist = User::where('email', $request->email)->first();
 
             if ($email_exist) {
                 Alert::error('Oops!', 'The email has already been taken.');
-                return redirect()->back();              
-            } 
+                return redirect()->back();
+            }
         }
 
-        if($data->phone !== $request->phone){
+        if ($data->phone !== $request->phone) {
             $phone_exist = User::where('phone', $request->phone)->first();
 
             if ($phone_exist) {
@@ -199,7 +199,7 @@ class AccountController extends Controller
                 return redirect()->back();
             }
         }
-        
+
         $data->first_name = $request->first_name;
         $data->last_name = $request->last_name;
         $data->email = $request->email;
@@ -207,8 +207,8 @@ class AccountController extends Controller
         $data->address = $request->address;
 
         if ($request->file('avatar')) {
-            $file = $request->file('avatar');           
-            @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
+            $file = $request->file('avatar');
+            @unlink(public_path('assets/dist/img/avatar/' . Auth::user()->avatar));
 
             //new filename
             $filename = $file->hashName();
@@ -221,9 +221,9 @@ class AccountController extends Controller
         // $data->save();
 
         // alert()->success('Title','Lorem Lorem Lorem');
-        if( $data->save()){
+        if ($data->save()) {
             Alert::success('Success', 'Your Profile updated successfully!');
-        }      
+        }
 
 
         $notification = array(
@@ -234,19 +234,19 @@ class AccountController extends Controller
         return redirect()->back()->with($notification);
     }
     // Change password
-    
+
     // Update Password
-    public function adminUpdatePassword( Request $request)
+    public function adminUpdatePassword(Request $request)
     {
         //validation
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required|min:6|confirmed'
         ]);
-        
-         // Verify the current password
+
+        // Verify the current password
         if (!Hash::check($request->current_password, Auth::user()->password)) {
-           $notification = array(
+            $notification = array(
                 'message' => 'Current Password does not matched!',
                 'alert-type' => 'error'
             );
@@ -258,48 +258,71 @@ class AccountController extends Controller
         User::whereId(Auth::user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
-       
-        
+
+
         Alert::success('Success', 'Password updated successfully!');
 
         $notification = array(
-                'message' => 'Password updated successfully!',
-                'alert-type' => 'success'
-            );
+            'message' => 'Password updated successfully!',
+            'alert-type' => 'success'
+        );
 
-            return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification);
     }
 
+    // ================Client================
+
+    // Client Account Management
 
 
-    // ================client================
-    
-    // client Account Management
-    public function clientDashboard()
+    // Display Profile
+    public function clientsDashboard()
     {
-         return view('client.index');
+        return view('clients.index');
     }
 
     // Display Profile
-    public function clientProfile(Request $request)
+    public function clientsProfile(Request $request)
     {
         $account = User::find(Auth::user()->id);
-        return view('client.client_profile', compact('account'));
+        return view('clients.clients_profile', compact('account'));
     }
 
-    public function clientProfileUpdate(Request $request)
-    {        
+    public function clientsProfileUpdate(Request $request)
+    {
         // Validation rules for the form fields
-       $request->validate([
+        $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'phone' => ['numeric','digits:11'],
+            'email' => ['required', 'string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+            'phone' => ['numeric', 'digits:11'],
             'address' => ['string', 'max:255'],
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+
+
+
         $data = User::find(Auth::user()->id);
+
+        if ($data->email !== $request->email) {
+            $email_exist = User::where('email', $request->email)->first();
+
+            if ($email_exist) {
+                Alert::error('Oops!', 'The email has already been taken.');
+                return redirect()->back();
+            }
+        }
+
+        if ($data->phone !== $request->phone) {
+            $phone_exist = User::where('phone', $request->phone)->first();
+
+            if ($phone_exist) {
+                Alert::success('Oops!', 'The phone has already been taken.');
+                return redirect()->back();
+            }
+        }
+
         $data->first_name = $request->first_name;
         $data->last_name = $request->last_name;
         $data->email = $request->email;
@@ -307,8 +330,8 @@ class AccountController extends Controller
         $data->address = $request->address;
 
         if ($request->file('avatar')) {
-            $file = $request->file('avatar');           
-            @unlink(public_path('assets/dist/img/avatar/'.Auth::user()->avatar));
+            $file = $request->file('avatar');
+            @unlink(public_path('assets/dist/img/avatar/' . Auth::user()->avatar));
 
             //new filename
             $filename = $file->hashName();
@@ -318,8 +341,14 @@ class AccountController extends Controller
             $data['avatar'] = $filename;
         }
 
-        $data->save();
-        Alert::success('Success', 'Profile updated successfully!');
+        // $data->save();
+
+        // alert()->success('Title','Lorem Lorem Lorem');
+        if ($data->save()) {
+            Alert::success('Success', 'Your Profile updated successfully!');
+        }
+
+
         $notification = array(
             'message' => 'Profile updated successfully!',
             'alert-type' => 'success'
@@ -328,25 +357,19 @@ class AccountController extends Controller
         return redirect()->back()->with($notification);
     }
     // Change password
-    public function clientChangePassword()
-    {
-        $account = User::find(Auth::user()->id);
-        return view('client.client_change_password', compact('account'));
-    }
 
     // Update Password
-    public function clientUpdatePassword( Request $request)
+    public function clientsUpdatePassword(Request $request)
     {
         //validation
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required|min:6|confirmed'
         ]);
-        
-         // Verify the current password
+
+        // Verify the current password
         if (!Hash::check($request->current_password, Auth::user()->password)) {
-            Alert::error('Failed', 'Current Password does not matched!');
-           $notification = array(
+            $notification = array(
                 'message' => 'Current Password does not matched!',
                 'alert-type' => 'error'
             );
@@ -358,12 +381,15 @@ class AccountController extends Controller
         User::whereId(Auth::user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
-        Alert::success('Success', 'Password updated successfully!');
-        $notification = array(
-                'message' => 'Password updated successfully!',
-                'alert-type' => 'success'
-            );
 
-            return redirect()->back()->with($notification);
+
+        Alert::success('Success', 'Password updated successfully!');
+
+        $notification = array(
+            'message' => 'Password updated successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
     }
 }

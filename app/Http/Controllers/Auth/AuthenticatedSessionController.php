@@ -29,14 +29,14 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        
-        
-        
+
+
+
         if ($request->user()->status !== 'active') {
             Auth::logout(); // Log out the user
             return redirect('/login')->with(['status' => 'Your account is not activated.']); // Redirect with an error message
         }
-        
+
         if ($request->user()->status !== 'active') {
             Auth::logout(); // Log out the user
             return redirect('/login')->with(['status' => 'Your account is not activated.']); // Redirect with an error message
@@ -45,12 +45,12 @@ class AuthenticatedSessionController extends Controller
 
         $url = '';
         if ($request->user()->role === 'super_admin') {
-           $url = 'my/dashboard';
+            $url = 'my/dashboard';
         } elseif ($request->user()->role === 'admin') {
-           $url = 'my/account/dashboard';
+            $url = 'my/account/dashboard';
         } elseif ($request->user()->role === 'client') {
             $url = 'client/dashboard';
-        }else{
+        } else {
             $url = 'index';
         }
         return redirect()->intended($url);
@@ -67,6 +67,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return Redirect::to('http://202.137.126.58/');
+        // return Redirect::to('http://202.137.126.58/');
+        return Redirect::to('http://localhost/assetx');
     }
 }

@@ -65,7 +65,7 @@
                                                     <option value="" selected>Select School/Office</option>
                                                     @foreach ($schoolOrOffices as $schoolOrOffice)
                                                         <option value="{{ $schoolOrOffice->id }}"
-                                                            @if (empty($issuance->user->school_id)) {{ $schoolOrOffice->id === $issuance->issuedTo->office_id ? 'selected' : '' }}
+                                                            @if (empty($issuance->user->school_id)) {{ $schoolOrOffice->id == $issuance->issuedTo->office_id ? 'selected' : '' }}
                                                         @else
                                                          {{ $schoolOrOffice->id === $issuance->issuedTo->school_id ? 'selected' : '' }} @endif>
                                                             {{ $schoolOrOffice->name }}

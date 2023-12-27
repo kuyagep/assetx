@@ -94,7 +94,7 @@ class IssuanceController extends Controller
         if (empty($issuance->issuedTo->school_id)) {
             $users = User::where('office_id', $issuance->issuedTo->office_id)->get();
         } else {
-            $user = User::where('district_id', $request->id)->where('school_id', $request->id)->get();
+            $users = User::where('school_id', $request->id)->get();
         }
 
         return  view('pages.issuances.edit', compact('types', 'districts', 'schoolOrOffices', 'issuance', 'users'));

@@ -30,58 +30,38 @@ use App\Http\Controllers\BackEnd\DivisionController;
 use App\Http\Controllers\ProductController;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// External
 Route::get('/auth', [AuthController::class, 'store'])->name('auth');
 
 require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
     return view('index');
-});
-
-Route::get('/index', [HomeController::class, 'index'])->name('index');
-Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('/features', [HomeController::class, 'features'])->name('features');
-Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
-Route::get('/disclaimer', [HomeController::class, 'disclaimer'])->name('disclaimer');
-Route::get('/terms-of-service', [HomeController::class, 'termsService'])->name('terms-of-service');
-Route::get('/data-privacy-notice', [HomeController::class, 'dataPrivacy'])->name('data-privacy-notice');
+})->middleware('auth');
+Route::get('/index', [HomeController::class, 'index'])->name('index')->middleware('auth');
 
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+
 
 
 ######################## SUPER ADMIN ########################
 Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(function () {
 
+
     //* ############# ADMIN #############
     Route::controller(AccountController::class)->prefix('account')->as('account.')->middleware(['role:admin'])->group(function () {
         //* ->middleware('permission:division.all')
-        Route::get('/dashboard', [AccountController::class, 'adminDashboard'])->name('dashboard');
-        Route::get('/profile', [AccountController::class, 'adminProfile'])->name('profile');
-        Route::post('/profile/update', [AccountController::class, 'adminProfileUpdate'])->name('profile.update');
-        Route::post('/update/password', [AccountController::class, 'adminUpdatePassword'])->name('update.password');
+        Route::get('/dashboard', 'adminDashboard')->name('dashboard');
+        Route::get('/profile', 'adminProfile')->name('profile');
+        Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
+        Route::post('/update/password', 'adminUpdatePassword')->name('update.password');
     });
     //* ############# SUPER ADMIN #############
     Route::controller(AccountController::class)->middleware(['role:super-admin'])->group(function () {
-        Route::get('/dashboard', [AccountController::class, 'super_adminDashboard'])->name('dashboard');
-        Route::get('/profile', [AccountController::class, 'super_adminProfile'])->name('profile');
-        Route::post('/profile/update', [AccountController::class, 'super_adminProfileUpdate'])->name('profile.update');
-        Route::post('/update/password', [AccountController::class, 'super_adminUpdatePassword'])->name('update.password');
+        Route::get('/dashboard', 'super_adminDashboard')->name('dashboard');
+        Route::get('/profile', 'super_adminProfile')->name('profile');
+        Route::post('/profile/update', 'super_adminProfileUpdate')->name('profile.update');
+        Route::post('/update/password', 'super_adminUpdatePassword')->name('update.password');
         Route::post('/security/check-current-password', 'super_adminCheckPassword')->name('check.password');
     });
 
@@ -182,6 +162,16 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
 
         Route::get('/online/users', 'online')->name('user.online');
     });
+});
+
+
+//* ############# CLIENT ROUTE #############
+Route::controller(AccountController::class)->prefix('client')->as('client.')->middleware(['auth', 'role:client'])->group(function () {
+    //* ->middleware('permission:division.all')
+    Route::get('/dashboard', 'clientsDashboard')->name('dashboard');
+    Route::get('/profile', 'clientsProfile')->name('profile');
+    Route::post('/profile/update', 'clientsProfileUpdate')->name('profile.update');
+    Route::post('/update/password', 'clientsUpdatePassword')->name('update.password');
 });
 
 

@@ -8,15 +8,17 @@
         <div class="content-header">
             <div class="container">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    {{-- <div class="col-sm-6">
                         <h1 class="m-0"> Division Asset MS <small>Version 0.2.9</small></h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
+                    </div> --}}
+                    <!-- /.col -->
+                    {{-- <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <div class="time" id="time"> </div> &nbsp; &nbsp;
 
                         </ol>
-                    </div><!-- /.col -->
+                    </div> --}}
+                    <!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

@@ -55,7 +55,7 @@
             j.src =
                 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5CZ6KPHZ');
+        })(window, document, 'script', 'dataLayer', 'GTM-PQVBC2BK');
     </script>
     <!-- End Google Tag Manager -->
 </head>
@@ -76,7 +76,7 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-navy ">
     <noscript>You must run this system with JavaScript enabled.</noscript>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CZ6KPHZ" height="0" width="0"
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQVBC2BK" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     @include('sweetalert::alert')
