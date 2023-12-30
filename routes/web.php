@@ -166,12 +166,14 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
 
 
 //* ############# CLIENT ROUTE #############
-Route::controller(AccountController::class)->prefix('client')->as('client.')->middleware(['auth', 'role:client'])->group(function () {
-    //* ->middleware('permission:division.all')
-    Route::get('/dashboard', 'clientsDashboard')->name('dashboard');
-    Route::get('/profile', 'clientsProfile')->name('profile');
-    Route::post('/profile/update', 'clientsProfileUpdate')->name('profile.update');
-    Route::post('/update/password', 'clientsUpdatePassword')->name('update.password');
+Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->group(function () {
+
+    Route::controller(AccountController::class)->group(function () {
+        Route::get('/dashboard', 'clientsDashboard')->name('dashboard');
+        Route::get('/profile', 'clientsProfile')->name('profile');
+        Route::post('/profile/update', 'clientsProfileUpdate')->name('profile.update');
+        Route::post('/update/password', 'clientsUpdatePassword')->name('update.password');
+    });
 });
 
 

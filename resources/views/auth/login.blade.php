@@ -70,7 +70,7 @@
                     </div>
                 </form>
                 <p class="mt-3 text-center ">
-                    {{-- <a href="{{ route('register') }}" class="text-secondary">Register</a> --}}
+                    Don't have an account?<a href="{{ route('register') }}" class="text-secondary"> Register here.</a>
                 </p>
 
             </div>

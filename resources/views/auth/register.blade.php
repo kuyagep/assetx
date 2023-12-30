@@ -2,13 +2,16 @@
 @section('auth-title', 'Registers')
 @section('auth-content')
     <div class="register-box">
-        <div class="register-logo">
+        {{-- <div class="register-logo">
             <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
+        </div> --}}
+        <div class="login-logo">
+            <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
+            {{-- <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p> --}}
         </div>
-
-        <div class="card">
+        <div class="card card-outline card-danger">
             <div class="card-body register-card-body">
-                <h3 class="login-box-msg">Register</h3>
+                <h5 class="login-box-msg"><b>Create Account</b></h5>
 
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
@@ -87,13 +90,13 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn  btn-dark btn-block">REGISTER</button>
+                            <button type="submit" class="btn  btn-danger btn-block">REGISTER</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
                 <p class="mt-3 text-center ">
-                    <a href="{{ route('login') }}" class="text-secondary">I already have an account</a>
+                    Already registered? <a href="{{ route('login') }}" class="text-secondary">Login here.</a>
                 </p>
             </div>
             <!-- /.form-box -->

@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="row float-right mt-3">
                                     <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
-                                        Update Changes</button>
+                                        Continue</button>
                                 </div>
                             </form>
                         </div>

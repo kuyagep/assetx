@@ -51,7 +51,9 @@ class AuthController extends Controller
                         'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
                         'role' => 'client', // Set email_verified_at to null initially
                     ]);
+
                     Auth::login($newuser);
+                    
                     $url = '';
                     if (Auth::user()->role === 'super_admin') {
                         $url = 'my/dashboard';
@@ -78,7 +80,7 @@ class AuthController extends Controller
                     return redirect()->to($url);
                 }
             } else {
-                return Redirect::to('http://202.137.126.59/assetx');
+                return Redirect::to('https://202.137.126.59/assetx');
             }
             // dd($user);
 
