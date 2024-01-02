@@ -53,7 +53,6 @@ class LoginRequest extends FormRequest
                 'email' => trans('auth.failed'),
             ]);
         }
-
         
 
         if (!$user->hasVerifiedEmail()) {
@@ -62,7 +61,6 @@ class LoginRequest extends FormRequest
             $user->sendEmailVerificationNotification();
 
             return redirect()->route('verification.notice')->with('email', $this->email);
-
         } 
 
 
