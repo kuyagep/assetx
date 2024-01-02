@@ -29,7 +29,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' => ['required', 'string'],
+            'email' => ['required', 'string','email'],
             'password' => ['required', 'string'],
         ];
     }
@@ -39,25 +39,18 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate()
     {
         $this->ensureIsNotRateLimited();
-        if(isset($this->remember) && !empty($this->remember)){
-            setcookie($this->login, $this->login, time() + 3600);
-            setcookie($this->password, $this->password, time() + 3600);
-        }else{
-            setcookie($this->login, "");
-            setcookie($this->password, "");
-        }
-        $user = User::where('email', $this->login)
-                ->orWhere('phone', $this->login)
-                ->first();
+
+       
+        $user = User::where('email', $this->email)->first();
           
-        if (! $user || !Hash::check($this->password, $user->password)) {
+        if (!$user || !Hash::check($this->password, $user->password)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'login' => trans('auth.failed'),
+                'email' => trans('auth.failed'),
             ]);
         }
 
@@ -67,6 +60,8 @@ class LoginRequest extends FormRequest
 
             // Send the email verification link
             $user->sendEmailVerificationNotification();
+
+            return redirect()->route('verification.notice')->with('email', $this->email);
 
         } 
 

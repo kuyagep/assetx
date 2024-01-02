@@ -67,8 +67,9 @@
 
 
             // Login Button
-            $('#loginBtn').click(function() {
-                $('#loginBtn').html("Loading..");
+            $('#loginBtn').click(function(e) {
+                // e.preventDefault();
+                $('#loginBtn').html("Loading...");
             });
             $('#login').keyup(function() {
                 $('#loginBtn').html("LOGIN");
@@ -78,8 +79,8 @@
             });
 
             // Register Button
-            $('#registerBtn').click(function() {
-                $('#registerBtn').html("Loading..");
+            $('#registerBtn').click(function(e) {
+                $('#registerBtn').html("Loading...");
             });
             $('#first_name').keyup(function() {
                 $('#registerBtn').html("REGISTER");

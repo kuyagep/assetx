@@ -25,14 +25,13 @@
 
                     {{-- old version --}}
                     <div class="form-group mb-3">
-                        <input type="text" name="login"
-                            class="form-control   @error('login')
+                        <input type="email" name="email"
+                            class="form-control   @error('email')
                             is-invalid
                         @enderror"
-                            placeholder="Registered Email/Phone" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                            value="{{ old('login') }}" id="login" required>
+                            placeholder="Registered Email/Phone" value="{{ old('email') }}" id="login" required>
 
-                        @error('login')
+                        @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

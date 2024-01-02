@@ -3,7 +3,7 @@
 @section('auth-content')
     <div class="login-box">
         <div class="login-logo">
-            <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
+            <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -27,16 +27,16 @@
                             <span class="error invalid-feedback"> {{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn  btn-dark btn-block">EMAIL PASSWORD RESET LINK</button>
+                    <div class="row ">
+                        <div class="col-12 ">
+                            <button type="submit" class="btn  btn-danger btn-block">EMAIL PASSWORD RESET LINK</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
-                <p class="mt-3 mb-1">
-                    <a class="text-muted" href="{{ url('/login') }}">Login</a>
+                <p class="mt-3 mb-1 text-center">
+                    <a class="text-muted" href="{{ url('/login') }}">Back to Login</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

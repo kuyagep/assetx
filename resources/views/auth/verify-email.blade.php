@@ -3,7 +3,7 @@
 @section('auth-content')
     <div class="login-box">
         <div class="login-logo">
-            <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
+            <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
         </div>
         <!-- /.login-logo -->
         <div class="card">
