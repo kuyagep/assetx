@@ -14,7 +14,7 @@
                 <h5 class="login-box-msg"><b>Enter your valid credentials</b></h5>
 
                 @if (Session::has('status'))
-                    <div class="alert alert-success alert-dismissible">
+                    <div class="alert alert-warning alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         {{ Session::get('status') }}
                     </div>
@@ -47,6 +47,7 @@
                             </span>
                         @enderror
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-7">
                             <div class="icheck-secondary">
@@ -67,6 +68,16 @@
                         </div>
                         <!-- /.col -->
                     </div>
+                    <div class="text-center mb-3">
+                        <!-- Google Recaptcha -->
+                        <div class="g-recaptcha " data-sitekey={{ config('services.recaptcha.key') }}></div>
+                        @if (Session::has('recaptcha_status'))
+                            <span class="text-danger">
+                                <small>{{ Session::get('recaptcha_status') }}</small>
+                            </span>
+                        @endif
+                    </div>
+
                     <div class="row">
                         <div class="col-12">
                             <button type="submit" class="btn bg-danger btn-block" id="loginBtn">LOG

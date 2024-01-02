@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Redirect;
 
+use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\IpUtils;
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -26,29 +29,52 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $recaptcha_response = $request->input('g-recaptcha-response');
 
-        $request->session()->regenerate();
+        if (is_null($recaptcha_response)) {
+            return redirect()->back()->with('recaptcha_status', 'Please Complete the Recaptcha to proceed');
+        }
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+        $body = [
+            'secret' => config('services.recaptcha.secret'),
+            'response' => $recaptcha_response,
+            'remoteip' => IpUtils::anonymize($request->ip()) //anonymize the ip to be GDPR compliant. Otherwise just pass the default ip address
+        ];
+        
+        $response = Http::asForm()->post($url, $body);
+
+        $result = json_decode($response);
 
 
 
-        if ($request->user()->status !== '1') {
-            Auth::logout(); // Log out the user
-            return redirect('/login')->with(['status' => 'Your account is not activated.']); // Redirect with an error message
+        if ($response->successful() && $result->success == true) {
+            $request->authenticate();
+
+            $request->session()->regenerate();
+
+            if ($request->user()->status !== '1') {
+                Auth::logout(); // Log out the user
+                return redirect('/login')->with(['status' => 'Account Pending! Contact Administrator.']); // Redirect with an error message
+            }
+
+             $url = '';
+            if ($request->user()->hasRole('super-admin')) {
+                $url = 'my/dashboard';
+            } elseif ($request->user()->hasRole('admin')) {
+                $url = 'my/account/dashboard';
+            } elseif ($request->user()->hasRole('client')) {
+                $url = 'client/dashboard';
+            } else {
+                $url = 'index';
+            }
+            return redirect()->intended($url);
+        }else{
+            return redirect()->back()->with('recaptcha_status', 'Please Complete the Recaptcha Again to proceed');
         }
 
 
-        $url = '';
-        if ($request->user()->hasRole('super-admin')) {
-            $url = 'my/dashboard';
-        } elseif ($request->user()->hasRole('admin')) {
-            $url = 'my/account/dashboard';
-        } elseif ($request->user()->hasRole('client')) {
-            $url = 'client/dashboard';
-        } else {
-            $url = 'index';
-        }
-        return redirect()->intended($url);
+
+       
     }
 
     /**
