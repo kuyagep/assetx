@@ -2,9 +2,22 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    {{-- Base Meta Tags --}}
     <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{-- Custom Meta Tags --}}
+    @yield('meta_tags')
+
+    {{-- Title --}}
+    <title>
+        @yield('title_prefix')
+        @yield('title', config('app.name', 'AssetX'))
+        @yield('title_postfix')
+    </title>
+
     <title>@yield('page-title') | {{ config('app.name', 'AssetX') }}</title>
 
     <meta name="description" content="Division Asset Management of DepEd Davao del Sur.">
@@ -17,8 +30,8 @@
     <link rel="manifest" href="{{ asset('brand_logo/site.webmanifest') }}">
 
     <!-- Google Font: Source Sans Pro -->
-    {{-- <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}"> --}}

@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-       //
-       $user =  User::create([
+       
+       $user0 =  User::create([
                 'id' => Str::uuid(),
                 'first_name' => 'Super Admin',
                 'last_name' => 'Account',
@@ -28,8 +28,8 @@ class UserSeeder extends Seeder
                 'status' => 'active',
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
-        ]);
-        $user->assignRole(1);
+        ]);        
+        
        $user1 =  User::create([
                'id' => Str::uuid(),
                 'first_name' => 'Administrator',
@@ -42,34 +42,24 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
         ]);
-        $user1->assignRole(2);
+        
 
-        DB::table('users')->insert([  
-            [ //Custodian Administrator
-                'id' => Str::uuid(),
-                'first_name' => 'Client',
+       $user2 =  User::create([
+               'id' => Str::uuid(),
+                'first_name' => 'Demo',
                 'last_name' => 'Account',
-                'email' => 'user@gmail.com',
+                'email' => 'demo@gmail.com',
                 'password' => Hash::make('password'),
                 'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
                 'role' => 'client',
                 'status' => 'active',
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
-                'updated_at' => Carbon::now()->timezone('Asia/Manila'),
-            ]
-            ,
-            [ //Demo Account
-                'id' => Str::uuid(),
-                'first_name' => 'Demo',
-                'last_name' => 'Account',
-                'email' => 'demo@deped.gov.ph',
-                'password' => Hash::make('demo'),
-                'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
-                'role' => 'admin',
-                'status' => 'active',
-                'created_at' => Carbon::now()->timezone('Asia/Manila'),
-                'updated_at' => Carbon::now()->timezone('Asia/Manila'),
-            ]
-        ]); //call this class to the DatabaseSeeder & run  'php artisan db:seed --class=UserSeeder'
+                'updated_at' => Carbon::now()->timezone('Asia/Manila')
+        ]);
+        
+
+        $user0->assignRole(1);
+        $user1->assignRole(2);
+        $user2->assignRole(3);
     }
 }

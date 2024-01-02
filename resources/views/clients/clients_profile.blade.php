@@ -29,8 +29,12 @@
                                 <div class="author-box-job"> {{ $account->email }}</div>
 
                                 <div class="mb-2 mt-3">
-                                    <div class="text-md font-weight-bold"><i class="fa-solid fa-location-dot"></i>
-                                        {{ $account->address }}</div>
+                                    <div class="text-md font-weight-bold">
+                                        @if ($account->address)
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            {{ $account->address }}
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <div class="text-center">

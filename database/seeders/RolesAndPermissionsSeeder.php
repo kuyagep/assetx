@@ -16,6 +16,7 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        
         //create Permission Groups
         PermissionGroup::create(['name' => 'Dashboard']);
         PermissionGroup::create(['name' => 'Purchase Request']);

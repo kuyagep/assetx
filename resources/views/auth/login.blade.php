@@ -33,13 +33,19 @@
                             value="{{ old('login') }}" required>
 
                         @error('login')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
                         <input type="password" name="password" class="form-control  " placeholder="Password" required>
+
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row mb-3">
                         <div class="col-7">

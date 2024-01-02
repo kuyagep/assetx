@@ -101,8 +101,7 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::get('/get-assets-by-classification/{classificationId}', 'getAssetsByClassification')->name('get.assets');
         Route::get('/get-school-or-office', 'getSchoolOrOffice')->name('get.school.office');
         Route::get('/get-issued-to', 'getIssuedTo')->name('get.issued.to');
-        Route::get('/issuances/{id}/edit', 'edit')->name('issuances.edit');
-        Route::post('/issuances/{id}/', 'update')->name('issuances.update');
+        
     });
     Route::controller(AssetIssuanceController::class)->group(function () {
         Route::get('/asset-issuance/', 'create')->name('asset_issuance.create');
