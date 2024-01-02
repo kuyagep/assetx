@@ -23,7 +23,6 @@
                     @csrf
 
 
-                    {{-- old version --}}
                     <div class="form-group mb-3">
                         <input type="email" name="email"
                             class="form-control   @error('email')
@@ -33,7 +32,7 @@
 
                         @error('email')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <small>{{ $message }}</small>
                             </span>
                         @enderror
                     </div>
@@ -43,7 +42,7 @@
 
                         @error('password')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <small>{{ $message }}</small>
                             </span>
                         @enderror
                     </div>
@@ -80,8 +79,8 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn bg-danger btn-block" id="loginBtn">LOG
-                                IN</button>
+                            <button type="submit" class="btn bg-danger btn-block" id="loginBtn">
+                                LOGIN</button>
                         </div>
                         <!-- /.col -->
                     </div>
