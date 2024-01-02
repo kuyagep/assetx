@@ -174,6 +174,18 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::post('/profile/update', 'clientsProfileUpdate')->name('profile.update');
         Route::post('/update/password', 'clientsUpdatePassword')->name('update.password');
     });
+
+
+    Route::get('/download/attachment/{id}', [PurchaseController::class, 'download'])->name('purchase.download');
+    Route::get('/purchase/history/{purchase}', [PurchaseController::class, 'history'])->name('purchase.history');
+    Route::controller(PurchaseController::class)->group(function () {
+        Route::get('/purchase', 'clientPurchase')->name('purchase');
+        Route::post('/purchase', 'store')->name('purchase.store');
+        Route::get('/purchase/show/{id}', 'show')->name('purchase.show');
+        Route::get('/purchase/{id}/edit', 'edit')->name('purchase.edit');
+
+        Route::put('/purchase/{purchase}', 'approved')->name('purchase.approved');
+    });
 });
 
 

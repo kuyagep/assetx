@@ -19,12 +19,12 @@ class PurchaseController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $data = [];
-        if($request->ajax()){
+        if ($request->ajax()) {
             if (auth()->user()->hasRole('super-admin')) {
                 $data = Purchase::all();
-            }else{
+            } else {
                 $data = Purchase::where('user_id', Auth::user()->id)->get();
             }
 
@@ -32,7 +32,7 @@ class PurchaseController extends Controller
                 ->editColumn('office', function ($request) {
                     return $request->office->name;
                 })
-                
+
                 ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s');
                 })
@@ -53,15 +53,15 @@ class PurchaseController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="btn-group">';
-                    $btn .= '<button title="History" type="button" data-id="'.$row->id.'" class="btn btn-sm bg-navy" id="history-button"><i class="fas fa-history"></i></button>';
+                    $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-navy" id="history-button"><i class="fas fa-history"></i></button>';
                     if (auth()->user()->hasRole('admin')) {
-                        $btn .= '<button title="Edit" type="button" data-id="'.$row->id.'" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
+                        $btn .= '<button title="Edit" type="button" data-id="' . $row->id . '" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
                     }
                     if (auth()->user()->hasRole('super-admin')) {
-                        $btn .= '<button type="button" data-id="'.$row->id.'" class="btn bg-olive btn-sm " id="approvedButton"><i class="fas fa-check"></i></button>';
-                        $btn .= '<button type="button" data-id="'.$row->id.'" class="btn bg-danger btn-sm " id="deleteButton"><i class="far fa-trash-alt"></i></button>';
+                        $btn .= '<button type="button" data-id="' . $row->id . '" class="btn bg-olive btn-sm " id="approvedButton"><i class="fas fa-check"></i></button>';
+                        $btn .= '<button type="button" data-id="' . $row->id . '" class="btn bg-danger btn-sm " id="deleteButton"><i class="far fa-trash-alt"></i></button>';
                     }
-                   
+
                     $btn .= '<div class="btn-group">
                         <button type="button" class="btn btn-default btn-sm  dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                             </button>
@@ -71,15 +71,14 @@ class PurchaseController extends Controller
                                 </div>
                             </div>
                         </div>';
-                                      
+
                     return $btn;
                 })
-                ->rawColumns(['action','isApproved','created_at','office'])
+                ->rawColumns(['action', 'isApproved', 'created_at', 'office'])
                 ->make(true);
         }
-        
+
         return view('pages.purchase_request.index');
-       
     }
 
     /**
@@ -105,10 +104,10 @@ class PurchaseController extends Controller
                 'amount_abc' => 'required|numeric|min:0.01|max:999999999999.99',
             ]);
 
-            
+
             // checked if new data or exists
             if (empty($request->id)) {
-                $request->validate([                
+                $request->validate([
                     'attachment' => 'required',
                 ]);
                 $data = new Purchase();
@@ -116,17 +115,17 @@ class PurchaseController extends Controller
                 $data->alt_mode_procurement = $request->alt_mode_procurement;
                 $data->title = $request->title;
                 $data->src_fund = $request->src_fund;
-                $data->amount = $request->amount_abc;                          
+                $data->amount = $request->amount_abc;
 
                 if ($request->hasFile('attachment')) {
-                    $attachment = $request->file('attachment');    
-                           
+                    $attachment = $request->file('attachment');
+
                     // Upload the new file 
-                    $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() .'.'. $attachment->extension());
-                  
+                    $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() . '.' . $attachment->extension());
+
                     $data['attachment'] = $attachment;
                 }
-                
+
                 $data->user_id = Auth::user()->id;
                 $data->office_id = Auth::user()->office_id;
                 $data->save();
@@ -137,28 +136,26 @@ class PurchaseController extends Controller
                 $purchaseHistory->manage_by = Auth::user()->id; // You can set an action or description for the history
                 $purchaseHistory->action = 'submit'; // You can set an action or description for the history
                 $purchaseHistory->remarks = 'Submitted document for approval'; // You can set an action or description for the history
-                
+
                 $purchaseHistory->save();
 
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request saved successfully!']);
-            }else{
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Purchase Request saved successfully!']);
+            } else {
                 $data = Purchase::find($request->id);
                 $data->get_started = $request->get_started;
                 $data->alt_mode_procurement = $request->alt_mode_procurement;
                 $data->title = $request->title;
                 $data->src_fund = $request->src_fund;
                 $data->amount = $request->amount_abc;
-                if(auth()->user()->hasRole('super-admin')){
+                if (auth()->user()->hasRole('super-admin')) {
                     $data->isApproved = $request->isApproved;
-                    
-                    
-                }                
+                }
 
-               if ($request->hasFile('attachment')) {
-                    $attachment = $request->file('attachment');    
-                           
+                if ($request->hasFile('attachment')) {
+                    $attachment = $request->file('attachment');
+
                     // Upload the new file and update the record
-                    $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() .'.'. $attachment->extension());
+                    $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() . '.' . $attachment->extension());
                     // Delete the old file if it exists
                     if ($data->attachment) {
                         Storage::delete($data->attachment);
@@ -170,13 +167,11 @@ class PurchaseController extends Controller
                 $data->office_id = Auth::user()->office_id;
                 $data->save();
 
-                
-                
-                return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request updated successfully!']);
-            }
-            
-        }
 
+
+                return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Purchase Request updated successfully!']);
+            }
+        }
     }
 
     /**
@@ -206,16 +201,14 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        
     }
 
     public function history(Request $request, $id)
     {
         $purchase = Purchase::findOrFail($id);
         $histories = PurchaseHistory::where('purchase_id', $purchase->id)->orderBy('created_at', 'desc')->get();
-        
-        return view('pages.purchase_request.history', compact('purchase','histories'));
+
+        return view('pages.purchase_request.history', compact('purchase', 'histories'));
     }
 
     public function download(Request $request, $id)
@@ -232,19 +225,19 @@ class PurchaseController extends Controller
                 // if (Auth::user()->hasRole('admin')) {
                 return response()->download($storagePath);
                 // }
-            }else{
+            } else {
                 abort(403); // Unauthorized access
             }
-        }        
+        }
         abort(404); // File not found
     }
     public function approved(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $data = Purchase::find($request->id);
-            if(auth()->user()->hasRole('super-admin')){
+            if (auth()->user()->hasRole('super-admin')) {
                 $data->isApproved = 'approved';
-            }                
+            }
 
             $data->save();
 
@@ -253,29 +246,82 @@ class PurchaseController extends Controller
             $purchaseHistory->manage_by = Auth::user()->id; // You can set an action or description for the history
             $purchaseHistory->action = 'approved'; // You can set an action or description for the history
             $purchaseHistory->remarks = 'Approved the document'; // You can set an action or description for the history
-            
+
             $purchaseHistory->save();
-            return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request approved successfully!']);
+            return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Purchase Request approved successfully!']);
         }
 
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again!']);
+        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again!']);
     }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $data = Purchase::where('id', $request->id)->first();
 
             if ($data->attachment) {
                 Storage::delete($data->attachment);
             }
-            
+
             $data->delete();
-            return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Purchase Request deleted successfully!']);
+            return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Purchase Request deleted successfully!']);
         }
 
-        return response()->json(['icon'=>'error','title'=>'Ooops!', 'message' => 'Something went wrong! Try again!']);
+        return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again!']);
+    }
+
+    public function clientPurchase(Request $request)
+    {
+
+        $data = [];
+        if ($request->ajax()) {
+            $data = Purchase::where('user_id', Auth::user()->id)->get();
+            return DataTables::of($data)
+
+
+                ->editColumn('created_at', function ($request) {
+                    return $request->created_at->format('d-m-Y H:i:s');
+                })
+                ->editColumn('isApproved', function ($request) {
+
+                    if ($request->isApproved === "approved") {
+                        $result = '<span class="badge badge-success">Approved</span>';
+                    } elseif ($request->isApproved === "pending") {
+                        $result = '<span class="badge badge-warning">Pending</span>';
+                    } elseif ($request->isApproved === "cancelled") {
+                        $result = '<span class="badge badge-danger">Cancelled</span>';
+                    } elseif ($request->isApproved === "rebid") {
+                        $result = '<span class="badge badge-primary">Rebid</span>';
+                    }
+                    return $result;
+                })
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<div class="btn-group">';
+                    $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-navy" id="history-button"><i class="fas fa-history"></i></button>';
+                    if (auth()->user()->hasRole('client')) {
+                        $btn .= '<button title="Edit" type="button" data-id="' . $row->id . '" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
+                    }
+
+
+                    $btn .= '<div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm  dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                            </button>
+                                <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" data-id="' . $row->attachment . '" title="Download" href="javascript:void(0)" id="downloadButton">Download</a>
+                                </div>
+                            </div>
+                        </div>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action', 'isApproved', 'created_at'])
+                ->make(true);
+        }
+
+        return view('pages.purchase_request.client_purchase');
     }
 }

@@ -15,11 +15,11 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
-                                    <h3 class="text-info">278</h3>
-                                    <p class="mb-0">New Reports</p>
+                                    <h3 class="text-info">{{ $total_cancelled_purchase }}</h3>
+                                    <p class="mb-0">Cancelled Purchase</p>
                                 </div>
                                 <div class="align-self-center">
-                                    <i class="fas fa-book-open text-info fa-3x"></i>
+                                    <i class="fas fa-times-circle text-info fa-3x"></i>
                                 </div>
                             </div>
                             <div class="px-md-1">
@@ -36,11 +36,11 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
-                                    <h3 class="text-warning">156</h3>
-                                    <p class="mb-0">New Issued</p>
+                                    <h3 class="text-warning">{{ $total_pending_purchase }}</h3>
+                                    <p class="mb-0">Pending Purchase </p>
                                 </div>
                                 <div class="align-self-center">
-                                    <i class="far fa-comments text-warning fa-3x"></i>
+                                    <i class="fas fa-exclamation-circle text-warning fa-3x"></i>
                                 </div>
                             </div>
                             <div class="px-md-1">
@@ -57,11 +57,11 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
-                                    <h3 class="text-success">64.89 %</h3>
-                                    <p class="mb-0">Tranfer</p>
+                                    <h3 class="text-success">{{ $total_approved_purchase }}</h3>
+                                    <p class="mb-0">Approved Purchase</p>
                                 </div>
                                 <div class="align-self-center">
-                                    <i class="fas fa-mug-hot text-success fa-3x"></i>
+                                    <i class="fas fa-check-circle text-success fa-3x"></i>
                                 </div>
                             </div>
                             <div class="px-md-1">
@@ -78,11 +78,11 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
-                                    <h3 class="text-danger">423</h3>
-                                    <p class="mb-0">Condenmed</p>
+                                    <h3 class="text-danger">{{ $total_rebid_purchase }}</h3>
+                                    <p class="mb-0">Rebid Purchase</p>
                                 </div>
                                 <div class="align-self-center">
-                                    <i class="fas fa-map-signs text-danger fa-3x"></i>
+                                    <i class="fas fa-undo-alt text-danger fa-3x"></i>
                                 </div>
                             </div>
                             <div class="px-md-1">

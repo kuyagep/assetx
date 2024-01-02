@@ -39,7 +39,7 @@
         href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <script src="{{ asset('assets/custom/css/toastr.min.css') }}"></script>
-    @livewireStyles
+
     <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
@@ -120,11 +120,10 @@
                 <form action="{{ route('logout') }}" method="post">@csrf
 
                     <div class="modal-body">
-                        <p>Are you sure you want to log-out?</p>
+                        <h5>Are you sure you want to log-out?</h5>
                     </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-dark">Logout</button>
+                    <div class="modal-footer justify-content-right">
+                        <button type="submit" class="btn btn-danger">Logout</button>
                     </div>
                 </form>
             </div>
