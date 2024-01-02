@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PositionSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(AccountableSeeder::class);
         
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

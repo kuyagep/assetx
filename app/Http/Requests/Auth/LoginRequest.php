@@ -55,13 +55,13 @@ class LoginRequest extends FormRequest
         }
         
 
-        if (!$user->hasVerifiedEmail()) {
+        // if (!$user->hasVerifiedEmail()) {
 
-            // Send the email verification link
-            $user->sendEmailVerificationNotification();
+        //     // Send the email verification link
+        //     $user->sendEmailVerificationNotification();
 
-            return redirect()->route('verification.notice')->with('email', $this->email);
-        } 
+        //     return redirect()->route('verification.notice')->with('email', $this->email);
+        // } 
 
 
         

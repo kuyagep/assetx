@@ -32,19 +32,14 @@ class AuthenticatedSessionController extends Controller
 
 
 
-        if ($request->user()->status !== 'active') {
-            Auth::logout(); // Log out the user
-            return redirect('/login')->with(['status' => 'Your account is not activated.']); // Redirect with an error message
-        }
-
-        if ($request->user()->status !== 'active') {
+        if ($request->user()->status !== '1') {
             Auth::logout(); // Log out the user
             return redirect('/login')->with(['status' => 'Your account is not activated.']); // Redirect with an error message
         }
 
 
         $url = '';
-        if ($request->user()->hasRole('super_admin')) {
+        if ($request->user()->hasRole('super-admin')) {
             $url = 'my/dashboard';
         } elseif ($request->user()->hasRole('admin')) {
             $url = 'my/account/dashboard';

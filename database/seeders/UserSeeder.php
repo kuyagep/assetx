@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
                 'role' => 'super_admin',
-                'status' => 'active',
+                'status' => 1,
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
         ]);        
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
                 'role' => 'admin',
-                'status' => 'active',
+                'status' => 1,
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
         ]);
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
                 'role' => 'client',
-                'status' => 'active',
+                'status' => 1,
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
         ]);
