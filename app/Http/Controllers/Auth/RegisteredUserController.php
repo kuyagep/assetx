@@ -48,7 +48,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'email_verified_at' => null, // Set email_verified_at to null initially
             'role' => 'client',
-            'status' => '0'
+            'status' => 1
         ]);
 
         $user->assignRole(3);
@@ -56,7 +56,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         $user->sendEmailVerificationNotification();
-
+        
+        Auth::login($user);
         // Redirect to a page indicating that a verification email has been sent
         return redirect()->route('verification.notice')->with('email', $user->email);
 

@@ -165,7 +165,7 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
 
 
 //* ############# CLIENT ROUTE #############
-Route::prefix('client')->as('client.')->middleware(['auth', 'role:client','verified'])->group(function () {
+Route::prefix('client')->as('client.')->middleware(['auth', 'verified','role:client'])->group(function () {
 
     Route::controller(AccountController::class)->group(function () {
         Route::get('/dashboard', 'clientsDashboard')->name('dashboard');

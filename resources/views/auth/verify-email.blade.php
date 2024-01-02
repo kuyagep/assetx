@@ -24,13 +24,13 @@
 
                     <div class="row">
                         <div class="col-12 mt-3">
-                            <button type="submit" class="btn btn-dark btn-block">RESEND VERIFICATION EMAIL </button>
+                            <button type="submit" class="btn btn-primary btn-block">RESEND VERIFICATION EMAIL </button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
-                <p class="mt-3 mb-1">
+                <p class="mt-3 mb-1 text-center">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a class="text-muted" type="submit"

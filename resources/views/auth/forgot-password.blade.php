@@ -8,8 +8,8 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <small class="login-box-msg">Forgot your password? No problem. Just let us know your email address and we
-                    will email you a password reset link that will allow you to choose a new one.</small>
+                <p class="login-box-msg">Forgot your password? No problem. Just let us know your email address and we
+                    will email you a password reset link that will allow you to choose a new one.</p>
 
                 @if (Session::has('status'))
                     <div class="alert alert-success alert-dismissible">
