@@ -15,27 +15,6 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">
                                 <div>
-                                    <h3 class="text-info">{{ $total_cancelled_purchase }}</h3>
-                                    <p class="mb-0">Cancelled Purchase</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i class="fas fa-times-circle text-info fa-3x"></i>
-                                </div>
-                            </div>
-                            <div class="px-md-1">
-                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 100%"
-                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between px-md-1">
-                                <div>
                                     <h3 class="text-warning">{{ $total_pending_purchase }}</h3>
                                     <p class="mb-0">Pending Purchase </p>
                                 </div>
@@ -89,6 +68,27 @@
                                 <div class="progress mt-3 mb-1 rounded" style="height: 7px">
                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
                                         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div>
+                                    <h3 class="text-info">{{ $total_cancelled_purchase }}</h3>
+                                    <p class="mb-0">Cancelled Purchase</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-times-circle text-info fa-3x"></i>
+                                </div>
+                            </div>
+                            <div class="px-md-1">
+                                <div class="progress mt-3 mb-1 rounded" style="height: 7px">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 100%"
+                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>

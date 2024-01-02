@@ -15,7 +15,7 @@
                             <div class="text-center">
                                 <a href="#">
                                     <img id="showImage" alt="image"
-                                        src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
+                                        src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
                                         class="rounded-circle author-box-picture"
                                         style="width: 80px;max-width: 80px;height: 80px;object-fit: cover;">
                                 </a>
@@ -38,7 +38,8 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-danger btn-sm"><i class="fa-regular fa-message"></i> Message</button>
+                                <button class="btn btn-primary btn-sm"><i class="fa-regular fa-message"></i>
+                                    Message</button>
                             </div>
                         </div>
                     </div>
@@ -55,9 +56,8 @@
                                         <h4 class="mb-0">Edit profile </h4>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <a href="#change_password" class="btn btn-sm btn-primary"><i
-                                                class="fa-solid fa-key"></i> Change
-                                            Password</a>
+                                        <a href="#change_password" class="btn btn-primary">
+                                            Change Password</a>
                                     </div>
                                 </div>
                             </div>

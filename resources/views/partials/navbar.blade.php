@@ -115,15 +115,14 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     @if (Auth::user()->role === 'client')
-                        <a href="/client/profile" class="btn btn-default btn-flat">Profile</a>
+                        <a href="{{ url('client/profile') }}" class="btn btn-success btn-flat">Profile</a>
                     @elseif(Auth::user()->role === 'admin')
-                        <a href="/admin/profile" class="btn btn-default btn-flat">Profile</a>
+                        <a href="{{ url('account/profile') }}" class="btn btn-success btn-flat">Profile</a>
                     @else
-                        <a href="/s/profile" class="btn btn-default btn-flat">Profile</a>
+                        <a href="{{ url('my/profile') }}" class="btn btn-success btn-flat">Profile</a>
                     @endif
 
-
-                    <a href="#" class="btn btn-default btn-flat float-right" data-toggle="modal"
+                    <a href="#" class="btn btn-danger btn-flat float-right" data-toggle="modal"
                         data-target="#logoutModal">Sign out</a>
 
 
