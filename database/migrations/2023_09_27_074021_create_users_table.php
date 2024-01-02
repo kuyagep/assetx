@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();
             $table->string('address')->nullable();
             $table->enum('role',['super_admin','admin','client'])->default('client');
-            $table->enum('status',['active','inactive'])->default('inactive');           
+            $table->enum('status',['1','0'])->default('0');           
             
             $table->rememberToken();
             $table->timestamps();

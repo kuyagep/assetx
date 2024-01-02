@@ -55,6 +55,50 @@
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function($) {
+            // token header
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            // Login Button
+            $('#loginBtn').click(function() {
+                $('#loginBtn').html("Loading..");
+            });
+            $('#login').keyup(function() {
+                $('#loginBtn').html("LOGIN");
+            });
+            $('#password').keyup(function() {
+                $('#loginBtn').html("LOGIN");
+            });
+
+            // Register Button
+            $('#registerBtn').click(function() {
+                $('#registerBtn').html("Loading..");
+            });
+            $('#first_name').keyup(function() {
+                $('#registerBtn').html("REGISTER");
+            });
+            $('#last_name').keyup(function() {
+                $('#registerBtn').html("REGISTER");
+            });
+            $('#email').keyup(function() {
+                $('#registerBtn').html("REGISTER");
+            });
+            $('#reg_password').keyup(function() {
+                $('#registerBtn').html("REGISTER");
+            });
+            $('#reg_confirm_password').keyup(function() {
+                $('#registerBtn').html("REGISTER");
+            });
+
+        });
+    </script>
 </body>
 
 </html>

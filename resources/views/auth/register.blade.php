@@ -16,7 +16,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="form-group mb-3">
-                        <input type="text" name="first_name"
+                        <input type="text" name="first_name" id="first_name"
                             class="form-control @error('first_name')
                             is-invalid
                         @enderror"
@@ -28,7 +28,7 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="text" name="last_name"
+                        <input type="text" name="last_name" id="last_name"
                             class="form-control @error('last_name')
                             is-invalid
                         @enderror"
@@ -40,7 +40,8 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        <input type="email" name="email" id="email"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                             class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
                             placeholder="Email" required>
                         @error('email')
@@ -50,7 +51,7 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password"
+                        <input type="password" name="password" id="reg_password"
                             class="form-control @error('password')
                             is-invalid
                         @enderror"
@@ -66,7 +67,7 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password_confirmation"
+                        <input type="password" name="password_confirmation" id="reg_confirm_password"
                             class="form-control @error('password_confirmation')
                             is-invalid
                         @enderror"
@@ -90,7 +91,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn  btn-danger btn-block">REGISTER</button>
+                            <button type="submit" class="btn  btn-danger btn-block" id="registerBtn">REGISTER</button>
                         </div>
                         <!-- /.col -->
                     </div>

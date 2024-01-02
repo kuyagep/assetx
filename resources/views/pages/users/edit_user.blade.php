@@ -148,12 +148,12 @@
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You want delete this admin user?",
+                    text: "You want delete this user?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Yes, Confirmed!'
                 }).then((result) => {
 
                     if (result.isConfirmed) {

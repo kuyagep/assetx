@@ -84,7 +84,7 @@ class UsersController extends Controller
 
                 ->editColumn('status', function ($request) {
 
-                    if ($request->status === "active") {
+                    if ($request->status === "1") {
                         $result = '<span class="badge badge-success">Active</span>';
                     } else {
                         $result = '<span class="badge badge-danger">Inactive</span>';
@@ -109,8 +109,8 @@ class UsersController extends Controller
         $positions = Position::all();
         $offices = Office::all();
         $roles = Role::all();
-        // $schools = School::where('district_id', Auth::user()->office->division_id)->get();
-        $districts = District::where('division_id', Auth::user()->office->division_id)->get();
+        //$schools = School::where('district_id', Auth::user()->office->division_id)->get();
+        $districts = District::all();
         return view('pages.users.all_user', compact('positions', 'roles', 'offices', 'districts'));
     }
 
@@ -125,8 +125,8 @@ class UsersController extends Controller
                 'phone' => ['numeric', 'digits:11'],
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'position_name' => 'required',
-                'roles' => 'required|string|max:255',
-                'status' => 'required|string|max:255',
+                'roles' => 'required',
+                'status' => 'required',
             ]);
             //check office if exists
 

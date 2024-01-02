@@ -25,7 +25,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h5><i class="fas fa-users "></i>&nbsp;List of All User</h5>
+                            <h5><i class="fas fa-users "></i>&nbsp;List of All Users</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -158,8 +158,8 @@
                                             <label for="status">Status <span class="text-danger">*</span></label>
                                             <select class="custom-select" name="status" id="status">
                                                 <option value="">Select...</option>
-                                                <option value="active" selected>Activate</option>
-                                                <option value="inactive">Deactivate</option>
+                                                <option value="1" selected>Activate</option>
+                                                <option value="0">Deactivate</option>
                                             </select>
                                         </div>
                                     </div>

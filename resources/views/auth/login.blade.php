@@ -30,7 +30,7 @@
                             is-invalid
                         @enderror"
                             placeholder="Registered Email/Phone" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                            value="{{ old('login') }}" required>
+                            value="{{ old('login') }}" id="login" required>
 
                         @error('login')
                             <span class="invalid-feedback" role="alert">
@@ -39,7 +39,8 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password" class="form-control  " placeholder="Password" required>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password"
+                            required>
 
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -69,7 +70,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn bg-danger btn-block">LOG
+                            <button type="submit" class="btn bg-danger btn-block" id="loginBtn">LOG
                                 IN</button>
                         </div>
                         <!-- /.col -->

@@ -141,8 +141,8 @@
                                             <label for="status">Status <span class="text-danger">*</span></label>
                                             <select class="custom-select" name="status" id="status">
                                                 <option>Select...</option>
-                                                <option value="active" selected>Activate</option>
-                                                <option value="inactive">Deactivate</option>
+                                                <option value="1" selected>Activate</option>
+                                                <option value="0">Deactivate</option>
                                             </select>
                                         </div>
                                     </div>
