@@ -27,12 +27,12 @@
 
 </head>
 <style>
-    /* body {
-        background-image: url('https://cdn.wallpapersafari.com/89/94/KycE8k.png');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-    } */
+    body {
+        background-image: linear-gradient(to top, #ad0505ba, #6e6e6e), url('https://localhost/assetx/public/assets/dist/img/background.png') !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+    }
 
     /* .login-box,
     .card-body {

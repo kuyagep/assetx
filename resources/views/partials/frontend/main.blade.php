@@ -38,17 +38,15 @@
         })(window, document, 'script', 'dataLayer', 'GTM-5CZ6KPHZ');
     </script>
     <!-- End Google Tag Manager -->
-
-    <style>
-        .content-wrapper {
-            background-image: url('https://localhost/assetx/public/assets/dist/img/background.png') !important;
-            background-repeat: no-repeat !important;
-            background-attachment: fixed !important;
-            background-size: cover !important;
-        }
-    </style>
 </head>
 <style>
+    .content-wrapper {
+        background-image: url('https://localhost/assetx/public/assets/dist/img/background.png') !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+    }
+
     .modal-body {
         max-height: 50vh;
         overflow-y: scroll;
