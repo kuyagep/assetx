@@ -88,7 +88,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        // return Redirect::to('http://202.137.126.58/');
-        return Redirect::to('http://localhost/assetx');
+        //return Redirect::to('https://202.137.126.58/');
+        return Redirect::to('https://localhost/assetx/');
     }
 }

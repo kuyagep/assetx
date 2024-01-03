@@ -108,7 +108,7 @@
                     </div>
                 </form>
                 <p class="mt-3 text-center ">
-                    Already registered? <a href="{{ route('login') }}" class="text-secondary">Login here.</a>
+                    Already registered? <a href="{{ route('login') }}" class="text-secondary">Login here</a>
                 </p>
             </div>
             <!-- /.form-box -->

@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        {{-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
                                 </li>
@@ -58,10 +58,8 @@
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
-                    <!-- /.col-md-6 -->
-
                 </div>
                 <!-- /.row -->
                 <div class="modal fade" id="data-privacy-notice" style="display: none;" aria-hidden="true">

@@ -38,6 +38,15 @@
         })(window, document, 'script', 'dataLayer', 'GTM-5CZ6KPHZ');
     </script>
     <!-- End Google Tag Manager -->
+
+    <style>
+        .content-wrapper {
+            background-image: url('https://localhost/assetx/public/assets/dist/img/background.png') !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
+            background-size: cover !important;
+        }
+    </style>
 </head>
 <style>
     .modal-body {
@@ -56,9 +65,9 @@
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md navbar-dark accent-navy bg-navy">
             <div class="container">
-                <a href="#" class="navbar-brand">
+                <a href="#" class="navbar-brand mt-2">
                     <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
-                        style="opacity: .8; height: 60px;">
+                        style="opacity: .8; height: 70px;">
                 </a>
 
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
@@ -67,146 +76,66 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-                    <!-- Left navbar links -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="{{ url('/index') }}" class="nav-link active">Home</a>
-                        </li>
+
+
+                <!-- Right navbar links -->
+                <div class="text-center collapse navbar-collapse order-2" id="navbarCollapse">
+                    <ul class=" order-md-2 navbar-nav navbar-no-expand ml-auto">
 
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" class="nav-link dropdown-toggle">About</a>
-                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">Overview </a></li>
-                                <li><a href="#" class="dropdown-item">Features</a></li>
-                                <li><a href="#" class="dropdown-item">Downloadable Forms</a></li>
-                                <li><a href="{{ url('/data-privacy-notice') }}" class="dropdown-item">Data Privacy
-                                        Notice</a>
-                                </li>
+                                aria-expanded="false" class="nav-link dropdown-toggle">
 
-                                <li class="dropdown-divider"></li>
-
-                                <!-- Level two dropdown-->
-                                <li class="dropdown-submenu dropdown-hover">
-                                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false"
-                                        class="dropdown-item dropdown-toggle">Privacy Notice</a>
-                                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                                        <li>
-                                            <a tabindex="-1" href="{{ url('/terms-of-service') }}"
-                                                class="dropdown-item">Terms & Condition</a>
-                                        </li>
-                                        <li><a href="{{ url('/disclaimer') }}" class="dropdown-item">Disclaimer</a>
-                                        </li>
-                                        <li><a href="{{ url('/privacy') }}" class="dropdown-item">Privacy
-                                                Policy</a></li>
-
-                                        {{-- <!-- Level three dropdown-->
-                                        <li class="dropdown-submenu">
-                                            <a id="dropdownSubMenu3" href="#" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                class="dropdown-item dropdown-toggle">level 2</a>
-                                            <ul aria-labelledby="dropdownSubMenu3"
-                                                class="dropdown-menu border-0 shadow">
-                                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                            </ul>
-                                        </li>
-                                        <!-- End Level three -->
-
-                                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                                        <li><a href="#" class="dropdown-item">level 2</a></li> --}}
-                                    </ul>
-                                </li>
-                                <!-- End Level two -->
-                            </ul>
-                        </li>
-                        @auth
-                            <li class="nav-item dropdown">
-                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false" class="nav-link dropdown-toggle">My Account</a>
-                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                @auth
+                                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
+                                        class="user-image img-circle elevation-0" alt="User Profile Image"
+                                        style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
+                                @else
+                                    My Account
+                                @endauth
+                            </a>
+                            <ul aria-labelledby="dropdownSubMenu1"
+                                class="dropdown-menu dropdown-menu-right border-0 shadow ">
+                                @auth
                                     @if (auth()->user()->hasRole('super-admin'))
                                         <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
                                         </li>
+                                        <li><a href="{{ url('/my/profile') }}" class="dropdown-item">Profile</a></li>
                                     @elseif(auth()->user()->hasRole('admin'))
-                                        <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        <li><a href="{{ url('/account/dashboard') }}" class="dropdown-item">Dashboard
+                                            </a>
                                         </li>
+                                        <li><a href="{{ url('/account/profile') }}" class="dropdown-item">Profile</a></li>
                                     @else
-                                        <li><a href="{{ url('/client/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        <li><a href="{{ url('/client/dashboard') }}" class="dropdown-item">Dashboard
+                                            </a>
                                         </li>
+                                        <li><a href="{{ url('/client/profile') }}" class="dropdown-item">Profile</a></li>
                                     @endif
-                                    <li><a href="#" class="dropdown-item">Profile</a></li>
 
                                     <li class="dropdown-divider"></li>
 
                                     <!-- Level two dropdown-->
-
                                     <li class="dropdown-submenu dropdown-hover">
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf
                                             <a href="javascript:void(0)"
                                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();"
-                                                role="button" aria-expanded="false" class="dropdown-item">Logout</a>
+                                                role="button" aria-expanded="false"
+                                                class="dropdown-item text-danger"><strong>Logout</strong></a>
                                         </form>
-
-
                                     </li>
-                                    <!-- End Level two -->
-                                </ul>
-                            </li>
-                        @endauth
+                                @else
+                                    <li><a href="{{ route('login') }}" class="dropdown-item">Login</a></li>
+                                    <li><a href="{{ route('register') }}" class="dropdown-item">Register</a></li>
+                                @endauth
+                            </ul>
+                        </li>
 
                     </ul>
-
-                    <!-- SEARCH FORM -->
-
-                    <form class="form-inline ml-0 ml-md-3 d-none">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
 
-                <!-- Right navbar links -->
-                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                    <!-- Messages Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fa-brands fa-facebook"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">
-                            <i class="fa-brands fa-tiktok"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">
-                            <i class="fa-brands fa-youtube"></i>
-                        </a>
-                    </li>
-                    @auth
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <a href="{{ route('login') }}"
-                                onclick="event.preventDefault();
-                                                this.closest('form').submit();"
-                                class="nav-item btn btn-danger px-3">Logout</a>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}" class="nav-item btn btn-default px-3 ">Demo</a>
-                    @endauth
-
-                </ul>
             </div>
         </nav>
         <!-- /.navbar -->
@@ -216,19 +145,7 @@
         <!-- /.content-wrapper -->
 
 
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                {{-- Developed with ❤️ by Geperson C. Mamalias --}}
-                <a href="#">Privacy</a> | <a href="#">Terms & Condition</a>
-            </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; {{ date('Y') }} <a
-                    href="{{ url('/') }}">{{ config('app.name') }}</a>.</strong> All
-            rights
-            reserved.
-        </footer>
+
     </div>
     <!-- ./wrapper -->
 
