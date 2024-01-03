@@ -37,10 +37,9 @@ require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
     return view('index');
-})->middleware('auth');
+});
+
 Route::get('/index', [HomeController::class, 'index'])->name('index')->middleware('auth');
-
-
 
 
 

@@ -28,7 +28,7 @@
                             class="form-control   @error('email')
                             is-invalid
                         @enderror"
-                            placeholder="Registered Email/Phone" value="{{ old('email') }}" id="login" required>
+                            placeholder="Email" value="{{ old('email') }}" id="login" required>
 
                         @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -67,14 +67,16 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                    <div class="text-center mb-3">
-                        <!-- Google Recaptcha -->
-                        <div class="g-recaptcha " data-sitekey={{ config('services.recaptcha.key') }}></div>
-                        @if (Session::has('recaptcha_status'))
-                            <span class="text-danger">
-                                <small>{{ Session::get('recaptcha_status') }}</small>
-                            </span>
-                        @endif
+                    <div class="row mb-3">
+                        <div class="col-12 text-center">
+                            <!-- Google Recaptcha -->
+                            <div class="g-recaptcha " data-sitekey={{ config('services.recaptcha.key') }}></div>
+                            @if (Session::has('recaptcha_status'))
+                                <span class="text-danger">
+                                    <small>{{ Session::get('recaptcha_status') }}</small>
+                                </span>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="row">

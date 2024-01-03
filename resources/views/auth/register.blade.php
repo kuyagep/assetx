@@ -90,6 +90,17 @@
                         <!-- /.col -->
                     </div>
                     <div class="row mb-3">
+                        <div class="col-12 text-center">
+                            <!-- Google Recaptcha -->
+                            <div class="g-recaptcha " data-sitekey={{ config('services.recaptcha.key') }}></div>
+                            @if (Session::has('recaptcha_status'))
+                                <span class="text-danger">
+                                    <small>{{ Session::get('recaptcha_status') }}</small>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col-12">
                             <button type="submit" class="btn  btn-danger btn-block" id="registerBtn">REGISTER</button>
                         </div>
