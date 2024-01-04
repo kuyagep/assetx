@@ -236,8 +236,8 @@ class PurchaseController extends Controller
 
     public function exportPurchase() 
     {
-        $time = time();
-        return Excel::download(new PurchasesExport, $time.'purchase.xlsx');
+        
+        return Excel::download(new PurchasesExport, time().'purchase.xlsx');
     }
     public function approved(Request $request)
     {
