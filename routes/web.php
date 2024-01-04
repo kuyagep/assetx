@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MaintenanceController;
 use Illuminate\Support\Facades\Route;
 ############################### ACCOUNT 
 use App\Http\Controllers\AccountController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\ProductController;
 
 // External
 Route::get('/auth', [AuthController::class, 'store'])->name('auth');
+Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance');
 
 require __DIR__ . '/auth.php';
 
@@ -40,6 +42,7 @@ Route::get('/', function () {
 });
 
 Route::get('/index', [HomeController::class, 'index'])->name('index')->middleware('auth');
+
 
 
 

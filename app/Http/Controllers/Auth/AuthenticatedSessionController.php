@@ -46,7 +46,6 @@ class AuthenticatedSessionController extends Controller
         $result = json_decode($response);
 
 
-
         if ($response->successful() && $result->success == true) {
             $request->authenticate();
 

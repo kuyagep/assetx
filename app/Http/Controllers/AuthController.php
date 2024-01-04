@@ -34,12 +34,19 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->get('user'))) {
+            
+            
+            if(!empty($request->get('user'))){
+                return redirect()->route('maintenance');
+                // exit();
+            }                
+            
 
             $user = DB::connection('mysql_external')->table('tblusers', 'tblroles')->where('username', $request->get('user'))->first();
 
             if ($user === null) {
                 return Redirect::to('http://202.137.126.58/');
-            } elseif ($user->username !== null) {
+            }elseif ($user->username !== null) {
                 $result = User::where('email', $user->username)->first();
 
                 if (empty($result)) {
@@ -87,6 +94,8 @@ class AuthController extends Controller
             // Auth::login($user);
 
             // return view('dashboard', compact('user'));
+        }else{
+            return Redirect::to('http://202.137.126.58/');
         }
     }
 

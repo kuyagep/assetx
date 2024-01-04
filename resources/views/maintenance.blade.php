@@ -38,20 +38,40 @@
         })(window, document, 'script', 'dataLayer', 'GTM-5CZ6KPHZ');
     </script>
     <!-- End Google Tag Manager -->
-</head>
-<style>
-    .content-wrapper {
-        background-image: url('https://localhost/assetx/public/assets/dist/img/background.png') !important;
-        background-repeat: no-repeat !important;
-        background-attachment: fixed !important;
-        background-size: cover !important;
-    }
 
-    .modal-body {
-        max-height: 50vh;
-        overflow-y: scroll;
-    }
-</style>
+    <style type="text/css">
+        body {
+            text-align: center;
+            /* padding: 150px; */
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        body {
+            font: 20px Poppins, sans-serif;
+            color: #333;
+        }
+
+        #article {
+            display: block;
+            text-align: left;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #2253db;
+            text-decoration: none;
+        }
+    </style>
+</head>
 
 <body class="hold-transition layout-top-nav ">
     <!-- Google Tag Manager (noscript) -->
@@ -85,57 +105,6 @@
                                 <div class="current-date" id="current-date"> </div>
                             </span>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a id="dropdownSubMenu1" href="javascript:void(0)" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
-
-                                @auth
-                                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
-                                        class="user-image img-circle elevation-0" alt="User Profile Image"
-                                        style="width: 2rem;max-width: 2rem;height: 2rem;object-fit: cover;">
-                                @else
-                                    MY ACCOUNT
-                                @endauth
-                            </a>
-                            <ul aria-labelledby="dropdownSubMenu1"
-                                class="dropdown-menu dropdown-menu-right border-0 shadow ">
-                                @auth
-                                    @if (auth()->user()->hasRole('super-admin'))
-                                        <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
-                                        </li>
-                                        <li><a href="{{ url('/my/profile') }}" class="dropdown-item">Profile</a></li>
-                                    @elseif(auth()->user()->hasRole('admin'))
-                                        <li><a href="{{ url('/account/dashboard') }}" class="dropdown-item">Dashboard
-                                            </a>
-                                        </li>
-                                        <li><a href="{{ url('/account/profile') }}" class="dropdown-item">Profile</a></li>
-                                    @else
-                                        <li><a href="{{ url('/client/dashboard') }}" class="dropdown-item">Dashboard
-                                            </a>
-                                        </li>
-                                        <li><a href="{{ url('/client/profile') }}" class="dropdown-item">Profile</a></li>
-                                    @endif
-
-                                    <li class="dropdown-divider"></li>
-
-                                    <!-- Level two dropdown-->
-                                    <li class="dropdown-submenu dropdown-hover">
-                                        <form action="{{ route('logout') }}" method="post">
-                                            @csrf
-                                            <a href="javascript:void(0)"
-                                                onclick="event.preventDefault();
-                                                this.closest('form').submit();"
-                                                role="button" aria-expanded="false"
-                                                class="dropdown-item text-danger"><strong>Logout</strong></a>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li><a href="{{ route('login') }}" class="dropdown-item">Login</a></li>
-                                    <li><a href="{{ route('register') }}" class="dropdown-item">Register</a></li>
-                                @endauth
-                            </ul>
-                        </li>
-
                     </ul>
                 </div>
 
@@ -144,7 +113,44 @@
         <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
-        @yield('content')
+        <div class="content-wrapper ">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container">
+                    <div class="row mb-2">
+
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <div class="content ">
+                <div class="container ">
+                    <div class="row mt-5">
+                        <div class="col-8 offset-2">
+                            <div id="article">
+                                <h1>We&rsquo;ll be back soon!</h1>
+                                <div>
+                                    <p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the
+                                        moment. If you need to you can always <a href="http://202.137.126.58/">contact
+                                            us</a>,
+                                        otherwise we&rsquo;ll be back online shortly!</p>
+                                    <p>&mdash; Developer Team</p>
+
+                                    <a href="http://202.137.126.58/" class="btn bg-danger "
+                                        style="color: white !important;">BACK TO
+                                        MAIN
+                                        PAGE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
         <!-- /.content-wrapper -->
 
 
