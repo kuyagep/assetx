@@ -214,7 +214,6 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
-    @livewireScripts
     @yield('script')
 </body>
 
