@@ -38,7 +38,7 @@
                             <p class="text-muted">{{ $purchase->src_fund }}</p>
                             <hr>
                             <strong><i class="fa-solid fa-peso-sign"></i> Amount</strong>
-                            <h4 class="text-success"><b>{{ $purchase->amount }}</b></h4>
+                            <h4 class="text-success"><b>{{ number_format($purchase->amount, 2, '.', ',') }}</b></h4>
                             <hr>
                             <strong><i class="far fa-file-alt mr-1"></i> Remarks</strong>
                             <p class="text-muted">Submitted by

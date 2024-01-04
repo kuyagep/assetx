@@ -123,15 +123,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                            <td>Call of Duty IV</td>
-                                            <td><span class="badge badge-success">Shipped</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                    25,100.00</div>
-                                            </td>
-                                        </tr>
+                                        @forelse ($latest_purchase as $latest)
+                                            <tr>
+                                                <td><a href="javascript:void" data-id={{ $latest->id }}
+                                                        id="history-button">{{ $latest->purchase_number }}</a>
+                                                </td>
+                                                <td>{{ $latest->title }}</td>
+                                                <td>
+                                                    @if ($latest->isApproved === 'approved')
+                                                        <span class="badge badge-success">Approved</span>
+                                                    @elseif ($latest->isApproved === 'pending')
+                                                        <span class="badge badge-warning">Pending</span>
+                                                    @elseif ($latest->isApproved === 'cancelled')
+                                                        <span class="badge badge-danger">Cancelled</span>
+                                                    @elseif ($latest->isApproved === 'rebid')
+                                                        <span class="badge badge-primary">Rebid</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <div class="sparkbar" data-color="#00a65a" data-height="20">
+                                                        {{ number_format($latest->amount, 2, '.', ',') }}</div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="4">No Data Found!</td>
+                                            </tr>
+                                        @endforelse
+
 
                                     </tbody>
                                 </table>
@@ -140,8 +159,9 @@
                         </div>
 
                         <div class="card-footer clearfix" style="display: block;">
-                            <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Add New Purchase</a>
-                            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
+                            <a href="{{ url('client/purchase') }}" class="btn btn-sm btn-info float-left">Add New
+                                Purchase</a>
+                            <a href="{{ url('client/purchase') }}" class="btn btn-sm btn-secondary float-right">View All
                                 Purchase</a>
                         </div>
 
@@ -242,5 +262,27 @@
     <!-- /.content -->
 @endsection
 @section('script')
+
+    <script type="text/javascript">
+        $(document).ready(function($) {
+            // token header
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            //History Function
+            $('body').on('click', '#history-button', function() {
+
+                var id = $(this).data('id');
+                var route = "{{ route('client.purchase.history', ':id') }}";
+                route = route.replace(':id', id);
+                window.location.href = route;
+
+            });
+
+        });
+    </script>
 
 @endsection

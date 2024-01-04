@@ -63,7 +63,7 @@
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md navbar-dark accent-navy bg-navy">
             <div class="container">
-                <a href="#" class="navbar-brand mt-2">
+                <a href="javascript:void(0);" class="navbar-brand mt-2 text-white">
                     <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
                         style="opacity: .8; height: 70px;">
                 </a>

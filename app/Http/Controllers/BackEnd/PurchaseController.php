@@ -127,7 +127,6 @@ class PurchaseController extends Controller
                 }
 
                 $data->user_id = Auth::user()->id;
-                $data->office_id = Auth::user()->office_id;
                 $data->save();
 
                 // history

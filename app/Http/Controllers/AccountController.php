@@ -294,6 +294,7 @@ class AccountController extends Controller
 
     // Display Profile
     public function clientsProfile(Request $request)
+    
     {
         $account = User::find(Auth::user()->id);
         return view('clients.clients_profile', compact('account'));
