@@ -1,9 +1,9 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Purchase Request')
+@section('page-title', 'Manage Purchase Order')
 {{-- Content Header --}}
-@section('content-header', 'Manage Purchase Request')
+@section('content-header', 'Manage Purchase Order')
 {{-- Main content --}}
 @section('main-content')
     <!-- Main content -->
@@ -27,7 +27,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card card-outline card-navy">
                         <div class="card-header">
-                            <h3 class="card-title"> All Purchase Request</h3>
+                            <h3 class="card-title"> All Purchase Order</h3>
 
                         </div>
 
@@ -38,10 +38,11 @@
                                         <tr>
                                             <th>#</th>
                                             <th>PR NO.</th>
+                                            <th>PO NO.</th>
                                             <th>Title of Activity</th>
-                                            <th>Source of Fund</th>
-                                            <th>Amount ABC</th>
+                                            <th>Amount</th>
                                             <th>Status</th>
+                                            <th>Remarks</th>
                                             <th>Submitted At</th>
                                             <th>Action</th>
                                         </tr>
@@ -78,78 +79,78 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="get_started">Get Started <span class="text-danger"
+                                            <label for="po_category">Category <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <select class="custom-select" name="get_started" id="get_started">
-                                                <option selected disabled>Select...</option>
-                                                <option value="new-bid">New Bid</option>
-                                                <option value="rebid-1">Re-Bid 1</option>
-                                                <option value="rebid-2">Re-Bid 2</option>
-                                                <option value="rebid-3">Re-Bid 3</option>
-
+                                            <select class="custom-select" name="po_category" id="po_category">
+                                                <option selected disabled>Select Category...</option>
+                                                <option value="catering-services">Catering & Services</option>
+                                                <option value="goods-services">Goods & Services</option>
+                                                <option value="furniture-fixtures">Furniture & Fixtures</option>
+                                                <option value="others">Others</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="alt_mode_procurement">Alternative Mode of Procurement <span
-                                                    class="text-danger" title="important">*</span></label>
-                                            <select class="custom-select" name="alt_mode_procurement"
-                                                id="alt_mode_procurement">
+                                            <label for="purchase_id">PR No. <span class="text-danger"
+                                                    title="important">*</span></label>
+                                            <select class="custom-select" name="purchase_id" id="purchase_id" required>
                                                 <option selected disabled>Select...</option>
-                                                <option value="Shopping">Shopping</option>
-                                                <option value="Direct Contracting">Direct Contracting</option>
-                                                <option value="Repeat Order">Repeat Order</option>
-                                                <option value="egotiated Procurement">Negotiated Procurement</option>
-                                                <option value="Limited Source Bidding">Limited Source Bidding</option>
-                                                <option value="Emergency Purchase">Emergency Purchase</option>
+                                                @forelse ($purchases as $purchase)
+                                                    <option value="{{ $purchase->id }}">
+                                                        {{ $purchase->purchase_number . ' ' . $purchase->title }}
+                                                    </option>
+                                                @empty
+                                                    <option value="">No data found!</option>
+                                                @endforelse
+
 
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-lg-12 col-sm-12">
                                         <div class="form-group">
-                                            <label for="title">Title of Activity <span class="text-danger"
+                                            <label for="supplier_id">Supplier <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <textarea class="form-control" id="title" name="title" placeholder="Title/Purpose"></textarea>
+                                            <select class="custom-select" name="supplier_id" id="supplier_id" required>
+                                                <option selected disabled>Select Supplier...</option>
+                                                @forelse ($suppliers as $supplier)
+                                                    <option value="{{ $supplier->id }}">
+                                                        {{ $supplier->name }}
+                                                    </option>
+                                                @empty
+                                                    <option value="">No data found!</option>
+                                                @endforelse
+
+
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
+
                                     <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
-                                            <label for="src_fund">Source of Fund <span class="text-danger"
+                                            <label for="po_date">PO Date <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <input list="src_fund_list" class="form-control" id="src_fund" name="src_fund"
-                                                placeholder="Ex. Division MOOE">
-                                            <datalist id="src_fund_list">
-                                                <option value="Division MOOE - CID">
-                                                <option value="Division MOOE - CID">
-                                                <option value="Division MOOE - SGOD">
-                                                <option value="CAPITAL OUTLAY">
-                                                <option value="SCHOOL MOOE">
-                                                <option value="INSET FUNDS">
-                                                <option value="Division MOOE">
-                                                <option value="Division MOOE">
-                                                <option value="HRTD FUNDS - SGOD">
-                                                <option value="HRTD FUNDS">
-                                            </datalist>
+                                            <input type="date" class="form-control" id="po_date"_date name="po_date"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
-                                            <label for="amount_abc">Amount (ABC) <span class="text-danger"
+                                            <label for="amount">PO Total Amount <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <input type="currency" class="form-control" id="amount_abc"
-                                                name="amount_abc" placeholder="Ex. 12345.00">
+                                            <input type="currency" class="form-control" id="amount" name="amount"
+                                                placeholder="Ex. 12345.00" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
-                                            <label for="logo">Upload Attachment <small>.xlsx, .xls</small><span
-                                                    class="text-danger" title="important">*</span></label>
+                                            <label for="logo">Upload Attachment <small>.xlsx, .xls</small></label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="attachment"
@@ -161,23 +162,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                @role('super-admin')
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="form-group">
-                                                <label for="status">Approval <span class="text-danger"
-                                                        title="important">*</span></label>
-                                                <select class="custom-select" name="isApproved" id="isApproved">
-                                                    <option>Select...</option>
-                                                    <option value="approved" selected>Approved</option>
-                                                    <option value="pending">Pending</option>
-                                                    <option value="cancelled">Cancelled</option>
-                                                    <option value="rebid">Rebid</option>
-                                                </select>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="remarks">Remarks <span class="text-danger"
+                                                    title="important">*</span></label>
+                                            <textarea class="form-control" id="remarks" name="remarks" placeholder="Type here"></textarea>
                                         </div>
                                     </div>
-                                @endrole
+                                </div>
 
                                 <div class="row float-right my-3  ">
                                     <div class="col-12">
@@ -232,7 +225,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('client/purchase') }}",
+                ajax: "{{ url('client/purchase-order') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -241,21 +234,23 @@
                         data: 'purchase_number',
                         name: 'purchase_number'
                     }, {
+                        data: 'purchase_order_number',
+                        name: 'purchase_order_number'
+                    }, {
                         data: 'title',
                         name: 'title'
-                    },
-                    {
-                        data: 'src_fund',
-                        name: 'src_fund'
                     },
                     {
                         data: 'amount',
                         name: 'amount'
                     },
                     {
-                        data: 'isApproved',
-                        name: 'isApproved',
+                        data: 'status',
+                        name: 'status',
                         class: 'text-center'
+                    }, {
+                        data: 'remarks',
+                        name: 'remarks'
                     }, {
                         data: 'created_at',
                         name: 'created_at'
@@ -297,7 +292,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('client.purchase.store') }}",
+                    url: "{{ route('client.purchase.order.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -332,7 +327,7 @@
                 $('#btn-save').attr('disabled', true);
 
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.show', ':id') }}";
+                var route = "{{ route('client.purchase.order.show', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -347,9 +342,10 @@
                         $('#modal-title').html("View Data");
                         $('#modal').modal("show");
                         $('#id').val(response.id);
-                        $('#name').val(response.name);
-                        $('#budget').val(response.budget);
-                        $('#isApproved').val(response.isApproved);
+                        $('#supplier_id').val(response.supplier_id);
+                        $('#po_date').val(response.po_date);
+                        $('#amount').val(response.amount);
+                        $('#remarks').val(response.remarks);
                         $('#error').html('');
 
                     },
@@ -365,7 +361,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.edit', ':id') }}";
+                var route = "{{ route('client.purchase.order.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -399,7 +395,7 @@
             $('body').on('click', '#history-button', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.history', ':id') }}";
+                var route = "{{ route('client.purchase.order.history', ':id') }}";
                 route = route.replace(':id', id);
                 window.location.href = route;
 
@@ -408,8 +404,7 @@
             $('body').on('click', '#downloadButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('purchase.download', ':id') }}";
-
+                var route = "{{ route('client.purchase.order.download', ':id') }}";
                 route = route.replace(':id', id);
 
 
@@ -431,10 +426,10 @@
             });
 
             $('body').on('click', '#export-data', function() {
-                var route = "{{ route('client.export.purchase') }}";
+                var route = "{{ route('client.export.purchase.order') }}";
 
                 Swal.fire({
-                    title: 'Do you want to export purchase request?',
+                    title: 'Do you want to export purchase order?',
                     text: "",
                     icon: 'warning',
                     showCancelButton: true,
@@ -446,8 +441,8 @@
                         // Exporting permission
                         let timerInterval
                         Swal.fire({
-                            title: 'Export',
-                            html: 'Exporting Purchase Request to Excel.',
+                            title: 'Exporting',
+                            html: 'Exporting Purchase Order to Excel.',
                             timer: 3000,
                             timerProgressBar: true,
                             didOpen: () => {
@@ -462,6 +457,39 @@
 
                                 window.location.href = route;
                             }
+                        });
+                    }
+                });
+            });
+
+            ////////////////////////getting schools
+            $('#purchase_request').on('change', function() {
+                var id = $(this).val();
+
+
+                var route = "{{ route('client.get.purchase.request') }}";
+                // route = route.replace(':id', id);
+
+
+                // Make an Ajax request to fetch assets for the selected classification
+                $.ajax({
+                    url: route,
+                    type: 'GET',
+                    data: {
+
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        // Update the assets dropdown with the received data
+                        var assetsDropdown = $('#purchase_request');
+                        assetsDropdown.empty();
+
+                        $.each(data, function(key, value) {
+                            assetsDropdown.append($('<option>', {
+                                value: value.id,
+                                text: value.name
+                            }));
                         });
                     }
                 });

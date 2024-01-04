@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BackEnd\PurchaseOrderController;
+use App\Http\Controllers\BackEnd\SuppliersController;
 use App\Http\Controllers\MaintenanceController;
 use Illuminate\Support\Facades\Route;
 ############################### ACCOUNT 
@@ -163,7 +165,26 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
 
         Route::get('/online/users', 'online')->name('user.online');
     });
+
+    Route::controller(SuppliersController::class)->group(function () {
+        Route::get('/supplier', 'index')->name('supplier.index');
+        Route::post('/supplier', 'store')->name('supplier.store');
+        Route::get('/supplier/{id}/edit', 'edit')->name('supplier.edit');
+        Route::post('/supplier/update/{id}', 'update')->name('supplier.update');
+        Route::delete('/supplier/destroy/{id}', 'destroy')->name('supplier.destroy');
+    });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 //* ############# CLIENT ROUTE #############
@@ -177,16 +198,28 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
     });
 
 
-    Route::get('/download/attachment/{id}', [PurchaseController::class, 'download'])->name('purchase.download');
-    Route::get('/purchase/history/{purchase}', [PurchaseController::class, 'history'])->name('purchase.history');
+    
     Route::controller(PurchaseController::class)->group(function () {
         Route::get('/purchase', 'clientPurchase')->name('purchase');
         Route::post('/purchase', 'store')->name('purchase.store');
         Route::get('/purchase/show/{id}', 'show')->name('purchase.show');
         Route::get('/purchase/{id}/edit', 'edit')->name('purchase.edit');
         Route::get('/purchase/export/','exportPurchase')->name('export.purchase');
-
         Route::put('/purchase/{purchase}', 'approved')->name('purchase.approved');
+        Route::get('/download/attachment/{id}', 'download')->name('purchase.download');
+        Route::get('/purchase/history/{purchase}',  'history')->name('purchase.history');
+    });
+
+    Route::controller(PurchaseOrderController::class)->group(function () {
+        Route::get('/purchase-order', 'clientPurchaseOrder')->name('purchase.order');
+        Route::post('/purchase-order', 'store')->name('purchase.order.store');
+        Route::get('/purchase-order/show/{id}', 'show')->name('purchase.order.show');
+        Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
+        Route::get('/purchase-order/export/','exportPurchaseOrder')->name('export.purchase.order');
+        Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
+        Route::get('/download/attachment/{id}', 'download')->name('purchase.order.download');
+        Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
+        Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
     });
 });
 

@@ -16,9 +16,6 @@
                             <button id="add-button" class="btn bg-navy mr-2 float-left" accesskey="a">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
                             </button>
-                            <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
-                                <i class="fas fa-file-excel"></i>&nbsp;Export
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -27,7 +24,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card card-outline card-navy">
                         <div class="card-header">
-                            <h3 class="card-title"> All Purchase Request</h3>
+                            <h3 class="card-title"> All Purchase Order</h3>
 
                         </div>
 
@@ -38,11 +35,11 @@
                                         <tr>
                                             <th>#</th>
                                             <th>PR NO.</th>
+                                            <th>Po NO.</th>
                                             <th>Title of Activity</th>
-                                            <th>Source of Fund</th>
-                                            <th>Amount ABC</th>
+                                            <th>Amount</th>
                                             <th>Status</th>
-                                            <th>Submitted At</th>
+                                            <th>Remarks</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -143,7 +140,7 @@
                                             <label for="amount_abc">Amount (ABC) <span class="text-danger"
                                                     title="important">*</span></label>
                                             <input type="currency" class="form-control" id="amount_abc"
-                                                name="amount_abc" placeholder="Ex. 12345.00">
+                                                name="amount_abc" placeholder="Ex. 67997.00">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-sm-12">
@@ -203,19 +200,6 @@
 @endsection
 
 @section('script')
-
-    {{-- dataTable --}}
-    <script>
-        $(function() {
-            $("#dataTable").DataTable({
-                "responsive": true,
-                "searching": true,
-                "lengthChange": true,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
-        });
-    </script>
     <script type="text/javascript">
         $(document).ready(function($) {
             // token header
@@ -232,7 +216,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('client/purchase') }}",
+                ajax: "{{ url('client/purchase-order') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -240,22 +224,24 @@
                     }, {
                         data: 'purchase_number',
                         name: 'purchase_number'
+                    }, {}, {
+                        data: 'purchase_order_number',
+                        name: 'purchase_order_number'
                     }, {
                         data: 'title',
                         name: 'title'
-                    },
-                    {
-                        data: 'src_fund',
-                        name: 'src_fund'
                     },
                     {
                         data: 'amount',
                         name: 'amount'
                     },
                     {
-                        data: 'isApproved',
-                        name: 'isApproved',
+                        data: 'status',
+                        name: 'status',
                         class: 'text-center'
+                    }, {
+                        data: 'remarks',
+                        name: 'remarks'
                     }, {
                         data: 'created_at',
                         name: 'created_at'
@@ -297,7 +283,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('client.purchase.store') }}",
+                    url: "{{ route('purchase.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -332,7 +318,7 @@
                 $('#btn-save').attr('disabled', true);
 
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.show', ':id') }}";
+                var route = "{{ route('purchase.show', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -365,7 +351,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.edit', ':id') }}";
+                var route = "{{ route('purchase.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -399,7 +385,7 @@
             $('body').on('click', '#history-button', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.history', ':id') }}";
+                var route = "{{ route('purchase.history', ':id') }}";
                 route = route.replace(':id', id);
                 window.location.href = route;
 
@@ -409,7 +395,6 @@
 
                 var id = $(this).data('id');
                 var route = "{{ route('purchase.download', ':id') }}";
-
                 route = route.replace(':id', id);
 
 
@@ -430,44 +415,109 @@
 
             });
 
-            $('body').on('click', '#export-data', function() {
-                var route = "{{ route('client.export.purchase') }}";
+            //approval Function
+            $('body').on('click', '#approvedButton', function() {
+
+                var id = $(this).data('id');
+                var route = "{{ route('super_admin.purchase.approved', ':id') }}";
+                route = route.replace(':id', id);
+
 
                 Swal.fire({
-                    title: 'Do you want to export purchase request?',
-                    text: "",
-                    icon: 'warning',
+                    title: 'Are you sure?',
+                    text: "You want to approved this purchase request?",
+                    icon: 'info',
                     showCancelButton: true,
-                    confirmButtonColor: '#716add',
+                    confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Export'
+                    confirmButtonText: 'Approved!'
                 }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Exporting permission
-                        let timerInterval
-                        Swal.fire({
-                            title: 'Export',
-                            html: 'Exporting Purchase Request to Excel.',
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: () => {
-                                Swal.showLoading()
-                            },
-                            willClose: () => {
-                                clearInterval(timerInterval)
-                            }
-                        }).then((result) => {
-                            /* Read more about handling dismissals below */
-                            if (result.dismiss === Swal.DismissReason.timer) {
 
-                                window.location.href = route;
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "PUT",
+                            url: route,
+                            data: {
+                                id: id
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                // console.log(response);
+                                table.draw();
+                                //Sweet Alert
+                                Swal.fire({
+                                    icon: response.icon,
+                                    title: response.title,
+                                    text: response.message,
+                                    timer: 2000
+                                });
+
+                            },
+                            error: function(response) {
+                                console.log('Error : ', response);
                             }
                         });
+
                     }
                 });
+
+            });
+            // Delete Function
+            $('body').on('click', '#deleteButton', function() {
+
+                var id = $(this).data('id');
+                var route = "{{ route('purchase.destroy', ':id') }}";
+                route = route.replace(':id', id);
+
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want delete this purchase request permanently?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: route,
+                            data: {
+                                id: id
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                // console.log(response);
+                                table.draw();
+                                //Sweet Alert
+                                Swal.fire({
+                                    icon: response.icon,
+                                    title: response.title,
+                                    text: response.message,
+                                    timer: 2000
+                                });
+
+                            },
+                            error: function(response) {
+                                console.log('Error : ', response);
+                            }
+                        });
+
+                    }
+                });
+
             });
 
-
+            // display image
+            $('#avatar').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
         });
     </script>
 @endsection
