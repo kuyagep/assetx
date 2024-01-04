@@ -80,16 +80,21 @@
                 <div class="text-center collapse navbar-collapse order-2" id="navbarCollapse">
                     <ul class=" order-md-2 navbar-nav navbar-no-expand ml-auto">
 
+                        <li class="nav-item">
+                            <span href="javascript:void(0)" aria-expanded="false" class="nav-link text-white">
+                                <div class="current-date" id="current-date"> </div>
+                            </span>
+                        </li>
                         <li class="nav-item dropdown">
-                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" class="nav-link dropdown-toggle">
+                            <a id="dropdownSubMenu1" href="javascript:void(0)" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
 
                                 @auth
                                     <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
                                         class="user-image img-circle elevation-0" alt="User Profile Image"
                                         style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
                                 @else
-                                    My Account
+                                    MY ACCOUNT
                                 @endauth
                             </a>
                             <ul aria-labelledby="dropdownSubMenu1"

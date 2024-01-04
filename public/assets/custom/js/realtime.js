@@ -41,12 +41,24 @@ function showTime() {
 
   // display date and time
   var date =
-    dayNames[day] + ", " + monthNames[month] + " " + date + ", " + year;
-  var time = h + ":" + m + ":" + s + " " + session;
+    dayNames[day] +
+    ", " +
+    monthNames[month] +
+    " " +
+    date +
+    ", " +
+    year +
+    " " +
+    h +
+    ":" +
+    m +
+    ":" +
+    s +
+    " " +
+    session;
+
   document.getElementById("current-date").innerText = date;
   document.getElementById("current-date").textContent = date;
-  document.getElementById("time").innerText = time;
-  document.getElementById("time").textContent = time;
 
   setTimeout(showTime, 1000);
 }

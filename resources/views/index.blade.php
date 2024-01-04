@@ -62,12 +62,12 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                <div class="modal fade" id="data-privacy-notice" style="display: none;" aria-hidden="true">
+                <div class="modal fade " id="data-privacy-notice" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header bg-navy">
                                 <h4 class="modal-title">Data Privacy Notice</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
@@ -116,12 +116,12 @@
                                         well as the right to ask for its correction, if found erroneous, or deletion on
                                         reasonable
                                         grounds. You may contact&nbsp;<a
-                                            href="mailto:deped.davaodelsur@deped.gov.ph">deped.davaodelsur@deped.gov.ph</a>.
+                                            href="mailto:deped.davaodelsur@deped.gov.ph">Project Davaosur Support</a>.
                                     </p>
 
 
 
-                                    <h2 class="wp-block-heading">WEBSITE ANALYTICS</h2>
+                                    <h5 class="wp-block-heading">WEBSITE ANALYTICS</h5>
 
 
 

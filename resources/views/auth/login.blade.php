@@ -22,7 +22,6 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-
                     <div class="form-group mb-3">
                         <input type="email" name="email"
                             class="form-control   @error('email')
@@ -49,7 +48,7 @@
 
                     <div class="row mb-3">
                         <div class="col-7">
-                            <div class="icheck-secondary">
+                            <div class="icheck-primary">
                                 <input type="checkbox" id="remember" name="remember">
                                 <label for="remember">
                                     Remember Me
@@ -69,8 +68,14 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12 text-center">
-                            <!-- Google Recaptcha -->
-                            <div class="g-recaptcha " data-sitekey={{ config('services.recaptcha.key') }}></div>
+                            <div class="row align-content-between">
+                                <div class="col-12 ">
+                                    <!-- Google Recaptcha -->
+                                    <div class="g-recaptcha" data-sitekey={{ config('services.recaptcha.key') }}>
+                                    </div>
+
+                                </div>
+                            </div>
                             @if (Session::has('recaptcha_status'))
                                 <span class="text-danger">
                                     <small>{{ Session::get('recaptcha_status') }}</small>
@@ -88,7 +93,7 @@
                     </div>
                 </form>
                 <p class="mt-3 text-center ">
-                    Don't have an account?<a href="{{ route('register') }}" class="text-secondary"> Register here</a>
+                    Don't have an account?<a href="{{ route('register') }}" class="text-primary"> Register here</a>
                 </p>
 
             </div>

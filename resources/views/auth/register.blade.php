@@ -1,5 +1,5 @@
 @extends('partials.auth.main')
-@section('auth-title', 'Registers')
+@section('auth-title', 'Register')
 @section('auth-content')
     <div class="register-box">
         {{-- <div class="register-logo">
@@ -43,7 +43,7 @@
                         <input type="email" name="email" id="email"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                             class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                            placeholder="Email" required>
+                            placeholder="DepED Email" required>
                         @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -79,11 +79,11 @@
                         @enderror
                     </div>
                     <div class="row mb-3">
-                        <div class="col-8">
-                            <div class="icheck-secondary">
+                        <div class="col-12">
+                            <div class="icheck-primary">
                                 <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
                                 <label for="agreeTerms">
-                                    I agree to the <a href="#">terms</a>
+                                    I agree to the <a href="#" class="text-primary">terms of service</a>
                                 </label>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                     </div>
                 </form>
                 <p class="mt-3 text-center ">
-                    Already registered? <a href="{{ route('login') }}" class="text-secondary">Login here</a>
+                    Already registered? <a href="{{ route('login') }}" class="text-primary">Login here</a>
                 </p>
             </div>
             <!-- /.form-box -->

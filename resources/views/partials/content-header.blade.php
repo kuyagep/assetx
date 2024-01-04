@@ -6,11 +6,11 @@
              </div><!-- /.col -->
              <div class="col-sm-6">
                  <ol class="breadcrumb float-sm-right">
-                     {{-- <div class="time" id="time"> </div> &nbsp; &nbsp; --}}
-                     {{-- <li class="breadcrumb-item"><a href="#">Home</a></li>
-                     <li class="breadcrumb-item active">Users</li> --}}
+                     <li class="breadcrumb-item active">
+                         <div class="current-date" id="current-date"> </div>
+                     </li>
                  </ol>
-             </div><!-- /.col -->
+             </div>
          </div><!-- /.row -->
          <hr class="my-3">
      </div><!-- /.container-fluid -->
