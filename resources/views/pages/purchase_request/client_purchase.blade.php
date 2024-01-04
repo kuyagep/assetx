@@ -16,6 +16,9 @@
                             <button id="add-button" class="btn bg-navy mr-2 float-left" accesskey="a">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
                             </button>
+                            <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
+                                <i class="fas fa-file-excel"></i>&nbsp;Export
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -140,7 +143,7 @@
                                             <label for="amount_abc">Amount (ABC) <span class="text-danger"
                                                     title="important">*</span></label>
                                             <input type="currency" class="form-control" id="amount_abc"
-                                                name="amount_abc" placeholder="Ex. 67997.00">
+                                                name="amount_abc" placeholder="Ex. 12345.00">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-sm-12">
@@ -424,6 +427,43 @@
 
                 });
 
+            });
+
+            $('body').on('click', '#export-data', function() {
+                var route = "{{ route('client.export.purchase') }}";
+
+                Swal.fire({
+                    title: 'Do you want to export purchase request?',
+                    text: "",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#716add',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Export'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Exporting permission
+                        let timerInterval
+                        Swal.fire({
+                            title: 'Export',
+                            html: 'Exporting Purchase Request to Excel.',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+
+                                window.location.href = route;
+                            }
+                        });
+                    }
+                });
             });
 
 

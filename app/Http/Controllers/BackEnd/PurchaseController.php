@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackEnd;
 
+use App\Exports\PurchasesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Office;
 use App\Models\Purchase;
@@ -9,6 +10,7 @@ use App\Models\PurchaseHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -230,6 +232,13 @@ class PurchaseController extends Controller
         }
         abort(404); // File not found
     }
+
+
+    public function exportPurchase() 
+    {
+        $time = time();
+        return Excel::download(new PurchasesExport, $time.'purchase.xlsx');
+    }
     public function approved(Request $request)
     {
         if ($request->ajax()) {
@@ -280,6 +289,9 @@ class PurchaseController extends Controller
             return DataTables::of($data)
 
 
+                ->editColumn('amount', function ($request) {
+                     return number_format($request->amount, 2, '.', ',');
+                })
                 ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s');
                 })
@@ -317,7 +329,7 @@ class PurchaseController extends Controller
 
                     return $btn;
                 })
-                ->rawColumns(['action', 'isApproved', 'created_at'])
+                ->rawColumns(['action', 'isApproved', 'created_at','amount'])
                 ->make(true);
         }
 

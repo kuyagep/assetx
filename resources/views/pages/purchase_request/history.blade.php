@@ -45,7 +45,8 @@
                                 {{ $purchase->user->first_name . ' ' . $purchase->user->last_name }} <br> on
                                 {{ $purchase->created_at->format('d-m-Y H:i:s') }}.</p>
                             <div class="text-center mt-5 mb-3">
-                                <a href="#" class="btn btn-sm btn-primary"><i class="fa-regular fa-file-excel"></i>
+                                <a href="javascript:void(0)" id="downloadButton" data-id="{{ $purchase->attachment }}"
+                                    class="btn btn-primary"><i class="fa-regular fa-file-excel"></i>
                                     Download File</a>
                             </div>
                         </div>
@@ -156,6 +157,30 @@
                 }
             });
 
+            //Download Function
+            $('body').on('click', '#downloadButton', function() {
+
+                var id = $(this).data('id');
+                var route = "{{ route('client.purchase.download', ':id') }}";
+                route = route.replace(':id', id);
+
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to download this file?",
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Download'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = route;
+                    }
+
+                });
+
+            });
         });
     </script>
 @endsection

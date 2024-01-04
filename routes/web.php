@@ -184,6 +184,7 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::post('/purchase', 'store')->name('purchase.store');
         Route::get('/purchase/show/{id}', 'show')->name('purchase.show');
         Route::get('/purchase/{id}/edit', 'edit')->name('purchase.edit');
+        Route::get('/purchase/export/','exportPurchase')->name('export.purchase');
 
         Route::put('/purchase/{purchase}', 'approved')->name('purchase.approved');
     });
