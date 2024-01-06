@@ -288,7 +288,6 @@ class PurchaseController extends Controller
             $data = Purchase::where('user_id', Auth::user()->id)->get();
             return DataTables::of($data)
 
-
                 ->editColumn('amount', function ($request) {
                      return number_format($request->amount, 2, '.', ',');
                 })

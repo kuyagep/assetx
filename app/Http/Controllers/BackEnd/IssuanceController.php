@@ -36,10 +36,11 @@ class IssuanceController extends Controller
     public function create()
     {
         // $users = User::select('id', 'first_name', 'last_name')->get();
+        $divisions = Division::first();
         $types = IssuanceType::all();
-        $districts = District::where('division_id', Auth::user()->office->division->id)->get();
-        $schoolOrOffices = Office::where('division_id', Auth::user()->office->division->id)->get();
-        return  view('pages.issuances.create', compact('types', 'districts', 'schoolOrOffices'));
+        $districts = District::all();
+        $schoolOrOffices = Office::all();
+        return  view('pages.issuances.create', compact('types', 'districts', 'schoolOrOffices', 'divisions'));
     }
 
     /**

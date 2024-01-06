@@ -31,8 +31,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Division</label>
                                                 <input type="text" id="division" name="division"
-                                                    value="{{ Auth::user()->office->division->name }}" class="form-control"
-                                                    disabled>
+                                                    value="{{ $divisions->name }}" class="form-control" readonly>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
@@ -79,7 +78,6 @@
                                                 <label class="form-control-label" for="issued_to">Issued to</label>
                                                 <select name="issued_to" id="issued_to" class="custom-select" required>
                                                     <option value="" selected>Select Recipient</option>
-
                                                 </select>
                                                 @error('issued_to')
                                                     <small class="text-danger">

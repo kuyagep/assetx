@@ -146,7 +146,7 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td colspan="4">No Data Found!</td>
                                             </tr>
                                         @endforelse
