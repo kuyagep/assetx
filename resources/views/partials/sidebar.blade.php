@@ -1,28 +1,16 @@
 @hasanyrole('admin|super-admin')
-    <aside class="main-sidebar sidebar-dark-light bg-navy elevation-1">
+    <aside class="main-sidebar sidebar-dark-light elevation-1">
         <!-- Brand Logo -->
         @include('partials.brand_logo')
 
         <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) d-flex -->
-            <div class="user-panel my-2 text-center ">
-                <div class="image d-none">
-                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
-                        class="user-image img-circle elevation-1" alt="User Image"
-                        style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
-                </div>
-                <div class="info">
-                    <h4 class="time" id="time"> </h4>
-                    <div class="current-date" id="current-date"> </div>
-                </div>
 
-            </div>
 
             <!-- SidebarSearch Form -->
-            {{-- <div class="form-inline ">
+            <div class="form-inline mt-2">
                 <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search by Property Code"
                         aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-sidebar">
@@ -30,14 +18,14 @@
                         </button>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">
@@ -241,8 +229,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('user.index') }}"
-                            class="nav-link {{ Request::is('my/user') ? 'active' : '' }}">
+                        <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('my/user') ? 'active' : '' }}">
                             <i class="fas fa-users nav-icon "></i>
                             <p>Manage Users</p>
                         </a>
@@ -378,7 +365,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('client/issuances') }}"
+                        <a href="{{ route('client.issuances.index') }}"
                             class="nav-link {{ Request::is('client/issuances') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-inbox"></i>
                             <p>

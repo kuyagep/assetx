@@ -222,9 +222,21 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
         Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
     });
+     #assets
+    Route::resource('/assets', AssetController::class);
+
+    // Route::resource('/issuances', IssuanceController::class);
+    Route::controller(IssuanceController::class)->group(function () {
+        Route::GET('/issuances', 'client_index')->name('issuances.index');
+        Route::post('/issuances', 'store')->name('issuances.store');
+        Route::GET('/issuances/create', 'create')->name('issuances.create');
+        Route::GET('/issuances/{issuance}', 'show')->name('issuances.show');
+        Route::PUT('/issuances/{issuance}', 'update')->name('issuances.update');
+        Route::DELETE('/issuances/{issuance}', 'destroy')->name('issuances.destroy');
+        Route::GET('/issuances/{issuance}/edit', 'edit')->name('issuances.edit');
+        
+    });
 });
-
-
 
 ###################### Example of Multi Step Form ##########################
 Route::get('products', [ProductController::class, 'index'])->name('products.index');

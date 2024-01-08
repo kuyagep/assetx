@@ -159,4 +159,10 @@ class IssuanceController extends Controller
 
         return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again!']);
     }
+
+     public function client_index(Request $request)
+    {
+        $issuances = Issuance::all();
+        return view('pages.issuances.client_index', compact('issuances'));
+    }
 }
