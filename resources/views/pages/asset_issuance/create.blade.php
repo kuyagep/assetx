@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('title_prefixe', 'Add Issuance')
+@section('title_prefix', 'Add Issuance')
 {{-- Content Header --}}
 @section('content-header', 'Add Issuance')
 {{-- Main content --}}
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="#" method="POST">
+                            <form action="#" method="get">
                                 @csrf
                                 <div class="row">
                                     <div class="col-6">

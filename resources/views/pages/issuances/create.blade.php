@@ -55,8 +55,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="school">School/Office</label>
-                                                <select name="schoolOrOffice" id="schoolOrOffice" class="custom-select"
-                                                    required>
+                                                <select name="schoolOrOffice" id="schoolOrOffice" class="custom-select">
                                                     <option value="" selected>Select School/Office</option>
                                                     @foreach ($schoolOrOffices as $schoolOrOffice)
                                                         <option value="{{ $schoolOrOffice->id }}">

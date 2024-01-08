@@ -184,10 +184,6 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
 
 
 
-
-
-
-
 //* ############# CLIENT ROUTE #############
 Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->group(function () {
 
@@ -197,8 +193,6 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::post('/profile/update', 'clientsProfileUpdate')->name('profile.update');
         Route::post('/update/password', 'clientsUpdatePassword')->name('update.password');
     });
-
-
     
     Route::controller(PurchaseController::class)->group(function () {
         Route::get('/purchase', 'clientPurchase')->name('purchase');

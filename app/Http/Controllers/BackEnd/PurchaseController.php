@@ -24,17 +24,11 @@ class PurchaseController extends Controller
 
         $data = [];
         if ($request->ajax()) {
-            if (auth()->user()->hasRole('super-admin')) {
-                $data = Purchase::all();
-            } else {
-                $data = Purchase::where('user_id', Auth::user()->id)->get();
-            }
+            
+            $data = Purchase::all();            
 
             return DataTables::of($data)
-                ->editColumn('office', function ($request) {
-                    return $request->office->name;
-                })
-
+               
                 ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s');
                 })
@@ -55,7 +49,7 @@ class PurchaseController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="btn-group">';
-                    $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-navy" id="history-button"><i class="fas fa-history"></i></button>';
+                    $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-primary" id="history-button"><i class="fas fa-history"></i></button>';
                     if (auth()->user()->hasRole('admin')) {
                         $btn .= '<button title="Edit" type="button" data-id="' . $row->id . '" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
                     }
@@ -69,14 +63,14 @@ class PurchaseController extends Controller
                             </button>
                                 <div class="dropdown-menu" style="">
                                     <a class="dropdown-item" data-id="' . $row->attachment . '" title="Download" href="javascript:void(0)" id="downloadButton">Download</a>
-                                     <a class="dropdown-item" href="#">Dropdown link</a>
+                                   
                                 </div>
                             </div>
                         </div>';
 
                     return $btn;
                 })
-                ->rawColumns(['action', 'isApproved', 'created_at', 'office'])
+                ->rawColumns(['action', 'isApproved', 'created_at'])
                 ->make(true);
         }
 
