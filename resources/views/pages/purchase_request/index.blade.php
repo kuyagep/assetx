@@ -38,7 +38,7 @@
                                             <th>Title of Activity</th>
                                             <th>Source of Fund</th>
                                             <th>Amount ABC</th>
-                                            <th>Office</th>
+                                            {{-- <th>Office</th> --}}
                                             <th>Status</th>
                                             <th>Submitted At</th>
                                             <th>Action</th>
@@ -146,13 +146,13 @@
                                     </div>
                                     <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
-                                            <label for="logo">Upload Attachment <small>.xlsx, .xls</small><span
+                                            <label for="attachment">Upload Attachment <small>.xlsx, .xls</small><span
                                                     class="text-danger" title="important">*</span></label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="attachment"
                                                         id="attachment">
-                                                    <label class="custom-file-label" for="logo">Choose
+                                                    <label class="custom-file-label" for="attachment">Choose
                                                         file</label>
                                                 </div>
                                             </div>
@@ -163,7 +163,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-group">
-                                                <label for="status">Approval <span class="text-danger"
+                                                <label for="isApproved">Approval <span class="text-danger"
                                                         title="important">*</span></label>
                                                 <select class="custom-select" name="isApproved" id="isApproved">
                                                     <option>Select...</option>
@@ -237,10 +237,10 @@
                         data: 'amount',
                         name: 'amount'
                     },
-                    {
-                        data: 'office',
-                        name: 'office'
-                    },
+                    // {
+                    //     data: 'office',
+                    //     name: 'office'
+                    // },
                     {
                         data: 'isApproved',
                         name: 'isApproved',

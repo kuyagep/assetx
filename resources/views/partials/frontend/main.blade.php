@@ -112,20 +112,20 @@
                                 class="dropdown-menu dropdown-menu-right border-0 shadow ">
                                 @auth
                                     @if (auth()->user()->hasRole('super-admin'))
-                                        <li><a href="{{ url('/my/dashboard') }}" class="dropdown-item">Dashboard </a>
+                                        <li><a href="{{ url('dashboard') }}" class="dropdown-item">Dashboard </a>
                                         </li>
-                                        <li><a href="{{ url('/my/profile') }}" class="dropdown-item">Profile</a></li>
+                                        <li><a href="{{ url('profile') }}" class="dropdown-item">Profile</a></li>
                                     @elseif(auth()->user()->hasRole('admin'))
-                                        <li><a href="{{ url('/account/dashboard') }}" class="dropdown-item">Dashboard
+                                        <li><a href="{{ url('account.dashboard') }}" class="dropdown-item">Dashboard
                                             </a>
                                         </li>
-                                        <li><a href="{{ url('/account/profile') }}" class="dropdown-item">Profile</a>
+                                        <li><a href="{{ url('account.profile') }}" class="dropdown-item">Profile</a>
                                         </li>
                                     @else
-                                        <li><a href="{{ url('/client/dashboard') }}" class="dropdown-item">Dashboard
+                                        <li><a href="{{ route('client.dashboard') }}" class="dropdown-item">Dashboard
                                             </a>
                                         </li>
-                                        <li><a href="{{ url('/client/profile') }}" class="dropdown-item">Profile</a>
+                                        <li><a href="{{ url('client.profile') }}" class="dropdown-item">Profile</a>
                                         </li>
                                     @endif
 

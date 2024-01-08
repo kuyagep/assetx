@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\BackEnd\PurchaseOrderController;
 use App\Http\Controllers\BackEnd\SuppliersController;
 use App\Http\Controllers\MaintenanceController;
@@ -43,8 +44,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/index', [HomeController::class, 'index'])->name('index')->middleware('auth');
-
+Route::get('/index', [HomeController::class, 'index'])->name('index');
+Route::get('application',[ ApplicationController::class, 'index'])->name('application.index');
 
 
 
