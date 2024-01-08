@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Asset Classifications')
+@section('title_prefix', 'Asset Classifications')
 {{-- Content Header --}}
 @section('content-header', 'Asset Classifications')
 {{-- Main content --}}

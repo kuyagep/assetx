@@ -19,12 +19,13 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
     <script async src="https://www.google.com/recaptcha/api.js"></script>
-
+    @include('partials.analytics')
 </head>
 <style>
     body {
@@ -41,7 +42,7 @@
     } */
 </style>
 
-<body class="hold-transition login-page bg-dark  accent-navy">
+<body class="hold-transition login-page bg-dark  accent-dark">
     <!-- Preloader -->
     {{-- <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__wobble" src="{{ asset('brand_logo/android-chrome-192x192.png') }}"
@@ -49,7 +50,11 @@
     </div> --}}
     <!-- /.navbar -->
     @yield('auth-content')
-
+    <div class="lockscreen-footer text-center text-white">
+        Copyright © {{ date('Y') }} <b><a href="index" class="text-white">{{ config('app.name') }} </a></b> <br>
+        All
+        rights reserved.
+    </div>
 
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>

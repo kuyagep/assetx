@@ -13,12 +13,12 @@
 
     {{-- Title --}}
     <title>
-        @yield('title_prefix')
+        @yield('title_prefix') |
         @yield('title', config('app.name', 'AssetX'))
         @yield('title_postfix')
     </title>
 
-    <title>@yield('page-title') | {{ config('app.name', 'AssetX') }}</title>
+    {{-- <title>@yield('page-title') | {{ config('app.name', 'AssetX') }}</title> --}}
 
     <meta name="description" content="Division Asset Management of DepEd Davao del Sur.">
     <meta name="author" content="Project DAVAOSUR">
@@ -52,7 +52,7 @@
         href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     {{-- <script src="{{ asset('assets/custom/css/toastr.min.css') }}"></script> --}}
-
+    @include('partials.analytics')
     <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
@@ -82,7 +82,7 @@
 
     .brand-link,
     .main-header {
-        background-color: #001f3f !important;
+        background-color: #000000 !important;
     }
 </style>
 

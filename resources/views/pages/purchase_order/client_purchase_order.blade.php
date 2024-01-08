@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Purchase Order')
+@section('title_prefix', 'Manage Purchase Order')
 {{-- Content Header --}}
 @section('content-header', 'Manage Purchase Order')
 {{-- Main content --}}

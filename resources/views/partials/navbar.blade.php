@@ -83,8 +83,8 @@
                 <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
                     class="user-image img-circle elevation-1" alt="User Image"
                     style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
-                <span
-                    class="d-none d-md-inline">{{ ucwords(Auth::user()->first_name) . ' ' . ucwords(Auth::user()->last_name) }}</span>
+                {{-- <span
+                    class="d-none d-md-inline">{{ ucwords(Auth::user()->first_name) . ' ' . ucwords(Auth::user()->last_name) }}</span> --}}
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->

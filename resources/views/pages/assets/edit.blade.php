@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Assets Inventories')
+@section('title_prefix', 'Manage Assets Inventories')
 {{-- Content Header --}}
 @section('content-header', 'Manage Assets Inventories')
 {{-- Main content --}}

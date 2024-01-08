@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Asset Status')
+@section('title_prefix', 'Manage Asset Status')
 {{-- Content Header --}}
 @section('content-header', 'Manage Asset Status')
 {{-- Main content --}}

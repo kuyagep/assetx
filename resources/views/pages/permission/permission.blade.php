@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Permission')
+@section('title_prefix', 'Manage Permission')
 {{-- Content Header --}}
 @section('content-header', 'Manage Permission')
 {{-- Main content --}}

@@ -1,6 +1,6 @@
 @extends('partials.main')
 {{-- page title --}}
-@section('page-title', 'Import Permission')
+@section('title_prefix', 'Import Permission')
 {{-- Content Header --}}
 @section('content-header', 'Import Permission')
 {{-- content --}}

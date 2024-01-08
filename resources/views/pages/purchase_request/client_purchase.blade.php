@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Purchase Request')
+@section('title_prefix', 'Manage Purchase Request')
 {{-- Content Header --}}
 @section('content-header', 'Manage Purchase Request')
 {{-- Main content --}}
@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn bg-navy mr-2 float-left" accesskey="a">
+                            <button id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
                             </button>
                             <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
@@ -27,7 +27,8 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card card-outline card-navy">
                         <div class="card-header">
-                            <h3 class="card-title"> All Purchase Request</h3>
+                            <h3 class="card-title"><b><i class="fa-solid fa-ellipsis-vertical"></i> All Purchase Request</b>
+                            </h3>
 
                         </div>
 

@@ -115,18 +115,7 @@
         }
     </style>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EEQ7P39CBP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-EEQ7P39CBP');
-    </script>
+    @include('partials.analytics')
     <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
@@ -214,11 +203,11 @@
                         <div class="col-sm-4 col-md-3 item">
                             <h3>Links</h3>
                             <ul>
-                                <li><a href="https://esecure.sec.gov.ph">HEREOS</a></li>
-                                <li><a href="https://espaysec.sec.gov.ph">eDAMS</a></li>
-                                <li><a href="https://efast.sec.gov.ph">FLAMES</a></li>
-                                <li><a href="https://apps010.sec.gov.ph/">FAMOUS</a></li>
-                                <li><a href="https://apps010.sec.gov.ph/">VERT</a></li>
+                                <li><a href="#">HEREOS</a></li>
+                                <li><a href="#">eDAMS</a></li>
+                                <li><a href="#">FLAMES</a></li>
+                                <li><a href="#">FAMOUS</a></li>
+                                <li><a href="#">VERT</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-3 item social">

@@ -1,6 +1,6 @@
 @extends('partials.main')
 {{-- page title --}}
-@section('page-title', 'Edit Admin')
+@section('title_prefix', 'Edit Admin')
 {{-- Content Header --}}
 @section('content-header', 'Edit Admin')
 {{-- content --}}

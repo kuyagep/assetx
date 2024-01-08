@@ -53,7 +53,7 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h4 class="mb-0">Edit profile </h4>
+                                        <h4 class="mb-0"><b>Update Profile</b> </h4>
                                     </div>
                                     <div class="col-4 text-right">
                                         <a href="#change_password" class="btn btn-primary">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="card-body">
                                 {{-- new version --}}
-                                <h6 class="heading-small text-muted mb-4">User information</h6>
+                                <h6 class="heading-small text-muted mb-4">User Information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -121,7 +121,7 @@
                                 </div>
                                 <hr class="my-4">
 
-                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                <h6 class="heading-small text-muted mb-4">Contact Information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-4">
@@ -171,7 +171,8 @@
                                     </div>
                                 </div>
                                 <div class="row float-right mt-3">
-                                    <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
+                                    <button type="submit" class="btn bg-dark">
+                                        <i class="fa-regular fa-floppy-disk"></i>
                                         Update Profile</button>
                                 </div>
                             </div>
@@ -190,13 +191,13 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h4 class="mb-0">Change Password </h4>
+                                        <h4 class="mb-0"><b>Change Password</b> </h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 {{-- new version --}}
-                                <h6 class="heading-small text-muted mb-4">Update security password</h6>
+                                <h6 class="heading-small text-muted mb-4">Update Security Password</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-12 col-sm-12">
@@ -235,7 +236,8 @@
                                     </div>
                                 </div>
                                 <div class="row float-right mt-3">
-                                    <button type="submit" class="btn bg-navy"><i class="fa-regular fa-floppy-disk"></i>
+                                    <button type="submit" class="btn bg-dark">
+                                        <i class="fa-regular fa-floppy-disk"></i>
                                         Save Changes</button>
                                 </div>
                             </div>

@@ -37,7 +37,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">
@@ -339,7 +339,7 @@
 
 {{-- Client --}}
 @hasanyrole('client')
-    <aside class="main-sidebar sidebar-dark-danger bg-navy elevation-1">
+    <aside class="main-sidebar sidebar-light-dark elevation-1">
         <!-- Brand Logo -->
         @include('partials.brand_logo')
 

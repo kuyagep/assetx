@@ -1,7 +1,5 @@
 @extends('partials.frontend.main')
-
 @section('title', 'HOME')
-
 @section('content')
     <div class="content-wrapper ">
         <!-- Content Header (Page header) -->
@@ -63,9 +61,9 @@
                 </div>
                 <!-- /.row -->
                 <div class="modal fade " id="data-privacy-notice" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-dialog modal-dialog-scrollable  modal-dialog-centered" role="document">
                         <div class="modal-content">
-                            <div class="modal-header bg-navy">
+                            <div class="modal-header bg-black">
                                 <h4 class="modal-title">Data Privacy Notice</h4>
                                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
@@ -148,7 +146,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-right">
-                                <button type="button" class="btn btn-flat bg-navy" data-dismiss="modal" id="scrollButton">I
+                                <button type="button" class="btn  bg-black px-3" data-dismiss="modal" id="scrollButton">I
                                     Agree</button>
                             </div>
                         </div>

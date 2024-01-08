@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Issuance')
+@section('title_prefix', 'Manage Issuance')
 {{-- Content Header --}}
 @section('content-header', 'Manage Issuance')
 {{-- Main content --}}

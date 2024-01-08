@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Districts')
+@section('title_prefix', 'Manage Districts')
 {{-- Content Header --}}
 @section('content-header', 'Manage Districts')
 {{-- Main content --}}

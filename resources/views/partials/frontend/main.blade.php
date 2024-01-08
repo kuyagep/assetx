@@ -19,36 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EEQ7P39CBP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    @include('partials.analytics')
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-EEQ7P39CBP');
-    </script>
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-PQVBC2BK');
-    </script>
-    <!-- End Google Tag Manager -->
 </head>
 <style>
     .content-wrapper {
@@ -72,7 +44,7 @@
     <div class="wrapper ">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-dark accent-navy bg-navy">
+        <nav class="main-header navbar navbar-expand-md navbar-dark accent-dark bg-black">
             <div class="container">
                 <a href="javascript:void(0);" class="navbar-brand mt-2 text-white">
                     <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
@@ -105,7 +77,7 @@
                                         class="user-image img-circle elevation-0" alt="User Profile Image"
                                         style="width: 2rem;max-width: 2rem;height: 2rem;object-fit: cover;">
                                 @else
-                                    MY ACCOUNT
+                                    Go to My Account
                                 @endauth
                             </a>
                             <ul aria-labelledby="dropdownSubMenu1"
@@ -155,13 +127,9 @@
             </div>
         </nav>
         <!-- /.navbar -->
-
         <!-- Content Wrapper. Contains page content -->
         @yield('content')
         <!-- /.content-wrapper -->
-
-
-
     </div>
     <!-- ./wrapper -->
 

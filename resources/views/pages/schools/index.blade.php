@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Schools')
+@section('title_prefix', 'Manage Schools')
 {{-- Content Header --}}
 @section('content-header', 'Manage Schools')
 {{-- Main content --}}

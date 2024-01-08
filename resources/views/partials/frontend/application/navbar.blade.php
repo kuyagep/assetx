@@ -1,4 +1,4 @@
- <nav class="main-header navbar navbar-expand-md navbar-dark accent-navy bg-navy  ">
+ <nav class="main-header navbar navbar-expand-md navbar-dark accent-navy bg-black ">
      <div class="container">
          <a href="javascript:void(0);" class="navbar-brand mt-2 text-white">
              <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"

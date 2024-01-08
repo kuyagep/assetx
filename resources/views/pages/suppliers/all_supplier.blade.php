@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage suppliers')
+@section('title_prefix', 'Manage suppliers')
 {{-- Content Header --}}
 @section('content-header', 'Manage suppliers')
 {{-- Main content --}}

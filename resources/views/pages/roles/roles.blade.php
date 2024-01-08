@@ -1,7 +1,7 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('page-title', 'Manage Roles')
+@section('title_prefix', 'Manage Roles')
 {{-- Content Header --}}
 @section('content-header', 'Manage Roles')
 {{-- Main content --}}
