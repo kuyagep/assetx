@@ -28,11 +28,11 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>ISSUANCE CODE</th>
-                                            <th>ISSUED BY</th>
-                                            <th>ISSUED TO</th>
-                                            <th class="text-center">STATUS</th>
-                                            <th width="250px">ACTION</th>
+                                            <th>Issuance Code</th>
+                                            <th>Issued By</th>
+                                            <th>Issued To</th>
+                                            <th class="text-center">Status</th>
+                                            <th width="250px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,8 +40,10 @@
                                             <tr>
                                                 <td>{{ $issuance->id }}</td>
                                                 <td>{{ $issuance->issuance_code }}</td>
-                                                <td>{{ $issuance->issuedBy->first_name }}</td>
-                                                <td>{{ $issuance->issuedTo->first_name }}</td>
+                                                <td>{{ $issuance->issuedBy->first_name . ' ' . $issuance->issuedBy->last_name }}
+                                                </td>
+                                                <td>{{ $issuance->issuedTo->first_name . ' ' . $issuance->issuedTo->last_name }}
+                                                </td>
                                                 <td class="text-center">
 
                                                     @if ($issuance->isApproved)

@@ -25,13 +25,11 @@
             </div>
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
+                    <div class="card card-outline card-dark">
                         <div class="card-header">
                             <h3 class="card-title text-bold">All Received Issuances</h3>
                             <div class="card-tools">
-                                <a href="{{ route('issuances.create') }}" class="btn bg-navy mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;ADD NEW
-                                </a>
+
                             </div>
                             <!-- /.card-tools -->
                         </div>
@@ -42,11 +40,11 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>ISSUANCE CODE</th>
-                                            <th>ISSUED BY</th>
-                                            <th>ISSUED TO</th>
-                                            <th class="text-center">STATUS</th>
-                                            <th width="250px">ACTION</th>
+                                            <th>Issuance Code</th>
+                                            <th>Issued By</th>
+                                            <th>Issued To</th>
+                                            <th class="text-center">Status</th>
+                                            <th width="250px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

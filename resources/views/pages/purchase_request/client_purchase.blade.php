@@ -14,10 +14,10 @@
                     <div class="row mb-3 ">
                         <div class="col-12">
                             <button id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
-                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
+                                <i class="fa-solid fa-paper-plane mr-2"></i>Add New
                             </button>
                             <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
-                                <i class="fas fa-file-excel"></i>&nbsp;Export
+                                <i class="fas fa-file-excel mr-2"></i>Export
                             </button>
                         </div>
                     </div>
@@ -25,9 +25,10 @@
             </div>
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card card-outline card-navy">
+                    <div class="card card-outline card-dark">
                         <div class="card-header">
-                            <h3 class="card-title"><b><i class="fa-solid fa-ellipsis-vertical"></i> All Purchase Request</b>
+                            <h3 class="card-title"><b><i class="fa-solid fa-ellipsis-vertical mr-2"></i> All Purchase
+                                    Request</b>
                             </h3>
 
                         </div>
@@ -183,7 +184,7 @@
                                 <div class="row float-right my-3  ">
                                     <div class="col-12">
                                         <button type="submit" class="btn bg-navy btn-save" accesskey="s"
-                                            id="btn-save">Save</button>
+                                            id="btn-save">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -278,8 +279,8 @@
                 $('#btn-save').attr('disabled', false);
                 $('#error').html('');
                 $('#modal').modal("show");
-                $('#modal-title').html("Add Data");
-                $('#btn-save').html("Save");
+                $('#modal-title').html("Add Purchase Request");
+                $('#btn-save').html("Submit");
                 $('#btn-save').show();
                 $('#id').val('');
                 $('#modal-form').trigger("reset");

@@ -13,8 +13,8 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn bg-navy mr-2 float-left" accesskey="a">
-                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
+                            <button id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
+                                <i class="fa-solid fa-paper-plane mr-2"></i>Add New
                             </button>
                         </div>
                     </div>
@@ -22,10 +22,11 @@
             </div>
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card card-outline card-navy">
+                    <div class="card card-outline card-dark">
                         <div class="card-header">
-                            <h3 class="card-title"> All Purchase Request</h3>
-
+                            <h3 class="card-title">
+                                <b><i class="fa-solid fa-ellipsis-vertical mr-2"></i> All Purchase Request</b>
+                            </h3>
                         </div>
 
                         <div class="card-body">

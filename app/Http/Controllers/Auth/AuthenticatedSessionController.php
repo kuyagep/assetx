@@ -56,17 +56,17 @@ class AuthenticatedSessionController extends Controller
                 return redirect('/login')->with(['status' => 'Account Pending! Contact Administrator.']); // Redirect with an error message
             }
 
-            // $url = '';
-            // if ($request->user()->hasRole('super-admin')) {
-            //     $url = 'my/dashboard';
-            // } elseif ($request->user()->hasRole('admin')) {
-            //     $url = 'my/account/dashboard';
-            // } elseif ($request->user()->hasRole('client')) {
-            //     $url = 'client/dashboard';
-            // } else {
-            //     $url = 'index';
-            // }
-            return redirect()->intended(RouteServiceProvider::HOME);
+            $url = '';
+            if ($request->user()->hasRole('super-admin')) {
+                $url = 'my/dashboard';
+            } elseif ($request->user()->hasRole('admin')) {
+                $url = 'my/account/dashboard';
+            } elseif ($request->user()->hasRole('client')) {
+                $url = 'client/dashboard';
+            } else {
+                $url = 'index';
+            }
+            return redirect()->intended($url);
         }else{
             return redirect()->back()->with('recaptcha_status', 'Please Complete the Recaptcha Again to proceed');
         }
