@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackEnd;
 
+use App;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\AssetClassification;
@@ -9,6 +10,7 @@ use App\Models\AssetIssuance;
 use App\Models\Issuance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+ use Barryvdh\DomPDF\Facade\Pdf;
 
 class AssetIssuanceController extends Controller
 {
@@ -107,5 +109,12 @@ class AssetIssuanceController extends Controller
 
         $assets = Asset::where('classification_id', $request->id)->get();
         return response()->json($assets);
+    }
+
+    public function generateIssuances(Request $request)
+    {
+        $name = 'Geperson';
+           $pdf = Pdf::loadView('pages.asset_issuance.generate_issuance', compact('name'))->setPaper('a4','portrait');
+            return $pdf->stream();
     }
 }

@@ -112,6 +112,8 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::get('/asset-issuance/', 'create')->name('asset_issuance.create');
         Route::post('/asset-issuance/', 'store')->name('asset_issuance.store');
         Route::get('/asset/issuance/', 'getAssetByClassification')->name('get.asset');
+        Route::get('/asset/issuance/generate', 'generateIssuances')->name('asset_issuance.generate');
+
     });
     #issuances
     Route::resource('/purchase', PurchaseController::class);
@@ -212,7 +214,6 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
         Route::get('/purchase-order/export/','exportPurchaseOrder')->name('export.purchase.order');
         Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
-        Route::get('/download/attachment/{id}', 'download')->name('purchase.order.download');
         Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
         Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
     });

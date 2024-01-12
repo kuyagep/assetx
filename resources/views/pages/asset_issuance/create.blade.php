@@ -94,7 +94,8 @@
                                 <div class="row mb-3">
                                     <div class="col-12 float-right">
                                         <button class="btn btn-primary ">Add Asset Issuance</button>
-                                        <button class="btn btn-danger ">Generate Issuance</button>
+                                        <a href="{{ route('asset_issuance.generate') }}" class="btn btn-danger ">Generate
+                                            Issuance</a>
                                         <button class="btn btn-success mr-2">Preview Issuance</button>
                                     </div>
                                 </div>

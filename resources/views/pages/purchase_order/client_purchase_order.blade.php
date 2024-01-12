@@ -400,30 +400,9 @@
                 window.location.href = route;
 
             });
+
             //Download Function
-            $('body').on('click', '#downloadButton', function() {
 
-                var id = $(this).data('id');
-                var route = "{{ route('client.purchase.order.download', ':id') }}";
-                route = route.replace(':id', id);
-
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You want to download this file?",
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Download'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = route;
-                    }
-
-                });
-
-            });
 
             $('body').on('click', '#export-data', function() {
                 var route = "{{ route('client.export.purchase.order') }}";

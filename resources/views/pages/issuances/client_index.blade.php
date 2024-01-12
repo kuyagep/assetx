@@ -16,9 +16,9 @@
                             {{-- <a href="{{ route('issuances.create') }}" class="btn bg-dark mr-2 float-left" accesskey="a">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
                             </a> --}}
-                            <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
+                            {{-- <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
                                 <i class="fas fa-file-excel"></i>&nbsp;Export
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                 </div>
@@ -63,17 +63,8 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('issuances.show', $issuance->id) }}"
-                                                        class="btn btn-info btn-sm">Show</a>
-                                                    <a href="{{ route('issuances.edit', $issuance->id) }}"
-                                                        class="btn btn-warning btn-sm">Edit</a>
-                                                    <form action="{{ route('issuances.destroy', $issuance->id) }}"
-                                                        method="POST" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Are you sure?')">Delete</button>
-                                                    </form>
+                                                    <a href="#" class="btn btn-info btn-sm">Show</a>
+
                                                 </td>
                                             </tr>
                                         @empty

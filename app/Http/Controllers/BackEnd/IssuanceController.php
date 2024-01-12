@@ -83,10 +83,10 @@ class IssuanceController extends Controller
     {
         $issuance = Issuance::findOrFail($id);
         $types = IssuanceType::all();
-
-        $districts = District::where('division_id', Auth::user()->office->division->id)->get();
+        $division = Division::first();
+        $districts = District::all();
         if (empty($issuance->user->school_id)) {
-            $schoolOrOffices = Office::where('division_id', Auth::user()->office->division->id)->get();
+            $schoolOrOffices = Office::get();
         } else {
             $schoolOrOffices =  School::where('district_id', $request->id)->get();
         }
@@ -98,7 +98,7 @@ class IssuanceController extends Controller
             $users = User::where('school_id', $request->id)->get();
         }
 
-        return  view('pages.issuances.edit', compact('types', 'districts', 'schoolOrOffices', 'issuance', 'users'));
+        return  view('pages.issuances.edit', compact('types', 'districts', 'schoolOrOffices', 'issuance', 'users','division'));
     }
 
     /**

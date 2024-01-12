@@ -49,6 +49,7 @@ class PurchaseController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="btn-group">';
+                    
                     $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-primary" id="history-button"><i class="fas fa-history"></i></button>';
                     if (auth()->user()->hasRole('admin')) {
                         $btn .= '<button title="Edit" type="button" data-id="' . $row->id . '" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';

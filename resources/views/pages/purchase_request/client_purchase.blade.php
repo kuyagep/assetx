@@ -410,7 +410,7 @@
             $('body').on('click', '#downloadButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('purchase.download', ':id') }}";
+                var route = "{{ route('client.purchase.download', ':id') }}";
 
                 route = route.replace(':id', id);
 
