@@ -225,7 +225,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('client/purchase-order') }}",
+                ajax: "{{ url('my/purchase-order') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',

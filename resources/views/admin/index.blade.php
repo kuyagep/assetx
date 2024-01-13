@@ -1,6 +1,6 @@
 @extends('partials.main')
 {{-- page title --}}
-@section('page-title', 'Home')
+@section('title_prefix', 'Home')
 {{-- Content Header --}}
 @section('content-header', 'Dashboard')
 {{-- content --}}
@@ -8,14 +8,6 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <blockquote class="quote-danger">
-                        <h5 id="note"><i class="fas fa-bullhorn"></i> Welcome! {{ Auth::user()->first_name }}</h5>
-                        <p>This is your main dashboard you can freely navigate. Contact support team if you need help.</p>
-                    </blockquote>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-xl-3 col-sm-6 col-12 mb-4">
                     <div class="card">

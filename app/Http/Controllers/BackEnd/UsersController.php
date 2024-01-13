@@ -126,7 +126,6 @@ class UsersController extends Controller
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'position_name' => 'required',
                 'roles' => 'required',
-                'status' => 'required',
             ]);
             //check office if exists
 

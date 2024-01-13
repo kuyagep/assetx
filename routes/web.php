@@ -40,6 +40,10 @@ Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maint
 
 require __DIR__ . '/auth.php';
 
+Route::get('/pdf', function () {
+    return view('testing.pdf');
+});
+
 Route::get('/', function () {
     return view('index');
 });
@@ -52,7 +56,6 @@ Route::get('application',[ ApplicationController::class, 'index'])->name('applic
 ######################## SUPER ADMIN ########################
 Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(function () {
 
-
     //* ############# ADMIN #############
     Route::controller(AccountController::class)->prefix('account')->as('account.')->middleware(['role:admin'])->group(function () {
         //* ->middleware('permission:division.all')
@@ -61,6 +64,7 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
         Route::post('/update/password', 'adminUpdatePassword')->name('update.password');
     });
+    
     //* ############# SUPER ADMIN #############
     Route::controller(AccountController::class)->middleware(['role:super-admin'])->group(function () {
         Route::get('/dashboard', 'super_adminDashboard')->name('dashboard');
@@ -169,6 +173,18 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::get('/online/users', 'online')->name('user.online');
     });
 
+    ##### ADMIN PART #####
+    Route::controller(PurchaseOrderController::class)->group(function () {
+        Route::get('/purchase-order', 'adminPurchaseOrder')->name('purchase.order');
+        Route::post('/purchase-order', 'store')->name('purchase.order.store');
+        Route::get('/purchase-order/show/{id}', 'show')->name('purchase.order.show');
+        Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
+        Route::get('/purchase-order/export/','exportPurchaseOrder')->name('export.purchase.order');
+        Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
+        Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
+        Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
+    });
+
     Route::controller(SuppliersController::class)->group(function () {
         Route::get('/supplier', 'index')->name('supplier.index');
         Route::post('/supplier', 'store')->name('supplier.store');
@@ -177,7 +193,6 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::delete('/supplier/destroy/{id}', 'destroy')->name('supplier.destroy');
     });
 });
-
 
 
 
@@ -232,6 +247,11 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         
     });
 });
+
+
+
+
+
 
 ###################### Example of Multi Step Form ##########################
 Route::get('products', [ProductController::class, 'index'])->name('products.index');

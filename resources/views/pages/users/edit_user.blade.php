@@ -75,26 +75,29 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="role">Role <span class="text-danger">*</span></label>
-                                            <select class="custom-select" id="roles" name="roles">
-                                                <option selected disabled>Choose...</option>
-                                                @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}"
-                                                        {{ $user->hasRole($role->name) ? 'selected' : '' }}>
-                                                        {{ $role->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="status">Status <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="status" id="status">
-                                                <option>Select...</option>
-                                                <option value="active" selected>Activate</option>
-                                                <option value="inactive">Deactivate</option>
-                                            </select>
-                                        </div>
+                                        @role('super-admin')
+                                            <div class="form-group">
+                                                <label for="role">Role <span class="text-danger">*</span></label>
+                                                <select class="custom-select" id="roles" name="roles">
+                                                    <option selected disabled>Choose...</option>
+                                                    @foreach ($roles as $role)
+                                                        <option value="{{ $role->id }}"
+                                                            {{ $user->hasRole($role->name) ? 'selected' : '' }}>
+                                                            {{ $role->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="status">Status</label>
+                                                <select class="custom-select" name="status" id="status">
+                                                    <option>Select...</option>
+                                                    <option value="1" selected>Activate</option>
+                                                    <option value="0">Deactivate</option>
+                                                </select>
+                                            </div>
+                                        @endrole
                                     </div>
                                     <div class="col-4">
                                         <img id="showImage" alt="Avatar" class="table-avatar"

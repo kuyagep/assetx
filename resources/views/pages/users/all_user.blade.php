@@ -155,7 +155,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="status">Status <span class="text-danger">*</span></label>
+                                            <label for="status">Status </label>
                                             <select class="custom-select" name="status" id="status">
                                                 <option value="">Select...</option>
                                                 <option value="1" selected>Activate</option>

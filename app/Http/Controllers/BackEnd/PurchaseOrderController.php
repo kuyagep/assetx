@@ -97,7 +97,7 @@ class PurchaseOrderController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                // 'get_started' => 'required',
+                'category' => 'required',
                 'po_date' => 'required|date',
                 'amount' => 'required|numeric|min:0.01|max:999999999999.99',
                 'remarks' => 'required|string|max:255',
@@ -109,6 +109,7 @@ class PurchaseOrderController extends Controller
             if (empty($request->id)) {
                 
                 $data = new PurchaseOrder();
+                $data->category = $request->category;
                 $data->purchase_id = $request->purchase_id;
                 $data->po_date = $request->po_date;
                 $data->amount = $request->amount;
@@ -273,6 +274,68 @@ class PurchaseOrderController extends Controller
         return response()->json(['icon' => 'error', 'title' => 'Ooops!', 'message' => 'Something went wrong! Try again!']);
     }
 
+    public function adminPurchaseOrder (Request $request)
+    {
+
+        $data = [];
+        if ($request->ajax()) {
+            $data = PurchaseOrder::all();
+            return DataTables::of($data)
+                ->editColumn('purchase_number', function ($request) {                    
+                    return $request->purchase->purchase_number;
+                })
+                ->editColumn('title', function ($request) {                    
+                    return $request->purchase->title;
+                })
+                ->editColumn('amount', function ($request) {
+                     return number_format($request->amount, 2, '.', ',');
+                })
+                ->editColumn('created_at', function ($request) {
+                    return $request->created_at->format('d-m-Y H:i:s');
+                })
+                ->editColumn('status', function ($request) {
+
+                    if ($request->status === "approved") {
+                        $result = '<span class="badge badge-success">Approved</span>';
+                    } elseif ($request->status === "pending") {
+                        $result = '<span class="badge badge-warning">Pending</span>';
+                    } elseif ($request->status === "cancelled") {
+                        $result = '<span class="badge badge-danger">Cancelled</span>';
+                    } elseif ($request->status === "rebid") {
+                        $result = '<span class="badge badge-primary">Rebid</span>';
+                    }
+                    return $result;
+                })
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<div class="btn-group">';
+                    $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-navy" id="history-button"><i class="fas fa-history"></i></button>';
+                    if (auth()->user()->hasRole('client')) {
+                        $btn .= '<button title="Edit" type="button" data-id="' . $row->id . '" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
+                    }
+
+
+                    $btn .= '<div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm  dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                            </button>
+                                <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" data-id="' . $row->attachment . '" title="Download" href="javascript:void(0)" id="downloadButton">Download</a>
+                                </div>
+                            </div>
+                        </div>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action', 'status', 'created_at','amount','title','purchase_number'])
+                ->make(true);
+        }
+
+        $purchases = Purchase::all();
+        $suppliers = Supplier::all();
+
+        return view('pages.purchase_order.admin_purchase_order', compact('purchases','suppliers'));
+    }
     public function clientPurchaseOrder (Request $request)
     {
 
