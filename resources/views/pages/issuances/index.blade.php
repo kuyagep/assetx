@@ -10,15 +10,29 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="row mb-3 ">
+                        <div class="col-12">
+                            <a href="{{ route('issuances.create') }}" class="btn bg-dark mr-2 float-left" accesskey="a">
+                                <i class="fa-solid fa-paper-plane mr-2"></i>Add Issuance
+                            </a>
+                            <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
+                                <i class="fas fa-file-excel mr-2"></i>Export Issuance
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"> ALL ISSUANCES</h3>
-                            <div class="card-tools">
+                            <h3 class="card-title text-bold"> All Issuances</h3>
+                            {{-- <div class="card-tools">
                                 <a href="{{ route('issuances.create') }}" class="btn bg-navy mr-2">
                                     <i class="fa fa-plus mr-1"></i>&nbsp;ADD NEW
                                 </a>
-                            </div>
+                            </div> --}}
                             <!-- /.card-tools -->
                         </div>
 

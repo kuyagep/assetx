@@ -9,16 +9,20 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            <div class="row mb-3 ">
+                <div class="col-12">
+                    <a href="javascript:void(0)" id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>Add Status
+                    </a>
+
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"> List of Status</h3>
-                            <div class="card-tools">
-                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add Status
-                                </a>
-                            </div>
+
                             <!-- /.card-tools -->
                         </div>
 
@@ -299,13 +303,9 @@
                                 console.log('Error : ', response);
                             }
                         });
-
                     }
                 });
-
             });
-
-
         });
     </script>
 @endsection
