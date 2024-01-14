@@ -64,7 +64,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Asset Issuance</h3>
-
                             <!-- /.card-tools -->
                         </div>
 
@@ -76,7 +75,7 @@
                                         <!-- Issuance Code Field -->
                                         <div class="form-group">
                                             <label for="issuance_code">Issuance Code:</label>
-                                            <input type="text" name="" id="" class="form-control"
+                                            <input type="text" name="issuance_code" id="" class="form-control"
                                                 value="{{ $issuance->issuance_code }}" disabled>
                                         </div>
 
@@ -94,7 +93,8 @@
                                 <div class="row mb-3">
                                     <div class="col-12 float-right">
                                         <button class="btn btn-primary ">Add Asset Issuance</button>
-                                        <a href="{{ route('asset_issuance.generate') }}" class="btn btn-danger ">Generate
+                                        <a href="{{ route('asset_issuance.generate', $issuance->id) }}" target="_blank"
+                                            class="btn btn-danger ">Generate
                                             Issuance</a>
                                         <button class="btn btn-success mr-2">Preview Issuance</button>
                                     </div>

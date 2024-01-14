@@ -111,10 +111,19 @@ class AssetIssuanceController extends Controller
         return response()->json($assets);
     }
 
-    public function generateIssuances(Request $request)
+    public function generateIssuances(Request $request, $id)
     {
-        $name = 'Geperson';
-           $pdf = Pdf::loadView('pages.asset_issuance.generate_issuance', compact('name'))->setPaper('a4','portrait');
+        if(!empty($request->id)){
+            $issuance = Issuance::where('id', $request->id)->first();
+            $asset_issuances = AssetIssuance::where('issuance_id', $request->id)->get();
+
+            $name = 'Geperson';
+            $pdf = Pdf::loadView('pages.asset_issuance.generate_issuance', compact('name','asset_issuances','issuance'))->setPaper('a4','portrait');
             return $pdf->stream();
+        }
+
+
+        
+        
     }
 }

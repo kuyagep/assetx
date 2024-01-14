@@ -116,7 +116,7 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::get('/asset-issuance/', 'create')->name('asset_issuance.create');
         Route::post('/asset-issuance/', 'store')->name('asset_issuance.store');
         Route::get('/asset/issuance/', 'getAssetByClassification')->name('get.asset');
-        Route::get('/asset/issuance/generate', 'generateIssuances')->name('asset_issuance.generate');
+        Route::get('/asset/issuance/generate/{id}', 'generateIssuances')->name('asset_issuance.generate');
 
     });
     #issuances

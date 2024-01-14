@@ -1,222 +1,193 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Issuance</title>
 
     <style>
-        .invoice-box {
-            max-width: 800px;
-            margin: auto;
-            padding: 30px;
-            border: 1px solid #eee;
-            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-            font-size: 16px;
-            line-height: 24px;
-            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-            color: #555;
+        * {
+            box-sizing: border-box;
         }
 
-        .invoice-box table {
-            width: 100%;
-            line-height: inherit;
+        /* Create three equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 33.33%;
+            height: 60px;
+            /* Should be removed. Only for demonstration */
+        }
+
+        .column1 {
+            float: left;
+            width: 50%;
+            /* height: 60px; */
+            /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+        h2,
+        h4 {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            padding: 1px
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .table-header {
+            border: none !important;
+        }
+
+        th,
+        td {
+            border: 1px solid #444;
+            padding: 8px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        td {
             text-align: left;
         }
 
-        .invoice-box table td {
-            padding: 5px;
-            vertical-align: top;
+        .sign {
+            text-align: center;
+            padding-top: 60px;
+            font-weight: 600;
+            border-top: none !important;
         }
 
-        .invoice-box table tr td:nth-child(2) {
-            text-align: right;
+        .position,
+        .date {
+            text-align: center;
+            padding-top: 25px;
+            font-weight: 600;
         }
 
-        .invoice-box table tr.top table td {
-            padding-bottom: 20px;
-        }
-
-        .invoice-box table tr.top table td.title {
-            font-size: 45px;
-            line-height: 45px;
-            color: #333;
-        }
-
-        .invoice-box table tr.information table td {
-            padding-bottom: 40px;
-        }
-
-        .invoice-box table tr.heading td {
-            background: #eee;
-            border-bottom: 1px solid #ddd;
-            font-weight: bold;
-        }
-
-        .invoice-box table tr.details td {
-            padding-bottom: 20px;
-        }
-
-        .invoice-box table tr.item td {
-            border-bottom: 1px solid #eee;
-        }
-
-        .invoice-box table tr.item.last td {
-            border-bottom: none;
-        }
-
-        .invoice-box table tr.total td:nth-child(2) {
-            border-top: 2px solid #eee;
-            font-weight: bold;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .invoice-box table tr.top table td {
-                width: 100%;
-                display: block;
-                text-align: center;
-            }
-
-            .invoice-box table tr.information table td {
-                width: 100%;
-                display: block;
-                text-align: center;
-            }
-        }
-
-        /** RTL **/
-        .rtl {
-            direction: rtl;
-            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-        }
-
-        .rtl table {
-            text-align: right;
-        }
-
-        .rtl table tr td:nth-child(2) {
-            text-align: left;
+        .mytable {
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <div class="invoice-box">
-        <table cellpadding="0" cellspacing="0">
-            <tr class="top">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td class="title">
-                                {{-- <img src="https://depeddavaodelsur.com/wp-content/themes/wp-bootstrap-starter-child/compiled/images/davsurdeped.png"
-                                    style="width:100%; max-width:300px;"> --}}
-                            </td>
 
-                            <td>
-                                Invoice #: 123<br>
-                                Created: January 1, 2015<br>
-                                Due: February 1, 2015
-                            </td>
-                            <td>
-                                Invoice #: 123<br>
-                                Created: January 1, 2015<br>
-                                Due: February 1, 2015
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
 
-            <tr class="information">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td>
-                                Sparksuite, Inc.<br>
-                                12345 Sunny Road<br>
-                                Sunnyville, CA 12345
-                            </td>
 
-                            <td>
-                                Acme Corp.<br>
-                                {{ $name }}<br>
-                                john@example.com
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
 
-            <tr class="heading">
-                <td>
-                    Payment Method
-                </td>
-
-                <td>
-                    Check #
-                </td>
-            </tr>
-
-            <tr class="details">
-                <td>
-                    Check
-                </td>
-
-                <td>
-                    1000
-                </td>
-            </tr>
-
-            <tr class="heading">
-                <td>
-                    Item
-                </td>
-
-                <td>
-                    Price
-                </td>
-            </tr>
-
-            <tr class="item">
-                <td>
-                    Website design
-                </td>
-
-                <td>
-                    $300.00
-                </td>
-            </tr>
-
-            <tr class="item">
-                <td>
-                    Hosting (3 months)
-                </td>
-
-                <td>
-                    $75.00
-                </td>
-            </tr>
-
-            <tr class="item last">
-                <td>
-                    Domain name (1 year)
-                </td>
-
-                <td>
-                    $10.00
-                </td>
-            </tr>
-
-            <tr class="total">
-                <td></td>
-
-                <td>
-                    Total: $385.00
-                </td>
-            </tr>
-        </table>
+    <div class="row">
+        <div class="column" style="text-align: center;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Seal_of_the_Department_of_Education_of_the_Philippines.png"
+                alt="Logo" srcset="utf-8" style="width:100%; max-width:80px;">
+        </div>
+        <div class="column">
+            <h4>Department of Education <br> Division of Davao del Sur</h4>
+        </div>
+        <div class="column" style="text-align: center; padding-top: 8px">
+            <img src="https://logodix.com/logo/1354867.png" alt="Logo" srcset="utf-8"
+                style="width:100%; max-width:100px;">
+        </div>
     </div>
+
+    <h2>INVENTORY CUSTODIAN SLIP</h2>
+
+
+
+
+
+    <div class="row">
+        <div class="column1">
+            <p>Entity Name: <br>
+                Fund Cluster: </p>
+        </div>
+        <div class="column1" style="text-align: right;">
+            <p>ICS NO: <b> {{ $issuance->issuance_code }}</b></p>
+        </div>
+    </div>
+
+    <table style="width:100%" class="table">
+        <tr>
+            <th rowspan="2">Quantity</th>
+            <th rowspan="2">Unit</th>
+            <th colspan="2">Amount</th>
+            <th rowspan="2">Description</th>
+            <th rowspan="2">Inventory Item No.</th>
+            <th rowspan="2">Estimated Useful Life </th>
+        </tr>
+        <tr>
+            <th>Unit Cost</th>
+            <th>Total Cost</th>
+        </tr>
+        @foreach ($asset_issuances as $asset_issuance)
+            <tr>
+                <td>{{ $asset_issuance->quantity }}</td>
+                <td>{{ $asset_issuance->asset->unit_of_measure }}</td>
+                <td>{{ number_format($asset_issuance->asset->unit_value, 2, '.', ',') }}</td>
+                <td>
+                    {{ number_format($asset_issuance->quantity * $asset_issuance->asset->unit_value, 2, '.', ',') }}
+                </td>
+                <td>{{ $asset_issuance->asset->description }}</td>
+                <td></td>
+                <td>3 years</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="7">
+                Accountability over Semi-expendable Property. Inventory Custodian Slip (ICS) shall be issued to
+                end-user of Semi-expendable Property to establish accountability. Accountability shall be
+                extinguished upon return of the item to the Asset Management Division (AMD) or in case of loss, upon
+                approval of the relief from property accountability.
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="4">Received from:</td>
+            <td colspan="3">Received by:</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="sign" style="width:50%">
+                {{ strtoupper($issuance->issuedBy->first_name . ' ' . $issuance->issuedBy->last_name) }}</td>
+            <td colspan="3" class="sign" style="width:50%">
+                {{ strtoupper($issuance->issuedTo->first_name . ' ' . $issuance->issuedTo->last_name) }}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="mytable">Signature Over Printed Name</td>
+            <td colspan="3" class="mytable">Signature Over Printed Name</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="position">
+                {{ $issuance->issuedBy->position->name }}
+            </td>
+            <td colspan="3" class="position">{{ $issuance->issuedTo->position->name }}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="mytable">Position/Office</td>
+            <td colspan="3" class="mytable">Position/Office</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="date">1/01/2023</td>
+            <td colspan="3" class="date">1/01/2023</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="mytable">Date</td>
+            <td colspan="3" class="mytable">Date</td>
+        </tr>
+    </table>
 </body>
 
 </html>
