@@ -154,7 +154,6 @@
                 approval of the relief from property accountability.
             </td>
         </tr>
-
         <tr>
             <td colspan="4">Received from:</td>
             <td colspan="3">Received by:</td>
