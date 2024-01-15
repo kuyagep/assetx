@@ -120,7 +120,7 @@
                                                     <td>{{ $assetItem->quantity }}</td>
                                                     <td>{{ $assetItem->quantity * $assetItem->asset->unit_value }}</td>
                                                     <td width="150px">
-                                                        <button class="btn btn-danger btn-sm">Remove</button>
+                                                        <button class="btn btn-danger btn-sm" id="removeBtn">Remove</button>
                                                         <button class="btn btn-warning btn-sm">Edit</button>
                                                     </td>
                                                 </tr>
@@ -137,6 +137,20 @@
 
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form action="/action_page.php">
+                        <fieldset>
+                            <legend>Personalia:</legend>
+                            <label for="fname">First name:</label><br>
+                            <input type="text" id="fname" name="fname" value="John"><br>
+                            <label for="lname">Last name:</label><br>
+                            <input type="text" id="lname" name="lname" value="Doe"><br><br>
+                            <input type="submit" value="Submit">
+                        </fieldset>
+                    </form>
                 </div>
             </div>
 

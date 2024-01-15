@@ -33,14 +33,11 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->get('user'))) {
+        if (!empty($request->get('user'))) {            
             
-            
-            if(!empty($request->get('user'))){
-                return redirect()->route('maintenance');
-                // exit();
-            }                
-            
+            // if(!empty($request->get('user'))){
+            //     return redirect()->route('maintenance');
+            // }                            
 
             $user = DB::connection('mysql_external')->table('tblusers', 'tblroles')->where('username', $request->get('user'))->first();
 
