@@ -14,10 +14,13 @@ class ClassificationSeeder extends Seeder
      */
     public function run(): void
     {
+        $name = "IT EQUIPMENT";
+        $uac_code = 254778;
         DB::table('asset_classifications')->insert([
             [ 
-                'name' => 'IT EQUIPMENT',
-                'slug' => Str::slug('IT EQUIPMENT'),
+                'name' => $name,
+                'uac_code' => $uac_code,
+                'slug' => Str::slug($name),
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila'),
             ]
