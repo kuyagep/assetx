@@ -13,7 +13,7 @@
                 <div class="col-md-4 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"> Select Assets</h3>
+                            <h3 class="card-title"> <b>Select Assets</b></h3>
 
                             <!-- /.card-tools -->
                         </div>
@@ -63,7 +63,7 @@
                 <div class="col-md-8 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Asset Issuance</h3>
+                            <h3 class="card-title"><b>Asset Issuance</b></h3>
                             <!-- /.card-tools -->
                         </div>
 
@@ -85,25 +85,23 @@
                                         <div class="form-group">
                                             <label for="issued_to_user_id">Issued To:</label>
                                             <input type="text" name="" id="" class="form-control"
-                                                value="{{ $issuance->issuedTo->first_name }}" disabled>
+                                                value="{{ $issuance->issuedTo->first_name . ' ' . $issuance->issuedTo->last_name }}"
+                                                disabled>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-12 float-right">
-                                        <button class="btn btn-primary ">Add Asset Issuance</button>
-                                        <a href="{{ route('asset_issuance.generate', $issuance->id) }}" target="_blank"
-                                            class="btn btn-danger ">Generate
-                                            Issuance</a>
-                                        <button class="btn btn-success mr-2">Preview Issuance</button>
+                                        <button class="btn btn-primary "><i class="fa-solid fa-magnifying-glass"></i> Add
+                                            Asset Issuance</button>
                                     </div>
                                 </div>
                             </form>
                             <!-- Select Multiple Assets Field -->
                             <div class="row">
                                 <div class="col-12">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="dataTableajax">
                                         <thead class="table-dark">
                                             <th>No</th>
                                             <th>Item</th>
@@ -112,15 +110,26 @@
                                             <th>Action</th>
                                         </thead>
                                         <tbody>
-
+                                            @php
+                                                $count = 0;
+                                            @endphp
                                             @foreach ($assetIssuances as $assetItem)
                                                 <tr>
-                                                    <td>{{ $assetItem->id }}</td>
+                                                    <td>{{ ++$count }}</td>
                                                     <td>{{ $assetItem->asset->article }}</td>
                                                     <td>{{ $assetItem->quantity }}</td>
-                                                    <td>{{ $assetItem->quantity * $assetItem->asset->unit_value }}</td>
+                                                    <td>
+                                                        {{ number_format($assetItem->quantity * $assetItem->asset->unit_value, 2, '.', ',') }}
+                                                    </td>
                                                     <td width="150px">
-                                                        <button class="btn btn-danger btn-sm" id="removeBtn">Remove</button>
+                                                        <form
+                                                            action="{{ route('asset_issuance.destroy', $assetItem->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-sm">Remove</button>
+                                                        </form>
+
                                                         <button class="btn btn-warning btn-sm">Edit</button>
                                                     </td>
                                                 </tr>
@@ -128,10 +137,24 @@
 
                                             <tr>
                                                 <th colspan="3">Total Value</th>
-                                                <td>{{ $totalValue }}</td>
+                                                <td>{{ number_format($totalValue, 2, '.', ',') }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            <div class="row no-print">
+                                <div class="col-12">
+                                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i
+                                            class="fas fa-print"></i> Print</a>
+                                    <button type="button" class="btn btn-success float-right">
+                                        <i class="fa-regular fa-share-from-square"></i>
+                                        Submit Issuance
+                                    </button>
+                                    <a href="{{ route('asset_issuance.generate', $issuance->id) }}" target="_blank"
+                                        type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                        <i class="fas fa-download"></i> Generate PDF
+                                    </a>
                                 </div>
                             </div>
 
@@ -139,7 +162,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
         <!--/. container-fluid -->
@@ -159,18 +182,12 @@
 
             $('#classification_id').on('change', function() {
                 var id = $(this).val();
-
-
                 var route = "{{ route('get.asset') }}";
-                // route = route.replace(':id', id);
-
-
                 // Make an Ajax request to fetch assets for the selected classification
                 $.ajax({
                     url: route,
                     type: 'GET',
                     data: {
-
                         id: id
                     },
                     dataType: 'json',
@@ -186,6 +203,51 @@
                                 text: value.article
                             }));
                         });
+                    }
+                });
+            });
+
+            // Delete Function
+            $('body').on('click', '#removeBtn', function() {
+                var id = $(this).data('id');
+                var route = "{{ route('asset_issuance.destroy', ':id') }}";
+                route = route.replace(':id', id);
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want delete this user?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirmed!'
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: route,
+                            data: {
+                                id: id
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                console.log(response);
+                                var oTable = $('#dataTableajax').dataTable();
+                                oTable.fnDraw(true);
+                                //Sweet Alert
+                                Swal.fire({
+                                    icon: response.icon,
+                                    title: response.title,
+                                    text: response.message,
+                                    timer: 2000
+                                });
+                            },
+                            error: function(response) {
+                                console.log('Error : ', response);
+                            }
+                        });
+
                     }
                 });
             });

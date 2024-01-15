@@ -25,7 +25,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">
@@ -69,7 +69,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item {{ Request::is('my/assets') ? 'menu-open' : '' }}">
+                    <li class="nav-item {{ Request::is('my/assets', 'my/assets/non/expendable') ? 'menu-open' : '' }}">
                         <a href="javascript:void(0)" class="nav-link {{ Request::is('my/assets') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-dice-d6"></i>
                             <p>
@@ -87,8 +87,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('my/roles/permission') }}"
-                                    class="nav-link {{ Request::is('my/roles/permission') ? 'active' : '' }}">
+                                <a href="{{ url('my/assets/non/expendable') }}"
+                                    class="nav-link {{ Request::is('my/assets/non/expendable') ? 'active' : '' }}">
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>Non Expendable</p>
                                 </a>
@@ -320,7 +320,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
 
                     <li class="nav-item">
@@ -482,19 +482,32 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon fas fa-inbox"></i>
+                            <p>
+                                Issued Items
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon fas fa-inbox"></i>
+                            <p>
+                                Reports
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-header">ACCOUNT MANAGEMENT</li>
-                    {{-- client --}}
-                    @role('client')
-                        <li class="nav-item">
-                            <a href="{{ url('client/profile') }}"
-                                class="nav-link {{ Request::is('client/profile') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Profile Settings
-                                </p>
-                            </a>
-                        </li>
-                    @endrole
+                    <li class="nav-item">
+                        <a href="{{ url('client/profile') }}"
+                            class="nav-link {{ Request::is('client/profile') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Profile Settings
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

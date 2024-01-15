@@ -13,8 +13,8 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn btn-primary mr-2 float-left" title="Add [Alt+A]">
-                                <i class="fa-regular fa-square-plus" accesskey="a"></i>&nbsp;Add User
+                            <button id="add-button" class="btn btn-success mr-2 float-left" title="Add [Alt+A]">
+                                <i class="fa-regular fa-user" accesskey="a"></i>&nbsp;&nbsp;Add New User Account
                             </button>
                         </div>
                     </div>
@@ -22,10 +22,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
-
                     <div class="card">
                         <div class="card-header">
-                            <h5><i class="fas fa-users "></i>&nbsp;List of All Users</h5>
+                            <h5><i class="fa-solid fa-ellipsis-vertical"></i>&nbsp;&nbsp;<b>List of All Users</b></h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -45,7 +44,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -333,18 +331,18 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('admin.destroy', ':id') }}";
+                var route = "{{ route('user.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You want delete this admin user?",
+                    text: "You want delete this user?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Confirm!'
                 }).then((result) => {
 
                     if (result.isConfirmed) {
@@ -375,7 +373,6 @@
 
                     }
                 });
-
             });
 
             // display image

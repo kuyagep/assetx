@@ -1,9 +1,9 @@
 {{-- Extend main layout --}}
 @extends('partials.main')
 {{-- Page Title --}}
-@section('title_prefix', 'Manage Inventories')
+@section('title_prefix', 'Non Expendable Inventories')
 {{-- Content Header --}}
-@section('content-header', 'Manage Inventories')
+@section('content-header', 'Non Expendable Inventories')
 {{-- Main content --}}
 @section('main-content')
     <!-- Main content -->
@@ -29,7 +29,7 @@
                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title"> List of Inventories</h3>
+                                <h3 class="card-title"> List of Non Expendable Inventories </h3>
 
                                 <!-- /.card-tools -->
                             </div>

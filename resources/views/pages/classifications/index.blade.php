@@ -135,11 +135,11 @@
                         name: 'name'
                     },
                     {
+                        data: 'uac_code',
+                        name: 'uac_code'
+                    }, {
                         data: 'slug',
                         name: 'slug'
-                    }, {
-                        data: 'created_at',
-                        name: 'created_at'
                     }, {
                         data: 'action',
                         name: 'action',
@@ -229,7 +229,7 @@
                         $('#modal').modal("show");
                         $('#id').val(response.id);
                         $('#name').val(response.name);
-                        $('#status').val(response.status);
+                        $('#uac_code').val(response.uac_code);
                         $('#error').html('');
 
                     },
@@ -261,6 +261,7 @@
                         $('#modal').modal("show");
                         $('#id').val(response.id);
                         $('#name').val(response.name);
+                        $('#uac_code').val(response.uac_code);
                         $('#error').html('');
 
                     },

@@ -69,13 +69,9 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended($url);
         }else{
             return redirect()->back()->with('recaptcha_status', 'Please Complete the Recaptcha Again to proceed');
-        }
-
-
-
-       
+        }       
     }
-
+  
     /**
      * Destroy an authenticated session.
      */

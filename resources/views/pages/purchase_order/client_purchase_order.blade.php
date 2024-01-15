@@ -13,9 +13,9 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn bg-navy mr-2 float-left" accesskey="a">
+                            {{-- <button id="add-button" class="btn bg-navy mr-2 float-left" accesskey="a">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
-                            </button>
+                            </button> --}}
                             <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
                                 <i class="fas fa-file-excel"></i>&nbsp;Export
                             </button>
@@ -57,135 +57,7 @@
                 </div>
             </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="modal">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="modal-title"></h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" accesskey="c">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="javascript:void(0)" name="modal-form" id="modal-form" class="form-horizontal"
-                            enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-body">
-                                {{-- Error Display here --}}
-                                <div id="error"></div>
-                                {{-- Reference Id --}}
-                                <input type="hidden" name="id" id="id">
-                                {{-- sample --}}
-                                <div class="row">
-                                    <div class="col-lg-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="po_category">Category <span class="text-danger"
-                                                    title="important">*</span></label>
-                                            <select class="custom-select" name="po_category" id="po_category">
-                                                <option selected disabled>Select Category...</option>
-                                                <option value="catering-services">Catering & Services</option>
-                                                <option value="goods-services">Goods & Services</option>
-                                                <option value="furniture-fixtures">Furniture & Fixtures</option>
-                                                <option value="others">Others</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="purchase_id">PR No. <span class="text-danger"
-                                                    title="important">*</span></label>
-                                            <select class="custom-select" name="purchase_id" id="purchase_id" required>
-                                                <option selected disabled>Select...</option>
-                                                @forelse ($purchases as $purchase)
-                                                    <option value="{{ $purchase->id }}">
-                                                        {{ $purchase->purchase_number . ' ' . $purchase->title }}
-                                                    </option>
-                                                @empty
-                                                    <option value="">No data found!</option>
-                                                @endforelse
 
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="supplier_id">Supplier <span class="text-danger"
-                                                    title="important">*</span></label>
-                                            <select class="custom-select" name="supplier_id" id="supplier_id" required>
-                                                <option selected disabled>Select Supplier...</option>
-                                                @forelse ($suppliers as $supplier)
-                                                    <option value="{{ $supplier->id }}">
-                                                        {{ $supplier->name }}
-                                                    </option>
-                                                @empty
-                                                    <option value="">No data found!</option>
-                                                @endforelse
-
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-lg-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="po_date">PO Date <span class="text-danger"
-                                                    title="important">*</span></label>
-                                            <input type="date" class="form-control" id="po_date"_date name="po_date"
-                                                required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="amount">PO Total Amount <span class="text-danger"
-                                                    title="important">*</span></label>
-                                            <input type="currency" class="form-control" id="amount" name="amount"
-                                                placeholder="Ex. 12345.00" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="logo">Upload Attachment <small>.xlsx, .xls</small></label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="attachment"
-                                                        id="attachment">
-                                                    <label class="custom-file-label" for="logo">Choose
-                                                        file</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="remarks">Remarks <span class="text-danger"
-                                                    title="important">*</span></label>
-                                            <textarea class="form-control" id="remarks" name="remarks" placeholder="Type here"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row float-right my-3  ">
-                                    <div class="col-12">
-                                        <button type="submit" class="btn bg-navy btn-save" accesskey="s"
-                                            id="btn-save">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
 
             <!-- End Modal -->
             <!-- /.modal -->
@@ -267,60 +139,6 @@
                 ]
             });
 
-            // Add Button Function
-            $('#add-button').click(function() {
-                $('#btn-save').attr('disabled', false);
-                $('#error').html('');
-                $('#modal').modal("show");
-                $('#modal-title').html("Create New Purchase Order");
-                $('#btn-save').html("Save");
-                $('#btn-save').show();
-                $('#id').val('');
-                $('#modal-form').trigger("reset");
-            });
-
-            // Store Function
-            $('#modal-form').submit(function(e) {
-                e.preventDefault();
-
-                $('#btn-save').html('Sending...');
-
-                // Serialize the form data using FormData
-                let formData = new FormData($('#modal-form')[0]);
-
-                // Send the form data via AJAX using jQuery store function
-                $.ajax({
-                    // Replace with your route URL
-                    type: 'POST',
-                    url: "{{ route('client.purchase.order.store') }}",
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: (response) => {
-                        // Handle the response from the server (if needed)
-                        $('#btn-save').html('Submitted');
-                        $('#modal').modal('hide');
-                        table.draw();
-                        $('#modal-form').trigger("reset");
-
-                        // Display the message on the page
-                        Swal.fire({
-                            icon: response.icon,
-                            title: response.title,
-                            text: response.message,
-                            timer: 2000
-                        });
-                    },
-                    error: (response) => {
-                        // Handle the error (if needed)
-                        $('#error').html("<div class='alert alert-danger'>" + response[
-                                'responseJSON']['message'] +
-                            "</div>");
-                        $('#btn-save').html('Save');
-                    }
-                });
-            });
 
             // View Function
             $('body').on('click', '#viewButton', function() {
@@ -355,42 +173,6 @@
                 });
             });
 
-            // Edit Function
-            $('body').on('click', '#editButton', function() {
-                $('#btn-save').attr('disabled', false);
-                // $('#ModalForm').attr("id", "editModalForm");
-                $('#btn-save').html("Save Changes");
-                var id = $(this).data('id');
-                var route = "{{ route('client.purchase.order.edit', ':id') }}";
-                route = route.replace(':id', id);
-
-                $.ajax({
-                    type: "GET",
-                    url: route,
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        // console.log(res);
-                        $('#modal-title').html("Edit Data");
-                        $('#modal').modal("show");
-                        $('#id').val(response.id);
-                        $('#title').val(response.title);
-                        $('#src_fund').val(response.src_fund);
-                        $('#amount_abc').val(response.amount);
-                        $('#isApproved').val(response.isApproved);
-                        $('#alt_mode_procurement').val(response.alt_mode_procurement);
-                        $('#get_started').val(response.get_started);
-                        $('#error').html('');
-
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
-            });
-
             //Download Function
             $('body').on('click', '#history-button', function() {
 
@@ -402,8 +184,6 @@
             });
 
             //Download Function
-
-
             $('body').on('click', '#export-data', function() {
                 var route = "{{ route('client.export.purchase.order') }}";
 

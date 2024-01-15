@@ -17,10 +17,17 @@ class AssetController extends Controller
 
     public function index()
     {
-        $assets = Asset::all();
+        $assets = Asset::where('unit_value','>',50000)->get();
         $classifications  = AssetClassification::all();
         $asset_status = AssetStatus::all();
         return view('pages.assets.index', compact('assets', 'classifications', 'asset_status'));
+    }
+    public function nonExpendable()
+    {
+        $assets = Asset::where('unit_value','<=',50000)->get();
+        $classifications  = AssetClassification::all();
+        $asset_status = AssetStatus::all();
+        return view('pages.assets.non_ex', compact('assets', 'classifications', 'asset_status'));
     }
 
     public function create()

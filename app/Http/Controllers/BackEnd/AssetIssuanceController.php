@@ -100,13 +100,13 @@ class AssetIssuanceController extends Controller
         $assetIssuance = AssetIssuance::findOrFail($id);
         $assetIssuance->delete();
 
-        return redirect()->route('asset_issuance.index')
+        return redirect()->back()
             ->with('success', 'Asset Issuance deleted successfully.');
+        //  return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Item deleted successfully!']);
     }
 
     public function getAssetByClassification(Request $request)
     {
-
         $assets = Asset::where('classification_id', $request->id)->get();
         return response()->json($assets);
     }
@@ -120,10 +120,7 @@ class AssetIssuanceController extends Controller
             $name = 'Geperson';
             $pdf = Pdf::loadView('pages.asset_issuance.generate_issuance', compact('name','asset_issuances','issuance'))->setPaper('a4','portrait');
             return $pdf->stream();
-        }
-
-
-        
+        }       
         
     }
 }

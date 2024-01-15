@@ -103,6 +103,11 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
     Route::resource('/issuance-type', IssuanceTypeController::class);
     #assets
     Route::resource('/assets', AssetController::class);
+    Route::controller(AssetController::class)->group(function () {
+       
+        Route::get('/assets/non/expendable', 'nonExpendable')->name('assets.non-expendable');
+        
+    });
     #issuances
 
     Route::resource('/issuances', IssuanceController::class);
@@ -115,6 +120,7 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
     Route::controller(AssetIssuanceController::class)->group(function () {
         Route::get('/asset-issuance/', 'create')->name('asset_issuance.create');
         Route::post('/asset-issuance/', 'store')->name('asset_issuance.store');
+        Route::post('/asset-issuance/{id}', 'destroy')->name('asset_issuance.destroy');
         Route::get('/asset/issuance/', 'getAssetByClassification')->name('get.asset');
         Route::get('/asset/issuance/generate/{id}', 'generateIssuances')->name('asset_issuance.generate');
 

@@ -14,7 +14,7 @@
                     <div class="row mb-3 ">
                         <div class="col-12">
                             <button id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
-                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add New
+                                <i class="fa-regular fa-square-plus"></i>&nbsp;Add Purchase Order
                             </button>
                             <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
                                 <i class="fas fa-file-excel"></i>&nbsp;Export
@@ -27,8 +27,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card card-outline card-navy">
                         <div class="card-header">
-                            <h3 class="card-title"> All Purchase Order</h3>
-
+                            <h3 class="card-title">&nbsp;&nbsp;<b>Purchase Orders</b></h3>
                         </div>
 
                         <div class="card-body">
