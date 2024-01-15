@@ -13,8 +13,7 @@
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"> Add a New Asset</h3>
-
+                            <h3 class="card-title"> Add New Asset</h3>
                             <!-- /.card-tools -->
                         </div>
 

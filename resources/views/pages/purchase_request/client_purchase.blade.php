@@ -14,10 +14,10 @@
                     <div class="row mb-3 ">
                         <div class="col-12">
                             <button id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
-                                <i class="fa-solid fa-paper-plane mr-2"></i>Add New
+                                <i class="fa-solid fa-paper-plane mr-2"></i>&nbsp;Add New
                             </button>
                             <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
-                                <i class="fas fa-file-excel mr-2"></i>Export
+                                <i class="fas fa-file-excel mr-2"></i>&nbsp;Export
                             </button>
                         </div>
                     </div>

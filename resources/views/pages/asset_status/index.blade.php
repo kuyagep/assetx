@@ -14,7 +14,6 @@
                     <a href="javascript:void(0)" id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
                         <i class="fa-solid fa-paper-plane mr-2"></i>Add Status
                     </a>
-
                 </div>
             </div>
             <div class="row">

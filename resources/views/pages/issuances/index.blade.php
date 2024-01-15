@@ -17,7 +17,7 @@
                                 <i class="fa-solid fa-paper-plane mr-2"></i>Add Issuance
                             </a>
                             <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
-                                <i class="fas fa-file-excel mr-2"></i>Export Issuance
+                                <i class="fas fa-file-excel mr-2"></i>Export Issuances
                             </button>
                         </div>
                     </div>

@@ -10,15 +10,21 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="row mb-3 ">
+                        <div class="col-12">
+                            <a href="javascript:void(0)" id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
+                                <i class="fa-solid fa-paper-plane mr-2"></i>&nbsp;Add Office
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"> List of Office</h3>
-                            <div class="card-tools">
-                                <a href="javascript:void(0)" id="add-button" class="btn btn-primary mr-2">
-                                    <i class="fa fa-plus mr-1"></i>&nbsp;Add Office
-                                </a>
-                            </div>
                             <!-- /.card-tools -->
                         </div>
 

@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn btn-primary mr-2 float-left" title="Add [Alt+A]">
+                            <button id="add-button" class="btn btn-dark mr-2 float-left" title="Add [Alt+A]">
                                 <i class="fa-regular fa-square-plus" accesskey="a"></i>&nbsp;Add Admin
                             </button>
                         </div>

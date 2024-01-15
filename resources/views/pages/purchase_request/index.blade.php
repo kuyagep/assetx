@@ -14,7 +14,7 @@
                     <div class="row mb-3 ">
                         <div class="col-12">
                             <button id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
-                                <i class="fa-solid fa-paper-plane mr-2"></i>Add New
+                                <i class="fa-solid fa-paper-plane mr-2"></i>&nbsp;Add New
                             </button>
                         </div>
                     </div>
