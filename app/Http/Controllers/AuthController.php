@@ -54,6 +54,7 @@ class AuthController extends Controller
                         'password' => Hash::make('password'),
                         'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
                         'role' => 'client', // Set email_verified_at to null initially
+                        'status' => 1, // default 0
                     ]);
 
                     Auth::login($newuser);

@@ -318,7 +318,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('districts.destroy', ':id') }}";
+                var route = "{{ route('offices.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
