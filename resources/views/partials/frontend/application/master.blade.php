@@ -150,75 +150,238 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper ">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container">
-                    <div class="row mb-2">
-
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
             <!-- Main content -->
-            <div class="content " style="height:100vh;">
-                <div class="row ">
-                    <div class="col-lg-6 col-sm-12  bg-navy">
+            <div class="content mt-5">
+                {{-- <div class="content mt-5" style="height:100vh;"> --}}
+                <div class="row mt-5 mb-5">
+                    <div class="col-lg-12">
                         <div class="container">
-                            <h1>My First Bootstrap Page</h1>
-                            <p>This is some text.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-12 bg-white">
-                        <div class="container">
-                            <h1>My First Bootstrap Page</h1>
-                            <p>This is some text.</p>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4><b>Registration</b></h4>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="heading-small text-muted mb-4">Work Assignment</h6>
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="division">Division
+                                                        Office</label>
+                                                    <select name="division" id="division" class="custom-select"
+                                                        disabled>
+                                                        <option value="">Select...</option>
+                                                        <option value="1" selected>Division of Davao del Sur
+                                                        </option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="district">District
+                                                    </label>
+                                                    <select name="district" id="district" class="custom-select">
+                                                        <option value="">Select...</option>
+                                                        <option value="0">Division Personnel
+                                                        </option>
+                                                        <option value="1">Hagonoy I
+                                                        </option>
+                                                    </select>
+                                                    @error('district')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label"
+                                                        for="office_school">Office/School</label>
+                                                    <select name="office_school" id="office_school"
+                                                        class="custom-select">
+                                                        <option value="">Select...</option>
+                                                        <option value="1">Supply
+                                                        </option>
+                                                    </select>
+                                                    @error('email')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <h6 class="heading-small text-muted mb-4">User Information</h6>
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-username">Employee
+                                                        No.</label>
+                                                    <input type="text" id="employee_number" name="employee_number"
+                                                        class="form-control" placeholder="Enter employee number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-first-name">First
+                                                        name</label>
+                                                    <input type="text" id="first_name" name="first_name"
+                                                        class="form-control" placeholder="First name"
+                                                        value="{{ old('first_name') }}">
+                                                    @error('first_name')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-first-name">Middle
+                                                        name</label>
+                                                    <input type="text" id="first_name" name="first_name"
+                                                        class="form-control" placeholder="First name"
+                                                        value="{{ old('first_name') }}">
+                                                    @error('first_name')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-first-name">Last
+                                                        name</label>
+                                                    <input type="text" id="first_name" name="first_name"
+                                                        class="form-control" placeholder="First name"
+                                                        value="{{ old('first_name') }}">
+                                                    @error('first_name')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <div class="form-group">
+                                                    <label class="form-control-label"
+                                                        for="input-last-name">M.I</label>
+                                                    <input type="text" id="last_name" name="last_name"
+                                                        class="form-control" placeholder="Last name"
+                                                        value=" {{ old('last_name') }}">
+                                                    @error('last_name')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-sm-12">
+                                                <label>Deped Email Address</label>
+                                                <input type="email"
+                                                    class="form-control @error('email')  is-invalid   @enderror "
+                                                    name="email" placeholder="Enter Email Address" required>
+                                                @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6 col-sm-12"><label>New Password</label>
+                                                <input type="password"
+                                                    class="form-control @error('password')                                             
+                                                    is-invalid                                              
+                                                 @enderror "
+                                                    name="password" placeholder="Enter password" required="">
+                                                @error('password')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12"><label>Confirm Password</label>
+                                                <input type="password_confirmation"
+                                                    class="form-control @error('password_confirmation')                                             
+                                                    is-invalid                                              
+                                                 @enderror "
+                                                    name="password_confirmation"
+                                                    placeholder="Confirm New Password"required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row float-right mt-3">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa-regular fa-floppy-disk"></i>
+                                            Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                 </div>
+
             </div>
             <!-- /.content -->
+            <div class="footer-clean">
+                <footer>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-4 col-md-3 item">
+                                <img class="" src="{{ asset('brand_logo/gov-ph-seal-footer.png') }}"
+                                    height="150px" alt="cards">
+                                <br>Republic of the Philippines<br>All content is in the public domain unless
+                                otherwise
+                                stated.
+                            </div>
+                            <div class="col-sm-4 col-md-3 item">
+                                <h3>About</h3>
+                                <ul>
+                                    <li><a href="https://www.sec.gov.ph">DEPED Website</a></li>
+                                    <li><a href="https://www.gov.ph/">GOVPH</a></li>
+                                    <li><a href="https://www.gov.ph/data">Open Data Portal</a></li>
+                                    <li><a href="https://www.officialgazette.gov.ph/">Official Gazette</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-4 col-md-3 item">
+                                <h3>Links</h3>
+                                <ul>
+                                    <li><a href="#">HEREOS</a></li>
+                                    <li><a href="#">eDAMS</a></li>
+                                    <li><a href="#">FLAMES</a></li>
+                                    <li><a href="#">FAMOUS</a></li>
+                                    <li><a href="#">VERT</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 item social">
+                                <!-- <a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a> -->
+                                <p class="copyright">Department of Education <br>
+                                    Region XI Davao del Sur <br>{{ date('Y') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+
         </div>
         <!-- /.content-wrapper -->
 
-        <div class="footer-clean">
-            <footer>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-sm-4 col-md-3 item">
-                            <img class="" src="{{ asset('brand_logo/gov-ph-seal-footer.png') }}" height="150px"
-                                alt="cards">
-                            <br>Republic of the Philippines<br>All content is in the public domain unless otherwise
-                            stated.
-                        </div>
-                        <div class="col-sm-4 col-md-3 item">
-                            <h3>About</h3>
-                            <ul>
-                                <li><a href="https://www.sec.gov.ph">DEPED Website</a></li>
-                                <li><a href="https://www.gov.ph/">GOVPH</a></li>
-                                <li><a href="https://www.gov.ph/data">Open Data Portal</a></li>
-                                <li><a href="https://www.officialgazette.gov.ph/">Official Gazette</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4 col-md-3 item">
-                            <h3>Links</h3>
-                            <ul>
-                                <li><a href="#">HEREOS</a></li>
-                                <li><a href="#">eDAMS</a></li>
-                                <li><a href="#">FLAMES</a></li>
-                                <li><a href="#">FAMOUS</a></li>
-                                <li><a href="#">VERT</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 item social">
-                            <!-- <a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a> -->
-                            <p class="copyright">Department of Education <br>
-                                Region XI Davao del Sur <br>{{ date('Y') }}</p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
+
 
     </div>
     <!-- ./wrapper -->

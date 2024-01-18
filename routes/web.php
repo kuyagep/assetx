@@ -40,6 +40,11 @@ Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maint
 
 require __DIR__ . '/auth.php';
 
+
+Route::get('/test/application', function () {
+    return view('testing.application');
+});
+
 Route::get('/pdf', function () {
     return view('testing.pdf');
 });
