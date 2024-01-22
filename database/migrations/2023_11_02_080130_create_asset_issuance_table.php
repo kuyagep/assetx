@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->timestamps();
 
-            $table->foreign('asset_id')->references('id')->on('assets');
-            $table->foreign('issuance_id')->references('id')->on('issuances');
+            $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
+            $table->foreign('issuance_id')->references('id')->on('issuances')->onDelete('cascade');
         });
     }
 

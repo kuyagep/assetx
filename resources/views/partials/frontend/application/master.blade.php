@@ -136,7 +136,7 @@
     <!-- End Google Tag Manager -->
 </head>
 
-<body class="hold-transition layout-top-nav ">
+<body class="hold-transition layout-top-nav accent-orange">
 
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQVBC2BK" height="0" width="0"
@@ -151,15 +151,20 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper ">
             <!-- Main content -->
-            <div class="content mt-5">
+            <div class="content mb-5">
                 {{-- <div class="content mt-5" style="height:100vh;"> --}}
-                <div class="row mt-5 mb-5">
+                <div class="row  ">
                     <div class="col-lg-12">
                         <div class="container">
-                            <div class="card">
+                            <div class="card card-orange mt-5">
                                 <div class="card-header">
-                                    <h4><b>Registration</b></h4>
+                                    <h4 class="card-title text-white">Application</h4>
+                                    <div class="card-tools">
+                                        <button type="submit" class="btn btn-default btn-flat btn-sm">
+                                            Cancel Application</button>
+                                    </div>
                                 </div>
+
                                 <div class="card-body">
                                     <h6 class="heading-small text-muted mb-4">Work Assignment</h6>
                                     <div class="pl-lg-4">
@@ -168,9 +173,9 @@
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="division">Division
                                                         Office</label>
-                                                    <select name="division" id="division" class="custom-select"
-                                                        disabled>
-                                                        <option value="">Select...</option>
+                                                    <select name="division" id="division"
+                                                        class="rounded-0 custom-select" disabled>
+                                                        <option value="">- Choose Divisin -</option>
                                                         <option value="1" selected>Division of Davao del Sur
                                                         </option>
                                                     </select>
@@ -179,10 +184,11 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label class="form-control-label" for="district">District
+                                                    <label class="form-control-label" for="district">District/Office
                                                     </label>
-                                                    <select name="district" id="district" class="custom-select">
-                                                        <option value="">Select...</option>
+                                                    <select name="district" id="district"
+                                                        class="rounded-0 custom-select">
+                                                        <option value="">- Select -</option>
                                                         <option value="0">Division Personnel
                                                         </option>
                                                         <option value="1">Hagonoy I
@@ -198,9 +204,9 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label class="form-control-label"
-                                                        for="office_school">Office/School</label>
+                                                        for="office_school">School/Office</label>
                                                     <select name="office_school" id="office_school"
-                                                        class="custom-select">
+                                                        class="custom-select rounded-0">
                                                         <option value="">Select...</option>
                                                         <option value="1">Supply
                                                         </option>
@@ -223,7 +229,8 @@
                                                     <label class="form-control-label" for="input-username">Employee
                                                         No.</label>
                                                     <input type="text" id="employee_number" name="employee_number"
-                                                        class="form-control" placeholder="Enter employee number">
+                                                        class="form-control rounded-0"
+                                                        placeholder="Enter employee number">
                                                 </div>
                                             </div>
                                         </div>
@@ -233,7 +240,7 @@
                                                     <label class="form-control-label" for="input-first-name">First
                                                         name</label>
                                                     <input type="text" id="first_name" name="first_name"
-                                                        class="form-control" placeholder="First name"
+                                                        class="form-control rounded-0" placeholder="First name"
                                                         value="{{ old('first_name') }}">
                                                     @error('first_name')
                                                         <small class="text-danger">
@@ -244,12 +251,12 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="form-control-label" for="input-first-name">Middle
+                                                    <label class="form-control-label" for="middle_name">Middle
                                                         name</label>
-                                                    <input type="text" id="first_name" name="first_name"
-                                                        class="form-control" placeholder="First name"
-                                                        value="{{ old('first_name') }}">
-                                                    @error('first_name')
+                                                    <input type="text" id="middle_name" name="middle_name"
+                                                        class="form-control rounded-0" placeholder="Middle name"
+                                                        value="{{ old('middle_name') }}">
+                                                    @error('middle_name')
                                                         <small class="text-danger">
                                                             {{ $message }}
                                                         </small>
@@ -258,12 +265,12 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label class="form-control-label" for="input-first-name">Last
+                                                    <label class="form-control-label" for="last_name">Last
                                                         name</label>
-                                                    <input type="text" id="first_name" name="first_name"
-                                                        class="form-control" placeholder="First name"
-                                                        value="{{ old('first_name') }}">
-                                                    @error('first_name')
+                                                    <input type="text" id="last_name" name="last_name"
+                                                        class="form-control rounded-0" placeholder="Last name"
+                                                        value="{{ old('last_name') }}">
+                                                    @error('last_name')
                                                         <small class="text-danger">
                                                             {{ $message }}
                                                         </small>
@@ -272,12 +279,11 @@
                                             </div>
                                             <div class="col-lg-1">
                                                 <div class="form-group">
-                                                    <label class="form-control-label"
-                                                        for="input-last-name">M.I</label>
-                                                    <input type="text" id="last_name" name="last_name"
-                                                        class="form-control" placeholder="Last name"
-                                                        value=" {{ old('last_name') }}">
-                                                    @error('last_name')
+                                                    <label class="form-control-label" for="mi">M.I</label>
+                                                    <input type="text" id="mi" name="mi"
+                                                        class="form-control rounded-0" placeholder="Middle initial"
+                                                        value=" {{ old('mi') }}">
+                                                    @error('mi')
                                                         <small class="text-danger">
                                                             {{ $message }}
                                                         </small>
@@ -292,7 +298,7 @@
                                             <div class="col-lg-12 col-sm-12">
                                                 <label>Deped Email Address</label>
                                                 <input type="email"
-                                                    class="form-control @error('email')  is-invalid   @enderror "
+                                                    class="form-control rounded-0 @error('email')  is-invalid   @enderror "
                                                     name="email" placeholder="Enter Email Address" required>
                                                 @error('email')
                                                     <div class="invalid-feedback">
@@ -304,7 +310,7 @@
                                         <div class="row mt-3">
                                             <div class="col-lg-6 col-sm-12"><label>New Password</label>
                                                 <input type="password"
-                                                    class="form-control @error('password')                                             
+                                                    class="form-control rounded-0 @error('password')                                             
                                                     is-invalid                                              
                                                  @enderror "
                                                     name="password" placeholder="Enter password" required="">
@@ -316,7 +322,7 @@
                                             </div>
                                             <div class="col-lg-6 col-sm-12"><label>Confirm Password</label>
                                                 <input type="password_confirmation"
-                                                    class="form-control @error('password_confirmation')                                             
+                                                    class="form-control rounded-0 @error('password_confirmation')                                             
                                                     is-invalid                                              
                                                  @enderror "
                                                     name="password_confirmation"
@@ -325,9 +331,9 @@
                                         </div>
                                     </div>
                                     <div class="row float-right mt-3">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fa-regular fa-floppy-disk"></i>
-                                            Save Changes</button>
+                                        <button type="submit" class="btn btn-success btn-flat btn-lg">
+                                            <i class="fa-regular fa-circle-right"></i>
+                                            Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -343,7 +349,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-sm-4 col-md-3 item">
-                                <img class="" src="{{ asset('brand_logo/gov-ph-seal-footer.png') }}"
+                                <img class="" src="{{ asset('brand_logo/gov-ph-seal-footer-white.png') }}"
                                     height="150px" alt="cards">
                                 <br>Republic of the Philippines<br>All content is in the public domain unless
                                 otherwise

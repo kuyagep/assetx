@@ -72,7 +72,7 @@ class AdminController extends Controller
 
                 ->editColumn('status', function ($request) {
 
-                    if ($request->status === "active") {
+                    if ($request->status === 1) {
                         $result = '<span class="badge badge-success">Active</span>';
                     } else {
                         $result = '<span class="badge badge-danger">Inactive</span>';
