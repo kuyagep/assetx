@@ -24,7 +24,7 @@
 </head>
 <style>
     .content-wrapper {
-        background-image: url('https://localhost/assetx/public/assets/dist/img/background.png') !important;
+        background-image: url({{ asset('assets/dist/img/background.png') }}) !important;
         background-repeat: no-repeat !important;
         background-attachment: fixed !important;
         background-size: cover !important;

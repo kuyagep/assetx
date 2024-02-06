@@ -1,8 +1,8 @@
- <nav class="main-header navbar navbar-expand-md navbar-dark accent-navy bg-black ">
+ <nav class="main-header navbar navbar-expand-md navbar-dark  ">
      <div class="container">
          <a href="javascript:void(0);" class="navbar-brand mt-2 text-white">
-             <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
-                 style="opacity: .8; height: 70px;">
+             <img src="{{ asset('brand_logo/deped_davaosur_masterheader_logo_white.png') }}" alt="Logo"
+                 class="brand-image  elevation-0" style="opacity: .8; height: 70px;">
          </a>
 
          <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"

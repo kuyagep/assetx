@@ -156,7 +156,14 @@ class AccountController extends Controller
     // Display Profile
     public function adminDashboard()
     {
-        return view('admin.index');
+        $latest_purchase = Purchase::where('user_id', Auth::user()->id)->get();
+        $total_pending_purchase = Purchase::where('user_id', Auth::user()->id)->where('isApproved', 'pending')->count();
+        $total_approved_purchase = Purchase::where('user_id', Auth::user()->id)->where('isApproved', 'approved')->count();
+        $total_cancelled_purchase = Purchase::where('user_id', Auth::user()->id)->where('isApproved', 'cancelled')->count();
+        $total_rebid_purchase = Purchase::where('user_id', Auth::user()->id)->where('isApproved', 'rebid')->count();
+        
+
+        return view('admin.index',compact('latest_purchase','total_pending_purchase', 'total_approved_purchase','total_cancelled_purchase','total_rebid_purchase'));
     }
 
     // Display Profile

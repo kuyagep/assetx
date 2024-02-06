@@ -23,8 +23,12 @@
 
     <style>
         body {
-            font-family: Helvetica, sans-serif !important;
+            font-family: Roboto, sans-serif !important;
             color: #333;
+        }
+
+        nav {
+            background-color: #0D528A !important;
         }
 
         .footer-clean {
@@ -136,7 +140,7 @@
     <!-- End Google Tag Manager -->
 </head>
 
-<body class="hold-transition layout-top-nav accent-orange">
+<body class="hold-transition layout-top-nav ">
 
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQVBC2BK" height="0" width="0"
@@ -155,8 +159,8 @@
                 {{-- <div class="content mt-5" style="height:100vh;"> --}}
                 <div class="row  ">
                     <div class="col-lg-12">
-                        <div class="container">
-                            <div class="card card-orange mt-5">
+                        <div class="container ">
+                            <div class="card card-primary mt-5">
                                 <div class="card-header">
                                     <h4 class="card-title text-white">Application</h4>
                                     <div class="card-tools">
@@ -331,7 +335,7 @@
                                         </div>
                                     </div>
                                     <div class="row float-right mt-3">
-                                        <button type="submit" class="btn btn-success btn-flat btn-lg">
+                                        <button type="submit" class="btn btn-primary btn-flat btn-lg">
                                             <i class="fa-regular fa-circle-right"></i>
                                             Submit</button>
                                     </div>
