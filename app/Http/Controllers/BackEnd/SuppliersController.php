@@ -7,6 +7,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class SuppliersController extends Controller
 {
@@ -31,13 +32,13 @@ class SuppliersController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm mr-1 px-2" id="editButton">
+                    $btn = '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="text-white mr-1 px-2" id="editButton">
                         <i class="fa-regular fa-pen-to-square"></i> </a>';
-                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="btn bg-navy btn-sm px-2" id="deleteButton">
+                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="text-white px-2" id="deleteButton">
                         <i class="fa-regular fa-trash-can"></i> </a>';
                     return $btn;
                 })
-                ->rawColumns(['status','created_at'])
+                ->rawColumns(['status','created_at','action'])
                 ->make(true);
         }
         
@@ -50,46 +51,82 @@ class SuppliersController extends Controller
         if ($request->ajax()) {
             $request->validate([
 
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'email' => ['required', 'string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
-                'phone' => ['numeric', 'digits:11'],
-                'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'position_name' => 'required',
-                'roles' => 'required',
-                'status' => 'required',
+                'name' => 'required|string|max:255',
+                'address' => 'string|max:255',
+                'tin' => 'string|max:255',
+                'contact' => ['numeric'],
+                'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'email' => ['string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+                'bank_name' => 'string|max:255',
+                'bank_account_name' => 'string|max:255',
+                'bank_account_number' => 'numeric',
+                'attachment' => 'file|mimes:pdf|max:2048',
+                'remarks' => 'string',
+                'status' => '',
             ]);
             //check office if exists
 
             // checked if new data or exists
             if (empty($request->id)) {
     
-                $user = new User;
-                $user->first_name = $request->first_name;
-                $user->last_name = $request->last_name;
-                $user->email = $request->email;
-                $user->phone = $request->phone;
-                $user->password = Hash::make('password');
-                $user->role = 'client';
-                $user->status = $request->status;
-                $user->office_id = $request->office_name;
-                $user->school_id = $request->school_name;
-                $user->position_id = $request->position_name;
+                $data = new Supplier;
+                $data->name = $request->name;
+                $data->address = $request->address;
+                $data->tin = $request->tin;
+                $data->contact = $request->contact;
+                $data->logo = $request->logo;
+                $data->email = $request->email;
+                $data->bank_name = $request->bank_name;
+                $data->bank_account_name = $request->bank_account_name;
+                $data->bank_account_number = $request->bank_account_number;
 
-                $user->save();
+                if ($request->hasFile('attachment')) {
+                    $attachment = $request->file('attachment');
+
+                    // Upload the new file 
+                    $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() . '.' . $attachment->extension());
+
+                    $data['attachment'] = $attachment;
+                }
+
+                $data->attachment = $request->attachment;
+                $data->remarks = $request->remarks;
+                $data->status = $request->status;
+                $data->save();
 
                 return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Supplier saved successfully!']);
             } else {
-                $user = Supplier::find($request->id);
+                $data = Supplier::find($request->id);
 
-                $user->first_name = $request->first_name;
-                $user->last_name = $request->last_name;
-                $user->email = $request->email;
-                $user->phone = $request->phone;
-                $user->role = $request->role;
-                $user->status = $request->status;
+                $data->name = $request->name;
+                $data->address = $request->address;
+                $data->tin = $request->tin;
+                $data->contact = $request->contact;
+                $data->logo = $request->logo;
+                $data->email = $request->email;
+                $data->bank_name = $request->bank_name;
+                $data->bank_account_name = $request->bank_account_name;
+                $data->bank_account_number = $request->bank_account_number;
 
-                $user->save();
+                if ($request->hasFile('attachment')) {
+                    $attachment = $request->file('attachment');
+
+                    // Upload the new file and update the record
+                    $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() . '.' . $attachment->extension());
+                    // Delete the old file if it exists
+                    if ($data->attachment) {
+                        Storage::delete($data->attachment);
+                    }
+                    // $file->move(public_path('assets/dist/attachment/purchases'), $filename);
+                    $data['attachment'] = $attachment;
+                }
+
+                $data->attachment = $request->attachment;
+                $data->remarks = $request->remarks;
+                $data->status = $request->status;
+                $data->save();
+
+                $data->save();
                 return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Supplier updated successfully!']);
             }
         }

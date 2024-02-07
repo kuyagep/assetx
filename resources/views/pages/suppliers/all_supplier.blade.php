@@ -13,8 +13,8 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn btn-primary mr-2 float-left" title="Add [Alt+A]">
-                                <i class="fa-regular fa-square-plus" accesskey="a"></i>&nbsp;Add New
+                            <button id="add-button" class="btn btn-success mr-2 float-left" title="Add [Alt+A]">
+                                <i class="fa-regular fa-square-plus" accesskey="a"></i>&nbsp;Add Supplier
                             </button>
                         </div>
                     </div>
@@ -74,26 +74,31 @@
                                 <div class="row">
                                     <div class="col-8">
                                         <div class="form-group mt-2">
-                                            <label for="avatar">Avatar</label>
+                                            <label for="logo">Logo</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="avatar"
-                                                        id="avatar">
-                                                    <label class="custom-file-label" for="avatar">Choose
+                                                    <input type="file" class="custom-file-input" name="logo"
+                                                        id="logo">
+                                                    <label class="custom-file-label" for="logo">Choose
                                                         file</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="first_name">First Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="first_name" name="first_name"
-                                                placeholder="Ex. Juan">
+                                            <label for="name">Supplier Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                placeholder="Ex. Juan Store" autocomplete="true">
 
                                         </div>
                                         <div class="form-group">
-                                            <label for="last_name">Last Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                                placeholder="Ex. Dela Cruz">
+                                            <label for="address">Address <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="address" name="address"
+                                                placeholder="Ex. Digos City">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tin">T.I.N <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="tin" name="tin"
+                                                placeholder="Ex. 000-222-333-0000">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email address <span class="text-danger">*</span></label>
@@ -101,18 +106,39 @@
                                                 placeholder="Ex. example@email.com">
                                         </div>
                                         <div class="form-group">
-                                            <label for="phone">Phone Number <span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" id="phone" name="phone"
+                                            <label for="contact">Contact Number <span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" id="contact" name="contact"
                                                 placeholder="Ex. 09123456789">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="school_name">School <span class="text-danger">*</span></label>
-                                            <select class="custom-select" id="school_name" name="school_name">
-                                                <option value="" selected disabled>Select School...</option>
-                                            </select>
+                                            <label for="bank_name">Bank Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="bank_name" name="bank_name"
+                                                placeholder="Ex. Land Bank">
                                         </div>
-
+                                        <div class="form-group">
+                                            <label for="bank_account_name">Bank Account Name <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="bank_account_name"
+                                                name="bank_account_name" placeholder="Ex. Juan Store">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bank_account_number">Bank Account Number <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="bank_account_number"
+                                                name="bank_account_number" placeholder="Ex. Juan Store">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="attachment">Attachments</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="attachment"
+                                                        id="attachment">
+                                                    <label class="custom-file-label" for="attachment">Choose
+                                                        file</label>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="status">Status <span class="text-danger">*</span></label>
@@ -177,25 +203,21 @@
                     name: 'DT_RowIndex',
                     class: 'text-center'
                 }, {
-                    data: 'purchase_number',
-                    name: 'purchase_number'
+                    data: 'name',
+                    name: 'name'
                 }, {
-                    data: 'purchase_order_number',
-                    name: 'purchase_order_number'
+                    data: 'address',
+                    name: 'address'
                 }, {
-                    data: 'title',
-                    name: 'title'
-                }, {
-                    data: 'amount',
-                    name: 'amount'
+                    data: 'contact',
+                    name: 'contact'
                 }, {
                     data: 'status',
                     name: 'status',
                     class: 'text-center'
                 }, {
-                    data: 'created-at',
-                    name: 'created-at',
-                    class: 'text-center'
+                    data: 'remarks',
+                    name: 'remarks',
                 }, {
                     data: 'action',
                     name: 'action',
@@ -212,8 +234,8 @@
             $('#add-button').click(function() {
                 $('#error').html('');
                 $('#modal').modal("show");
-                $('#modal-title').html("Add supplier");
-                $('#btn-save').html("Save");
+                $('#modal-title').html("Add Supplier");
+                $('#btn-save').html("Submit");
                 $('#btn-save').show();
                 $('#id').val('');
                 $('#modal-form').trigger("reset");

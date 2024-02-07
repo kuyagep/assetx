@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('tin')->nullable();
             $table->string('contact')->nullable();
+            $table->string('email')->nullable();
             $table->string('logo')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('bank_account_name')->nullable();
