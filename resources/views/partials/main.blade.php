@@ -14,11 +14,9 @@
     {{-- Title --}}
     <title>
         @yield('title_prefix') |
-        @yield('title', config('app.name', 'AssetX'))
-        @yield('title_postfix')
+        {{ config('app.name', 'AssetX') }}
     </title>
 
-    {{-- <title>@yield('page-title') | {{ config('app.name', 'AssetX') }}</title> --}}
 
     <meta name="description" content="Division Asset Management of DepEd Davao del Sur.">
     <meta name="author" content="Project DAVAOSUR">
@@ -82,7 +80,7 @@
 
     .brand-link,
     .main-header {
-        background-color: #000000 !important;
+        /* background-color: #000000 !important; */
     }
 </style>
 

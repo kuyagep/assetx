@@ -156,9 +156,10 @@
                                                         <label class="custom-file-label" for="avatar">Choose
                                                             file</label>
                                                     </div>
-                                                    <div>
-                                                        <span>Leave it blank if don't want to change the avatar.</span>
-                                                    </div>
+
+                                                </div>
+                                                <div>
+                                                    <span>Leave it blank if don't want to change the avatar.</span>
                                                 </div>
                                                 @error('avatar')
                                                     <small class="text-danger">
