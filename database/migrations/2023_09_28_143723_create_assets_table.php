@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->string('article');
-            $table->string('description');
+            $table->string('article')->nullable();
+            $table->string('description')->nullable();
             $table->string('reference')->nullable();
             $table->string('property_no');
-            $table->string('unit_of_measure');
-            $table->decimal('unit_value', 10, 2);
-            $table->integer('balance_per_card_qty');
-            $table->decimal('balance_per_card_value', 10, 2);
+            $table->string('unit_of_measure')->nullable();
+            $table->decimal('unit_value', 10, 2)->nullable();
+            $table->integer('balance_per_card_qty')->nullable();
+            $table->decimal('balance_per_card_value', 10, 2)->nullable();
             $table->integer('onhand_per_count_qty')->nullable();
             $table->decimal('onhand_per_count_value', 10, 2)->nullable();
             $table->integer('shortage_overage_qty')->nullable();

@@ -104,9 +104,9 @@ class PurchaseController extends Controller
 
             // checked if new data or exists
             if (empty($request->id)) {
-                $request->validate([
-                    'attachment' => 'required',
-                ]);
+                // $request->validate([
+                //     'attachment' => 'required',
+                // ]);
                 $data = new Purchase();
                 $data->get_started = $request->get_started;
                 $data->alt_mode_procurement = $request->alt_mode_procurement;

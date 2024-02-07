@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('division_id');
             $table->string('name');
             $table->string('slug')->nullable();
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->enum('status',[1,0])->default(1);
 
             $table->foreign('division_id')->references('id')->on('divisions')->onDelete('RESTRICT');
 

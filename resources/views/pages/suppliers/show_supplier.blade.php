@@ -28,87 +28,68 @@
                                 {{-- sample --}}
                                 <div class="row">
                                     <div class="col-8">
-                                        <div class="form-group mt-2">
-                                            <label for="logo">Logo</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="logo"
-                                                        id="logo">
-                                                    <label class="custom-file-label" for="logo">Choose
-                                                        file</label>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <label for="name">Supplier Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                value="{{ old('name', $supplier->name) }}" placeholder="Ex. Juan Store"
-                                                autocomplete="true">
+                                            <input disabled type="text" class="form-control" id="name"
+                                                name="name" value="{{ old('name', $supplier->name) }}"
+                                                placeholder="Ex. Juan Store" autocomplete="true">
 
                                         </div>
                                         <div class="form-group">
                                             <label for="address">Address <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="address" name="address"
-                                                value="{{ old('address', $supplier->address) }}"
+                                            <input disabled type="text" class="form-control" id="address"
+                                                name="address" value="{{ old('address', $supplier->address) }}"
                                                 placeholder="Ex. Digos City">
                                         </div>
                                         <div class="form-group">
                                             <label for="tin">T.I.N <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="tin" name="tin"
-                                                value="{{ old('tin', $supplier->tin) }}" placeholder="Ex. 000-222-333-0000">
+                                            <input disabled type="text" class="form-control" id="tin"
+                                                name="tin" value="{{ old('tin', $supplier->tin) }}"
+                                                placeholder="Ex. 000-222-333-0000">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email address <span class="text-danger">*</span></label>
-                                            <input type="email" class="form-control" id="email" name="email"
-                                                value="{{ old('email', $supplier->email) }}"
+                                            <input disabled type="email" class="form-control" id="email"
+                                                name="email" value="{{ old('email', $supplier->email) }}"
                                                 placeholder="Ex. example@email.com">
                                         </div>
                                         <div class="form-group">
                                             <label for="contact">Contact Number <span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" id="contact" name="contact"
-                                                value="{{ old('contact', $supplier->contact) }}"
+                                            <input disabled type="number" class="form-control" id="contact"
+                                                name="contact" value="{{ old('contact', $supplier->contact) }}"
                                                 placeholder="Ex. 09123456789">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="bank_name">Bank Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="bank_name" name="bank_name"
-                                                value="{{ old('bank_name', $supplier->bank_name) }}"
+                                            <input disabled type="text" class="form-control" id="bank_name"
+                                                name="bank_name" value="{{ old('bank_name', $supplier->bank_name) }}"
                                                 placeholder="Ex. Land Bank">
                                         </div>
                                         <div class="form-group">
                                             <label for="bank_account_name">Bank Account Name <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="bank_account_name"
+                                            <input disabled type="text" class="form-control" id="bank_account_name"
                                                 value="{{ old('bank_account_name', $supplier->bank_account_name) }}"
                                                 name="bank_account_name" placeholder="Ex. Juan Store">
                                         </div>
                                         <div class="form-group">
                                             <label for="bank_account_number">Bank Account Number <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="bank_account_number"
+                                            <input disabled type="text" class="form-control" id="bank_account_number"
                                                 value="{{ old('bank_account_number', $supplier->bank_account_number) }}"
                                                 name="bank_account_number" placeholder="Ex. Juan Store">
                                         </div>
-                                        <div class="form-group mt-2">
-                                            <label for="attachment">Attachments</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="attachment"
-                                                        id="attachment">
-                                                    <label class="custom-file-label" for="attachment">Choose
-                                                        file</label>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <label for="remarks">Remarks</label>
-                                            <textarea name="remarks" id="remarks" class="form-control">{{ old('remarks', $supplier->remarks) }}</textarea>
+                                            <textarea disabled name="remarks" id="remarks" class="form-control">{{ old('remarks', $supplier->remarks) }}</textarea>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="status">Status <span class="text-danger">*</span></label>
-                                            <select class="custom-select" name="status" id="status">
+                                            <select class="custom-select" name="status" id="status" disabled>
                                                 <option value="">Select...</option>
 
                                                 <option value="1" {{ $supplier->status == 1 ? 'selected' : '' }}>

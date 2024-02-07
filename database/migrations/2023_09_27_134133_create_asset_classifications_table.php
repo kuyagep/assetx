@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('asset_classifications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('uac_code');
+            $table->string('uac_code')->nullable();
             $table->string('slug')->unique();
             $table->timestamps();
         });

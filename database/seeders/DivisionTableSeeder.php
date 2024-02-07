@@ -19,7 +19,7 @@ class DivisionTableSeeder extends Seeder
             [                
                 'name' => 'Division Of Davao del Sur',
                 'slug' => Str::slug('Division Of Davao del Sur'),
-                'status' => 'active',
+                'status' => 1,
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
             ]

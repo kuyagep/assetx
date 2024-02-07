@@ -16,10 +16,10 @@ return new class extends Migration
             $table->integer('school_id');
             $table->unsignedBigInteger('district_id');
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->string('logo')->nullable();
             $table->string('slug')->nullable();
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->enum('status',[1,0])->default(1);
 
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('RESTRICT');
             $table->timestamps();

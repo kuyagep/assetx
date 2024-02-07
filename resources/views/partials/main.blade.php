@@ -84,7 +84,7 @@
     }
 </style>
 
-<body class=" hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-dark ">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-mini-md accent-dark ">
     <noscript>You must run this system with JavaScript enabled.</noscript>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQVBC2BK" height="0" width="0"

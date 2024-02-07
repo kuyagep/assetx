@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button onclick="history.back()" class="btn bg-navy  mb-3 px-3">
+                            <button onclick="history.back()" class="btn btn-success  mb-3 px-3">
                                 <i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back
                             </button>
                         </div>

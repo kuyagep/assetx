@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('purchase_id');
             $table->string('purchase_order_number');            
-            $table->unsignedBigInteger('supplier_id');
-            $table->double('amount', 15, 5);
+            $table->unsignedBigInteger('supplier_id')->nullable();
+            $table->double('amount', 15, 5)->nullable();
             $table->string('attachment')->nullable();
             $table->enum('category',['catering-services','catering-services-venue', 'goods-services', 'furniture-fixtures', 'rentals', 'others' ])->default('others');
             $table->enum('status',['approved', 'delivered', 'not-delivered', 'pending', 'failed','processing','for-payment' ])->default('pending');

@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('purchase_number');
-            $table->string('get_started');
-            $table->string('alt_mode_procurement');
+            $table->string('purchase_number')->nullable();
+            $table->string('get_started')->nullable();
+            $table->string('alt_mode_procurement')->nullable();
             $table->uuid('user_id');
-            $table->text('title');
-            $table->string('src_fund');
+            $table->text('title')->nullable();
+            $table->string('src_fund')->nullable();
             $table->double('amount', 15, 5);
-            $table->string('attachment');
+            $table->string('attachment')->nullable();
             $table->enum('isApproved',['approved', 'pending', 'cancelled', 'rebid' ])->default('pending');
             $table->timestamps();
 

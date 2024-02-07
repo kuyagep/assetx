@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="row mb-3 ">
                         <div class="col-12">
-                            <button id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
+                            <button id="add-button" class="btn btn-success mr-2 float-left" accesskey="a">
                                 <i class="fa-regular fa-square-plus"></i>&nbsp;Add Purchase Order
                             </button>
                             <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
