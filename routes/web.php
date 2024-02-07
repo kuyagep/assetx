@@ -134,9 +134,12 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
     Route::resource('/purchase', PurchaseController::class);
     Route::get('/download/attachment/{id}', [PurchaseController::class, 'download'])->name('purchase.download');
     Route::get('/purchase/history/{purchase}', [PurchaseController::class, 'history'])->name('purchase.history');
+
+    Route::get('/purchase/exports/', [PurchaseController::class, 'exportPurchase'])->name('export.purchase.request');
+
     Route::name('super_admin.')->controller(PurchaseController::class)->group(function () {
-        //* ->middleware('permission:division.all')        
         Route::put('/purchase/{purchase}', 'approved')->name('purchase.approved');
+        // Route::get('/purchase/exports/','exportPurchase')->name('export.purchase.request');
     });
 
     #accountability

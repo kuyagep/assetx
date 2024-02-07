@@ -43,7 +43,7 @@
                     <div class="card">
                         <form method="post" class="needs-validation" action="{{ route('profile.update') }}" novalidate=""
                             enctype="multipart/form-data">
-                            {{-- @method('patch') --}}
+
                             @csrf
                             <div class="card-header">
                                 <div class="row align-items-center">
@@ -155,6 +155,9 @@
                                                             id="avatar">
                                                         <label class="custom-file-label" for="avatar">Choose
                                                             file</label>
+                                                    </div>
+                                                    <div>
+                                                        <span>Leave it blank if don't want to change the avatar.</span>
                                                     </div>
                                                 </div>
                                                 @error('avatar')

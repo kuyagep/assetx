@@ -16,6 +16,9 @@
                             <button id="add-button" class="btn bg-dark mr-2 float-left" accesskey="a">
                                 <i class="fa-solid fa-paper-plane mr-2"></i>&nbsp;Add New
                             </button>
+                            <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
+                                <i class="fas fa-file-excel"></i>&nbsp;Export
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -514,14 +517,45 @@
 
             });
 
-            // display image
-            $('#avatar').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0']);
+
+            $('body').on('click', '#export-data', function() {
+                var route = "{{ route('export.purchase.request') }}";
+
+                Swal.fire({
+                    title: 'Do you want to export purchase request?',
+                    text: "",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#716add',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Export'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Exporting permission
+                        let timerInterval
+                        Swal.fire({
+                            title: 'Export',
+                            html: 'Exporting Purchase Request to Excel.',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+
+                                window.location.href = route;
+                            }
+                        });
+                    }
+                });
             });
+
+
         });
     </script>
 @endsection

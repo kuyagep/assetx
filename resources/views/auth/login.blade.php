@@ -1,17 +1,19 @@
 @extends('partials.auth.main')
 @section('auth-title', 'Login')
 @section('auth-content')
-    {{-- @include('sweetalert::alert') --}}
+
 
     <div class="login-box">
         <div class="login-logo">
             <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
-            {{-- <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p> --}}
+            {{-- <p href="javascript:void(0)"><b>DIVISION ASSET MANAGEMENT SYSTEM</b></p> --}}
         </div>
         <!-- /.login-logo -->
         <div class="card card-outline card-danger">
             <div class="card-body login-card-body">
-                <h5 class="login-box-msg"><b>Enter your valid credentials</b></h5>
+
+
+                <p class="login-box-msg"><b>Welcome back you've been missed!</b></p>
 
                 @if (Session::has('status'))
                     <div class="alert alert-warning alert-dismissible">
@@ -27,7 +29,8 @@
                             class="form-control   @error('email')
                             is-invalid
                         @enderror"
-                            placeholder="Email" value="{{ old('email') }}" id="login" required>
+                            placeholder="Email" value="{{ old('email') }}" id="login" autocomplete="true" autofocus
+                            required>
 
                         @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -49,7 +52,7 @@
                     <div class="row mb-3">
                         <div class="col-7">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember" name="remember">
+                                <input type="checkbox" id="remember" name="remember" checked>
                                 <label for="remember">
                                     Remember Me
                                 </label>
@@ -92,8 +95,9 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                <p class="mt-3 text-center ">
-                    Don't have an account?<a href="{{ route('register') }}" class="text-primary"> Register here</a>
+                <hr>
+                <p class="mt-3 text-center">
+                    Don't have an account? <a href="{{ route('register') }}" class="text-primary"> Register here</a>
                 </p>
 
             </div>

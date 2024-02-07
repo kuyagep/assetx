@@ -29,7 +29,7 @@
 </head>
 <style>
     body {
-        background-image: linear-gradient(to top, #ad0505ba, #6e6e6e), url({{ asset('assets/dist/img/background.png') }}) !important;
+        /* background-image: linear-gradient(to top, #ad0505ba, #ad0505ba), url({{ asset('assets/dist/img/background.png') }}) !important; */
         background-repeat: no-repeat !important;
         background-attachment: fixed !important;
         background-size: cover !important;

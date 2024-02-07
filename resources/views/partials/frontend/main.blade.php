@@ -58,7 +58,6 @@
                 </button>
 
 
-
                 <!-- Right navbar links -->
                 <div class="text-center collapse navbar-collapse order-2" id="navbarCollapse">
                     <ul class=" order-md-2 navbar-nav navbar-no-expand ml-auto">
@@ -76,6 +75,7 @@
                                     <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
                                         class="user-image img-circle elevation-0" alt="User Profile Image"
                                         style="width: 2rem;max-width: 2rem;height: 2rem;object-fit: cover;">
+                                    {{ Auth::user()->email }}
                                 @else
                                     Go to My Account
                                 @endauth
