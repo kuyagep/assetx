@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address');
-            $table->string('contact');
+            $table->string('address')->nullable();
+            $table->string('tin')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account_name')->nullable();
+            $table->string('bank_account_number')->nullable();
             $table->string('attachment')->nullable();
-            $table->enum('status',[1,0])->default(1);
             $table->string('remarks')->nullable();
+            $table->enum('status',[1,0])->default(1);
             $table->timestamps();
         });
     }

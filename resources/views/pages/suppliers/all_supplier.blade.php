@@ -105,42 +105,14 @@
                                             <input type="number" class="form-control" id="phone" name="phone"
                                                 placeholder="Ex. 09123456789">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="role">Position <span class="text-danger">*</span></label>
-                                            <select class="custom-select" id="position_name" name="position_name">
-                                                <option value="" selected>Choose...</option>
-                                                @foreach ($positions as $position)
-                                                    <option value="{{ $position->id }}">{{ $position->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="district_name">District <span class="text-danger">*</span></label>
-                                            <select class="custom-select" id="district_name" name="school_name">
-                                                <option value="" selected>Select District...</option>
-                                                @foreach ($districts as $district)
-                                                    <option value="{{ $district->id }}">{{ $district->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+
                                         <div class="form-group">
                                             <label for="school_name">School <span class="text-danger">*</span></label>
                                             <select class="custom-select" id="school_name" name="school_name">
                                                 <option value="" selected disabled>Select School...</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="office_name">Office <span class="text-danger">*</span></label>
-                                            <select class="custom-select" id="office_name" name="office_name">
-                                                <option value="" selected>Choose...</option>
-                                                @foreach ($offices as $office)
-                                                    <option value="{{ $office->id }}">{{ $office->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+
 
                                         <div class="form-group">
                                             <label for="status">Status <span class="text-danger">*</span></label>
@@ -199,7 +171,7 @@
                 serverSide: true,
                 select: true,
                 autoWidth: false,
-                ajax: "{{ url('my/supplier') }}",
+                ajax: "{{ url('my/suppliers') }}",
                 columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -261,7 +233,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('supplier.store') }}",
+                    url: "{{ route('suppliers.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -300,7 +272,7 @@
                 $('#btn-save').attr('disabled', false);
                 // $('#ModalForm').attr("id", "editModalForm");
                 var id = $(this).data('id');
-                var route = "{{ route('supplier.edit', ':id') }}";
+                var route = "{{ route('suppliers.edit', ':id') }}";
                 route = route.replace(':id', id);
                 window.location.href = route;
 
@@ -310,7 +282,7 @@
             $('body').on('click', '#deleteButton', function() {
 
                 var id = $(this).data('id');
-                var route = "{{ route('supplier.destroy', ':id') }}";
+                var route = "{{ route('suppliers.destroy', ':id') }}";
                 route = route.replace(':id', id);
 
 
@@ -356,7 +328,7 @@
             });
 
 
-            
+
         });
     </script>
 @endsection

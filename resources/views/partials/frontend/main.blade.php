@@ -144,20 +144,20 @@
 
     <script src="{{ asset('assets/custom/js/realtime.js') }}"></script>
     <script type="text/javascript">
-        $(window).on('load', function() {
-            $('#data-privacy-notice').modal('show');
-            const $modalBody = $('#modal-body');
-            const $scrollButton = $('#scrollButton');
+        // $(window).on('load', function() {
+        //     $('#data-privacy-notice').modal('show');
+        //     const $modalBody = $('#modal-body');
+        //     const $scrollButton = $('#scrollButton');
 
-            $modalBody.scroll(function() {
-                // Check if the user has scrolled to a certain point (e.g., 200 pixels)
-                if ($modalBody.scrollTop() >= 200) {
-                    $scrollButton.prop('disabled', false);
-                } else {
-                    $scrollButton.prop('disabled', true);
-                }
-            });
-        });
+        //     $modalBody.scroll(function() {
+        //         // Check if the user has scrolled to a certain point (e.g., 200 pixels)
+        //         if ($modalBody.scrollTop() >= 200) {
+        //             $scrollButton.prop('disabled', false);
+        //         } else {
+        //             $scrollButton.prop('disabled', true);
+        //         }
+        //     });
+        // });
     </script>
 
     {{-- <script>

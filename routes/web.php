@@ -200,11 +200,11 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
     });
 
     Route::controller(SuppliersController::class)->group(function () {
-        Route::get('/supplier', 'index')->name('supplier.index');
-        Route::post('/supplier', 'store')->name('supplier.store');
-        Route::get('/supplier/{id}/edit', 'edit')->name('supplier.edit');
-        Route::post('/supplier/update/{id}', 'update')->name('supplier.update');
-        Route::delete('/supplier/destroy/{id}', 'destroy')->name('supplier.destroy');
+        Route::get('/suppliers', 'index')->name('suppliers.index');
+        Route::post('/suppliers', 'store')->name('suppliers.store');
+        Route::get('/supplier/{id}/edit', 'edit')->name('suppliers.edit');
+        Route::post('/supplier/update/{id}', 'update')->name('suppliers.update');
+        Route::delete('/suppliers/destroy/{id}', 'destroy')->name('suppliers.destroy');
     });
 });
 
