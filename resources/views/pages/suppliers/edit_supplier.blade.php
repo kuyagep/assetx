@@ -1,23 +1,22 @@
 @extends('partials.main')
 {{-- page title --}}
-@section('title_prefix', 'Edit User')
+@section('title_prefix', 'Edit Supplier')
 {{-- Content Header --}}
-@section('content-header', 'Edit User')
+@section('content-header', 'Edit Supplier')
 {{-- content --}}
 @section('main-content')
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12 col-md-12">
                     {{-- download excel file --}}
                     <button onclick="history.back()" class="btn btn-dark  mb-3 px-3">
                         <i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Back
                     </button>
                     <div class="card">
-                        <form method="post" class="needs-validation" action="{{ route('user.update', $user->id) }}"
-                            novalidate="" enctype="multipart/form-data">
-                            {{-- @method('patch') --}}
+                        <form action="javascript:void(0)" name="modal-form" id="modal-form" class="form-horizontal"
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="card-body">
@@ -25,89 +24,108 @@
                                 {{-- Error Display here --}}
                                 <div id="error"></div>
                                 {{-- Reference Id --}}
-                                <input type="hidden" name="id" id="id" value="{{ $user->id }}">
+                                <input type="hidden" name="id" id="id">
                                 {{-- sample --}}
                                 <div class="row">
                                     <div class="col-8">
                                         <div class="form-group mt-2">
-                                            <label for="avatar">Avatar</label>
+                                            <label for="logo">Logo</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="avatar"
-                                                        id="avatar">
-                                                    <label class="custom-file-label" for="avatar">Choose
+                                                    <input type="file" class="custom-file-input" name="logo"
+                                                        id="logo">
+                                                    <label class="custom-file-label" for="logo">Choose
                                                         file</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="first_name">First Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="first_name" name="first_name"
-                                                value="{{ old('first_name', $user->first_name) }}" placeholder="Ex. Juan">
+                                            <label for="name">Supplier Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                value="{{ old('name', $supplier->name) }}" placeholder="Ex. Juan Store"
+                                                autocomplete="true">
 
                                         </div>
                                         <div class="form-group">
-                                            <label for="last_name">Last Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                                value="{{ old('last_name', $user->last_name) }}"
-                                                placeholder="Ex. Dela Cruz">
+                                            <label for="address">Address <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="address" name="address"
+                                                value="{{ old('address', $supplier->address) }}"
+                                                placeholder="Ex. Digos City">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tin">T.I.N <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="tin" name="tin"
+                                                value="{{ old('tin', $supplier->tin) }}" placeholder="Ex. 000-222-333-0000">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email address <span class="text-danger">*</span></label>
                                             <input type="email" class="form-control" id="email" name="email"
-                                                value="{{ old('email', $user->email) }}"
+                                                value="{{ old('email', $supplier->email) }}"
                                                 placeholder="Ex. example@email.com">
                                         </div>
                                         <div class="form-group">
-                                            <label for="phone">Phone Number <span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" id="phone" name="phone"
-                                                value="{{ old('phone', $user->phone) }}" placeholder="Ex. 09123456789">
+                                            <label for="contact">Contact Number <span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" id="contact" name="contact"
+                                                value="{{ old('contact', $supplier->contact) }}"
+                                                placeholder="Ex. 09123456789">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="bank_name">Bank Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="bank_name" name="bank_name"
+                                                value="{{ old('bank_name', $supplier->bank_name) }}"
+                                                placeholder="Ex. Land Bank">
                                         </div>
                                         <div class="form-group">
-                                            <label for="role">Office <span class="text-danger">*</span></label>
-                                            <select class="custom-select" id="office_name" name="office_name">
-                                                <option selected disabled>Choose...</option>
-                                                @foreach ($offices as $office)
-                                                    <option value="{{ $office->id }}"
-                                                        {{ $user->office_id == $office->id ? 'selected' : '' }}>
-                                                        {{ $office->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <label for="bank_account_name">Bank Account Name <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="bank_account_name"
+                                                value="{{ old('bank_account_name', $supplier->bank_account_name) }}"
+                                                name="bank_account_name" placeholder="Ex. Juan Store">
                                         </div>
                                         <div class="form-group">
-                                            <label for="role">Role <span class="text-danger">*</span></label>
-                                            <select class="custom-select" id="roles" name="roles">
-                                                <option selected disabled>Choose...</option>
-                                                @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}"
-                                                        {{ $user->hasRole($role->name) ? 'selected' : '' }}>
-                                                        {{ $role->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <label for="bank_account_number">Bank Account Number <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="bank_account_number"
+                                                value="{{ old('bank_account_number', $supplier->bank_account_number) }}"
+                                                name="bank_account_number" placeholder="Ex. Juan Store">
                                         </div>
+                                        <div class="form-group mt-2">
+                                            <label for="attachment">Attachments</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="attachment"
+                                                        id="attachment">
+                                                    <label class="custom-file-label" for="attachment">Choose
+                                                        file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label for="status">Status <span class="text-danger">*</span></label>
                                             <select class="custom-select" name="status" id="status">
-                                                <option>Select...</option>
-                                                <option value="active" selected>Activate</option>
-                                                <option value="inactive">Deactivate</option>
+                                                <option value="">Select...</option>
+
+                                                <option value="1" {{ $supplier->status == 1 ? 'selected' : '' }}>
+                                                    Activate</option>
+                                                <option value="0" {{ $supplier->status == 0 ? 'selected' : '' }}>
+                                                    Deactivate</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <img id="showImage" alt="Avatar" class="table-avatar"
                                             src="{{ asset('assets/dist/img/avatar/default.jpg') }}"
-                                            style="width: 100%;max-width: 100%;height: 240px;object-fit: cover; ">
-                                        <button type="submit" class="btn btn-dark btn-save mt-3 btn-block"
-                                            id="btn-save">Save
-                                            Changes</button>
-                                        <a title="Delete" href="javascript:void(0);" data-id="{{ $user->id }}"
-                                            class="btn bg-danger btn-block" id="deleteButton">
-                                            Delete Permanently </a>
+                                            style="width: 100%;max-width: 150px;height: 150px;object-fit: cover; ">
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button class="btn btn-primary float-right">Submit Changes</button>
+                                    </div>
+                                </div>
+
                             </div>
                         </form>
                     </div>

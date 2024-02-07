@@ -141,6 +141,11 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="remarks">Remarks:</label>
+                                            <textarea name="remarks" id="remarks" class="form-control"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
                                             <label for="status">Status <span class="text-danger">*</span></label>
                                             <select class="custom-select" name="status" id="status">
                                                 <option value="">Select...</option>

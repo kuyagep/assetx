@@ -17,7 +17,7 @@
                     <div class="card">
                         <form method="post" class="needs-validation" action="{{ route('user.update', $user->id) }}"
                             novalidate="" enctype="multipart/form-data">
-                            {{-- @method('patch') --}}
+
                             @csrf
 
                             <div class="card-body">

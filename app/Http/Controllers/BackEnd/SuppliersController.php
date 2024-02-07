@@ -20,7 +20,7 @@ class SuppliersController extends Controller
                 
                 ->editColumn('status', function ($request) {
 
-                    if ($request->status === 1) {
+                    if ($request->status == 1) {
                         $result = '<span class="badge badge-success">Active</span>';
                     } else {
                         $result = '<span class="badge badge-danger">Inactive</span>';
@@ -32,9 +32,9 @@ class SuppliersController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="text-white mr-1 px-2" id="editButton">
+                    $btn = '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="text-white mr-1 px-1" id="editButton">
                         <i class="fa-regular fa-pen-to-square"></i> </a>';
-                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="text-white px-2" id="deleteButton">
+                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="text-white px-1" id="deleteButton">
                         <i class="fa-regular fa-trash-can"></i> </a>';
                     return $btn;
                 })
