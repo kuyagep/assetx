@@ -13,6 +13,8 @@ class SuppliersController extends Controller
 {
     public function index(Request $request)
     {
+       
+
         $supplier = [];
         if ($request->ajax()) {
             $supplier = Supplier::all();
@@ -32,9 +34,11 @@ class SuppliersController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="text-white mr-1 px-1" id="editButton">
+                    $btn = '<a title="View" href="javascript:void(0);" data-id="' . $row->id . '" class="btn btn-info btn-sm mr-1 px-2" id="viewButton">
+                        <i class="fa-regular fa-eye"></i> </a>';
+                    $btn .= '<a title="Edit" href="javascript:void(0);" data-id="' . $row->id . '" class="btn btn-primary btn-sm mr-1 px-2" id="editButton">
                         <i class="fa-regular fa-pen-to-square"></i> </a>';
-                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="text-white px-1" id="deleteButton">
+                    $btn .= '<a title="Delete" href="javascript:void(0);" data-id="' . $row->id . '" class="btn btn-danger btn-sm  px-2" id="deleteButton">
                         <i class="fa-regular fa-trash-can"></i> </a>';
                     return $btn;
                 })
@@ -126,7 +130,6 @@ class SuppliersController extends Controller
                 $data->status = $request->status;
                 $data->save();
 
-                $data->save();
                 return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'Supplier updated successfully!']);
             }
         }
@@ -138,39 +141,66 @@ class SuppliersController extends Controller
         return view('pages.suppliers.edit_supplier', compact('supplier',));
         // return response()->json(['user'=> $user, 'roles'=> $roles, ]);
     }
+    public function show(Request $request)
+    {
+        $supplier = Supplier::findOrFail($request->id);
+        return view('pages.suppliers.show_supplier', compact('supplier',));
+    }
 
     public function update(Request $request, $id)
     {
 
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => ['required', 'string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
-            'phone' => ['numeric', 'digits:11'],
-            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'office_name' => 'required|string|max:255',
-            'roles' => 'required|string|max:255',
-            'status' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'address' => 'string|max:255',
+            'tin' => 'string|max:255',
+            'contact' => ['numeric'],
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'email' => ['string', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'max:255'],
+            'bank_name' => 'string|max:255',
+            'bank_account_name' => 'string|max:255',
+            'bank_account_number' => 'numeric',
+            'attachment' => 'file|mimes:pdf|max:2048',
+            'remarks' => 'string',
+            'status' => '',
         ]);
 
-        $user = Supplier::findOrFail($id);
+        $data = Supplier::find($id);
 
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->office_id = $request->office_name;
-        $user->role = 'client';
-        $user->status = $request->status;
+                $data->name = $request->name;
+                $data->address = $request->address;
+                $data->tin = $request->tin;
+                $data->contact = $request->contact;
+                $data->logo = $request->logo;
+                $data->email = $request->email;
+                $data->bank_name = $request->bank_name;
+                $data->bank_account_name = $request->bank_account_name;
+                $data->bank_account_number = $request->bank_account_number;
 
-        $user->save();
+                if ($request->hasFile('attachment')) {
+                    $attachment = $request->file('attachment');
 
-        Alert::success('Success', 'Supplier updated successfully!');
+                    // Upload the new file and update the record
+                    $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() . '.' . $attachment->extension());
+                    // Delete the old file if it exists
+                    if ($data->attachment) {
+                        Storage::delete($data->attachment);
+                    }
+                    // $file->move(public_path('assets/dist/attachment/purchases'), $filename);
+                    $data['attachment'] = $attachment;
+                }
 
-        return redirect()->route('supplier.index');
-        // return response()->json(['icon'=>'success','title'=>'Success!', 'message' => 'Admin user updated successfully!']);
+                $data->attachment = $request->attachment;
+                $data->remarks = $request->remarks;
+                $data->status = $request->status;
+                $data->save();
+
+        // Alert::success('Success', 'Supplier updated successfully!');
+        Alert::toast('Supplier updated successfully!', 'success');
 
 
+        return redirect()->route('suppliers.index');
+       
     }
 
     

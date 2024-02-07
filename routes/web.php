@@ -203,6 +203,7 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::get('/suppliers', 'index')->name('suppliers.index');
         Route::post('/suppliers', 'store')->name('suppliers.store');
         Route::get('/supplier/{id}/edit', 'edit')->name('suppliers.edit');
+        Route::get('/supplier/show/{id}', 'show')->name('suppliers.show');
         Route::post('/supplier/update/{id}', 'update')->name('suppliers.update');
         Route::delete('/suppliers/destroy/{id}', 'destroy')->name('suppliers.destroy');
     });

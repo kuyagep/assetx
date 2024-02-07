@@ -1,8 +1,8 @@
 @extends('partials.main')
 {{-- page title --}}
-@section('title_prefix', 'Edit Supplier')
+@section('title_prefix', 'View Supplier Details')
 {{-- Content Header --}}
-@section('content-header', 'Edit Supplier')
+@section('content-header', 'View Supplier Details')
 {{-- content --}}
 @section('main-content')
     <!-- Main content -->
@@ -124,11 +124,7 @@
                                             style="width: 100%;max-width: 150px;height: 150px;object-fit: cover; ">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <button class="btn btn-primary float-right">Submit Changes</button>
-                                    </div>
-                                </div>
+
 
                             </div>
                         </form>

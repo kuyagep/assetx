@@ -15,7 +15,7 @@
                             <div class="text-center">
                                 <a href="#">
                                     <img id="showImage" alt="image"
-                                        src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/default.jpg') }}"
+                                        src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : Gravatar::get(Auth::user()->email) }}"
                                         class="rounded-circle author-box-picture"
                                         style="width: 80px;max-width: 80px;height: 80px;object-fit: cover;">
                                 </a>
@@ -48,7 +48,7 @@
                     <div class="card">
                         <form method="post" class="needs-validation" action="{{ route('client.profile.update') }}"
                             novalidate="" enctype="multipart/form-data">
-                            {{-- @method('patch') --}}
+
                             @csrf
                             <div class="card-header">
                                 <div class="row align-items-center">
@@ -196,7 +196,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                {{-- new version --}}
+
                                 <h6 class="heading-small text-muted mb-4">Update Security Password</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">

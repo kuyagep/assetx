@@ -15,7 +15,7 @@
                             <div class="text-center">
                                 <a href="#">
                                     <img id="showImage" alt="image"
-                                        src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : asset('assets/dist/img/avatar/avatar5.png') }}"
+                                        src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : Gravatar::get(Auth::user()->email) }}"
                                         class="rounded-circle author-box-picture"
                                         style="width: 80px;max-width: 80px;height: 80px;object-fit: cover;">
                                 </a>

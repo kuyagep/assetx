@@ -128,7 +128,7 @@
                                             <input type="text" class="form-control" id="bank_account_number"
                                                 name="bank_account_number" placeholder="Ex. Juan Store">
                                         </div>
-                                        <div class="form-group mt-2">
+                                        <div class="form-group">
                                             <label for="attachment">Attachments</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
@@ -141,7 +141,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="remarks">Remarks:</label>
+                                            <label for="remarks">Remarks</label>
                                             <textarea name="remarks" id="remarks" class="form-control"></textarea>
                                         </div>
 
@@ -295,7 +295,19 @@
 
 
             // Edit Function
-            $('body').on('click', '#editButton', function() {
+            $('body').on('click', '#viewButton', function(e) {
+                e.preventDefault();
+                $('#btn-save').attr('disabled', false);
+                var id = $(this).data('id');
+                var route = "{{ route('suppliers.show', ':id') }}";
+                route = route.replace(':id', id);
+                location.replace(route);
+
+            });
+
+            // Edit Function
+            $('body').on('click', '#editButton', function(e) {
+                e.preventDefault()
                 $('#btn-save').attr('disabled', false);
                 // $('#ModalForm').attr("id", "editModalForm");
                 var id = $(this).data('id');
