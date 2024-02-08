@@ -52,6 +52,7 @@ class PurchaseOrderController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
+                    
 
                     $btn = '<div class="btn-group">';
                     $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-navy" id="history-button"><i class="fas fa-history"></i></button>';
@@ -97,7 +98,7 @@ class PurchaseOrderController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
-                'category' => 'required',
+                'po_category' => 'required',
                 'po_date' => 'required|date',
                 'amount' => 'required|numeric|min:0.01|max:999999999999.99',
                 'remarks' => 'required|string|max:255',
@@ -109,9 +110,10 @@ class PurchaseOrderController extends Controller
             if (empty($request->id)) {
                 
                 $data = new PurchaseOrder();
-                $data->category = $request->category;
+                $data->category = $request->po_category;
                 $data->purchase_id = $request->purchase_id;
-                $data->po_date = $request->po_date;
+                $data->supplier_id = $request->supplier_id;
+                $data->purchase_order_date = $request->po_date;
                 $data->amount = $request->amount;
                 $data->remarks = $request->remarks;
                 
@@ -370,6 +372,8 @@ class PurchaseOrderController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
+                    
+                    
 
                     $btn = '<div class="btn-group">';
                     $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-navy" id="history-button"><i class="fas fa-history"></i></button>';

@@ -58,7 +58,7 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="modal">
+            <div class="modal fade " id="modal">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -159,6 +159,7 @@
                                                         file</label>
                                                 </div>
                                             </div>
+                                         
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +293,7 @@
                 $.ajax({
                     // Replace with your route URL
                     type: 'POST',
-                    url: "{{ route('client.purchase.order.store') }}",
+                    url: "{{ route('purchase.order.store') }}",
                     data: formData,
                     cache: false,
                     contentType: false,
@@ -327,7 +328,7 @@
                 $('#btn-save').attr('disabled', true);
 
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.order.show', ':id') }}";
+                var route = "{{ route('purchase.order.show', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({
@@ -361,7 +362,7 @@
                 // $('#ModalForm').attr("id", "editModalForm");
                 $('#btn-save').html("Save Changes");
                 var id = $(this).data('id');
-                var route = "{{ route('client.purchase.order.edit', ':id') }}";
+                var route = "{{ route('purchase.order.edit', ':id') }}";
                 route = route.replace(':id', id);
 
                 $.ajax({

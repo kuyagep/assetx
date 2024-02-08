@@ -78,6 +78,16 @@ class SuppliersController extends Controller
                 $data->address = $request->address;
                 $data->tin = $request->tin;
                 $data->contact = $request->contact;
+                if ($request->hasFile('logo')) {
+                    $file = $request->file('logo');
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/img/avatar'), $filename);
+                    $data['logo'] = $filename;
+                }
                 $data->logo = $request->logo;
                 $data->email = $request->email;
                 $data->bank_name = $request->bank_name;
@@ -106,6 +116,17 @@ class SuppliersController extends Controller
                 $data->address = $request->address;
                 $data->tin = $request->tin;
                 $data->contact = $request->contact;
+                 if ($request->hasFile('logo')) {
+                    $file = $request->file('logo');
+                    @unlink(public_path('assets/dist/img/avatar/' . $data->logo));
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/img/avatar'), $filename);
+                    $data['logo'] = $filename;
+                }
                 $data->logo = $request->logo;
                 $data->email = $request->email;
                 $data->bank_name = $request->bank_name;
@@ -121,7 +142,6 @@ class SuppliersController extends Controller
                     if ($data->attachment) {
                         Storage::delete($data->attachment);
                     }
-                    // $file->move(public_path('assets/dist/attachment/purchases'), $filename);
                     $data['attachment'] = $attachment;
                 }
 
@@ -171,6 +191,17 @@ class SuppliersController extends Controller
                 $data->address = $request->address;
                 $data->tin = $request->tin;
                 $data->contact = $request->contact;
+                 if ($request->hasFile('logo')) {
+                    $file = $request->file('logo');
+                    @unlink(public_path('assets/dist/img/avatar/' . $data->logo));
+
+                    //new filename
+                    $filename = $file->hashName();
+
+                    // dd($filename);
+                    $file->move(public_path('assets/dist/img/avatar'), $filename);
+                    $data['logo'] = $filename;
+                }
                 $data->logo = $request->logo;
                 $data->email = $request->email;
                 $data->bank_name = $request->bank_name;
@@ -186,7 +217,6 @@ class SuppliersController extends Controller
                     if ($data->attachment) {
                         Storage::delete($data->attachment);
                     }
-                    // $file->move(public_path('assets/dist/attachment/purchases'), $filename);
                     $data['attachment'] = $attachment;
                 }
 
