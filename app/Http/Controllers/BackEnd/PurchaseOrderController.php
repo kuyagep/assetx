@@ -381,6 +381,10 @@ class PurchaseOrderController extends Controller
                         $btn .= '<button title="Edit" type="button" data-id="' . $row->id . '" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
                     }
 
+                    if (auth()->user()->hasRole('super-admin')) {
+                        $btn .= '<button type="button" data-id="' . $row->id . '" class="btn bg-olive btn-sm " id="approvedButton"><i class="fas fa-check"></i></button>';
+                        $btn .= '<button type="button" data-id="' . $row->id . '" class="btn bg-danger btn-sm " id="deleteButton"><i class="far fa-trash-alt"></i></button>';
+                    }
 
                     $btn .= '<div class="btn-group">
                         <button type="button" class="btn btn-default btn-sm  dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">

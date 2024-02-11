@@ -61,14 +61,7 @@ Route::get('application',[ ApplicationController::class, 'index'])->name('applic
 ######################## SUPER ADMIN ########################
 Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(function () {
 
-    //* ############# ADMIN #############
-    Route::controller(AccountController::class)->prefix('account')->as('account.')->middleware(['role:admin'])->group(function () {
-        //* ->middleware('permission:division.all')
-        Route::get('/dashboard', 'adminDashboard')->name('dashboard');
-        Route::get('/profile', 'adminProfile')->name('profile');
-        Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
-        Route::post('/update/password', 'adminUpdatePassword')->name('update.password');
-    });
+    
     
     //* ############# SUPER ADMIN #############
     Route::controller(AccountController::class)->middleware(['role:super-admin'])->group(function () {
@@ -187,7 +180,20 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::get('/online/users', 'online')->name('user.online');
     });
 
+
+    
     ##### ADMIN PART #####
+
+    //* ############# ADMIN #############
+    Route::controller(AccountController::class)->prefix('account')->as('account.')->middleware(['role:admin'])->group(function () {
+        //* ->middleware('permission:division.all')
+        Route::get('/dashboard', 'adminDashboard')->name('dashboard');
+        Route::get('/profile', 'adminProfile')->name('profile');
+        Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
+        Route::post('/update/password', 'adminUpdatePassword')->name('update.password');
+    });
+
+
     Route::controller(PurchaseOrderController::class)->group(function () {
         Route::get('/purchase-order', 'adminPurchaseOrder')->name('purchase.order');
         Route::post('/purchase-order', 'store')->name('purchase.order.store');
