@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Office;
 use App\Models\Position;
 use App\Models\User;
+use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -56,7 +57,7 @@ class AdminController extends Controller
                 ->editColumn('avatar', function ($request) {
 
                     if (empty($request->avatar)) {
-                        $temp = asset("assets/dist/img/avatar/default.jpg");
+                        $temp = Gravatar::get($request->email);
                     } else {
                         $temp = asset("assets/dist/img/avatar/" . $request->avatar);
                     }
@@ -72,7 +73,7 @@ class AdminController extends Controller
 
                 ->editColumn('status', function ($request) {
 
-                    if ($request->status === 1) {
+                    if ($request->status == 1) {
                         $result = '<span class="badge badge-success">Active</span>';
                     } else {
                         $result = '<span class="badge badge-danger">Inactive</span>';
