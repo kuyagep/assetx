@@ -185,7 +185,7 @@
                     <div class="card">
                         <form method="post" class="needs-validation" action="{{ route('update.password') }}"
                             novalidate="" enctype="multipart/form-data">
-                            {{-- @method('patch') --}}
+
                             @csrf
                             <div class="card-header">
                                 <div class="row align-items-center">
@@ -227,10 +227,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-lg-6 col-sm-12 "><label>Confirm Password</label>
-                                            <input type="password"
-                                                class="form-control @error('new_password_confirmation')                                             
-                                                    is-invalid                                              
-                                                 @enderror "
+                                            <input type="password" class="form-control  "
                                                 name="new_password_confirmation"
                                                 placeholder="Confirm New Password"required="">
                                         </div>

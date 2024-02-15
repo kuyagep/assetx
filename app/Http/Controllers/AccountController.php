@@ -25,7 +25,7 @@ class AccountController extends Controller
     public function super_adminProfile(Request $request)
     {
         $account = User::find(Auth::user()->id);
-        return view('super_admin.super_admin_profile', compact('account'));
+        return view('super_admin.super_admin_profile_new', compact('account'));
     }
 
     public function super_adminProfileUpdate(Request $request)

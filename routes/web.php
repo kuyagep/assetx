@@ -49,6 +49,7 @@ Route::get('/pdf', function () {
     return view('testing.pdf');
 });
 
+
 Route::get('/', function () {
     return view('index');
 });
