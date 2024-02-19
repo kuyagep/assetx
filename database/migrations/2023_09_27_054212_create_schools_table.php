@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->integer('school_id');
             $table->unsignedBigInteger('district_id');
-            $table->string('name');
+            $table->string('name');            
             $table->string('code')->nullable();
             $table->string('logo')->nullable();
+
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->enum('role',['school-admin'])->default('school-admin');
+            
             $table->string('slug')->nullable();
             $table->enum('status',[1,0])->default(1);
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\BackEnd\PPMPController;
 use App\Http\Controllers\BackEnd\PurchaseOrderController;
 use App\Http\Controllers\BackEnd\SuppliersController;
 use App\Http\Controllers\MaintenanceController;
@@ -179,6 +180,19 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::delete('/user/destroy/{id}', 'destroy')->name('user.destroy');
 
         Route::get('/online/users', 'online')->name('user.online');
+    });
+
+
+    Route::controller(PPMPController::class)->group(function () {
+        Route::get('/ppmp', 'index')->name('ppmp');
+        Route::post('/ppmp', 'store')->name('ppmp.store');
+        Route::get('/ppmp/show/{id}', 'show')->name('ppmp.show');
+        Route::get('/ppmp/{id}/edit', 'edit')->name('ppmp.edit');
+        Route::get('/ppmp/export/','exportPPMP')->name('export.ppmp');
+        Route::post('/ppmp/approved/{id}', 'approved')->name('ppmp.approved');
+        Route::post('/ppmp/{id}', 'reject')->name('ppmp.reject');
+        Route::get('/download/ppmp/{id}', 'download')->name('ppmp.download');
+        Route::delete('/ppmp/destroy/{id}', 'destroy')->name('ppmp.destroy');
     });
 
 

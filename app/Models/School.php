@@ -29,4 +29,8 @@ class School extends Model
     {
         return $this->hasMany(User::class, 'school_id', 'id');
     }
+    public function ppmp()
+    {
+        return $this->hasMany(PPMP::class, 'school_id', 'id');
+    }
 }

@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('division_id');
             $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->enum('role',['district-admin'])->default('district-admin');
             $table->string('slug')->nullable();
             $table->enum('status',[1,0])->default(1);
 

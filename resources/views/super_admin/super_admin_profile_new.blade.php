@@ -12,7 +12,8 @@
                 <div class="col-12">
                     <div class="callout callout-danger">
                         <h5><i class="fas fa-info"></i> Note:</h5>
-                        This page has been enhanced for user-friendly. Please update your profile account information. See
+                        This page has been enhanced for a better user-friendly experience. Please update your profile
+                        account information. See
                         <a href="#">Data Privacy Notice</a>
                     </div>
                 </div>
@@ -20,7 +21,7 @@
             {{-- mt-sm-4 --}}
             <div class="row ">
                 <div class="col-xl-3 order-xl-2">
-                    <div class="card card-primary card-outline">
+                    <div class="card card-danger card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 <img id="showImage" alt="image" class="profile-user-img img-fluid img-circle"
@@ -46,7 +47,7 @@
                         </div>
 
                     </div>
-                    <div class="card card-primary">
+                    <div class="card card-danger">
                         <div class="card-header">
                             <h3 class="card-title">About Me</h3>
                         </div>
@@ -77,7 +78,7 @@
                     </div>
                 </div>
                 <div class="col-xl-9 order-xl-1">
-                    <div class="card card-primary card-outline">
+                    <div class="card card-danger card-outline">
                         <div class="card-header p-2">
                             <ul class="nav nav-pills">
 
