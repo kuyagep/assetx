@@ -5,8 +5,8 @@
         {{-- <div class="register-logo">
             <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
         </div> --}}
-        <div class="login-logo">
-            <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
+        <div class="register-logo mt-5">
+            <img src="{{ asset('brand_logo/deped-logo.png') }}" width="130px" alt="Dams Logo" srcset="">
             {{-- <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p> --}}
         </div>
         <div class="card card-outline card-danger">

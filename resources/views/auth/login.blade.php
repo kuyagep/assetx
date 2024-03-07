@@ -4,8 +4,11 @@
 
 
     <div class="login-box">
-        <div class="login-logo">
-            <img src="{{ asset('brand_logo/deped-logo.png') }}" width="150px" alt="Dams Logo" srcset="">
+        <div class="login-logo mt-5">
+            
+                <img src="{{ asset('brand_logo/deped-logo.png') }}" width="130px" alt="Dams Logo" srcset="">
+   
+            
             {{-- <p href="javascript:void(0)"><b>DIVISION ASSET MANAGEMENT SYSTEM</b></p> --}}
         </div>
         <!-- /.login-logo -->
@@ -87,18 +90,17 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col-12">
                             <button type="submit" class="btn bg-danger btn-block" id="loginBtn">
-                                LOGIN</button>
+                                Login</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-                <hr>
-                <p class="mt-3 text-center">
+                {{-- <p class="mt-3 text-center">
                     Don't have an account? <a href="{{ route('register') }}" class="text-primary"> Register here</a>
-                </p>
+                </p> --}}
 
             </div>
             <!-- /.login-card-body -->

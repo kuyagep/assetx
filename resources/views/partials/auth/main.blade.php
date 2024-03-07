@@ -51,7 +51,7 @@
     <!-- /.navbar -->
     @yield('auth-content')
     <div class="lockscreen-footer text-center text-white">
-        Copyright © {{ date('Y') }} <b><a href="index" class="text-white">{{ config('app.name') }} </a></b> <br>
+        Copyright © {{ date('Y') }} <b><a href="index" class="text-white">{{ config('app.name') }} </a></b>. 
         All
         rights reserved.
     </div>
