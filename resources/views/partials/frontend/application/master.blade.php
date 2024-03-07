@@ -28,7 +28,7 @@
         }
 
         nav {
-            background-color: #0D528A !important;
+            background-color: #1f1f1f !important;
         }
 
         .footer-clean {
@@ -284,9 +284,17 @@
                                             <div class="col-lg-1">
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="mi">M.I</label>
-                                                    <input type="text" id="mi" name="mi"
-                                                        class="form-control rounded-0" placeholder="Middle initial"
-                                                        value=" {{ old('mi') }}">
+                                                    <select name="mi" id="mi"
+                                                        class="rounded-0 custom-select">
+                                                        <option value="" selected>N/A</option>
+                                                        <option value="0">JR.
+                                                        </option>
+                                                        <option value="1">SR.
+                                                        </option>
+                                                        <option value="1">III
+                                                        </option>
+                                                    </select>
+
                                                     @error('mi')
                                                         <small class="text-danger">
                                                             {{ $message }}
@@ -295,9 +303,77 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="gender">Gender</label>
+                                                    <input type="text" id="gender" name="gender"
+                                                        class="form-control rounded-0" placeholder="Gender"
+                                                        value="{{ old('gender') }}">
+                                                    @error('gender')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="civil_status">Civil Status
+                                                    </label>
+                                                    <input type="text" id="civil_status" name="civil_status"
+                                                        class="form-control rounded-0" placeholder="Civil Status"
+                                                        value="{{ old('civil_status') }}">
+                                                    @error('civil_status')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="date_of_birth">Date of
+                                                        Birth</label>
+                                                    <input type="date" id="date_of_birth" name="date_of_birth"
+                                                        class="form-control rounded-0" placeholder="Last name"
+                                                        value="{{ old('date_of_birth') }}">
+                                                    @error('date_of_birth')
+                                                        <small class="text-danger">
+                                                            {{ $message }}
+                                                        </small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
 
                                     <div class="pl-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-sm-12 mb-3">
+                                                <label>Phone Number</label>
+                                                <input type="number"
+                                                    class="form-control rounded-0 @error('phone')  is-invalid   @enderror "
+                                                    name="phone" placeholder="Enter Phone Number" required>
+                                                @error('phone')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-6 col-sm-12">
+                                                <label>Address</label>
+                                                <input type="texr"
+                                                    class="form-control rounded-0 @error('address')  is-invalid   @enderror "
+                                                    name="address" placeholder="Enter Address" required>
+                                                @error('address')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-lg-12 col-sm-12">
                                                 <label>Deped Email Address</label>

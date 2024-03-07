@@ -10,12 +10,9 @@
              <span class="navbar-toggler-icon"></span>
          </button>
 
-
-
          <!-- Right navbar links -->
          <div class="text-center collapse navbar-collapse order-2" id="navbarCollapse">
              <ul class=" order-md-2 navbar-nav navbar-no-expand ml-auto">
-
                  <li class="nav-item">
                      <span href="javascript:void(0)" aria-expanded="false" class="nav-link text-white">
                          <div class="current-date" id="current-date"> </div>
@@ -23,6 +20,5 @@
                  </li>
              </ul>
          </div>
-
      </div>
  </nav>
