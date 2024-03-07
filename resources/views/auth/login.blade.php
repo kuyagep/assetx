@@ -5,7 +5,7 @@
 
     <div class="login-box">
         <div class="login-logo">
-            <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
+            <img src="{{ asset('brand_logo/deped-logo.png') }}" width="150px" alt="Dams Logo" srcset="">
             {{-- <p href="javascript:void(0)"><b>DIVISION ASSET MANAGEMENT SYSTEM</b></p> --}}
         </div>
         <!-- /.login-logo -->

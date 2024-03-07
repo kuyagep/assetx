@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -55,8 +53,7 @@ class UserSeeder extends Seeder
                 'status' => 1,
                 'created_at' => Carbon::now()->timezone('Asia/Manila'),
                 'updated_at' => Carbon::now()->timezone('Asia/Manila')
-        ]);
-        
+        ]);        
 
         $user0->assignRole(1);
         $user1->assignRole(2);
