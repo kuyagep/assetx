@@ -307,9 +307,14 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="gender">Gender</label>
-                                                    <input type="text" id="gender" name="gender"
-                                                        class="form-control rounded-0" placeholder="Gender"
-                                                        value="{{ old('gender') }}">
+                                                    <select name="gender" id="gender"
+                                                        class="rounded-0 custom-select">
+                                                        <option value="" selected>N/A</option>
+                                                        <option value="0">MALE
+                                                        </option>
+                                                        <option value="1">FEMALE
+                                                        </option>
+                                                    </select>
                                                     @error('gender')
                                                         <small class="text-danger">
                                                             {{ $message }}
@@ -321,9 +326,14 @@
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="civil_status">Civil Status
                                                     </label>
-                                                    <input type="text" id="civil_status" name="civil_status"
-                                                        class="form-control rounded-0" placeholder="Civil Status"
-                                                        value="{{ old('civil_status') }}">
+                                                    <select name="civil_status" id="civil_status"
+                                                        class="rounded-0 custom-select">
+                                                        <option value="" selected>N/A</option>
+                                                        <option value="0">SINGLE
+                                                        </option>
+                                                        <option value="1">MARRIED
+                                                        </option>
+                                                    </select>
                                                     @error('civil_status')
                                                         <small class="text-danger">
                                                             {{ $message }}

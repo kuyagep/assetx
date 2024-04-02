@@ -48,7 +48,7 @@
             <div class="container">
                 <a href="javascript:void(0);" class="navbar-brand mt-2 text-white">
                     <img src="{{ asset('brand_logo/logo.png') }}" alt="Logo" class="brand-image  elevation-0"
-                        style="opacity: .8; height: 70px;">
+                        style="height: 70px;">
                 </a>
 
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse"

@@ -30,18 +30,17 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar')->nullable();
-            
-            $table->enum('role',['super_admin','admin','sub_admin','users','client'])->default('client');
-            $table->enum('status',['1','0'])->default('0');           
-            
+
+            $table->enum('role', ['super_admin', 'admin', 'sub_admin', 'users', 'client'])->default('client');
+            $table->enum('status', ['1', '0'])->default('0');
+
             $table->rememberToken();
             $table->timestamps();
-            
+
             // Define the foreign key constraint
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('RESTRICT');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('RESTRICT');
             $table->foreign('office_id')->references('id')->on('offices')->onDelete('RESTRICT');
-           
         });
     }
 
