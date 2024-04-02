@@ -1,9 +1,10 @@
 @extends('partials.auth.main')
 @section('auth-title', 'Forgot Password')
 @section('auth-content')
-    <div class="login-box">
-        <div class="login-logo">
-            <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
+    <div class="login-box ">
+        <div class="login-logo mt-5">
+            {{-- <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset=""> --}}
+            <img src="{{ asset('brand_logo/deped-logo.png') }}" width="130px" alt="Dams Logo" srcset="">
         </div>
         <!-- /.login-logo -->
         <div class="card">

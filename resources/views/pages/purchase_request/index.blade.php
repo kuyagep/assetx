@@ -60,7 +60,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="modal">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-dialog modal-lg ">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="modal-title"></h4>
@@ -76,6 +76,7 @@
                                 <div id="error"></div>
                                 {{-- Reference Id --}}
                                 <input type="hidden" name="id" id="id">
+                                
                                 {{-- sample --}}
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-12">
@@ -124,8 +125,8 @@
                                         <div class="form-group">
                                             <label for="src_fund">Source of Fund <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <input list="src_fund_list" class="form-control" id="src_fund" name="src_fund"
-                                                placeholder="Ex. Division MOOE">
+                                            <input list="src_fund_list" class="form-control" id="src_fund"
+                                                name="src_fund" placeholder="Ex. Division MOOE">
                                             <datalist id="src_fund_list">
                                                 <option value="Division MOOE - CID">
                                                 <option value="Division MOOE - CID">
@@ -183,8 +184,8 @@
 
                                 <div class="row float-right my-3  ">
                                     <div class="col-12">
-                                        <button type="submit" class="btn bg-navy btn-save" accesskey="s"
-                                            id="btn-save">Save</button>
+                                        <button type="submit" class="btn bg-dark btn-save" accesskey="s"
+                                            id="btn-save">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -271,7 +272,7 @@
                 $('#error').html('');
                 $('#modal').modal("show");
                 $('#modal-title').html("Add Data");
-                $('#btn-save').html("Save");
+                $('#btn-save').html("Submit");
                 $('#btn-save').show();
                 $('#id').val('');
                 $('#modal-form').trigger("reset");

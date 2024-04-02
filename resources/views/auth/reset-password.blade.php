@@ -2,7 +2,7 @@
 @section('auth-title', 'Reset Password')
 @section('auth-content')
     <div class="login-box">
-       <div class="login-logo">
+        <div class="login-logo mt-5">
             <img src="{{ asset('brand_logo/dams_logo.png') }}" width="100%" alt="Dams Logo" srcset="">
         </div>
         <!-- /.login-logo -->
@@ -57,7 +57,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-dark btn-block">RESET PASSWORD</button>
+                            <button type="submit" class="btn  btn-primary btn-block">RESET PASSWORD</button>
                         </div>
                         <!-- /.col -->
                     </div>

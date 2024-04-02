@@ -2,7 +2,7 @@
 @section('auth-title', 'Confirm Password')
 @section('auth-content')
     <div class="login-box">
-        <div class="login-logo">
+        <div class="login-logo mt-5">
             <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p>
         </div>
         <!-- /.login-logo -->

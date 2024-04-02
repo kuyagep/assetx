@@ -3,16 +3,16 @@
 @section('auth-content')
 
 
-    <div class="login-box">
+    <div class="login-box mt-5">
         <div class="login-logo mt-5">
-            
-                <img src="{{ asset('brand_logo/deped-logo.png') }}" width="130px" alt="Dams Logo" srcset="">
-   
-            
+
+            <img src="{{ asset('brand_logo/deped-logo.png') }}" width="130px" alt="Dams Logo" srcset="">
+
+
             {{-- <p href="javascript:void(0)"><b>DIVISION ASSET MANAGEMENT SYSTEM</b></p> --}}
         </div>
         <!-- /.login-logo -->
-        <div class="card card-outline card-danger">
+        <div class="card card-outline card-primary ">
             <div class="card-body login-card-body">
 
 
@@ -65,8 +65,10 @@
                         <div class="col-5">
                             @if (Route::has('password.request'))
                                 <div class="mt-1">
-                                    <a href="{{ route('password.request') }}">Forgot
-                                        Password?</a>
+                                    <a href="{{ route('password.request') }}">
+                                        Forgot
+                                        Password?
+                                    </a>
                                 </div>
                             @endif
                         </div>
@@ -92,7 +94,7 @@
 
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn bg-danger btn-block" id="loginBtn">
+                            <button type="submit" class="btn bg-primary btn-block" id="loginBtn">
                                 Login</button>
                         </div>
                         <!-- /.col -->

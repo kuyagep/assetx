@@ -9,7 +9,7 @@
             <img src="{{ asset('brand_logo/deped-logo.png') }}" width="130px" alt="Dams Logo" srcset="">
             {{-- <p href="javascript:void(0)"><b>{{ config('app.name') }}</b></p> --}}
         </div>
-        <div class="card card-outline card-danger">
+        <div class="card card-outline card-primary">
             <div class="card-body register-card-body">
                 <h5 class="login-box-msg"><b>Create Account</b></h5>
 
@@ -102,7 +102,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn  btn-danger btn-block" id="registerBtn">REGISTER</button>
+                            <button type="submit" class="btn  btn-primary btn-block" id="registerBtn">REGISTER</button>
                         </div>
                         <!-- /.col -->
                     </div>
