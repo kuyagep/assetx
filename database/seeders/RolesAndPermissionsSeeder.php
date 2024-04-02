@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\PermissionGroup;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -16,7 +15,7 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-        
+
         //create Permission Groups
         PermissionGroup::create(['name' => 'Dashboard']);
         PermissionGroup::create(['name' => 'Purchase Request']);
@@ -36,7 +35,7 @@ class RolesAndPermissionsSeeder extends Seeder
         PermissionGroup::create(['name' => 'Users']);
         PermissionGroup::create(['name' => 'Admins']);
         PermissionGroup::create(['name' => 'Reports']);
-         // create permissions
+        // create permissions
         //* Permission::create(['name' => 'menu']);
         //* Permission::create(['name' => 'view']);
         //* Permission::create(['name' => 'edit']);
@@ -48,7 +47,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::create(['name' => 'super-admin']);
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'sub-admin']);
-        Role::create(['name' => 'user']);
+        Role::create(['name' => 'users']);
         Role::create(['name' => 'client']);
     }
 }

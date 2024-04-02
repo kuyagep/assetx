@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
             'email' => 'sub_admin@gmail.com',
             'password' => Hash::make('password@123'),
             'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
-            'role' => 'sub-admin',
+            'role' => 'sub_admin',
             'status' => 1,
             'created_at' => Carbon::now()->timezone('Asia/Manila'),
             'updated_at' => Carbon::now()->timezone('Asia/Manila')
@@ -58,12 +58,12 @@ class UserSeeder extends Seeder
 
         $user4 =  User::create([
             'id' => Str::uuid(),
-            'first_name' => 'Client',
+            'first_name' => 'User',
             'last_name' => 'Account',
-            'email' => 'client@gmail.com',
+            'email' => 'user@gmail.com',
             'password' => Hash::make('password@123'),
             'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
-            'role' => 'user',
+            'role' => 'users',
             'status' => 1,
             'created_at' => Carbon::now()->timezone('Asia/Manila'),
             'updated_at' => Carbon::now()->timezone('Asia/Manila')
