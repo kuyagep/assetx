@@ -69,6 +69,7 @@ class PurchaseController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
+                'purchase_number' => 'string|max:255',
                 'get_started' => 'required|string|max:255',
                 'alt_mode_procurement' => 'required|string|max:255',
                 'title' => 'required|string|max:255',
@@ -83,6 +84,7 @@ class PurchaseController extends Controller
             if (empty($request->id)) {
 
                 $data = new Purchase();
+                $data->purchase_number = $request->purchase_number;
                 $data->get_started = $request->get_started;
                 $data->alt_mode_procurement = $request->alt_mode_procurement;
                 $data->title = $request->title;

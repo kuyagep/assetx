@@ -4,18 +4,18 @@ namespace App\Http\Controllers\BackEnd;
 
 use App\Exports\PurchasesExport;
 use App\Http\Controllers\Controller;
-use App\Models\Office;
 use App\Models\Purchase;
 use App\Models\PurchaseHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class PurchaseController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
@@ -24,11 +24,10 @@ class PurchaseController extends Controller
 
         $data = [];
         if ($request->ajax()) {
-            
-            $data = Purchase::all();            
+
+            $data = Purchase::all();
 
             return DataTables::of($data)
-               
                 ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s');
                 })
@@ -49,10 +48,11 @@ class PurchaseController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="btn-group">';
-                    
+
                     $btn .= '<button title="History" type="button" data-id="' . $row->id . '" class="btn btn-sm bg-primary" id="history-button"><i class="fas fa-history"></i></button>';
                     if (auth()->user()->hasRole('admin')) {
                         $btn .= '<button title="Edit" type="button" data-id="' . $row->id . '" class="btn btn-sm btn-warning" id="editButton"><i class="far fa-edit"></i></button>';
+                        $btn .= '<button type="button" data-id="' . $row->id . '" class="btn bg-danger btn-sm " id="deleteButton"><i class="far fa-trash-alt"></i></button>';
                     }
                     if (auth()->user()->hasRole('super-admin')) {
                         $btn .= '<button type="button" data-id="' . $row->id . '" class="btn bg-olive btn-sm " id="approvedButton"><i class="fas fa-check"></i></button>';
@@ -64,7 +64,6 @@ class PurchaseController extends Controller
                             </button>
                                 <div class="dropdown-menu" style="">
                                     <a class="dropdown-item" data-id="' . $row->attachment . '" title="Download" href="javascript:void(0)" id="downloadButton">Download</a>
-                                   
                                 </div>
                             </div>
                         </div>';
@@ -93,6 +92,7 @@ class PurchaseController extends Controller
     {
         if ($request->ajax()) {
             $request->validate([
+                // 'purchase_number' => 'string|max:255',
                 'get_started' => 'required|string|max:255',
                 'alt_mode_procurement' => 'required|string|max:255',
                 'title' => 'required|string|max:255',
@@ -108,6 +108,11 @@ class PurchaseController extends Controller
                 //     'attachment' => 'required',
                 // ]);
                 $data = new Purchase();
+                if ($request->purchase_number == '') {
+                    $data->purchase_number = Purchase::generateUniquePurchaseCode();
+                } else {
+                    $data->purchase_number = strtoupper($request->purchase_number);
+                }
                 $data->get_started = $request->get_started;
                 $data->alt_mode_procurement = $request->alt_mode_procurement;
                 $data->title = $request->title;
@@ -229,9 +234,9 @@ class PurchaseController extends Controller
     }
 
 
-    public function exportPurchase() 
+    public function exportPurchase()
     {
-        return Excel::download(new PurchasesExport, time().'purchase.xlsx');
+        return Excel::download(new PurchasesExport, time() . 'purchase.xlsx');
     }
     public function approved(Request $request)
     {
@@ -283,7 +288,7 @@ class PurchaseController extends Controller
             return DataTables::of($data)
 
                 ->editColumn('amount', function ($request) {
-                     return number_format($request->amount, 2, '.', ',');
+                    return number_format($request->amount, 2, '.', ',');
                 })
                 ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s');
@@ -322,7 +327,7 @@ class PurchaseController extends Controller
 
                     return $btn;
                 })
-                ->rawColumns(['action', 'isApproved', 'created_at','amount'])
+                ->rawColumns(['action', 'isApproved', 'created_at', 'amount'])
                 ->make(true);
         }
 

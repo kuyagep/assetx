@@ -79,6 +79,16 @@
 
                                 {{-- sample --}}
                                 <div class="row">
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="purchase_number">PR Number </label>
+                                            <input type="text" class="form-control" id="purchase_number"
+                                                name="purchase_number"
+                                                placeholder="Ex. 2024-01-001 or Leave blank if you want auto generated">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="get_started">Get Started <span class="text-danger"
@@ -125,8 +135,8 @@
                                         <div class="form-group">
                                             <label for="src_fund">Source of Fund <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <input list="src_fund_list" class="form-control" id="src_fund" name="src_fund"
-                                                placeholder="Ex. Division MOOE">
+                                            <input list="src_fund_list" class="form-control" id="src_fund"
+                                                name="src_fund" placeholder="Ex. Division MOOE">
                                             <datalist id="src_fund_list">
                                                 <option value="Division MOOE - CID">
                                                 <option value="Division MOOE - CID">

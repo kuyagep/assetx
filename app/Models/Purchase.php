@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+
 class Purchase extends Model
 {
     use HasFactory;
@@ -15,15 +16,15 @@ class Purchase extends Model
     //         $model->{$model->getKeyName()} = Str::uuid();
     //     });
     // }
-    public static function boot()
-    {
-        parent::boot();
+    // public static function boot()
+    // {
+    //     parent::boot();
 
-        static::creating(function ($purchase) {
-            // Generate a unique purchase code
-            $purchase->purchase_number = static::generateUniquePurchaseCode();
-        });
-    }
+    //     static::creating(function ($purchase) {
+    //         // Generate a unique purchase code
+    //         $purchase->purchase_number = static::generateUniquePurchaseCode();
+    //     });
+    // }
 
     public static function generateUniquePurchaseCode()
     {
@@ -51,9 +52,9 @@ class Purchase extends Model
         return $newNumber;
     }
 
-    
 
-     protected $guarded = [];
+
+    protected $guarded = [];
 
     public function office()
     {
@@ -74,5 +75,4 @@ class Purchase extends Model
     {
         return $this->hasMany(PurchaseOrder::class, 'purchase_id', 'id');
     }
-     
 }
