@@ -2,7 +2,6 @@
 @section('auth-title', 'Login')
 @section('auth-content')
 
-
     <div class="login-box mt-5">
         <div class="login-logo mt-5">
 
@@ -16,7 +15,7 @@
             <div class="card-body login-card-body">
 
 
-                <p class="login-box-msg"><b>Welcome back you've been missed!</b></p>
+                <p class="login-box-msg"><b>Welcome back!</b></p>
 
                 @if (Session::has('status'))
                     <div class="alert alert-warning alert-dismissible">

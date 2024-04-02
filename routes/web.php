@@ -56,15 +56,15 @@ Route::get('/', function () {
 });
 
 Route::get('/index', [HomeController::class, 'index'])->name('index');
-Route::get('application',[ ApplicationController::class, 'index'])->name('application.index');
+Route::get('application', [ApplicationController::class, 'index'])->name('application.index');
 
 
 
 ######################## SUPER ADMIN ########################
 Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(function () {
 
-    
-    
+
+
     //* ############# SUPER ADMIN #############
     Route::controller(AccountController::class)->middleware(['role:super-admin'])->group(function () {
         Route::get('/dashboard', 'super_adminDashboard')->name('dashboard');
@@ -104,18 +104,16 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
     #assets
     Route::resource('/assets', AssetController::class);
     Route::controller(AssetController::class)->group(function () {
-       
+
         Route::get('/assets/non/expendable', 'nonExpendable')->name('assets.non-expendable');
-        
     });
-    #issuances
+
 
     Route::resource('/issuances', IssuanceController::class);
     Route::controller(IssuanceController::class)->group(function () {
         Route::get('/get-assets-by-classification/{classificationId}', 'getAssetsByClassification')->name('get.assets');
         Route::get('/get-school-or-office', 'getSchoolOrOffice')->name('get.school.office');
         Route::get('/get-issued-to', 'getIssuedTo')->name('get.issued.to');
-        
     });
     Route::controller(AssetIssuanceController::class)->group(function () {
         Route::get('/asset-issuance/', 'create')->name('asset_issuance.create');
@@ -123,9 +121,8 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::post('/asset-issuance/{id}', 'destroy')->name('asset_issuance.destroy');
         Route::get('/asset/issuance/', 'getAssetByClassification')->name('get.asset');
         Route::get('/asset/issuance/generate/{id}', 'generateIssuances')->name('asset_issuance.generate');
-
     });
-    #issuances
+
     Route::resource('/purchase', PurchaseController::class);
     Route::get('/download/attachment/{id}', [PurchaseController::class, 'download'])->name('purchase.download');
     Route::get('/purchase/history/{purchase}', [PurchaseController::class, 'history'])->name('purchase.history');
@@ -188,7 +185,7 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::post('/ppmp', 'store')->name('ppmp.store');
         Route::get('/ppmp/show/{id}', 'show')->name('ppmp.show');
         Route::get('/ppmp/{id}/edit', 'edit')->name('ppmp.edit');
-        Route::get('/ppmp/export/','exportPPMP')->name('export.ppmp');
+        Route::get('/ppmp/export/', 'exportPPMP')->name('export.ppmp');
         Route::post('/ppmp/approved/{id}', 'approved')->name('ppmp.approved');
         Route::post('/ppmp/{id}', 'reject')->name('ppmp.reject');
         Route::get('/download/ppmp/{id}', 'download')->name('ppmp.download');
@@ -196,25 +193,16 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
     });
 
 
-    
+
     ##### ADMIN PART #####
 
     //* ############# ADMIN #############
-    Route::controller(AccountController::class)->prefix('account')->as('account.')->middleware(['role:admin'])->group(function () {
-        //* ->middleware('permission:division.all')
-        Route::get('/dashboard', 'adminDashboard')->name('dashboard');
-        Route::get('/profile', 'adminProfile')->name('profile');
-        Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
-        Route::post('/update/password', 'adminUpdatePassword')->name('update.password');
-    });
-
-
     Route::controller(PurchaseOrderController::class)->group(function () {
         Route::get('/purchase-order', 'adminPurchaseOrder')->name('purchase.order');
         Route::post('/purchase-order', 'store')->name('purchase.order.store');
         Route::get('/purchase-order/show/{id}', 'show')->name('purchase.order.show');
         Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
-        Route::get('/purchase-order/export/','exportPurchaseOrder')->name('export.purchase.order');
+        Route::get('/purchase-order/export/', 'exportPurchaseOrder')->name('export.purchase.order');
         Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
         Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
         Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
@@ -231,10 +219,32 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
 });
 
 
+//* ############# ADMIN ROUTE #############
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::controller(AccountController::class)->prefix('account')->as('account.')->middleware(['role:admin'])->group(function () {
+        Route::get('/dashboard', 'adminDashboard')->name('dashboard');
+        Route::get('/profile', 'adminProfile')->name('profile');
+        Route::post('/profile/update', 'adminProfileUpdate')->name('profile.update');
+        Route::post('/update/password', 'adminUpdatePassword')->name('update.password');
+    });
 
+    // Purchase Request Admin 
+    Route::resource('/purchase', PurchaseController::class);
+    Route::get('/download/attachment/{id}', [PurchaseController::class, 'download'])->name('purchase.download');
+    Route::get('/purchase/history/{purchase}', [PurchaseController::class, 'history'])->name('purchase.history');
+    Route::get('/purchase/exports/', [PurchaseController::class, 'exportPurchase'])->name('export.purchase.request');
 
-
-
+    Route::controller(PurchaseOrderController::class)->group(function () {
+        Route::get('/purchase-order', 'adminPurchaseOrder')->name('purchase.order');
+        Route::post('/purchase-order', 'store')->name('purchase.order.store');
+        Route::get('/purchase-order/show/{id}', 'show')->name('purchase.order.show');
+        Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
+        Route::get('/purchase-order/export/', 'exportPurchaseOrder')->name('export.purchase.order');
+        Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
+        Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
+        Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
+    });
+});
 
 
 //* ############# CLIENT ROUTE #############
@@ -246,13 +256,13 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::post('/profile/update', 'clientsProfileUpdate')->name('profile.update');
         Route::post('/update/password', 'clientsUpdatePassword')->name('update.password');
     });
-    
+
     Route::controller(PurchaseController::class)->group(function () {
         Route::get('/purchase', 'clientPurchase')->name('purchase');
         Route::post('/purchase', 'store')->name('purchase.store');
         Route::get('/purchase/show/{id}', 'show')->name('purchase.show');
         Route::get('/purchase/{id}/edit', 'edit')->name('purchase.edit');
-        Route::get('/purchase/export/','exportPurchase')->name('export.purchase');
+        Route::get('/purchase/export/', 'exportPurchase')->name('export.purchase');
         Route::put('/purchase/{purchase}', 'approved')->name('purchase.approved');
         Route::get('/download/attachment/{id}', 'download')->name('purchase.download');
         Route::get('/purchase/history/{purchase}',  'history')->name('purchase.history');
@@ -263,12 +273,12 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::post('/purchase-order', 'store')->name('purchase.order.store');
         Route::get('/purchase-order/show/{id}', 'show')->name('purchase.order.show');
         Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
-        Route::get('/purchase-order/export/','exportPurchaseOrder')->name('export.purchase.order');
+        Route::get('/purchase-order/export/', 'exportPurchaseOrder')->name('export.purchase.order');
         Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
         Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
         Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
     });
-     #assets
+    #assets
     Route::resource('/assets', AssetController::class);
 
     // Route::resource('/issuances', IssuanceController::class);
@@ -280,7 +290,6 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::PUT('/issuances/{issuance}', 'update')->name('issuances.update');
         Route::DELETE('/issuances/{issuance}', 'destroy')->name('issuances.destroy');
         Route::GET('/issuances/{issuance}/edit', 'edit')->name('issuances.edit');
-        
     });
 });
 

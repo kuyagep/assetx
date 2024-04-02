@@ -25,7 +25,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
                     @role('super-admin')
                         <li class="nav-item">
@@ -323,12 +323,12 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               with font-awesome or any other icon font library -->
                     <li class="nav-header">DASHBOARD</li>
 
                     <li class="nav-item">
-                        <a href="{{ url('my/account/dashboard') }}"
-                            class="nav-link {{ Request::is('my/account/dashboard') ? 'active' : '' }}">
+                        <a href="{{ url('admin/account/dashboard') }}"
+                            class="nav-link {{ Request::is('admin/account/dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fa-regular fa-compass"></i>
                             <p>
                                 Dashboard
@@ -336,8 +336,9 @@
                         </a>
                     </li>
 
-                    <li class="nav-item {{ Request::is('my/purchase') ? 'menu-open' : '' }}">
-                        <a href="javascript:void(0)" class="nav-link {{ Request::is('my/purchase') ? 'active' : '' }}">
+                    <li class="nav-item {{ Request::is('admin/purchase') ? 'menu-open' : '' }}">
+                        <a href="javascript:void(0)"
+                            class="nav-link {{ Request::is('admin/purchase') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-cart-shopping"></i>
                             <p>
                                 Purchase Request
@@ -347,8 +348,8 @@
                         <ul class="nav nav-treeview">
 
                             <li class="nav-item">
-                                <a href="{{ url('my/purchase') }}"
-                                    class="nav-link {{ Request::is('my/purchase') ? 'active' : '' }}">
+                                <a href="{{ url('admin/purchase') }}"
+                                    class="nav-link {{ Request::is('admin/purchase') ? 'active' : '' }}">
                                     <i class="nav-icon fa-solid fa-receipt"></i>
                                     <p>All Purchase Request</p>
                                 </a>
@@ -356,9 +357,10 @@
 
                         </ul>
                     </li>
+
                     <li class="nav-item">
-                        <a href="{{ url('my/purchase-order') }}"
-                            class="nav-link {{ Request::is('my/purchase-order') ? 'active' : '' }}">
+                        <a href="{{ url('admin/purchase-order') }}"
+                            class="nav-link {{ Request::is('admin/purchase-order') ? 'active' : '' }}">
 
                             <i class="nav-icon fa-solid fa-file-lines"></i>
                             <p>Purchase Order</p>
@@ -366,8 +368,8 @@
                     </li>
                     @role('admin')
                         <li class="nav-item">
-                            <a href="{{ url('my/account/profile') }}"
-                                class="nav-link {{ Request::is('my/account/profile') ? 'active' : '' }}">
+                            <a href="{{ url('admin/account/profile') }}"
+                                class="nav-link {{ Request::is('admin/account/profile') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>
                                     Profile Settings

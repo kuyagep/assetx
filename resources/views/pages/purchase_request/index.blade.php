@@ -14,10 +14,10 @@
                     <div class="row mb-3 ">
                         <div class="col-12">
                             <button id="add-button" class="btn btn-success mr-2 float-left" accesskey="a">
-                                <i class="fa-solid fa-paper-plane mr-2"></i>&nbsp;Submit Purchase Request
+                                <i class="fa-solid fa-paper-plane mr-2"></i>&nbsp;Submit New PR
                             </button>
                             <button href="javascript:void(0)" class="btn btn-danger" id="export-data" title="Export Excel">
-                                <i class="fas fa-file-excel"></i>&nbsp;Export
+                                <i class="fas fa-file-excel"></i>&nbsp;Export PR
                             </button>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                                 <div id="error"></div>
                                 {{-- Reference Id --}}
                                 <input type="hidden" name="id" id="id">
-                                
+
                                 {{-- sample --}}
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-12">
@@ -125,8 +125,8 @@
                                         <div class="form-group">
                                             <label for="src_fund">Source of Fund <span class="text-danger"
                                                     title="important">*</span></label>
-                                            <input list="src_fund_list" class="form-control" id="src_fund"
-                                                name="src_fund" placeholder="Ex. Division MOOE">
+                                            <input list="src_fund_list" class="form-control" id="src_fund" name="src_fund"
+                                                placeholder="Ex. Division MOOE">
                                             <datalist id="src_fund_list">
                                                 <option value="Division MOOE - CID">
                                                 <option value="Division MOOE - CID">
