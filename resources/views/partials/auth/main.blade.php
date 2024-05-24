@@ -42,7 +42,7 @@
     } */
 </style>
 
-<body class="hold-transition login-page bg-light  accent-dark">
+<body class="hold-transition login-page  accent-dark">
     <!-- Preloader -->
     {{-- <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__wobble" src="{{ asset('brand_logo/android-chrome-192x192.png') }}"
