@@ -91,7 +91,7 @@
 
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn deped-btn-primary btn-block btn-lg btn-flat" id="loginBtn">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg btn-flat" id="loginBtn">
                                 Login</button>
                         </div>
                         <!-- /.col -->
