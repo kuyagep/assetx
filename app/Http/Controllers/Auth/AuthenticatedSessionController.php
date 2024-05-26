@@ -4,14 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\Redirect;
-
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\IpUtils;
 
 class AuthenticatedSessionController extends Controller
@@ -38,13 +36,12 @@ class AuthenticatedSessionController extends Controller
         $body = [
             'secret' => config('services.recaptcha.secret'),
             'response' => $recaptcha_response,
-            'remoteip' => IpUtils::anonymize($request->ip()) //anonymize the ip to be GDPR compliant. Otherwise just pass the default ip address
+            'remoteip' => IpUtils::anonymize($request->ip()), //anonymize the ip to be GDPR compliant. Otherwise just pass the default ip address
         ];
-        
+
         $response = Http::asForm()->post($url, $body);
 
         $result = json_decode($response);
-
 
         if ($response->successful() && $result->success == true) {
             $request->authenticate();
@@ -67,11 +64,11 @@ class AuthenticatedSessionController extends Controller
                 $url = 'index';
             }
             return redirect()->intended($url);
-        }else{
+        } else {
             return redirect()->back()->with('recaptcha_status', 'Please Complete the Recaptcha Again to proceed');
-        }       
+        }
     }
-  
+
     /**
      * Destroy an authenticated session.
      */
@@ -84,6 +81,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         //return Redirect::to('https://202.137.126.58/');
-        return Redirect::to('https://localhost/assetx/');
+        return Redirect::to('https://localhost/assetx/public/');
     }
 }

@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\BackEnd;
 
-
 use App\Exports\PPMPExport;
-use Illuminate\Http\Request;
-use App\Models\PPMP;
-use App\Exports\PurchasesExport;
 use App\Http\Controllers\Controller;
+use App\Models\PPMP;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class PPMPController extends Controller
@@ -24,11 +21,11 @@ class PPMPController extends Controller
 
         $data = [];
         if ($request->ajax()) {
-            
-            $data = PPMP::all();            
+
+            $data = PPMP::all();
 
             return DataTables::of($data)
-               
+
                 ->editColumn('created_at', function ($request) {
                     return $request->created_at->format('d-m-Y H:i:s');
                 })
@@ -37,10 +34,10 @@ class PPMPController extends Controller
                     if ($request->status === 'pending') {
                         $result = '<span class="badge badge-warning">pending</span>';
                     } elseif ($request->status === 'reject') {
-                        $result = '<span class="badge badge-danger">Reject</span>';                    
-                    
+                        $result = '<span class="badge badge-danger">Reject</span>';
+
                     } elseif ($request->status === 'approved') {
-                        $result = '<span class="badge badge-success">Approved</span>';                    
+                        $result = '<span class="badge badge-success">Approved</span>';
                     }
 
                     return $result;
@@ -49,7 +46,7 @@ class PPMPController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="btn-group">';
-                    
+
                     if (auth()->user()->hasRole('super-admin')) {
                         $btn .= '<button type="button" data-id="' . $row->id . '" class="btn bg-success btn-sm" id="approvedButton"><i class="fas fa-check"></i></button>';
                         $btn .= '<button type="button" data-id="' . $row->id . '" class="btn bg-warning btn-sm" id="rejectButton"><i class="fa-solid fa-x"></i></button>';
@@ -61,7 +58,7 @@ class PPMPController extends Controller
                             </button>
                                 <div class="dropdown-menu" style="">
                                     <a class="dropdown-item" data-id="' . $row->attachment . '" title="Download" href="javascript:void(0)" id="downloadButton">Download</a>
-                                   
+
                                 </div>
                             </div>
                         </div>';
@@ -89,25 +86,24 @@ class PPMPController extends Controller
     public function store(Request $request)
     {
         if ($request->ajax()) {
-            $request->validate([                
+            $request->validate([
                 'remarks' => 'required|string|max:255',
                 'attachment' => 'file|mimes:xlsx,xls|max:2048',
                 'amount' => 'required|numeric|min:0.01|max:999999999999.99',
             ]);
 
-
             // checked if new data or exists
             if (empty($request->id)) {
-                
+
                 $data = new PPMP();
-              
+
                 $data->remarks = $request->remarks;
                 $data->amount = $request->amount;
 
                 if ($request->hasFile('attachment')) {
                     $attachment = $request->file('attachment');
 
-                    // Upload the new file 
+                    // Upload the new file
                     $attachment = Storage::disk('local')->putFileAs('/', $attachment, str()->uuid() . '.' . $attachment->extension());
 
                     $data['attachment'] = $attachment;
@@ -117,7 +113,7 @@ class PPMPController extends Controller
                 $data->save();
 
                 return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'PPMP submitted successfully!']);
-            
+
             } else {
                 $data = PPMP::find($request->id);
                 $data->get_started = $request->get_started;
@@ -144,8 +140,6 @@ class PPMPController extends Controller
                 // $data->user_id = Auth::user()->id;
                 // $data->office_id = Auth::user()->office_id;
                 $data->save();
-
-
 
                 return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'PPMP updated successfully!']);
             }
@@ -181,8 +175,6 @@ class PPMPController extends Controller
     {
     }
 
-  
-
     public function download(Request $request, $id)
     {
         //$filePath = 'private/' . $id;
@@ -204,15 +196,14 @@ class PPMPController extends Controller
         abort(404); // File not found
     }
 
-
-    public function exportPurchase() 
+    public function exportPPMP()
     {
-        return Excel::download(new PPMPExport, time().'ppmp.xlsx');
+        return Excel::download(new PPMPExport, time() . 'ppmp.xlsx');
     }
     public function approved(Request $request, $id)
     {
         if ($request->ajax()) {
-            
+
             $data = PPMP::findOrFail($id);
             if (auth()->user()->hasRole('super-admin')) {
                 $data->status = 'approved';
@@ -220,7 +211,6 @@ class PPMPController extends Controller
 
             $data->save();
 
-           
             return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => $data->remarks]);
         }
 
@@ -236,7 +226,6 @@ class PPMPController extends Controller
 
             $data->save();
 
-           
             return response()->json(['icon' => 'success', 'title' => 'Success!', 'message' => 'PPMP reject successfully!']);
         }
 

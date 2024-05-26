@@ -5,17 +5,17 @@
     <div class="login-box mt-5">
         <div class="login-logo mt-5">
 
-            <img src="{{ asset('brand_logo/deped-logo.png') }}" width="130px" alt="Dams Logo" srcset="">
+            <img src="{{ asset('brand_logo/deped-logo.png') }}" width="130px" alt="DAMS Logo" srcset="">
 
 
-            {{-- <p href="javascript:void(0)"><b>DIVISION ASSET MANAGEMENT SYSTEM</b></p> --}}
+            <p href="javascript:void(0)"><b>DIVISION ASSET MANAGEMENT SYSTEM</b></p>
         </div>
         <!-- /.login-logo -->
-        <div class="card card-outline card-primary ">
+        <div class="card card-outline card-gray ">
             <div class="card-body login-card-body">
 
 
-                <p class="login-box-msg"><b>Welcome back!</b></p>
+                <p class="login-box-msg"><b>Sign In</b></p>
 
                 @if (Session::has('status'))
                     <div class="alert alert-warning alert-dismissible">
@@ -28,12 +28,10 @@
 
                     <div class="form-group mb-3">
                         <input type="email" name="email"
-                            class="form-control   @error('email')
-                            is-invalid
+                            class="form-control rounded-0 form-control-lg   @error('email') is-invalid
                         @enderror"
                             placeholder="Email" value="{{ old('email') }}" id="login" autocomplete="true" autofocus
                             required>
-
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <small>{{ $message }}</small>
@@ -41,8 +39,8 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password"
-                            required>
+                        <input type="password" name="password" class="form-control rounded-0 form-control-lg" id="password"
+                            placeholder="Password" required>
 
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -54,7 +52,7 @@
                     <div class="row mb-3">
                         <div class="col-7">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember" name="remember" checked>
+                                <input type="checkbox" id="remember" name="remember">
                                 <label for="remember">
                                     Remember Me
                                 </label>
@@ -93,7 +91,7 @@
 
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn bg-primary btn-block" id="loginBtn">
+                            <button type="submit" class="btn deped-btn-primary btn-block btn-lg btn-flat" id="loginBtn">
                                 Login</button>
                         </div>
                         <!-- /.col -->

@@ -23,6 +23,7 @@
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('assets/custom/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
     <script async src="https://www.google.com/recaptcha/api.js"></script>
     @include('partials.analytics')
@@ -42,18 +43,17 @@
     } */
 </style>
 
-<body class="hold-transition login-page  accent-dark">
+<body class="hold-transition login-page accent-dark">
     <!-- Preloader -->
-    {{-- <div class="preloader flex-column justify-content-center align-items-center">
+    <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__wobble" src="{{ asset('brand_logo/android-chrome-192x192.png') }}"
-            alt="Brand Logo Preloader" height="60" width="60">
-    </div> --}}
+            alt="Brand Logo Preloader" height="75" width="75">
+    </div>
     <!-- /.navbar -->
     @yield('auth-content')
     <div class="lockscreen-footer text-center mb-5">
         Copyright © {{ date('Y') }} <b><a href="index">{{ config('app.name') }} </a></b>.
-        All
-        rights reserved.
+        All rights reserved.
     </div>
 
     <!-- jQuery -->

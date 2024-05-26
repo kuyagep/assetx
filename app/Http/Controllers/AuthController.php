@@ -33,24 +33,24 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->get('user'))) {            
-            
+        if (!empty($request->get('user'))) {
+
             // if(!empty($request->get('user'))){
             //     return redirect()->route('maintenance');
-            // }                            
+            // }
 
             $user = DB::connection('mysql_external')->table('tblusers', 'tblroles')->where('username', $request->get('user'))->first();
 
             if ($user === null) {
                 return Redirect::to('http://202.137.126.58/');
-            }elseif ($user->username !== null) {
+            } elseif ($user->username !== null) {
                 $result = User::where('email', $user->username)->first();
 
                 if (empty($result)) {
                     $newuser = User::create([
                         'first_name' => 'First Name',
                         'last_name' => 'Last Name',
-                        'email' =>  $request->get('user'),
+                        'email' => $request->get('user'),
                         'password' => Hash::make('password'),
                         'email_verified_at' => Carbon::now()->timezone('Asia/Manila'),
                         'role' => 'client', // Set email_verified_at to null initially
@@ -60,7 +60,7 @@ class AuthController extends Controller
                     $newuser->assignRole(3);
 
                     Auth::login($newuser);
-                    
+
                     $url = '';
                     if (Auth::user()->role === 'super_admin') {
                         $url = 'my/dashboard';
@@ -87,14 +87,15 @@ class AuthController extends Controller
                     return redirect()->to($url);
                 }
             } else {
-                return Redirect::to('https://202.137.126.59/assetx');
+                return Redirect::to('https://202.137.126.59/assetx/');
+                // return Redirect::to('https://202.137.126.59/assetx/public/');
             }
             // dd($user);
 
             // Auth::login($user);
 
             // return view('dashboard', compact('user'));
-        }else{
+        } else {
             return Redirect::to('http://202.137.126.58/');
         }
     }
