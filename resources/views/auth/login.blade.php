@@ -15,7 +15,7 @@
             <div class="card-body login-card-body">
 
 
-                <p class="login-box-msg"><b>Sign In</b></p>
+                <p class="login-box-msg"><b>Sign in to your account to continue</b></p>
 
                 @if (Session::has('status'))
                     <div class="alert alert-warning alert-dismissible">
