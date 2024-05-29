@@ -58,6 +58,6 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     Route::get('/logout', function () {
-        return redirect()->route('index');
+        return redirect()->route('/login');
     });
 });

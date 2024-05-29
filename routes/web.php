@@ -1,46 +1,51 @@
 <?php
-
-use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\BackEnd\PPMPController;
-use App\Http\Controllers\BackEnd\PurchaseOrderController;
-use App\Http\Controllers\BackEnd\SuppliersController;
-use App\Http\Controllers\MaintenanceController;
-use Illuminate\Support\Facades\Route;
-############################### ACCOUNT 
-use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountableController;
-############################### AUTH 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
-############################### LANDING PAGE 
-use App\Http\Controllers\FrontEnd\HomeController;
-############################### DASHBOARD
+use App\Http\Controllers\BackEnd\AdminController;
 use App\Http\Controllers\BackEnd\AssetClassificationController;
-use App\Http\Controllers\BackEnd\AssetStatusController;
+
+############################### ACCOUNT
 use App\Http\Controllers\BackEnd\AssetController;
+use App\Http\Controllers\BackEnd\AssetIssuanceController;
+############################### AUTH
+use App\Http\Controllers\BackEnd\AssetStatusController;
+############################### LANDING PAGE
+use App\Http\Controllers\BackEnd\DistrictController;
+############################### DASHBOARD
+use App\Http\Controllers\BackEnd\DivisionController;
 use App\Http\Controllers\BackEnd\IssuanceController;
 use App\Http\Controllers\BackEnd\IssuanceTypeController;
 use App\Http\Controllers\BackEnd\OfficeController;
 use App\Http\Controllers\BackEnd\PermissionGroupController;
 use App\Http\Controllers\BackEnd\PositionController;
+use App\Http\Controllers\BackEnd\PPMPController;
 use App\Http\Controllers\BackEnd\PurchaseController;
+use App\Http\Controllers\BackEnd\PurchaseOrderController;
 use App\Http\Controllers\BackEnd\RoleController;
 use App\Http\Controllers\BackEnd\SchoolController;
+use App\Http\Controllers\BackEnd\SuppliersController;
 use App\Http\Controllers\BackEnd\UsersController;
-use App\Http\Controllers\BackEnd\AdminController;
-use App\Http\Controllers\BackEnd\AssetIssuanceController;
-use App\Http\Controllers\BackEnd\DistrictController;
-use App\Http\Controllers\BackEnd\DivisionController;
-
-############################### FOR UPDATE
+use App\Http\Controllers\FrontEnd\HomeController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\ProductController;
-
+############################### FOR UPDATE
+use Illuminate\Support\Facades\Route;
 
 // External
 Route::get('/auth', [AuthController::class, 'store'])->name('auth');
 Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance');
 
-require __DIR__ . '/auth.php';
+Route::get('/', function () {
+    return view('index');
+    // return view('auth.login');
+    // if (!Auth::check()) {
+    //     return view('auth.login');
+    // }
+});
 
+require __DIR__ . '/auth.php';
 
 Route::get('/test/application', function () {
     return view('testing.application');
@@ -50,20 +55,11 @@ Route::get('/pdf', function () {
     return view('testing.pdf');
 });
 
-
-Route::get('/', function () {
-    return view('index');
-});
-
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('application', [ApplicationController::class, 'index'])->name('application.index');
 
-
-
 ######################## SUPER ADMIN ########################
 Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(function () {
-
-
 
     //* ############# SUPER ADMIN #############
     Route::controller(AccountController::class)->middleware(['role:super-admin'])->group(function () {
@@ -107,7 +103,6 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
 
         Route::get('/assets/non/expendable', 'nonExpendable')->name('assets.non-expendable');
     });
-
 
     Route::resource('/issuances', IssuanceController::class);
     Route::controller(IssuanceController::class)->group(function () {
@@ -179,7 +174,6 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::get('/online/users', 'online')->name('user.online');
     });
 
-
     Route::controller(PPMPController::class)->group(function () {
         Route::get('/ppmp', 'index')->name('ppmp');
         Route::post('/ppmp', 'store')->name('ppmp.store');
@@ -192,8 +186,6 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::delete('/ppmp/destroy/{id}', 'destroy')->name('ppmp.destroy');
     });
 
-
-
     ##### ADMIN PART #####
 
     //* ############# ADMIN #############
@@ -204,7 +196,7 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
         Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
         Route::get('/purchase-order/export/', 'exportPurchaseOrder')->name('export.purchase.order');
         Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
-        Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
+        Route::get('/purchase-order/history/{purchase-order}', 'history')->name('purchase.order.history');
         Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
     });
 
@@ -218,7 +210,6 @@ Route::prefix('my')->middleware(['auth', 'role:super-admin|admin'])->group(funct
     });
 });
 
-
 //* ############# ADMIN ROUTE #############
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(AccountController::class)->prefix('account')->as('account.')->middleware(['role:admin'])->group(function () {
@@ -228,7 +219,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/update/password', 'adminUpdatePassword')->name('update.password');
     });
 
-    // Purchase Request Admin 
+    // Purchase Request Admin
     Route::resource('/purchase', PurchaseController::class);
     Route::get('/download/attachment/{id}', [PurchaseController::class, 'download'])->name('purchase.download');
     Route::get('/purchase/history/{purchase}', [PurchaseController::class, 'history'])->name('purchase.history');
@@ -241,11 +232,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
         Route::get('/purchase-order/export/', 'exportPurchaseOrder')->name('export.purchase.order');
         Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
-        Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
+        Route::get('/purchase-order/history/{purchase-order}', 'history')->name('purchase.order.history');
         Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
     });
 });
-
 
 //* ############# CLIENT ROUTE #############
 Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->group(function () {
@@ -265,7 +255,7 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::get('/purchase/export/', 'exportPurchase')->name('export.purchase');
         Route::put('/purchase/{purchase}', 'approved')->name('purchase.approved');
         Route::get('/download/attachment/{id}', 'download')->name('purchase.download');
-        Route::get('/purchase/history/{purchase}',  'history')->name('purchase.history');
+        Route::get('/purchase/history/{purchase}', 'history')->name('purchase.history');
     });
 
     Route::controller(PurchaseOrderController::class)->group(function () {
@@ -275,7 +265,7 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::get('/purchase-order/{id}/edit', 'edit')->name('purchase.order.edit');
         Route::get('/purchase-order/export/', 'exportPurchaseOrder')->name('export.purchase.order');
         Route::put('/purchase-order/{purchase-order}', 'approved')->name('purchase.order.approved');
-        Route::get('/purchase-order/history/{purchase-order}',  'history')->name('purchase.order.history');
+        Route::get('/purchase-order/history/{purchase-order}', 'history')->name('purchase.order.history');
         Route::get('/purchase/request/', 'getPurchaseRequest')->name('get.purchase.request');
     });
     #assets
@@ -292,11 +282,6 @@ Route::prefix('client')->as('client.')->middleware(['auth', 'role:client'])->gro
         Route::GET('/issuances/{issuance}/edit', 'edit')->name('issuances.edit');
     });
 });
-
-
-
-
-
 
 ###################### Example of Multi Step Form ##########################
 Route::get('products', [ProductController::class, 'index'])->name('products.index');

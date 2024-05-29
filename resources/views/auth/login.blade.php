@@ -11,7 +11,7 @@
             <p href="javascript:void(0)"><b>DIVISION ASSET MANAGEMENT SYSTEM</b></p>
         </div>
         <!-- /.login-logo -->
-        <div class="card card-outline card-gray ">
+        <div class="card card-outline card-dark ">
             <div class="card-body login-card-body">
 
 
@@ -28,7 +28,7 @@
 
                     <div class="form-group mb-3">
                         <input type="email" name="email"
-                            class="form-control rounded-0 form-control-lg   @error('email') is-invalid
+                            class="form-control rounded-0   @error('email') is-invalid
                         @enderror"
                             placeholder="Email" value="{{ old('email') }}" id="login" autocomplete="true" autofocus
                             required>
@@ -39,7 +39,7 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="password" class="form-control rounded-0 form-control-lg" id="password"
+                        <input type="password" name="password" class="form-control rounded-0" id="password"
                             placeholder="Password" required>
 
                         @error('password')
@@ -91,12 +91,16 @@
 
                     <div class="row mb-3">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg btn-flat" id="loginBtn">
+                            <button type="submit" class="btn btn-dark btn-block btn-lg btn-flat" id="loginBtn">
                                 Login</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
+                <p class="mt-3 text-center">
+                    <a href="#" class="text-primary"> Help</a> | <a href="#" class="text-primary"> Privacy</a> |
+                    <a href="#" class="text-primary"> Term & Condition</a>
+                </p>
                 {{-- <p class="mt-3 text-center">
                     Don't have an account? <a href="{{ route('register') }}" class="text-primary"> Register here</a>
                 </p> --}}

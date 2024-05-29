@@ -43,7 +43,7 @@
     } */
 </style>
 
-<body class="hold-transition login-page accent-dark">
+<body class="hold-transition login-page accent-dark bg-dark">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__wobble" src="{{ asset('brand_logo/android-chrome-192x192.png') }}"
@@ -51,10 +51,10 @@
     </div>
     <!-- /.navbar -->
     @yield('auth-content')
-    <div class="lockscreen-footer text-center mb-5">
+    {{-- <div class="lockscreen-footer text-center mb-5">
         Copyright © {{ date('Y') }} <b><a href="index">{{ config('app.name') }} </a></b>.
         All rights reserved.
-    </div>
+    </div> --}}
 
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
