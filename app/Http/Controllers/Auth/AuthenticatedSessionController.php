@@ -80,7 +80,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        //return Redirect::to('https://202.137.126.58/');
+        //return Redirect::to('https://dams.projectdavaosur.com/');
         return Redirect::to('https://localhost/assetx/public/');
     }
 }
