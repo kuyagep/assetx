@@ -109,7 +109,7 @@
                         <h3><i class="fas fa-exclamation-triangle text-warning"></i> <b>Oops! Page not found.</b></h3>
                         <p>
                             We could not find the page you were looking for.
-                            Meanwhile, you may <a href="https://202.137.126.59/assetx/">go back to home page</a>.
+                            Meanwhile, you may <a href="https://dams.projectdavaosur.com">go back to home page</a>.
                         </p>
 
                     </div>

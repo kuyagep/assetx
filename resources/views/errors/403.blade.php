@@ -109,7 +109,7 @@
                         <h3><i class="fas fa-solid fa-ban text-danger"></i> <b>Oops! Forbidden.</b></h3>
                         <p>
                             Sorry, you are forbidden to access this page.
-                            Meanwhile, you may <a href="https://202.137.126.59/assetx/">go back to home page</a>.
+                            Meanwhile, you may <a href="https://dams.projectdavaosur.com">go back to home page</a>.
                         </p>
 
                     </div>

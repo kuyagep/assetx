@@ -110,7 +110,7 @@
                         </h3>
                         <p>
                             We will work on fixing that right away.
-                            Meanwhile, you may <a href="https://202.137.126.59/assetx/">go back to home page</a>.
+                            Meanwhile, you may <a href="https://dams.projectdavaosur.com">go back to home page</a>.
                         </p>
 
                     </div>
