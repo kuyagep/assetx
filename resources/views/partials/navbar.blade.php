@@ -50,9 +50,10 @@
 
         </li>
         <!-- User Menu -->
+
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : Gravatar::get(Auth::user()->email) }}"
+                <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : Gravatar::avatar(Auth::user()->email)->defaultImage('identicon') }}"
                     class="user-image img-circle elevation-1" alt="User Image"
                     style="width: 2.1rem;max-width: 2.1rem;height: 2.1rem;object-fit: cover;">
                 {{-- <span
@@ -61,7 +62,7 @@
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-default">
-                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : Gravatar::get(Auth::user()->email) }}"
+                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : Gravatar::avatar(Auth::user()->email)->defaultImage('identicon') }}"
                         class="img-circle elevation-1" alt="User Image">
 
                     <p>

@@ -72,7 +72,7 @@
                                 aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
 
                                 @auth
-                                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : Gravatar::get(Auth::user()->email) }}"
+                                    <img src="{{ !empty(Auth::user()->avatar) ? asset('assets/dist/img/avatar/' . Auth::user()->avatar) : Gravatar::avatar(Auth::user()->email)->defaultImage('identicon') }}"
                                         class="user-image img-circle elevation-0" alt="User Profile Image"
                                         style="width: 2rem;max-width: 2rem;height: 2rem;object-fit: cover;">
                                     {{ Auth::user()->email }}
